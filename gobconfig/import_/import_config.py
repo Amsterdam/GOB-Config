@@ -71,8 +71,23 @@ def get_mapping(input_name):
         return json.load(file)
 
 
+def get_absolute_filepath(filename: str):
+    """Returns absolute filepath for filename. filename should be relatei to the data directory.
+
+    :param filename:
+    :return:
+    """
+    return os.path.join(DATASET_DIR, filename)
+
+
 def get_import_definition_by_filename(filename: str):
-    return get_mapping(os.path.join(DATASET_DIR, filename))
+    """Returns import definition with filename relative to data directory.
+
+    :param filename:
+    :return:
+    """
+
+    return get_mapping(get_absolute_filepath(filename))
 
 
 def get_import_definition(catalogue: str, collection: str, application: str = None):

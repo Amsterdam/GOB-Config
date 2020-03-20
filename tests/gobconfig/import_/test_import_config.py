@@ -8,7 +8,8 @@ from gobconfig.import_.import_config import (
     get_dataset_file_location,
     _build_dataset_locations_mapping,
     get_import_definition,
-    get_import_definition_by_filename
+    get_import_definition_by_filename,
+    get_absolute_filepath
 )
 
 from collections import defaultdict
@@ -112,11 +113,15 @@ class TestImportConfig(TestCase):
         with self.assertRaisesRegexp(GOBConfigException, "Dataset file mocked/data/dir/file.json invalid"):
             _build_dataset_locations_mapping()
 
-    @patch("gobconfig.import_.import_config.get_mapping")
     @patch("gobconfig.import_.import_config.DATASET_DIR", "mocked/data/dir/")
+    def test_get_absolute_filepath(self):
+        self.assertEqual('mocked/data/dir/the_file.json', get_absolute_filepath('the_file.json'))
+
+    @patch("gobconfig.import_.import_config.get_mapping")
+    @patch("gobconfig.import_.import_config.get_absolute_filepath", lambda x: 'absolute(' + x + ')')
     def test_get_import_definition_by_filename(self, mock_get_mapping):
         self.assertEqual(mock_get_mapping.return_value, get_import_definition_by_filename('thefilename.json'))
-        mock_get_mapping.assert_called_with('mocked/data/dir/thefilename.json')
+        mock_get_mapping.assert_called_with('absolute(thefilename.json)')
 
     @patch("gobconfig.import_.import_config.get_mapping")
     @patch("gobconfig.import_.import_config.get_dataset_file_location")
