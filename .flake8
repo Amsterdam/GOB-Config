@@ -1,0 +1,19 @@
+[flake8]
+exclude=.git,
+        .cfg,
+        .ini,
+        .sh,
+        .yml,
+        __pycache__,
+        ./.uwsgi_plugins_builder/*,
+        ./uwsgi-consul,
+        migrations,
+        docs,
+        tests,
+        scripts,
+        venv,
+        */settings_commons.py,
+        ./src/datapunt-objectstore,
+        ./src/gobcore
+max-complexity=6
+max-line-length=119
