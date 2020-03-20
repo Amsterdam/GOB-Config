@@ -1,0 +1,3 @@
+
+class GOBConfigException(Exception):
+    pass
