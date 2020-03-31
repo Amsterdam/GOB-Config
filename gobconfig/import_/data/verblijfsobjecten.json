@@ -6,7 +6,6 @@
     "name": "AMSBI",
     "application": "Neuron",
     "entity_id": "identificatie",
-    "type": "oracle",
     "schema": "Neuron",
     "enrich": {
       "amsterdamse_sleutel": {

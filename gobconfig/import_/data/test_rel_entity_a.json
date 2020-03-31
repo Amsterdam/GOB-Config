@@ -6,9 +6,11 @@
     "name": "test",
     "application": "REL",
     "entity_id": "id",
-    "type": "file",
-    "config": {
-      "filename": "test/test_catalogue_rel_test_entity_a.csv",
+    "application_config": {
+      "type": "file",
+      "filename": "test/test_catalogue_rel_test_entity_a.csv"
+    },
+    "read_config": {
       "filetype": "CSV",
       "separator": ",",
       "encoding": "UTF-8"

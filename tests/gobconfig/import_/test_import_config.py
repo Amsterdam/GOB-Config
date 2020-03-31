@@ -9,7 +9,8 @@ from gobconfig.import_.import_config import (
     _build_dataset_locations_mapping,
     get_import_definition,
     get_import_definition_by_filename,
-    get_absolute_filepath
+    get_absolute_filepath,
+    get_mapping
 )
 
 from collections import defaultdict
@@ -112,6 +113,24 @@ class TestImportConfig(TestCase):
 
         with self.assertRaisesRegexp(GOBConfigException, "Dataset file mocked/data/dir/file.json invalid"):
             _build_dataset_locations_mapping()
+
+    @patch("builtins.open")
+    @patch("gobconfig.import_.import_config.json.load")
+    @patch("gobconfig.import_.import_config.get_absolute_filepath", lambda x: '/path/to/' + x)
+    def test_get_mapping(self, mock_load, mock_open):
+        mock_load.return_value = {
+            'source': {
+                'application_config': {
+                    'filename': 'the_filename',
+                }
+            }
+        }
+        mock_file = mock_open.return_value.__enter__.return_value
+
+        result = get_mapping('filename')
+
+        self.assertEqual('/path/to/the_filename', result['source']['application_config']['filepath'])
+        mock_load.assert_called_with(mock_file)
 
     @patch("gobconfig.import_.import_config.DATASET_DIR", "mocked/data/dir/")
     def test_get_absolute_filepath(self):

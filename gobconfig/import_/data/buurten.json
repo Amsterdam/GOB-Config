@@ -6,7 +6,6 @@
     "name": "AMSBI",
     "application": "DGDialog",
     "entity_id": "source_id",
-    "type": "oracle",
     "schema": "dgdialog",
     "merge": {
       "dataset": "buurten.diva.csv.json",

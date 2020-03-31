@@ -60,19 +60,27 @@ def get_dataset_file_location(catalogue: str, collection: str, application: str 
                                  f"{catalogue}, {collection}, {application}")
 
 
-def get_mapping(input_name):
+def get_mapping(filename):
     """
     Read a mapping from a file
 
-    :param input_name: name of the file that contains the mapping
+    :param filename: name of the file that contains the mapping
     :return: an object that contains the mapping
     """
-    with open(input_name) as file:
-        return json.load(file)
+    with open(filename) as file:
+        mapping = json.load(file)
+
+        source_filename = mapping.get('source', {}).get('application_config', {}).get('filename')
+
+        # Set source path to absolute filepath if filename exists in source config
+        if source_filename:
+            mapping['source']['application_config']['filepath'] = get_absolute_filepath(source_filename)
+
+        return mapping
 
 
 def get_absolute_filepath(filename: str):
-    """Returns absolute filepath for filename. filename should be relatei to the data directory.
+    """Returns absolute filepath for filename. filename should be relative to the data directory.
 
     :param filename:
     :return:

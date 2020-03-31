@@ -6,7 +6,6 @@
     "name": "AMSBI",
     "application": "DIVA",
     "entity_id": "identificatie",
-    "type": "oracle",
     "schema": "diva",
     "query": [
 "    SELECT '0' || d.bbk_id                                                          AS identificatie",

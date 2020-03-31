@@ -8,7 +8,7 @@
     "application": "TEST",
     "entity_id": "string",
     "type": "file",
-    "config": {
+    "application_config": {
       "filename": "test/test.csv",
       "filetype": "CSV",
       "separator": ",",

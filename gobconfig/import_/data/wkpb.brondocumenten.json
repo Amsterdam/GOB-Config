@@ -6,7 +6,6 @@
     "name": "AMSBI",
     "application": "Decos",
     "entity_id": "documentnummer",
-    "type": "oracle",
     "schema": "Decos",
     "query": [
       "SELECT b.subject2                                       AS documentnummer",

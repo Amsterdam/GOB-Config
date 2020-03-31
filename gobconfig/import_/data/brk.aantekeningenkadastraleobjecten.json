@@ -6,7 +6,6 @@
     "name": "AMSBI",
     "application": "GOBPrepare",
     "entity_id": "brk_atg_id",
-    "type": "postgres",
     "schema": "GOBPrepare",
     "query": [
       "SELECT * FROM (",
