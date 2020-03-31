@@ -6,9 +6,10 @@
     "name": "AMSBI",
     "application": "Basisinformatie",
     "entity_id": "GGW_CODE",
-    "type": "objectstore",
-    "file_filter": "gebieden/GGW_gebieden/GGW\\.xlsx$",
-    "file_type": "XLS",
+    "read_config": {
+      "file_filter": "gebieden/GGW_gebieden/GGW\\.xlsx$",
+      "file_type": "XLS"
+    },
     "depends_on": {
       "catalogue": "gebieden",
       "entity": "buurten"

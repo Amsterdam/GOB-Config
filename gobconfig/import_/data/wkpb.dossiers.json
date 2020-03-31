@@ -6,7 +6,6 @@
     "name": "AMSBI",
     "application": "Decos",
     "entity_id": "dossier",
-    "type": "oracle",
     "schema": "Decos",
     "query": [
       "SELECT TRIM(NVL(regexp_substr(substr(b.subject2, 1, 21), '^(.*?)_', 1, 1, NULL, 1), substr(b.subject2, 1, 21))) AS dossier",

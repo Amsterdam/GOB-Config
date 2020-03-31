@@ -6,7 +6,6 @@
     "name": "AMSBI",
     "application": "Decos",
     "entity_id": "dossier",
-    "type": "oracle",
     "schema": "Decos",
     "query": [
 "    SELECT * FROM (",

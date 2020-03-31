@@ -7,9 +7,11 @@
     "name": "test",
     "application": "DELETE_ALL",
     "entity_id": "string",
-    "type": "file",
-    "config": {
-      "filename": "test/test_DELETE_ALL.csv",
+    "application_config": {
+      "type": "file",
+      "filename": "test/test_DELETE_ALL.csv"
+    },
+    "read_config": {
       "filetype": "CSV",
       "separator": ",",
       "encoding": "UTF-8"

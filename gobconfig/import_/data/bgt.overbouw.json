@@ -6,7 +6,6 @@
     "name": "AMSBI",
     "application": "DGDialog",
     "entity_id": "source_id",
-    "type": "oracle",
     "schema": "dgdialog",
     "query": [
 "    SELECT SUBSTR(t.guid, 2, LENGTH(t.guid) - 2)                                    AS identificatie",

@@ -7,9 +7,11 @@
     "name": "test",
     "application": "MODIFY1",
     "entity_id": "string",
-    "type": "file",
-    "config": {
-      "filename": "test/test_MODIFY1.csv",
+    "application_config": {
+      "type": "file",
+      "filename": "test/test_MODIFY1.csv"
+    },
+    "read_config": {
       "filetype": "CSV",
       "separator": ",",
       "encoding": "UTF-8"

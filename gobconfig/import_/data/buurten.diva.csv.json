@@ -6,12 +6,13 @@
     "name": "AMSBI",
     "application": "Basisinformatie",
     "entity_id": "identificatie",
-    "type": "objectstore",
-    "file_filter": "gebieden/Buurten/DIVA_gebieden_buurten.csv",
-    "file_type": "CSV",
-    "delimiter": ";",
-    "encoding": "UTF-8",
-    "operators": ["lowercase_keys"]
+    "read_config": {
+      "file_filter": "gebieden/Buurten/DIVA_gebieden_buurten.csv",
+      "file_type": "CSV",
+      "delimiter": ";",
+      "encoding": "UTF-8",
+      "operators": ["lowercase_keys"]
+    }
   },
   "gob_mapping": {
     "identificatie": {

@@ -6,8 +6,10 @@
     "name": "Kadaster",
     "application": "PDOK",
     "entity_id": "id",
-    "type": "wfs",
-    "url": "https://geodata.nationaalgeoregister.nl/bestuurlijkegrenzen/wfs?service=WFS&request=getfeature&typename=gemeenten&outputFormat=application/json"
+    "application_config": {
+      "type": "wfs",
+      "url": "https://geodata.nationaalgeoregister.nl/bestuurlijkegrenzen/wfs?service=WFS&request=getfeature&typename=gemeenten&outputFormat=application/json"
+    }
   },
   "gob_mapping": {
     "identificatie": {

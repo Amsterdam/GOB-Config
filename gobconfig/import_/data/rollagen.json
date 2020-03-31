@@ -6,8 +6,9 @@
     "name": "AMSBI",
     "application": "Basisinformatie",
     "entity_id": "name",
-    "type": "objectstore",
-    "file_filter": "meetbouten/rollagen/.+\\.jpg$"
+    "read_config": {
+      "file_filter": "meetbouten/rollagen/.+\\.jpg$"
+    }
   },
   "gob_mapping": {
     "identificatie": {
