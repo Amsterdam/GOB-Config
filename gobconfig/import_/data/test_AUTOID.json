@@ -1,0 +1,37 @@
+{
+  "version": "0.1",
+  "catalogue": "test_catalogue",
+  "entity": "test_entity_autoid",
+  "source": {
+    "name": "test",
+    "application": "AUTOID",
+    "entity_id": "identificatie",
+    "application_config": {
+      "type": "file",
+      "filename": "test/test_AUTOID.csv"
+    },
+    "read_config": {
+      "filetype": "CSV",
+      "separator": ",",
+      "encoding": "UTF-8"
+    },
+    "enrich": {
+      "autoid": {
+        "type": "autoid",
+        "on": "code",
+        "template": "1234XXXXX"
+      }
+    }
+  },
+  "gob_mapping": {
+    "identificatie": {
+      "source_mapping": "identificatie"
+    },
+    "code": {
+      "source_mapping": "code"
+    },
+    "autoid": {
+      "source_mapping": "autoid"
+    }
+  }
+}
