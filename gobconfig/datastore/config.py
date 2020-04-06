@@ -72,6 +72,16 @@ DATASTORE_CONFIGS = {
         'USER': os.getenv('BASISINFORMATIE_OBJECTSTORE_USER'),
         'PASSWORD': os.getenv('BASISINFORMATIE_OBJECTSTORE_PASSWORD'),
         'REGION_NAME': 'NL'
+    },
+    'GOBObjectstore': {
+        'type': TYPE_OBJECTSTORE,
+        "VERSION": '2.0',
+        "AUTHURL": 'https://identity.stack.cloudvps.com/v2.0',
+        "TENANT_NAME": os.getenv("GOB_OBJECTSTORE_TENANT_NAME"),
+        "TENANT_ID": os.getenv("GOB_OBJECTSTORE_TENANT_ID"),
+        "USER": os.getenv("GOB_OBJECTSTORE_USER"),
+        "PASSWORD": os.getenv("GOB_OBJECTSTORE_PASSWORD"),
+        "REGION_NAME": 'NL'
     }
 }
 
