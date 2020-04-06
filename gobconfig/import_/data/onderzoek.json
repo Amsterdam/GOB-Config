@@ -71,6 +71,10 @@
       "source_mapping": "eindgeldigheid",
       "format": "%Y-%m-%d"
     },
+    "_expiration_date": {
+      "source_mapping": "eindgeldigheid",
+      "format": "%Y-%m-%d"
+    },
     "tijdstip_registratie": {
       "source_mapping": "tijdstipregistratie",
       "format": "%Y-%m-%d %H:%M:%S"
