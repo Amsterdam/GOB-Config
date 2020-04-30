@@ -45,9 +45,7 @@
       "  SELECT id, MAX(volgnummer) AS volgnummer FROM prb.beperking GROUP BY id",
       ") m ON m.id = b.id AND m.volgnummer = b.volgnummer",
       "WHERE b.registernummer IS NOT NULL",
-      "AND m.id IS NOT NULL",
-      "--AND   s.id IN (3,5)",
-      "AND   b.registernummer NOT IN (7210)"
+      "AND m.id IS NOT NULL"
     ]
   },
   "gob_mapping": {
