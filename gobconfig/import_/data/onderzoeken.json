@@ -1,7 +1,7 @@
 {
   "version": "0.1",
   "catalogue": "bag",
-  "entity": "onderzoek",
+  "entity": "onderzoeken",
   "source": {
     "name": "AMSBI",
     "application": "Neuron",
