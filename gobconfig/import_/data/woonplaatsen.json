@@ -15,13 +15,17 @@
       }
     },
     "query": [
-"    SELECT w.woonplaatsnummer                                                                     AS identificatie",
+"      SELECT w.woonplaatsnummer                                                                     AS identificatie",
 "    ,      w.woonplaatsvolgnummer                                                                 AS volgnummer",
 "    ,      s.status                                                                               AS status_code",
 "    ,      s.omschrijving                                                                         AS status_omschrijving",
 "    ,      to_char(w.datumopvoer, 'YYYY-MM-DD HH24:MI:SS')                                        AS begin_geldigheid",
 "    ,      to_char(q2.datumopvoer, 'YYYY-MM-DD HH24:MI:SS')                                       AS eind_geldigheid",
-"    ,      w.indinonderzoek                                                                       AS aanduiding_in_onderzoek",
+"    ,      CASE WHEN UPPER(io.aanduiding_in_onderzoek) like '%J%'",
+"      THEN 'J'",
+"      ELSE 'N'",
+"      END                                                                               AS aanduiding_in_onderzoek",
+"    ,      io.heeft_onderzoeken                                                                   AS heeft_onderzoeken",
 "    ,      w.indgeconstateerd                                                                     AS geconstateerd",
 "    ,      to_char(w.dd_document, 'YYYY-MM-DD')                                                   AS documentdatum",
 "    ,      w.documentnummer                                                                       AS documentnummer",
@@ -32,14 +36,14 @@
 "    ,      to_char(w.creation, 'YYYY-MM-DD HH24:MI:SS')                                           AS registratiedatum",
 "    ,      w.woonplaats_id                                                                        AS source_id",
 "    ,      NVL2(q2.datumopvoer,",
-"               CASE WHEN q2.datumopvoer < sysdate THEN",
-"                         to_char(q2.datumopvoer, 'YYYY-MM-DD HH24:MI:SS')",
-"                    ELSE to_char(w.modification, 'YYYY-MM-DD HH24:MI:SS') END",
-"               ,CASE WHEN s.status = 2 THEN",
-"                          CASE WHEN q2.datumopvoer < sysdate THEN",
-"                                    to_char(w.datumopvoer, 'YYYY-MM-DD HH24:MI:SS')",
-"                               ELSE to_char(w.creation, 'YYYY-MM-DD HH24:MI:SS') END",
-"                     ELSE NULL END)                                                               AS expirationdate",
+"      CASE WHEN q2.datumopvoer < sysdate THEN",
+"      to_char(q2.datumopvoer, 'YYYY-MM-DD HH24:MI:SS')",
+"      ELSE to_char(w.modification, 'YYYY-MM-DD HH24:MI:SS') END",
+"    ,CASE WHEN s.status = 2 THEN",
+"      CASE WHEN q2.datumopvoer < sysdate THEN",
+"      to_char(w.datumopvoer, 'YYYY-MM-DD HH24:MI:SS')",
+"      ELSE to_char(w.creation, 'YYYY-MM-DD HH24:MI:SS') END",
+"      ELSE NULL END)                                                               AS expirationdate",
 "    ,      w.bagproces                                                                            AS bagproces_code",
 "    ,      m.omschrijving                                                                         AS bagproces_omschrijving",
 "    ,      sdo_util.to_wktgeometry(geometrie)                                                     AS geometrie",
@@ -62,6 +66,27 @@
 "      LEFT OUTER JOIN basis.woonplaatsstatus s ON w.status_id = s.status",
 "      -- selecteren bagproces / mutatiereden",
 "      LEFT OUTER JOIN basis.mutatiereden m ON w.bagproces = m.id",
+"      -- selecteren onderzoeken",
+"      LEFT OUTER JOIN (SELECT o.object_identificatie",
+"    ,      o.begin_geldigheid",
+"    ,      o.eind_geldigheid",
+"    ,      listagg(o.inonderzoek, ';') WITHIN GROUP (ORDER BY o.object_identificatie, o.versie_identificatie) AS aanduiding_in_onderzoek",
+"    ,      listagg(o.identificatie, ';') WITHIN GROUP (ORDER BY o.object_identificatie) AS heeft_onderzoeken",
+"      FROM   lvbag.inonderzoek o",
+"      JOIN  (SELECT z.object_identificatie",
+"    ,      z.begin_geldigheid",
+"    ,      max(z.versie_identificatie) as max_versie_identificatie",
+"      FROM   lvbag.inonderzoek z",
+"      WHERE  z.objecttype = 113",
+"      GROUP BY z.object_identificatie, z.begin_geldigheid) y ON  o.object_identificatie = y.object_identificatie",
+"      AND o.versie_identificatie = y.max_versie_identificatie",
+"      WHERE  o.objecttype = 113",
+"      GROUP BY o.object_identificatie, o.begin_geldigheid, o.eind_geldigheid) io ON w.woonplaatsnummer = io.object_identificatie AND (",
+"      ( io.begin_geldigheid < nvl(to_char(q2.datumopvoer, 'YYYY-MM-DD'), '2199-12-31') AND",
+"      nvl(io.eind_geldigheid, '2199-12-31') > to_char(w.datumopvoer, 'YYYY-MM-DD') ) OR",
+"      ( io.begin_geldigheid = to_char(w.datumopvoer, 'YYYY-MM-DD') AND",
+"      nvl(io.eind_geldigheid, io.begin_geldigheid) <= nvl(to_char(q2.datumopvoer, 'YYYY-MM-DD'), '2199-12-31') )",
+"      )",
 "      WHERE  w.indauthentiek = 'J'"
     ],
     "recent": [
@@ -137,6 +162,11 @@
     "_expiration_date": {
       "source_mapping": "expirationdate",
       "format": "%Y-%m-%d %H:%M:%S"
-    }
+    },
+    "heeft_onderzoeken": {
+      "source_mapping": {
+        "bronwaarde": "heeft_onderzoeken"
+      }
   }
 }
+  }
