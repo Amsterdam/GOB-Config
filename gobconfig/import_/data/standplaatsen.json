@@ -11,8 +11,7 @@
       "amsterdamse_sleutel": {
         "type": "autoid",
         "on": "identificatie",
-        "template": "0363084XXXXXXX",
-        "dry_run": true
+        "template": "0363084XXXXXXX"
       }
     },
     "query": [
