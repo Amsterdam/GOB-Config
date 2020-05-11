@@ -82,7 +82,12 @@
       "    WHERE collection = 'kadastraal_subject' AND",
       "    date_registered > NOW() - INTERVAL '10 days'",
       "  ) l",
-      "WHERE sjt.nrn_sjt_id > l.last_id"
+      "WHERE sjt.nrn_sjt_id > l.last_id",
+      " OR sjt.nrn_sjt_id IN (",
+      "    SELECT van_nrn_subject_id",
+      "    FROM brk_prepared.tenaamstelling",
+      "    WHERE (creation >= NOW() - INTERVAL '10 days' OR modification >= NOW() - INTERVAL '10 days')",
+      ")"
     ]
   },
   "gob_mapping": {
