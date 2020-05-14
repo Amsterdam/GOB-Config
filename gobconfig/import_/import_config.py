@@ -60,6 +60,25 @@ def get_dataset_file_location(catalogue: str, collection: str, application: str 
                                  f"{catalogue}, {collection}, {application}")
 
 
+def get_query(filename):
+    """
+    Get query contents from file
+    Return an array of lines to be compatible with inline query contents
+    Return an empty array when the query file cannot be found
+
+    :param filename:
+    :return:
+    """
+    try:
+        # Load query from file
+        sql_file = os.path.join(DATASET_DIR, filename)
+        with open(sql_file, 'r') as sql_reader:
+            return sql_reader.readlines()
+    except FileNotFoundError:
+        print(f"Query file not found {filename}")
+        return []
+
+
 def get_mapping(filename):
     """
     Read a mapping from a file
@@ -75,6 +94,11 @@ def get_mapping(filename):
         # Set source path to absolute filepath if filename exists in source config
         if source_filename:
             mapping['source']['application_config']['filepath'] = get_absolute_filepath(source_filename)
+
+        # Test if query has to be read from file
+        query = mapping.get('source', {}).get('query')
+        if isinstance(query, str):
+            mapping['source']['query'] = get_query(filename=query)
 
         return mapping
 
