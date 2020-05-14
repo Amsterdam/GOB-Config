@@ -1,15 +1,83 @@
 WITH
+    -- Utility functions
+    -- Use max_date if eindgeldigheid is NULL
+    FUNCTION max_date RETURN char AS
+    BEGIN
+        RETURN to_date(9999, 'yyyy');
+    END;
+    -- Determine if a cycle of an objectklasse is in onderzoek
+    FUNCTION cyclus_in_onderzoek(
+    	begin_cyclus    IN DATE,
+    	eind_cyclus     IN DATE,
+    	begin_onderzoek IN DATE,
+    	eind_onderzoek  IN DATE) RETURN number AS
+	BEGIN
+       IF (
+            -- eindgeldigheid van object is altijd later dan begingeldigheid van onderzoek
+            eind_cyclus > begin_onderzoek AND
+            -- begingeldigheid van object is altijd eerder dan eindgeldigheid van onderzoek
+            begin_cyclus < eind_onderzoek AND
+           -- Er dient gekeken te worden naar de gerelateerde objecten bij een eindgeldigheid van een cyclus.
+            eind_cyclus <= eind_onderzoek
+          )
+          OR
+          (
+            -- begingeldigheid van object is gelijk aan begingeldigheid van onderzoek
+            begin_cyclus = begin_onderzoek AND
+            -- neem laatste cyclus van object, indien begingeldigheid en geldigheid van object gelijk zijn
+            begin_cyclus = eind_cyclus AND
+            -- Er dient gekeken te worden naar de gerelateerde objecten bij een eindgeldigheid van een cyclus.
+            eind_cyclus <= eind_onderzoek
+          )
+      	THEN RETURN 1;
+        ELSE RETURN 0;
+        END IF;
+	END;
+    -- SubQuery Factoring for onderzoeken
     -- Alle onderzoeken voor deze objectklasse
-    in_onderzoeken AS (SELECT *
-                       FROM lvbag.inonderzoek
-                       WHERE objecttype = 102),
+    in_onderzoeken AS (SELECT /*+ MATERIALIZE */
+                              identificatie
+                            , versie_identificatie
+                            , object_identificatie
+                            , inonderzoek
+                            , to_date(begin_geldigheid, 'yyyy-mm-dd')                 AS begin_onderzoek
+                            , nvl(to_date(eind_geldigheid, 'yyyy-mm-dd'), max_date()) AS eind_onderzoek
+                       FROM   lvbag.inonderzoek
+                       WHERE  objecttype = 102 ORDER BY object_identificatie),
     -- All onderzoeken gegroepeerd per dag op maximum versie
     -- Onderzoeken die meerdere statussen hebben per dag worden beoordeeld op de status aan het einde van de dag
-    in_onderzoeken_eod AS (SELECT identificatie
-                                , begin_geldigheid
-                                , max(versie_identificatie) AS maxversie
-                           FROM in_onderzoeken
-                           GROUP BY identificatie, begin_geldigheid)
+    in_onderzoeken_eod AS (SELECT /*+ MATERIALIZE */ io.*
+            	 	       FROM in_onderzoeken io
+                           INNER JOIN (SELECT   identificatie
+                                              , begin_onderzoek
+                                              , max(versie_identificatie) AS maxversie
+                                       FROM     in_onderzoeken
+                                       GROUP BY identificatie, begin_onderzoek) io_eod
+                           ON io.identificatie = io_eod.identificatie AND
+                              io.versie_identificatie = io_eod.maxversie
+                           WHERE io.inonderzoek = 'J'),
+    -- SubQuery factoring for objectklasse dataset
+    authentieke_objecten AS (SELECT *
+                             FROM   basis.verblijfseenheid
+                             WHERE  indauthentiek = 'J'),
+    -- SubQuery factoring for begin and eindgeldigheid
+    -- begindatum gebruiken als einddatum volgende cyclus
+    begin_cyclus AS (SELECT verblijfseenheidnummer
+	                      , verblijfseenheidvolgnummer
+	                      , 1 + dense_rank() OVER (partition BY verblijfseenheidnummer ORDER BY verblijfseenheidvolgnummer) AS rang
+	                 FROM   authentieke_objecten),
+    eind_cyclus AS (SELECT verblijfseenheidnummer
+	                     , verblijfseenheidvolgnummer
+	                     , datumopvoer
+                         , nvl(trunc(datumopvoer), max_date()) as eind_cyclus
+	                     , dense_rank() OVER (partition BY verblijfseenheidnummer ORDER BY verblijfseenheidvolgnummer) AS rang
+	                FROM   authentieke_objecten),
+    -- SubQuery factoring for shared datasets
+    adressen AS (SELECT   adres_id
+                        , adresnummer
+                 FROM     basis.adres
+                 WHERE    indauthentiek = 'J'
+                 GROUP BY adres_id, adresnummer)
 SELECT v.verblijfseenheidnummer                                                               AS identificatie
      , v.verblijfseenheidvolgnummer                                                           AS volgnummer
      , s.status                                                                               AS status_code
@@ -21,52 +89,17 @@ SELECT v.verblijfseenheidnummer                                                 
                THEN 'J'
                ELSE 'N'
                END
-        FROM lvbag.inonderzoek io
-             INNER JOIN in_onderzoeken_eod io_eod
-                     ON io.identificatie = io_eod.identificatie AND io.versie_identificatie = io_eod.maxversie
-        WHERE object_identificatie = v.verblijfseenheidnummer
-          AND inonderzoek = 'J'
-          AND (
-                (
-                    -- eindgeldigheid van object is altijd later dan begingeldigheid van onderzoek
-                    nvl(to_char(q2.datumopvoer, 'YYYY-MM-DD'), '2199-12-31') > io.begin_geldigheid AND
-                    -- begingeldigheid van object is altijd eerder dan eindgeldigheid van onderzoek
-                    to_char(v.datumopvoer, 'YYYY-MM-DD') < nvl(io.eind_geldigheid, '2199-12-31') AND
-                   -- Er dient gekeken te worden naar de gerelateerde objecten bij een eindgeldigheid van een cyclus.
-                    nvl(to_char(q2.datumopvoer, 'YYYY-MM-DD'), '2199-12-31') <= nvl(io.eind_geldigheid, '2199-12-31')
-                )
-                OR
-                (
-                    -- begingeldigheid van object is gelijk aan begingeldigheid van onderzoek
-                    to_char(v.datumopvoer, 'YYYY-MM-DD') = io.begin_geldigheid AND
-                    -- neem laatste cyclus van object, indien begingeldigheid en geldigheid van object gelijk zijn
-                    to_char(v.datumopvoer, 'YYYY-MM-DD') = to_char(q2.datumopvoer, 'YYYY-MM-DD') AND
-                    -- Er dient gekeken te worden naar de gerelateerde objecten bij een eindgeldigheid van een cyclus.
-                    nvl(to_char(q2.datumopvoer, 'YYYY-MM-DD'), '2199-12-31') <= nvl(io.eind_geldigheid, '2199-12-31')
-                )
-            ))                                                                                AS aanduiding_in_onderzoek
+        FROM  in_onderzoeken_eod io
+        WHERE io.object_identificatie = v.verblijfseenheidnummer
+          AND cyclus_in_onderzoek(trunc(v.datumopvoer), q2.eind_cyclus,
+                                  io.begin_onderzoek, io.eind_onderzoek) = 1
+       )                                                                                      AS aanduiding_in_onderzoek
      , (SELECT listagg(identificatie, ';')
-        FROM in_onderzoeken io
-        WHERE object_identificatie = v.verblijfseenheidnummer
-          AND (
-                (
-                    -- eindgeldigheid van object is altijd later dan begingeldigheid van onderzoek
-                    nvl(to_char(q2.datumopvoer, 'YYYY-MM-DD'), '2199-12-31') > io.begin_geldigheid AND
-                    -- begingeldigheid van object is altijd eerder dan eindgeldigheid van onderzoek
-                    to_char(v.datumopvoer, 'YYYY-MM-DD') < nvl(io.eind_geldigheid, '2199-12-31') AND
-                   -- Er dient gekeken te worden naar de gerelateerde objecten bij een eindgeldigheid van een cyclus.
-                    nvl(to_char(q2.datumopvoer, 'YYYY-MM-DD'), '2199-12-31') <= nvl(io.eind_geldigheid, '2199-12-31')
-                )
-                OR
-                (
-                    -- begingeldigheid van object is gelijk aan begingeldigheid van onderzoek
-                    to_char(v.datumopvoer, 'YYYY-MM-DD') = io.begin_geldigheid AND
-                    -- neem laatste cyclus van object, indien begingeldigheid en geldigheid van object gelijk zijn
-                    to_char(v.datumopvoer, 'YYYY-MM-DD') = to_char(q2.datumopvoer, 'YYYY-MM-DD') AND
-                    -- Er dient gekeken te worden naar de gerelateerde objecten bij een eindgeldigheid van een cyclus.
-                    nvl(to_char(q2.datumopvoer, 'YYYY-MM-DD'), '2199-12-31') <= nvl(io.eind_geldigheid, '2199-12-31')
-                )
-            ))                                                                                AS heeft_onderzoeken
+        FROM   in_onderzoeken io
+        WHERE  object_identificatie = v.verblijfseenheidnummer
+          AND  cyclus_in_onderzoek(trunc(v.datumopvoer), q2.eind_cyclus,
+                                   io.begin_onderzoek, io.eind_onderzoek) = 1
+       )                                                                                      AS heeft_onderzoeken
      , v.indgeconstateerd                                                                     AS geconstateerd
      , to_char(v.dd_document, 'YYYY-MM-DD')                                                   AS documentdatum
      , v.documentnummer                                                                       AS documentnummer
@@ -116,21 +149,12 @@ SELECT v.verblijfseenheidnummer                                                 
      , q2.adresnummer                                                                         AS nummeraanduidingid_neven
      , q4.pandidentificatie                                                                   AS pandidentificatie
      , sdo_util.to_wktgeometry(v.geometrie)                                                   AS geometrie
-FROM basis.verblijfseenheid v
+FROM authentieke_objecten v
     -- begindatum gebruiken als einddatum volgende cyclus
-	    JOIN  (SELECT x.verblijfseenheidnummer
-	           ,      x.verblijfseenheidvolgnummer
-	           ,      dense_rank() OVER (partition BY x.verblijfseenheidnummer ORDER BY x.verblijfseenheidvolgnummer) +1 AS rang
-	           FROM   basis.verblijfseenheid x
-	           WHERE  x.indauthentiek = 'J') q1 ON v.verblijfseenheidnummer = q1.verblijfseenheidnummer
-	                                           AND v.verblijfseenheidvolgnummer = q1.verblijfseenheidvolgnummer
-	    LEFT OUTER JOIN  (SELECT y.verblijfseenheidnummer
-	                      ,      y.verblijfseenheidvolgnummer
-	                      ,      y.datumopvoer
-	                      ,      dense_rank() OVER (partition BY y.verblijfseenheidnummer ORDER BY y.verblijfseenheidvolgnummer) AS rang
-	                      FROM   basis.verblijfseenheid y
-	                      WHERE  y.indauthentiek = 'J') q2 ON  q1.verblijfseenheidnummer = q2.verblijfseenheidnummer
-	                                                       AND q1.rang = q2.rang
+	    JOIN begin_cyclus q1 ON v.verblijfseenheidnummer = q1.verblijfseenheidnummer AND
+	                            v.verblijfseenheidvolgnummer = q1.verblijfseenheidvolgnummer
+	    LEFT OUTER JOIN eind_cyclus q2 ON  q1.verblijfseenheidnummer = q2.verblijfseenheidnummer AND
+	                                       q1.rang = q2.rang
     -- selecteren status
          LEFT OUTER JOIN basis.verblijfsobjectstatus s ON v.status_id = s.status
     -- selecteren bagproces / mutatiereden
@@ -150,10 +174,7 @@ FROM basis.verblijfseenheid v
                                , va.verblijfseenheidvolgnummer
                                , a.adresnummer
                           FROM basis.verblijfseenheid_adres va
-                                   JOIN (SELECT adres_id, adresnummer
-                                         FROM basis.adres
-                                         WHERE indauthentiek = 'J'
-                                         GROUP BY adres_id, adresnummer) a ON a.adres_id = va.adres_id
+                          JOIN adressen a ON a.adres_id = va.adres_id
                           WHERE va.indhoofdadres = 'J') q1 ON v.verblijfseenheid_id = q1.verblijfseenheid_id AND
                                                               v.verblijfseenheidvolgnummer = q1.verblijfseenheidvolgnummer
     -- selecteren nevenadres(sen)
@@ -162,10 +183,7 @@ FROM basis.verblijfseenheid v
                                , listagg(a.adresnummer, ';')
                                  WITHIN GROUP (ORDER BY va.verblijfseenheid_id, va.verblijfseenheidvolgnummer) AS adresnummer
                           FROM basis.verblijfseenheid_adres va
-                                   JOIN (SELECT adres_id, adresnummer
-                                         FROM basis.adres
-                                         WHERE indauthentiek = 'J'
-                                         GROUP BY adres_id, adresnummer) a ON a.adres_id = va.adres_id
+                          JOIN adressen a ON a.adres_id = va.adres_id
                           WHERE va.indhoofdadres = 'N'
                           GROUP BY va.verblijfseenheid_id, va.verblijfseenheidvolgnummer) q2 ON v.verblijfseenheid_id = q2.verblijfseenheid_id AND
                                                                                                 v.verblijfseenheidvolgnummer = q2.verblijfseenheidvolgnummer
@@ -253,4 +271,3 @@ FROM basis.verblijfseenheid v
                                 vg.gebruiksdoel_id = 4 AND
                                 q1.min_gebruiksdoel != 1) q7 ON v.verblijfseenheid_id = q7.verblijfsobject_id AND
                                                                 v.verblijfseenheidvolgnummer = q7.verblijfsobjectvolgnummer
-WHERE v.indauthentiek = 'J'
