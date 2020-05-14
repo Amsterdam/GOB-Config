@@ -10,7 +10,8 @@ from gobconfig.import_.import_config import (
     get_import_definition,
     get_import_definition_by_filename,
     get_absolute_filepath,
-    get_mapping
+    get_mapping,
+    get_query
 )
 
 from collections import defaultdict
@@ -114,10 +115,11 @@ class TestImportConfig(TestCase):
         with self.assertRaisesRegexp(GOBConfigException, "Dataset file mocked/data/dir/file.json invalid"):
             _build_dataset_locations_mapping()
 
+    @patch("gobconfig.import_.import_config.get_query")
     @patch("builtins.open")
     @patch("gobconfig.import_.import_config.json.load")
     @patch("gobconfig.import_.import_config.get_absolute_filepath", lambda x: '/path/to/' + x)
-    def test_get_mapping(self, mock_load, mock_open):
+    def test_get_mapping(self, mock_load, mock_open, mock_get_query):
         mock_load.return_value = {
             'source': {
                 'application_config': {
@@ -131,6 +133,42 @@ class TestImportConfig(TestCase):
 
         self.assertEqual('/path/to/the_filename', result['source']['application_config']['filepath'])
         mock_load.assert_called_with(mock_file)
+
+        mock_load.return_value = {
+            'source': {
+                'application_config': {
+                    'filename': 'the_filename',
+                },
+                'query': []
+            }
+        }
+        result = get_mapping('filename')
+        self.assertEqual(result['source']['query'], [])
+
+        mock_load.return_value = {
+            'source': {
+                'application_config': {
+                    'filename': 'the_filename',
+                },
+                'query': 'some filename'
+            }
+        }
+        mock_get_query.return_value = 'query'
+        result = get_mapping('filename')
+        self.assertEqual(result['source']['query'], 'query')
+
+    @patch("builtins.open")
+    def test_get_query(self, mock_open):
+        mock_file = MagicMock()
+        mock_file.readlines.return_value = 'any sql contents'
+        mock_open.return_value.__enter__.return_value = mock_file
+        result = get_query('any filename')
+        self.assertEqual(result, 'any sql contents')
+
+        # Fail silently, return None
+        mock_open.return_value.__enter__.side_effect = FileNotFoundError
+        result = get_query('any filename')
+        self.assertEqual(result, [])
 
     @patch("gobconfig.import_.import_config.DATASET_DIR", "mocked/data/dir/")
     def test_get_absolute_filepath(self):
@@ -148,4 +186,3 @@ class TestImportConfig(TestCase):
         self.assertEqual(mock_get_mapping.return_value, get_import_definition('cat', 'col', 'appl'))
         mock_get_mapping.assert_called_with(mock_file_location.return_value)
         mock_file_location.assert_called_with('cat', 'col', 'appl')
-
