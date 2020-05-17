@@ -1,9 +1,9 @@
 WITH
     -- Utility functions
     -- Use max_date if eindgeldigheid is NULL
-    FUNCTION max_date RETURN char AS
+    FUNCTION max_date RETURN DATE AS
     BEGIN
-        RETURN to_date(9999, 'yyyy');
+        RETURN to_date('9999', 'yyyy');
     END;
     -- Determine if a cycle of an objectklasse is in onderzoek
     FUNCTION cyclus_in_onderzoek(
@@ -33,29 +33,6 @@ WITH
         ELSE RETURN 0;
         END IF;
 	END;
-    -- SubQuery Factoring for onderzoeken
-    -- Alle onderzoeken voor deze objectklasse
-    in_onderzoeken AS (SELECT /*+ MATERIALIZE */
-                              identificatie
-                            , versie_identificatie
-                            , object_identificatie
-                            , inonderzoek
-                            , to_date(begin_geldigheid, 'yyyy-mm-dd')                 AS begin_onderzoek
-                            , nvl(to_date(eind_geldigheid, 'yyyy-mm-dd'), max_date()) AS eind_onderzoek
-                       FROM   lvbag.inonderzoek
-                       WHERE  objecttype = 112 ORDER BY object_identificatie),
-    -- All onderzoeken gegroepeerd per dag op maximum versie
-    -- Onderzoeken die meerdere statussen hebben per dag worden beoordeeld op de status aan het einde van de dag
-    in_onderzoeken_eod AS (SELECT /*+ MATERIALIZE */ io.*
-            	 	       FROM in_onderzoeken io
-                           INNER JOIN (SELECT   identificatie
-                                              , begin_onderzoek
-                                              , max(versie_identificatie) AS maxversie
-                                       FROM     in_onderzoeken
-                                       GROUP BY identificatie, begin_onderzoek) io_eod
-                           ON io.identificatie = io_eod.identificatie AND
-                              io.versie_identificatie = io_eod.maxversie
-                           WHERE io.inonderzoek = 'J'),
     -- SubQuery factoring for objectklasse dataset
     authentieke_objecten AS (SELECT *
                              FROM   basis.standplaats
@@ -64,14 +41,55 @@ WITH
     -- begindatum gebruiken als einddatum volgende cyclus
     begin_cyclus AS (SELECT standplaatsnummer
 	                      , standplaatsvolgnummer
+                          , datumopvoer
 	                      , 1 + dense_rank() OVER (partition BY standplaatsnummer ORDER BY standplaatsvolgnummer) AS rang
 	                 FROM   authentieke_objecten),
     eind_cyclus AS (SELECT standplaatsnummer
 	                     , standplaatsvolgnummer
 	                     , datumopvoer
-                         , nvl(trunc(datumopvoer), max_date()) as eind_cyclus
 	                     , dense_rank() OVER (partition BY standplaatsnummer ORDER BY standplaatsvolgnummer) AS rang
 	                FROM   authentieke_objecten),
+ 	cyclus AS (SELECT bc.standplaatsnummer                   AS object_nummer
+	                , bc.standplaatsvolgnummer               AS object_volgnummer
+	                , trunc(bc.datumopvoer)                  AS begin_cyclus
+	                , nvl(trunc(ec.datumopvoer), max_date()) AS eind_cyclus
+	           FROM begin_cyclus bc
+	           LEFT OUTER JOIN eind_cyclus ec ON  bc.standplaatsnummer = ec.standplaatsnummer AND
+							                      bc.rang = ec.rang),
+    -- SubQuery Factoring for onderzoeken
+    -- All onderzoeken gegroepeerd per onderzoek per object per dag op de toestand aan het einde van de dag
+    inonderzoeken_per_dag AS (SELECT identificatie
+                                   , object_identificatie
+                                   , begin_geldigheid
+                                   , max(versie_identificatie) AS eodversie
+                              FROM   lvbag.inonderzoek
+                              WHERE  objecttype = 112
+                              GROUP BY identificatie, object_identificatie, begin_geldigheid),
+    in_onderzoeken AS (SELECT io.identificatie
+                            , io.versie_identificatie
+                            , io.object_identificatie
+                            , io.inonderzoek
+                            , to_date(io.begin_geldigheid, 'yyyy-mm-dd')                 AS begin_onderzoek
+                            , nvl(to_date(io.eind_geldigheid, 'yyyy-mm-dd'), max_date()) AS eind_onderzoek
+                       FROM   lvbag.inonderzoek io
+                       INNER JOIN inonderzoeken_per_dag io_pd
+                               ON io.identificatie = io_pd.identificatie AND
+                                  io.versie_identificatie = io_pd.eodversie),
+    effectieve_onderzoeken AS (SELECT /*+ MATERIALIZE */
+                                      io.identificatie
+                                    , io.object_identificatie
+                                    , ao.standplaatsvolgnummer AS object_volgnummer
+                                    , io.inonderzoek
+                                    , io.begin_onderzoek
+                                    , io.eind_onderzoek
+                               FROM   in_onderzoeken io
+                               INNER JOIN authentieke_objecten ao ON io.object_identificatie = ao.standplaatsnummer
+                               JOIN cyclus c ON ao.standplaatsnummer = c.object_nummer AND
+							                    ao.standplaatsvolgnummer = c.object_volgnummer
+                               WHERE cyclus_in_onderzoek(c.begin_cyclus, c.eind_cyclus,
+                                                         io.begin_onderzoek, io.eind_onderzoek) = 1
+                               ORDER BY io.object_identificatie, ao.standplaatsvolgnummer
+                               ),
     -- SubQuery factoring for shared datasets
     adressen AS (SELECT   adres_id
                         , adresnummer
@@ -84,20 +102,16 @@ SELECT s.standplaatsnummer                                                      
      , to_char(s.datumopvoer, 'YYYY-MM-DD HH24:MI:SS')                                        AS begin_geldigheid
      , to_char(q2.datumopvoer, 'YYYY-MM-DD HH24:MI:SS')                                       AS eind_geldigheid
      , (SELECT CASE
-               WHEN listagg(inonderzoek, ';') WITHIN GROUP (ORDER BY object_identificatie) LIKE '%J%'
+               WHEN listagg(inonderzoek, ';') LIKE '%J%'
                THEN 'J'
                ELSE 'N'
                END
-        FROM  in_onderzoeken_eod io
-        WHERE io.object_identificatie = s.standplaatsnummer
-          AND cyclus_in_onderzoek(trunc(s.datumopvoer), q2.eind_cyclus,
-                                  io.begin_onderzoek, io.eind_onderzoek) = 1
+        FROM   effectieve_onderzoeken io
+        WHERE  io.object_identificatie = s.standplaatsnummer AND io.object_volgnummer = s.standplaatsvolgnummer
        )                                                                                      AS aanduiding_in_onderzoek
      , (SELECT listagg(identificatie, ';')
-        FROM   in_onderzoeken io
-        WHERE  object_identificatie = s.standplaatsnummer
-          AND  cyclus_in_onderzoek(trunc(s.datumopvoer), q2.eind_cyclus,
-                                   io.begin_onderzoek, io.eind_onderzoek) = 1
+        FROM   effectieve_onderzoeken io
+        WHERE  io.object_identificatie = s.standplaatsnummer AND io.object_volgnummer = s.standplaatsvolgnummer
        )                                                                                      AS heeft_onderzoeken
      , t.status                                                                               AS status_code
      , t.omschrijving                                                                         AS status_omschrijving
