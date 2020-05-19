@@ -63,7 +63,10 @@
     },
     "refereert_aan_referentiepunten": {
       "source_mapping": {
-        "bronwaarde": "refereert_aan_refpunt"
+        "bronwaarde": "refereert_aan_refpunt",
+        "format": {
+          "split": ";"
+        }
       }
     },
     "is_gemeten_door": {
