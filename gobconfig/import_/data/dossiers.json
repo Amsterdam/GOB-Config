@@ -31,7 +31,10 @@
     },
     "heeft_brondocumenten": {
       "source_mapping": {
-        "bronwaarde": "heeft_bag_brondocument"
+        "bronwaarde": "heeft_bag_brondocument",
+        "format": {
+          "split": ";"
+        }
       }
     }
   }
