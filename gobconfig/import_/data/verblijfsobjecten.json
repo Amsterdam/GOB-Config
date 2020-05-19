@@ -40,7 +40,10 @@
     },
     "heeft_nevenadres": {
       "source_mapping": {
-        "bronwaarde": "nummeraanduidingid_neven"
+        "bronwaarde": "nummeraanduidingid_neven",
+        "format": {
+          "split": ";"
+        }
       }
     },
     "geometrie": {
