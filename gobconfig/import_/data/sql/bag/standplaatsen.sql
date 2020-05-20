@@ -1,7 +1,7 @@
 WITH
     -- SubQuery factoring for objectklasse dataset
     authentieke_objecten AS (SELECT *
-                             FROM   basis.standplaats
+                             FROM   G0363_Basis.standplaats
                              WHERE  indauthentiek = 'J'),
     -- SubQuery factoring for begin and eindgeldigheid
     -- begindatum gebruiken als einddatum volgende cyclus
@@ -18,7 +18,7 @@ WITH
     -- SubQuery factoring for shared datasets
     adressen AS (SELECT   adres_id
                         , adresnummer
-                 FROM     basis.adres
+                 FROM     G0363_Basis.adres
                  WHERE    indauthentiek = 'J'
                  GROUP BY adres_id, adresnummer)
 SELECT s.standplaatsnummer                                                                    AS identificatie
@@ -62,14 +62,14 @@ FROM authentieke_objecten s
 	    LEFT OUTER JOIN eind_cyclus q2 ON  q1.standplaatsnummer = q2.standplaatsnummer AND
 	                                       q1.rang = q2.rang
     -- selecteren status
-         LEFT OUTER JOIN basis.standplaatsstatus t ON s.status = t.status
+         LEFT OUTER JOIN G0363_Basis.standplaatsstatus t ON s.status = t.status
     -- selecteren bagproces / mutatiereden
-         LEFT OUTER JOIN basis.mutatiereden m ON s.bagproces = m.id
+         LEFT OUTER JOIN G0363_Basis.mutatiereden m ON s.bagproces = m.id
     -- selecteren hoofdadres(sen)
          LEFT OUTER JOIN (SELECT sa.standplaats_id
                                , sa.standplaatsvolgnummer
                                , a.adresnummer
-                          FROM basis.standplaats_adres sa
+                          FROM G0363_Basis.standplaats_adres sa
                                    JOIN adressen a ON a.adres_id = sa.adres_id
                           WHERE sa.indhoofdadres = 'J') q1 ON s.standplaats_id = q1.standplaats_id AND
                                                               s.standplaatsvolgnummer = q1.standplaatsvolgnummer
@@ -78,7 +78,7 @@ FROM authentieke_objecten s
                                , sa.standplaatsvolgnummer
                                , listagg(a.adresnummer, ';')
                                  WITHIN GROUP (ORDER BY sa.standplaats_id,sa.standplaatsvolgnummer) AS adresnummer
-                          FROM basis.standplaats_adres sa
+                          FROM G0363_Basis.standplaats_adres sa
                                    JOIN adressen a ON a.adres_id = sa.adres_id
                           WHERE sa.indhoofdadres = 'N'
                           GROUP BY sa.standplaats_id, sa.standplaatsvolgnummer) q2 ON s.standplaats_id = q2.standplaats_id AND

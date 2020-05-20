@@ -1,7 +1,7 @@
 WITH
     -- SubQuery factoring for objectklasse dataset
     authentieke_objecten AS (SELECT *
-                             FROM   basis.verblijfseenheid
+                             FROM   G0363_Basis.verblijfseenheid
                              WHERE  indauthentiek = 'J'),
     -- SubQuery factoring for begin and eindgeldigheid
     -- begindatum gebruiken als einddatum volgende cyclus
@@ -18,7 +18,7 @@ WITH
     -- SubQuery factoring for shared datasets
     adressen AS (SELECT   adres_id
                         , adresnummer
-                 FROM     basis.adres
+                 FROM     G0363_Basis.adres
                  WHERE    indauthentiek = 'J'
                  GROUP BY adres_id, adresnummer)
 SELECT v.verblijfseenheidnummer                                                               AS identificatie
@@ -85,24 +85,24 @@ FROM authentieke_objecten v
 	    LEFT OUTER JOIN eind_cyclus q2 ON  q1.verblijfseenheidnummer = q2.verblijfseenheidnummer AND
 	                                       q1.rang = q2.rang
     -- selecteren status
-         LEFT OUTER JOIN basis.verblijfsobjectstatus s ON v.status_id = s.status
+         LEFT OUTER JOIN G0363_Basis.verblijfsobjectstatus s ON v.status_id = s.status
     -- selecteren bagproces / mutatiereden
-         LEFT OUTER JOIN basis.mutatiereden m ON v.bagproces = m.id
+         LEFT OUTER JOIN G0363_Basis.mutatiereden m ON v.bagproces = m.id
     -- selecteren type woonobject
-         LEFT OUTER JOIN basis.woningtype wt ON v.woningtype = wt.woningtype
+         LEFT OUTER JOIN G0363_Basis.woningtype wt ON v.woningtype = wt.woningtype
     -- selecteren eigendomsverhouding
-         LEFT OUTER JOIN basis.eigenaar e ON v.eigenaar = e.id
+         LEFT OUTER JOIN G0363_Basis.eigenaar e ON v.eigenaar = e.id
     -- selecteren feitelijk_gebruik
-         LEFT OUTER JOIN basis.woonverblijfsoort f ON v.woonverblijfsoort = f.woonverblijfsoort
+         LEFT OUTER JOIN G0363_Basis.woonverblijfsoort f ON v.woonverblijfsoort = f.woonverblijfsoort
     -- selecteren redenopvoer
-         LEFT OUTER JOIN basis.opvoerreden_verblijfseenheid ov ON v.redenopvoer = ov.opvoerreden
+         LEFT OUTER JOIN G0363_Basis.opvoerreden_verblijfseenheid ov ON v.redenopvoer = ov.opvoerreden
     -- selecteren redenafvoer
-         LEFT OUTER JOIN basis.afvoerreden_verblijfseenheid av ON v.redenafvoer = av.afvoerreden
+         LEFT OUTER JOIN G0363_Basis.afvoerreden_verblijfseenheid av ON v.redenafvoer = av.afvoerreden
     -- selecteren hoofdadres(sen)
          LEFT OUTER JOIN (SELECT va.verblijfseenheid_id
                                , va.verblijfseenheidvolgnummer
                                , a.adresnummer
-                          FROM basis.verblijfseenheid_adres va
+                          FROM G0363_Basis.verblijfseenheid_adres va
                           JOIN adressen a ON a.adres_id = va.adres_id
                           WHERE va.indhoofdadres = 'J') q1 ON v.verblijfseenheid_id = q1.verblijfseenheid_id AND
                                                               v.verblijfseenheidvolgnummer = q1.verblijfseenheidvolgnummer
@@ -111,7 +111,7 @@ FROM authentieke_objecten v
                                , va.verblijfseenheidvolgnummer
                                , listagg(a.adresnummer, ';')
                                  WITHIN GROUP (ORDER BY va.verblijfseenheid_id, va.verblijfseenheidvolgnummer) AS adresnummer
-                          FROM basis.verblijfseenheid_adres va
+                          FROM G0363_Basis.verblijfseenheid_adres va
                           JOIN adressen a ON a.adres_id = va.adres_id
                           WHERE va.indhoofdadres = 'N'
                           GROUP BY va.verblijfseenheid_id, va.verblijfseenheidvolgnummer) q2 ON v.verblijfseenheid_id = q2.verblijfseenheid_id AND
@@ -126,8 +126,8 @@ FROM authentieke_objecten v
                                      , g.gebouw_id
                                      , g.gebouwnummer
                                      , MAX(g.gebouwvolgnummer) AS gebouwvolgnummer
-                                FROM basis.verblijfseenheid_gebouw vg
-                                         JOIN basis.gebouw g ON vg.gebouw_id = g.gebouw_id
+                                FROM G0363_Basis.verblijfseenheid_gebouw vg
+                                         JOIN G0363_Basis.gebouw g ON vg.gebouw_id = g.gebouw_id
                                     AND vg.gebouwvolgnummer = g.gebouwvolgnummer
                                 WHERE g.indauthentiek = 'J'
                                 GROUP BY vg.verblijfseenheid_id
@@ -141,9 +141,9 @@ FROM authentieke_objecten v
                                , vg.verblijfsobjectvolgnummer
                                , listagg(g.gebruiksdoel_id || '|' || g.omschrijving, ';')
                                  WITHIN GROUP (ORDER BY vg.verblijfsobject_id,vg.verblijfsobjectvolgnummer) AS gebruiksdoel
-                          FROM basis.verblijfsobject_gebruiksdoel vg
-                                   JOIN basis.gebruiksdoel_vbo g ON vg.gebruiksdoel_id = g.gebruiksdoel_id
-                                   JOIN basis.verblijfseenheid v ON vg.verblijfsobject_id = v.verblijfseenheid_id
+                          FROM G0363_Basis.verblijfsobject_gebruiksdoel vg
+                                   JOIN G0363_Basis.gebruiksdoel_vbo g ON vg.gebruiksdoel_id = g.gebruiksdoel_id
+                                   JOIN G0363_Basis.verblijfseenheid v ON vg.verblijfsobject_id = v.verblijfseenheid_id
                               AND vg.verblijfsobjectvolgnummer = v.verblijfseenheidvolgnummer
                           WHERE v.indauthentiek = 'J'
                           GROUP BY vg.verblijfsobject_id, vg.verblijfsobjectvolgnummer) q3 ON v.verblijfseenheid_id = q3.verblijfsobject_id AND
@@ -153,9 +153,9 @@ FROM authentieke_objecten v
                                , vt.volgnummer                               AS verblijfsobjectvolgnummer
                                , listagg(t.toegankelijkheid || '|' || TRIM(regexp_substr(omschrijving, '[^(]*')), ';')
                                  WITHIN GROUP (ORDER BY vt.id,vt.volgnummer) AS toegang
-                          FROM basis.verblijfseenheid_toegang vt
-                               JOIN basis.toegankelijkheid t ON vt.id_toegankelijkheid = t.toegankelijkheid
-                               JOIN basis.verblijfseenheid v ON vt.id = v.verblijfseenheid_id AND
+                          FROM G0363_Basis.verblijfseenheid_toegang vt
+                               JOIN G0363_Basis.toegankelijkheid t ON vt.id_toegankelijkheid = t.toegankelijkheid
+                               JOIN G0363_Basis.verblijfseenheid v ON vt.id = v.verblijfseenheid_id AND
                                                                 vt.volgnummer = v.verblijfseenheidvolgnummer
                           WHERE v.indauthentiek = 'J'
                           GROUP BY vt.id, vt.volgnummer) q5 ON v.verblijfseenheid_id = q5.verblijfsobject_id AND
@@ -172,11 +172,11 @@ FROM authentieke_objecten v
                                                           substr(b.omschrijving, 7, LENGTH(b.omschrijving) - 5)
                                       END
                                  END AS gebruiksdoel_woonfunctie
-                          FROM basis.verblijfsobject_gebruiksdoel vg
-                               JOIN basis.gebruiksdoel_vbo g ON vg.gebruiksdoel_id = g.gebruiksdoel_id
-                               JOIN basis.verblijfseenheid v ON vg.verblijfsobject_id = v.verblijfseenheid_id AND
+                          FROM G0363_Basis.verblijfsobject_gebruiksdoel vg
+                               JOIN G0363_Basis.gebruiksdoel_vbo g ON vg.gebruiksdoel_id = g.gebruiksdoel_id
+                               JOIN G0363_Basis.verblijfseenheid v ON vg.verblijfsobject_id = v.verblijfseenheid_id AND
                                                                 vg.verblijfsobjectvolgnummer = v.verblijfseenheidvolgnummer
-                               JOIN basis.basiseenheidtype b ON v.basiseenheidtype = b.code
+                               JOIN G0363_Basis.basiseenheidtype b ON v.basiseenheidtype = b.code
                           WHERE v.indauthentiek = 'J' AND g.gebruiksdoel_id = 1) q6 ON v.verblijfseenheid_id = q6.verblijfsobject_id AND
                                                                                        v.verblijfseenheidvolgnummer = q6.verblijfsobjectvolgnummer
     -- select gebruiksdoel_gezondheidszorgfunctie
@@ -187,15 +187,15 @@ FROM authentieke_objecten v
                           FROM (SELECT x.verblijfsobject_id
                                      , x.verblijfsobjectvolgnummer
                                      , MIN(x.gebruiksdoel_id) AS min_gebruiksdoel
-                                FROM basis.verblijfsobject_gebruiksdoel x
+                                FROM G0363_Basis.verblijfsobject_gebruiksdoel x
                                 GROUP BY x.verblijfsobject_id
                                        , x.verblijfsobjectvolgnummer) q1
-                                   JOIN basis.verblijfsobject_gebruiksdoel vg
+                                   JOIN G0363_Basis.verblijfsobject_gebruiksdoel vg
                                         ON q1.verblijfsobject_id = vg.verblijfsobject_id
                                             AND q1.verblijfsobjectvolgnummer = vg.verblijfsobjectvolgnummer
-                                   JOIN basis.verblijfseenheid v ON vg.verblijfsobject_id = v.verblijfseenheid_id
+                                   JOIN G0363_Basis.verblijfseenheid v ON vg.verblijfsobject_id = v.verblijfseenheid_id
                               AND vg.verblijfsobjectvolgnummer = v.verblijfseenheidvolgnummer
-                                   JOIN basis.basiseenheidtype b ON v.basiseenheidtype = b.code
+                                   JOIN G0363_Basis.basiseenheidtype b ON v.basiseenheidtype = b.code
                           WHERE v.indauthentiek = 'J' AND
                                 vg.gebruiksdoel_id = 4 AND
                                 q1.min_gebruiksdoel != 1) q7 ON v.verblijfseenheid_id = q7.verblijfsobject_id AND

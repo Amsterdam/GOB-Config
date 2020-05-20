@@ -29,4 +29,4 @@ SELECT t.identificatie
                end)                                                     AS expirationdate
      , to_date(t.tijdstip_registratie, 'YYYY-MM-DD"T"HH24:MI:SS".000"') AS tijdstipRegistratie
      , to_date(t.eind_registratie, 'YYYY-MM-DD"T"HH24:MI:SS".000"')     AS EindRegistratie
-FROM LVBAG.INONDERZOEK t
+FROM G0363_LVBAG.INONDERZOEK t
