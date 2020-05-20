@@ -1,7 +1,7 @@
 WITH
     -- SubQuery factoring for objectklasse dataset
     authentieke_objecten AS (SELECT *
-                             FROM   basis.openbareruimte
+                             FROM   G0363_Basis.openbareruimte
                              WHERE  indauthentiek = 'J'),
     -- SubQuery factoring for begin and eindgeldigheid
     -- begindatum gebruiken als einddatum volgende cyclus
@@ -68,13 +68,13 @@ FROM authentieke_objecten o
     -- selecteren woonplaats
          LEFT OUTER JOIN (SELECT w.woonplaats_id
                                , w.woonplaatsnummer
-                          FROM basis.woonplaats w
+                          FROM G0363_Basis.woonplaats w
                           WHERE w.indauthentiek = 'J'
                           GROUP BY w.woonplaats_id
                                  , w.woonplaatsnummer) q ON o.woonplaats_id = q.woonplaats_id
     -- selecteren openbare ruimte type
-         LEFT OUTER JOIN basis.openbareruimtetype t ON o.openbareruimtetype = t.code
+         LEFT OUTER JOIN G0363_Basis.openbareruimtetype t ON o.openbareruimtetype = t.code
     -- selecteren status
-         LEFT OUTER JOIN basis.openbareruimtestatus s ON o.status_id = s.status
+         LEFT OUTER JOIN G0363_Basis.openbareruimtestatus s ON o.status_id = s.status
     -- selecteren bagproces / mutatiereden
-         LEFT OUTER JOIN basis.mutatiereden m ON o.bagproces = m.id
+         LEFT OUTER JOIN G0363_Basis.mutatiereden m ON o.bagproces = m.id

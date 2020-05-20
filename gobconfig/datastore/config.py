@@ -33,11 +33,12 @@ DATASTORE_CONFIGS = {
     },
     'Neuron': {
         'type': TYPE_ORACLE,
-        'username': os.getenv("BINNRN_DATABASE_USER", "gob"),
-        'password': os.getenv("BINNRN_DATABASE_PASSWORD", "insecure"),
-        'host': os.getenv("BINNRN_DATABASE_HOST", "hostname"),
-        'port': os.getenv("BINNRN_DATABASE_PORT", 1521),
-        'database': os.getenv("BINNRN_DATABASE", ""),
+        # NRBIN is the new Neuron configuration. Not to be confused with the old BINNRN variables
+        'username': os.getenv("NRBIN_DATABASE_USER", "gob"),
+        'password': os.getenv("NRBIN_DATABASE_PASSWORD", "insecure"),
+        'host': os.getenv("NRBIN_DATABASE_HOST", "hostname"),
+        'port': os.getenv("NRBIN_DATABASE_PORT", 1521),
+        'database': os.getenv("NRBIN_DATABASE", ""),
     },
     'Decos': {
         'type': TYPE_ORACLE,

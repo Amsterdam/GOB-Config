@@ -1,7 +1,7 @@
 WITH
     -- SubQuery factoring for objectklasse dataset
     authentieke_objecten AS (SELECT *
-                             FROM   basis.adres
+                             FROM   G0363_Basis.adres
                              WHERE  indauthentiek = 'J'),
     -- SubQuery factoring for begin and eindgeldigheid
     -- begindatum gebruiken als einddatum volgende cyclus
@@ -78,7 +78,7 @@ FROM authentieke_objecten a
      -- selecteren openbare ruimte
            LEFT OUTER JOIN (SELECT DISTINCT o.openbareruimte_id
                                           ,      o.openbareruimtenummer
-                            FROM   basis.openbareruimte o
+                            FROM   G0363_Basis.openbareruimte o
                             WHERE  o.indauthentiek = 'J') q1 ON a.openbareruimte_id = q1.openbareruimte_id
     -- selecteren woonplaats
            LEFT OUTER JOIN (SELECT w2.openbareruimte_id
@@ -86,8 +86,8 @@ FROM authentieke_objecten a
                             FROM  (SELECT o.openbareruimte_id
                                         , w.woonplaats_id
                                         , w.woonplaatsnummer
-                                   FROM   basis.openbareruimte o
-                                   JOIN   basis.woonplaats     w ON o.woonplaats_id = w.woonplaats_id
+                                   FROM   G0363_Basis.openbareruimte o
+                                   JOIN   G0363_Basis.woonplaats     w ON o.woonplaats_id = w.woonplaats_id
                                    WHERE  o.indauthentiek = 'J'
                                      AND  w.indauthentiek = 'J'
                                    GROUP BY o.openbareruimte_id
@@ -95,32 +95,32 @@ FROM authentieke_objecten a
                                           , w.woonplaatsnummer) w2
                             GROUP BY w2.openbareruimte_id) q3 ON  q1.openbareruimte_id = q3.openbareruimte_id
     -- selecteren type adresseerbaar object
-           LEFT OUTER JOIN basis.adrestype t ON a.adrestype = t.adrestype
+           LEFT OUTER JOIN G0363_Basis.adrestype t ON a.adrestype = t.adrestype
     -- selecteren status
-           LEFT OUTER JOIN basis.adresstatus s ON a.statuscode = s.status
+           LEFT OUTER JOIN G0363_Basis.adresstatus s ON a.statuscode = s.status
     -- selecteren bagproces / mutatiereden
-           LEFT OUTER JOIN basis.mutatiereden m ON a.bagproces = m.id
+           LEFT OUTER JOIN G0363_Basis.mutatiereden m ON a.bagproces = m.id
     -- selecteren hoofdadres/nevenadres (hoofdadres igv hoofdadres+nevenadres)
            LEFT OUTER JOIN (SELECT adres_id
                                  , MIN(indhoofdadres) AS indhoofdadres
-                            FROM   basis.verblijfseenheid_adres
+                            FROM   G0363_Basis.verblijfseenheid_adres
                             GROUP BY adres_id
                             UNION
                             SELECT adres_id
                                  , MIN(indhoofdadres) AS indhoofdadres
-                            FROM   basis.ligplaats_adres
+                            FROM   G0363_Basis.ligplaats_adres
                             GROUP BY adres_id
                             UNION
                             SELECT adres_id
                                  , MIN(indhoofdadres) AS indhoofdadres
-                            FROM   basis.standplaats_adres
+                            FROM   G0363_Basis.standplaats_adres
                             GROUP BY adres_id) q2 ON a.adres_id = q2.adres_id
     -- selecteren verblijfsobject
            LEFT OUTER JOIN (SELECT va.verblijfseenheid_id
                                  , va.adres_id
                                  , ve.verblijfseenheidnummer
-                            FROM   basis.verblijfseenheid_adres  va
-                            JOIN   basis.verblijfseenheid        ve
+                            FROM   G0363_Basis.verblijfseenheid_adres  va
+                            JOIN   G0363_Basis.verblijfseenheid        ve
                                 ON  va.verblijfseenheid_id = ve.verblijfseenheid_id AND
                                     va.verblijfseenheidvolgnummer = ve.verblijfseenheidvolgnummer
                             WHERE  ve.indauthentiek = 'J'
@@ -131,8 +131,8 @@ FROM authentieke_objecten a
            LEFT OUTER JOIN (SELECT la.ligplaats_id
                                  , la.adres_id
                                  , lp.ligplaatsnummer
-                            FROM   basis.ligplaats_adres la
-                            JOIN   basis.ligplaats       lp ON  la.ligplaats_id = lp.ligplaats_id AND
+                            FROM   G0363_Basis.ligplaats_adres la
+                            JOIN   G0363_Basis.ligplaats       lp ON  la.ligplaats_id = lp.ligplaats_id AND
                                                                 la.ligplaatsvolgnummer = lp.ligplaatsvolgnummer
                             WHERE  lp.indauthentiek = 'J'
                             GROUP BY la.ligplaats_id
@@ -142,8 +142,8 @@ FROM authentieke_objecten a
            LEFT OUTER JOIN (SELECT sa.standplaats_id
                                  , sa.adres_id
                                  , sp.standplaatsnummer
-                            FROM   basis.standplaats_adres sa
-                            JOIN   basis.standplaats       sp ON  sa.standplaats_id = sp.standplaats_id AND
+                            FROM   G0363_Basis.standplaats_adres sa
+                            JOIN   G0363_Basis.standplaats       sp ON  sa.standplaats_id = sp.standplaats_id AND
                                                                   sa.standplaatsvolgnummer = sp.standplaatsvolgnummer
                             WHERE  sp.indauthentiek = 'J'
                             GROUP BY sa.standplaats_id

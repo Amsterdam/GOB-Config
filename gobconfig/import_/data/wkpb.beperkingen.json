@@ -29,7 +29,7 @@
       ",      to_char(b.datum_einde, 'YYYY-MM-DD HH24:MI:SS')        AS expirationdate",
       ",      b.id                                                   AS source_id",
       ",      sdo_util.to_wktgeometry(b.geometrie)                   AS geometrie",
-      "FROM   prb.beperking              b",
+      "FROM   G0363_PRB.beperking              b",
       "-- type beperking selecteren",
       "LEFT OUTER JOIN prb.beperkingtype t ON b.id_beperkingtype = t.id",
       "-- status selecteren",
