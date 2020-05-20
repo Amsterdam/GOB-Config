@@ -1,7 +1,7 @@
 WITH
     -- SubQuery factoring for objectklasse dataset
     authentieke_objecten AS (SELECT *
-                             FROM   basis.gebouw
+                             FROM   G0363_Basis.gebouw
                              WHERE  indauthentiek = 'J'),
     -- SubQuery factoring for begin and eindgeldigheid
     -- begindatum gebruiken als einddatum volgende cyclus
@@ -67,11 +67,11 @@ FROM authentieke_objecten g
 	    LEFT OUTER JOIN eind_cyclus q2 ON  q1.gebouwnummer = q2.gebouwnummer AND
 	                                       q1.rang = q2.rang
     -- selecteren status
-         LEFT OUTER JOIN basis.gebouwstatus s ON g.status_id = s.status
+         LEFT OUTER JOIN G0363_Basis.gebouwstatus s ON g.status_id = s.status
     -- selecteren bagproces / mutatiereden
-         LEFT OUTER JOIN basis.mutatiereden m ON g.bagproces = m.id
+         LEFT OUTER JOIN G0363_Basis.mutatiereden m ON g.bagproces = m.id
     -- selecteren ligging
-         LEFT OUTER JOIN basis.gebouwtype t ON g.gebouwtype = t.gebouwtype
+         LEFT OUTER JOIN G0363_Basis.gebouwtype t ON g.gebouwtype = t.gebouwtype
     -- selecteren type woonobject
          LEFT OUTER JOIN (SELECT x1.gebouw_id
                                , x1.gebouwvolgnummer
@@ -89,14 +89,14 @@ FROM authentieke_objecten g
                                      , vg.gebouwvolgnummer
                                      , vg.verblijfseenheid_id
                                      , MAX(vg.verblijfseenheidvolgnummer) AS verblijfseenheidvolgnummer
-                                FROM basis.verblijfseenheid_gebouw vg
+                                FROM G0363_Basis.verblijfseenheid_gebouw vg
                                 GROUP BY vg.gebouw_id
                                        , vg.gebouwvolgnummer
                                        , vg.verblijfseenheid_id) x1
                                    JOIN (SELECT vg.verblijfsobject_id
                                               , vg.verblijfsobjectvolgnummer
                                               , vg.gebruiksdoel_id
-                                         FROM basis.verblijfsobject_gebruiksdoel vg) x2 ON x1.verblijfseenheid_id = x2.verblijfsobject_id AND
+                                         FROM G0363_Basis.verblijfsobject_gebruiksdoel vg) x2 ON x1.verblijfseenheid_id = x2.verblijfsobject_id AND
                                                                                            x1.verblijfseenheidvolgnummer = x2.verblijfsobjectvolgnummer
                           GROUP BY x1.gebouw_id, x1.gebouwvolgnummer) y ON y.gebouw_id = g.gebouw_id
     AND y.gebouwvolgnummer = g.gebouwvolgnummer
