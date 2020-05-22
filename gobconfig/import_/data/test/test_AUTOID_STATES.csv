@@ -1,0 +1,14 @@
+identificatie,volgnummer,begin_geldigheid,eind_geldigheid,code,autoid
+0,1,,,code 0,123400000
+0,2,,,code 0,123400000
+1,1,,,1,123400002
+2,1,,,00002,
+3,1,,,003,ABCD
+4,1,,,A,
+5,1,,,XYZ005,123400012
+9,1,,,idx
+9,2,,,idx
+6,1,,,B,
+7,1,,,00007,DEF
+8,1,,,-5,
+9,3,,,idx
