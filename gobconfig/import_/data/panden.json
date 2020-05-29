@@ -16,7 +16,7 @@
     },
     "query": "sql/bag/panden.sql",
     "recent": [
-"      AND (g.creation >= sysdate - 10 OR  g.modification >= sysdate - 10)"
+"      WHERE (g.creation >= sysdate - 10 OR  g.modification >= sysdate - 10)"
     ]
   },
   "gob_mapping": {
