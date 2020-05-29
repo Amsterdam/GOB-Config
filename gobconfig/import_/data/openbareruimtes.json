@@ -16,7 +16,7 @@
     },
     "query": "sql/bag/openbareruimtes.sql",
     "recent": [
-"      AND (o.creation >= sysdate - 10 OR  o.modification >= sysdate - 10)"
+"      WHERE (o.creation >= sysdate - 10 OR  o.modification >= sysdate - 10)"
     ]
   },
   "gob_mapping": {

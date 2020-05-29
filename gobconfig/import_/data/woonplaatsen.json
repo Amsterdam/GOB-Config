@@ -16,7 +16,7 @@
     },
     "query": "sql/bag/woonplaatsen.sql",
     "recent": [
-"      AND (w.creation >= sysdate - 10 OR  w.modification >= sysdate - 10)"
+"      WHERE (w.creation >= sysdate - 10 OR  w.modification >= sysdate - 10)"
     ]
   },
   "gob_mapping": {

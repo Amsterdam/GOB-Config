@@ -16,7 +16,7 @@
     },
     "query": "sql/bag/ligplaatsen.sql",
     "recent": [
-"      AND (l.creation >= sysdate - 10 OR  l.modification >= sysdate - 10)"
+"      WHERE (l.creation >= sysdate - 10 OR  l.modification >= sysdate - 10)"
     ]
   },
   "gob_mapping": {
