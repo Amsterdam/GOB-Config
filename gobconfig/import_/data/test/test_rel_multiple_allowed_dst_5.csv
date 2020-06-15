@@ -1,0 +1,10 @@
+id,identificatie,volgnummer,begin_geldigheid,eind_geldigheid,referenced_attribute
+1,identificatie1,1,2010-01-01T00:00:00.000000,,bw1
+2,identificatie2,1,2010-01-01T00:00:00.000000,,bw1
+3,identificatie3,1,2010-01-01T00:00:00.000000,,bw2
+4,identificatie4,1,2010-01-01T00:00:00.000000,,bw2
+7,identificatie7,1,2010-01-01T00:00:00.000000,,bw4
+8,identificatie8,1,2010-01-01T00:00:00.000000,,bw1
+10,identificatie10,1,2010-01-01T00:00:00.000000,,bw1
+11,identificatie11,1,2010-01-01T00:00:00.000000,,bw3
+
