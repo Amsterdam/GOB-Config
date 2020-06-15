@@ -1,0 +1,39 @@
+{
+  "version": "0.1",
+  "catalogue": "test_catalogue",
+  "entity": "rel_multiple_allowed_dst",
+  "source": {
+    "name": "MAdst",
+    "application": "MAdst5",
+    "entity_id": "identificatie",
+    "application_config": {
+      "type": "file",
+      "filename": "test/test_rel_multiple_allowed_dst_5.csv"
+    },
+    "read_config": {
+      "filetype": "CSV",
+      "separator": ",",
+      "encoding": "UTF-8"
+    }
+  },
+  "gob_mapping": {
+    "id": {
+      "source_mapping": "id"
+    },
+    "identificatie": {
+      "source_mapping": "identificatie"
+    },
+    "volgnummer": {
+      "source_mapping": "volgnummer"
+    },
+    "begin_geldigheid": {
+      "source_mapping": "begin_geldigheid"
+    },
+    "eind_geldigheid": {
+      "source_mapping": "eind_geldigheid"
+    },
+    "referenced_attribute": {
+      "source_mapping": "referenced_attribute"
+    }
+  }
+}

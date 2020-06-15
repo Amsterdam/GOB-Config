@@ -1,0 +1,47 @@
+{
+  "version": "0.1",
+  "catalogue": "test_catalogue",
+  "entity": "rel_multiple_allowed_multisource_src",
+  "source": {
+    "name": "MAsrcA",
+    "application": "MAsrcA1",
+    "entity_id": "identificatie",
+    "application_config": {
+      "type": "file",
+      "filename": "test/test_rel_multiple_allowed_multisource_src_A1.csv"
+    },
+    "read_config": {
+      "filetype": "CSV",
+      "separator": ",",
+      "encoding": "UTF-8"
+    }
+  },
+  "gob_mapping": {
+    "id": {
+      "source_mapping": "id"
+    },
+    "identificatie": {
+      "source_mapping": "identificatie"
+    },
+    "volgnummer": {
+      "source_mapping": "volgnummer"
+    },
+    "begin_geldigheid": {
+      "source_mapping": "begin_geldigheid"
+    },
+    "eind_geldigheid": {
+      "source_mapping": "eind_geldigheid"
+    },
+    "reference": {
+      "source_mapping": {
+        "bronwaarde": "reference"
+      }
+    },
+    "manyreference": {
+      "source_mapping": {
+        "bronwaarde": "manyreference",
+        "format": {"split":  ";"}
+      }
+    }
+  }
+}
