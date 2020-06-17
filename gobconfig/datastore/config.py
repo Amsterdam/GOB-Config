@@ -58,11 +58,11 @@ DATASTORE_CONFIGS = {
     },
     'GOBAnalyse': {
         'type': TYPE_POSTGRES,
-        'username': os.getenv('ANALYSE_DATABASE_USER'),
-        'password': os.getenv('ANALYSE_DATABASE_PASSWORD'),
-        'host': os.getenv('ANALYSE_DATABASE_HOST_OVERRIDE'),
-        'port': os.getenv('ANALYSE_DATABASE_PORT_OVERRIDE'),
-        'database': os.getenv('ANALYSE_DATABASE'),
+        'username': os.getenv('ANALYSE_DATABASE_USER', "gob"),
+        'password': os.getenv('ANALYSE_DATABASE_PASSWORD', "insecure"),
+        'host': os.getenv('ANALYSE_DATABASE_HOST_OVERRIDE', "hostname"),
+        'port': os.getenv('ANALYSE_DATABASE_PORT_OVERRIDE', 5409),
+        'database': os.getenv('ANALYSE_DATABASE', ""),
     },
     'Basisinformatie': {
         'type': TYPE_OBJECTSTORE,
