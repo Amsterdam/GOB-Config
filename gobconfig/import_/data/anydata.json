@@ -1,0 +1,38 @@
+{
+  "version": "0.1",
+  "catalogue": "test_catalogue",
+  "entity": "anydata",
+  "source": {
+    "name": "AMSBI",
+    "application": "Basisinformatie",
+    "entity_id": "id",
+    "type": "objectstore",
+    "file_filter": "anydata.csv",
+    "file_type": "CSV",
+    "delimiter": ",",
+    "encoding": "Latin-1",
+    "operators": ["lowercase_keys"]
+  },
+  "gob_mapping": {
+    "identificatie": {
+      "source_mapping": "id"
+    },
+    "voornaam": {
+      "source_mapping": "vnaam"
+    },
+    "achternaam": {
+      "source_mapping": "anaam"
+    },
+    "functie": {
+      "source_mapping": "functie"
+    },
+    "auto": {
+      "source_mapping": "auto"
+    },
+    "woont_in_stadsdeel": {
+      "source_mapping": {
+        "bronwaarde": "woont_in_stadsdeel"
+      }
+    }
+  }
+}
