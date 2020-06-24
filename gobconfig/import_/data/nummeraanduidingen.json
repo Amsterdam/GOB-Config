@@ -124,8 +124,7 @@
     },
     "heeft_onderzoeken": {
       "source_mapping": {
-        "bronwaarde": "heeft_onderzoeken",
-        "format": {"split":  ";"}
+        "bronwaarde": "=identificatie"
       }
     }
   }
