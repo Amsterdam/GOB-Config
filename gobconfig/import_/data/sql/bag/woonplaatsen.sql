@@ -21,7 +21,6 @@ SELECT w.woonplaatsnummer                                                       
      , s.omschrijving                                                                         AS status_omschrijving
      , to_char(w.datumopvoer, 'YYYY-MM-DD HH24:MI:SS')                                        AS begin_geldigheid
      , to_char(q2.datumopvoer, 'YYYY-MM-DD HH24:MI:SS')                                       AS eind_geldigheid
-     , w.indinonderzoek                                                                       AS aanduiding_in_onderzoek
      , NULL                                                                                   AS heeft_onderzoeken
      , w.indgeconstateerd                                                                     AS geconstateerd
      , to_char(w.dd_document, 'YYYY-MM-DD')                                                   AS documentdatum

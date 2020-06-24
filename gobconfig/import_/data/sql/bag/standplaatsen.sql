@@ -26,7 +26,6 @@ SELECT s.standplaatsnummer                                                      
      , s.indgeconstateerd                                                                     AS geconstateerd
      , to_char(s.datumopvoer, 'YYYY-MM-DD HH24:MI:SS')                                        AS begin_geldigheid
      , to_char(q2.datumopvoer, 'YYYY-MM-DD HH24:MI:SS')                                       AS eind_geldigheid
-     , s.indinonderzoek                                                                       AS aanduiding_in_onderzoek
      , NULL                                                                                   AS heeft_onderzoeken
      , t.status                                                                               AS status_code
      , t.omschrijving                                                                         AS status_omschrijving

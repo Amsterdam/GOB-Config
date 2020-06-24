@@ -20,7 +20,6 @@ SELECT g.gebouwnummer                                                           
      , g.indgeconstateerd                                                                     AS geconstateerd
      , to_char(g.datumopvoer, 'YYYY-MM-DD HH24:MI:SS')                                        AS begin_geldigheid
      , to_char(q2.datumopvoer, 'YYYY-MM-DD HH24:MI:SS')                                       AS eind_geldigheid
-     , g.indinonderzoek                                                                       AS aanduiding_in_onderzoek
      , NULL                                                                                   AS heeft_onderzoeken
      , g.status_id                                                                            AS status_code
      , s.omschrijving                                                                         AS status_omschrijving
