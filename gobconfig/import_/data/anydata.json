@@ -7,11 +7,13 @@
     "application": "Basisinformatie",
     "entity_id": "id",
     "type": "objectstore",
-    "file_filter": "anydata.csv",
-    "file_type": "CSV",
-    "delimiter": ",",
-    "encoding": "Latin-1",
-    "operators": ["lowercase_keys"]
+    "read_config": {
+      "file_filter": "demo/anydata.csv",
+      "file_type": "CSV",
+      "delimiter": ",",
+      "encoding": "Latin-1",
+      "operators": ["lowercase_keys"]
+    }
   },
   "gob_mapping": {
     "identificatie": {
