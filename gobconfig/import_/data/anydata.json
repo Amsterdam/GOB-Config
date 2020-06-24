@@ -1,7 +1,7 @@
 {
   "version": "0.1",
-  "catalogue": "test_catalogue",
-  "entity": "anydata",
+  "catalogue": "any",
+  "entity": "data",
   "source": {
     "name": "AMSBI",
     "application": "Basisinformatie",
