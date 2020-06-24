@@ -44,10 +44,6 @@
     "geconstateerd": {
       "source_mapping": "geconstateerd"
     },
-    "aanduiding_in_onderzoek": {
-      "source_mapping": "aanduiding_in_onderzoek",
-      "format": "JN"
-    },
     "documentdatum": {
       "source_mapping": "documentdatum"
     },
