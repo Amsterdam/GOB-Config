@@ -50,7 +50,8 @@
       "source_mapping": "geometrie"
     },
     "gebruiksdoel": {
-      "source_mapping": "gebruiksdoel"
+      "source_mapping": "gebruiksdoel",
+      "enriched": true
     },
     "oppervlakte": {
       "source_mapping": "oppervlakte"
@@ -85,10 +86,16 @@
       "source_mapping": "documentnummer"
     },
     "gebruiksdoel_woonfunctie": {
-      "source_mapping": "gebruiksdoel_woonfunctie"
+      "source_mapping": {
+        "code": "gebruiksdoel_woonfunctie_code",
+        "omschrijving": "gebruiksdoel_woonfunctie_omschrijving"
+      }
     },
     "gebruiksdoel_gezondheidszorgfunctie": {
-      "source_mapping": "gebruiksdoel_gezondheidszorg"
+      "source_mapping": {
+        "code": "gebruiksdoel_gezondheidszorg_code",
+        "omschrijving": "gebruiksdoel_gezondheidszorg_omschrijving"
+      }
     },
     "aantal_eenheden_complex": {
       "source_mapping": "aantal_verhuurbare_eenheden"
@@ -133,7 +140,8 @@
       }
     },
     "toegang": {
-      "source_mapping": "toegang"
+      "source_mapping": "toegang",
+      "enriched": true
     },
     "redenopvoer": {
       "source_mapping": {
