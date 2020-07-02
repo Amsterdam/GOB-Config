@@ -71,8 +71,10 @@ SELECT v.verblijfseenheidnummer                                                 
      , v.cbsnummer                                                                            AS cbs_nummer
      , v.woningvoorraad                                                                       AS woningvoorraad
      , q3.gebruiksdoel                                                                        AS gebruiksdoel
-     , q6.gebruiksdoel_woonfunctie                                                            AS gebruiksdoel_woonfunctie
-     , q7.gebruiksdoel_gezondheidszorg                                                        AS gebruiksdoel_gezondheidszorg
+     , q6.gebruiksdoel_woonfunctie_code                                                       AS gebruiksdoel_woonfunctie_code
+     , q6.gebruiksdoel_woonfunctie_omschrijving                                               AS gebruiksdoel_woonfunctie_omschrijving
+     , q7.gebruiksdoel_gezondheidszorg_code                                                   AS gebruiksdoel_gezondheidszorg_code
+     , q7.gebruiksdoel_gezondheidszorg_omschrijving                                           AS gebruiksdoel_gezondheidszorg_omschrijving
      , q5.toegang                                                                             AS toegang
      , q1.adresnummer                                                                         AS nummeraanduidingid_hoofd
      , q2.adresnummer                                                                         AS nummeraanduidingid_neven
@@ -160,7 +162,7 @@ FROM authentieke_objecten v
                           WHERE v.indauthentiek = 'J'
                           GROUP BY vt.id, vt.volgnummer) q5 ON v.verblijfseenheid_id = q5.verblijfsobject_id AND
                                                                v.verblijfseenheidvolgnummer = q5.verblijfsobjectvolgnummer
-    -- select gebruiksdoel_woonfunctie
+    -- select gebruiksdoel_woonfunctie_code and gebruiksdoel_woonfunctie_omschrijving 
          LEFT OUTER JOIN (SELECT vg.verblijfsobject_id
                                , vg.verblijfsobjectvolgnummer
                                , CASE g.gebruiksdoel_id
@@ -168,10 +170,18 @@ FROM authentieke_objecten v
                                  THEN CASE
                                       WHEN v.basiseenheidtype IN ('1010', '2075')
                                       THEN NULL
-                                      ELSE v.basiseenheidtype || '|' || UPPER(substr(b.omschrijving, 6, 1)) ||
+                                      ELSE v.basiseenheidtype
+                                      END
+                                 END AS gebruiksdoel_woonfunctie_code
+                               , CASE g.gebruiksdoel_id
+                                 WHEN 1
+                                 THEN CASE
+                                      WHEN v.basiseenheidtype IN ('1010', '2075')
+                                      THEN NULL
+                                      ELSE UPPER(substr(b.omschrijving, 6, 1)) ||
                                                           substr(b.omschrijving, 7, LENGTH(b.omschrijving) - 5)
                                       END
-                                 END AS gebruiksdoel_woonfunctie
+                                 END AS gebruiksdoel_woonfunctie_omschrijving
                           FROM G0363_Basis.verblijfsobject_gebruiksdoel vg
                                JOIN G0363_Basis.gebruiksdoel_vbo g ON vg.gebruiksdoel_id = g.gebruiksdoel_id
                                JOIN G0363_Basis.verblijfseenheid v ON vg.verblijfsobject_id = v.verblijfseenheid_id AND
@@ -182,8 +192,9 @@ FROM authentieke_objecten v
     -- select gebruiksdoel_gezondheidszorgfunctie
          LEFT OUTER JOIN (SELECT vg.verblijfsobject_id
                                , vg.verblijfsobjectvolgnummer
-                               , v.basiseenheidtype || '|' || UPPER(substr(b.omschrijving, 6, 1)) ||
-                                 substr(b.omschrijving, 7, LENGTH(b.omschrijving) - 5) AS gebruiksdoel_gezondheidszorg
+                               , v.basiseenheidtype AS gebruiksdoel_gezondheidszorg_code
+                               , UPPER(substr(b.omschrijving, 6, 1)) ||
+                                 substr(b.omschrijving, 7, LENGTH(b.omschrijving) - 5) AS gebruiksdoel_gezondheidszorg_omschrijving
                           FROM (SELECT x.verblijfsobject_id
                                      , x.verblijfsobjectvolgnummer
                                      , MIN(x.gebruiksdoel_id) AS min_gebruiksdoel
