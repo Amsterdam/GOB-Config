@@ -27,7 +27,6 @@ SELECT      a.adresnummer                                                       
      ,      q1.openbareruimtenummer                                                                AS ligt_aan_bag_openbareruimte
      ,      to_char(a.datumopvoer, 'YYYY-MM-DD HH24:MI:SS')                                        AS begin_geldigheid
      ,      to_char(q2.datumopvoer, 'YYYY-MM-DD HH24:MI:SS')                                       AS eind_geldigheid
-     ,      a.indinonderzoek                                                                       AS aanduiding_in_onderzoek
      ,      NULL                                                                                   AS heeft_onderzoeken
      ,      a.adrestype                                                                            AS type_aot_code
      ,      t.omschrijving                                                                         AS type_aot_omschrijving
