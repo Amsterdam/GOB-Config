@@ -42,7 +42,12 @@
       "format": "JN"
     },
     "json": {
-      "source_mapping": "json"
+      "source_mapping": {
+        "str": "json_str",
+        "array": "json_array",
+        "bool": "json_bool",
+        "null": "json_null"
+      }
     },
     "datetime": {
       "source_mapping": "datetime"
