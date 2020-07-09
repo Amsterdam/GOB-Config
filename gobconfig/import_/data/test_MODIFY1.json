@@ -63,6 +63,11 @@
         "_id": "reference",
         "bronwaarde": "reference"
       }
+    },
+    "manyreference": {
+      "source_mapping": {
+        "bronwaarde": "manyreference"
+      }
     }
   }
 }
