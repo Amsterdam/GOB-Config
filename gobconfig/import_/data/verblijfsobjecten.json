@@ -75,10 +75,6 @@
       "source_mapping": "eind_geldigheid",
       "format": "%Y-%m-%d %H:%M:%S"
     },
-    "aanduiding_in_onderzoek": {
-      "source_mapping": "aanduiding_in_onderzoek",
-      "format": "JN"
-    },
     "documentdatum": {
       "source_mapping": "documentdatum"
     },

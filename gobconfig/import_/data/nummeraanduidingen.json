@@ -58,10 +58,6 @@
       "source_mapping": "eind_geldigheid",
       "format": "%Y-%m-%d %H:%M:%S"
     },
-    "aanduiding_in_onderzoek": {
-      "source_mapping": "aanduiding_in_onderzoek",
-      "format": "JN"
-    },
     "ligt_aan_openbareruimte": {
       "source_mapping": {
         "bronwaarde": "ligt_aan_bag_openbareruimte"

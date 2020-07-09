@@ -22,7 +22,6 @@ SELECT o.openbareruimtenummer                                                   
      , to_char(o.datumopvoer, 'YYYY-MM-DD HH24:MI:SS')                                        AS begin_geldigheid
      , to_char(q2.datumopvoer, 'YYYY-MM-DD HH24:MI:SS')                                       AS eind_geldigheid
      , o.indgeconstateerd                                                                     AS geconstateerd
-     , o.indinonderzoek                                                                       AS aanduiding_in_onderzoek
      , NULL                                                                                   AS heeft_onderzoeken
      , to_char(o.dd_document, 'YYYY-MM-DD')                                                   AS documentdatum
      , o.documentnummer                                                                       AS documentnummer
