@@ -22,7 +22,7 @@
       "source_mapping": "geometry"
     },
     "begin_geldigheid": {
-      "source_mapping": "=2019-01-01 00:00:00",
+      "source_mapping": "=2020-01-01 00:00:00",
       "format": "%Y-%m-%d %H:%M:%S"
     }
   }
