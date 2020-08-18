@@ -9,11 +9,11 @@ TYPE_OBJECTSTORE = 'objectstore'
 DATASTORE_CONFIGS = {
     'Grondslag': {
         'type': TYPE_ORACLE,
-        'username': os.getenv("DBIMB_DATABASE_USER", "gob"),
-        'password': os.getenv("DBIMB_DATABASE_PASSWORD", "insecure"),
-        'host': os.getenv("DBIMB_DATABASE_HOST", "hostname"),
-        'port': os.getenv("DBIMB_DATABASE_PORT", 1521),
-        'database': os.getenv("DBIMB_DATABASE", "")
+        'username': os.getenv("GRONDSLAG_DATABASE_USER", "gob"),
+        'password': os.getenv("GRONDSLAG_DATABASE_PASSWORD", "insecure"),
+        'host': os.getenv("GRONDSLAG_DATABASE_HOST", "hostname"),
+        'port': os.getenv("GRONDSLAG_DATABASE_PORT", 1521),
+        'database': os.getenv("GRONDSLAG_DATABASE", "")
     },
     'DGDialog': {
         'type': TYPE_ORACLE,
