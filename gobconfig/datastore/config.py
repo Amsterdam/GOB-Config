@@ -5,6 +5,7 @@ from gobconfig.exception import GOBConfigException
 TYPE_ORACLE = 'oracle'
 TYPE_POSTGRES = 'postgres'
 TYPE_OBJECTSTORE = 'objectstore'
+TYPE_FTP = 'ftp'
 
 DATASTORE_CONFIGS = {
     'Grondslag': {
@@ -83,6 +84,13 @@ DATASTORE_CONFIGS = {
         "USER": os.getenv("GOB_OBJECTSTORE_USER"),
         "PASSWORD": os.getenv("GOB_OBJECTSTORE_PASSWORD"),
         "REGION_NAME": 'NL'
+    },
+    'GEO_BRIEVENBUS': {
+        'type': TYPE_FTP,
+        'username': os.getenv('GEO_BRIEVENBUS_USER'),
+        'password': os.getenv('GEO_BRIEVENBUS_PASSWORD'),
+        'host': os.getenv('GEO_BRIEVENBUS_HOST'),
+        'port': os.getenv('GEO_BRIEVENBUS_PORT'),
     }
 }
 
