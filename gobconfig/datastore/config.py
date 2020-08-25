@@ -5,7 +5,7 @@ from gobconfig.exception import GOBConfigException
 TYPE_ORACLE = 'oracle'
 TYPE_POSTGRES = 'postgres'
 TYPE_OBJECTSTORE = 'objectstore'
-TYPE_FTP = 'ftp'
+TYPE_SFTP = 'sftp'
 
 DATASTORE_CONFIGS = {
     'Grondslag': {
@@ -86,7 +86,7 @@ DATASTORE_CONFIGS = {
         "REGION_NAME": 'NL'
     },
     'GEO_BRIEVENBUS': {
-        'type': TYPE_FTP,
+        'type': TYPE_SFTP,
         'username': os.getenv('GEO_BRIEVENBUS_USER'),
         'password': os.getenv('GEO_BRIEVENBUS_PASSWORD'),
         'host': os.getenv('GEO_BRIEVENBUS_HOST'),
