@@ -7,6 +7,7 @@ from gobconfig.datastore.config import (
     TYPE_POSTGRES,
     TYPE_OBJECTSTORE,
     TYPE_ORACLE,
+    TYPE_SFTP,
     DATASTORE_CONFIGS
 )
 
@@ -39,6 +40,7 @@ class TestConfig(TestCase):
             TYPE_ORACLE,
             TYPE_OBJECTSTORE,
             TYPE_POSTGRES,
+            TYPE_SFTP,
         ]
 
         for name, config in DATASTORE_CONFIGS.items():
