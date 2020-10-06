@@ -22,6 +22,9 @@
     },
     "query": "sql/gebieden/buurten.sql"
   },
+  "not_provided_attributes": [
+    "cbs_code"
+  ],
   "gob_mapping": {
     "identificatie": {
       "source_mapping": "identificatie"

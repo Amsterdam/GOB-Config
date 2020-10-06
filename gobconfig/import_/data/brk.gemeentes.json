@@ -11,6 +11,9 @@
       "url": "https://geodata.nationaalgeoregister.nl/bestuurlijkegrenzen/wfs?service=WFS&request=getfeature&typename=gemeenten&outputFormat=application/json"
     }
   },
+  "not_provided_attributes": [
+    "_expiration_date"
+  ],
   "gob_mapping": {
     "identificatie": {
       "source_mapping": "code"
