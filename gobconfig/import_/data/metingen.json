@@ -39,6 +39,14 @@
 "    WHERE mod(hoort_bij_meetbout, 10) = mod(extract(DAY FROM sysdate), 10)"
     ]
   },
+  "not_provided_attributes": [
+    "type_meting",
+    "zakking",
+    "zakkingssnelheid",
+    "zakking_cumulatief",
+    "hoeveelste_meting",
+    "aantal_dagen"
+  ],
   "gob_mapping": {
     "identificatie": {
       "source_mapping": "identificatie"

@@ -9,6 +9,9 @@
     "schema": "Neuron",
     "query": "sql/bag/onderzoeken.sql"
   },
+  "not_provided_attributes": [
+    "registratiedatum"
+  ],
   "gob_mapping": {
     "identificatie": {
       "source_mapping": "identificatie"

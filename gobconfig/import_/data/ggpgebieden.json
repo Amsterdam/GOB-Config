@@ -28,6 +28,9 @@
       }
     }
   },
+  "not_provided_attributes": [
+    "registratiedatum"
+  ],
   "gob_mapping": {
     "identificatie": {
       "source_mapping": "_IDENTIFICATIE"

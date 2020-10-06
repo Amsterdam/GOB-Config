@@ -10,6 +10,9 @@
       "file_filter": "meetbouten/rollagen/.+\\.jpg$"
     }
   },
+  "not_provided_attributes": [
+    "_expiration_date"
+  ],
   "gob_mapping": {
     "identificatie": {
       "source_mapping": "name",

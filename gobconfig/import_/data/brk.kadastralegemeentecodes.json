@@ -15,6 +15,9 @@
       "FROM brk_prepared.kadastrale_gemeentecode"
     ]
   },
+  "not_provided_attributes": [
+    "_expiration_date"
+  ],
   "gob_mapping": {
     "identificatie": {
       "source_mapping": "identificatie"

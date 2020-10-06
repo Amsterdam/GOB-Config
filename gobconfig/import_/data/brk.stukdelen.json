@@ -47,6 +47,9 @@
       "WHERE sdl.nrn_sdl_id > l.last_id"
     ]
   },
+  "not_provided_attributes": [
+    "toestandsdatum"
+  ],
   "gob_mapping": {
     "id": {
       "source_mapping": "nrn_sdl_id"
