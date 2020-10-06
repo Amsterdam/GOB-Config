@@ -11,6 +11,9 @@
       "SELECT id, toestandsdatum FROM brk_prepared.meta"
     ]
   },
+  "not_provided_attributes": [
+    "_expiration_date"
+  ],
   "gob_mapping": {
     "id": {
       "source_mapping": "id"

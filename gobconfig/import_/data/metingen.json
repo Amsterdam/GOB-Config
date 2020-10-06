@@ -39,6 +39,14 @@
 "    WHERE mod(hoort_bij_meetbout, 10) = mod(extract(DAY FROM sysdate), 10)"
     ]
   },
+  "not_provided_attributes": [
+    "type_meting",
+    "zakking",
+    "zakkingssnelheid",
+    "zakking_cumulatief",
+    "hoeveelste_meting",
+    "aantal_dagen"
+  ],
   "gob_mapping": {
     "identificatie": {
       "source_mapping": "identificatie"
@@ -71,27 +79,6 @@
     },
     "is_gemeten_door": {
       "source_mapping": "is_gemeten_door_onderneming"
-    },
-    "type_meting": {
-      "source_mapping": "type_meting"
-    },
-    "zakking": {
-      "source_mapping": "zakking",
-      "precision": 4
-    },
-    "zakkingssnelheid": {
-      "source_mapping": "zakkingssnelheid",
-      "precision": 4
-    },
-    "zakking_cumulatief": {
-      "source_mapping": "zakking_cumulatief",
-      "precision": 4
-    },
-    "hoeveelste_meting": {
-      "source_mapping": "hoeveelste_meting"
-    },
-    "aantal_dagen": {
-      "source_mapping": "aantal_dagen"
     },
     "publiceerbaar": {
       "source_mapping": "publiceerbaar",

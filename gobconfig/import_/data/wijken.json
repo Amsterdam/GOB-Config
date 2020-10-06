@@ -15,6 +15,10 @@
     },
     "query": "sql/gebieden/wijken.sql"
   },
+  "not_provided_attributes": [
+    "cbs_code",
+    "identificatie"
+  ],
   "gob_mapping": {
     "identificatie": {
       "source_mapping": "identificatie"

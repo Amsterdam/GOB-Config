@@ -12,6 +12,9 @@
 "    WHERE registratiedatum >= sysdate - 10"
     ]
   },
+  "not_provided_attributes": [
+    "_expiration_date"
+  ],
   "gob_mapping": {
     "documentnummer": {
       "source_mapping": "documentnummer"
