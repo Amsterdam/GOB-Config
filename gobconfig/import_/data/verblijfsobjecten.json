@@ -50,8 +50,7 @@
       "source_mapping": "geometrie"
     },
     "gebruiksdoel": {
-      "source_mapping": "gebruiksdoel",
-      "enriched": true
+      "source_mapping": "gebruiksdoel"
     },
     "oppervlakte": {
       "source_mapping": "oppervlakte"
@@ -136,8 +135,7 @@
       }
     },
     "toegang": {
-      "source_mapping": "toegang",
-      "enriched": true
+      "source_mapping": "toegang"
     },
     "redenopvoer": {
       "source_mapping": {

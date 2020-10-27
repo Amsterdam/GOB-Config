@@ -140,8 +140,11 @@ FROM authentieke_objecten v
     -- select gebruiksdoel(en)
          LEFT OUTER JOIN (SELECT vg.verblijfsobject_id
                                , vg.verblijfsobjectvolgnummer
-                               , listagg(g.gebruiksdoel_id || '|' || g.omschrijving, ';')
-                                 WITHIN GROUP (ORDER BY vg.verblijfsobject_id,vg.verblijfsobjectvolgnummer) AS gebruiksdoel
+                               , json_arrayagg(
+                                   json_object(
+                                     'code' VALUE g.gebruiksdoel_id,
+                                     'omschrijving' VALUE g.omschrijving
+                                   ) ORDER BY vg.verblijfsobject_id,vg.verblijfsobjectvolgnummer) gebruiksdoel
                           FROM G0363_Basis.verblijfsobject_gebruiksdoel vg
                                    JOIN G0363_Basis.gebruiksdoel_vbo g ON vg.gebruiksdoel_id = g.gebruiksdoel_id
                                    JOIN G0363_Basis.verblijfseenheid v ON vg.verblijfsobject_id = v.verblijfseenheid_id
@@ -152,8 +155,11 @@ FROM authentieke_objecten v
     -- select toegang
          LEFT OUTER JOIN (SELECT vt.id                                       AS verblijfsobject_id
                                , vt.volgnummer                               AS verblijfsobjectvolgnummer
-                               , listagg(t.toegankelijkheid || '|' || TRIM(regexp_substr(omschrijving, '[^(]*')), ';')
-                                 WITHIN GROUP (ORDER BY vt.id,vt.volgnummer) AS toegang
+                               , json_arrayagg(
+                                   json_object(
+                                     'code' VALUE t.toegankelijkheid,
+                                     'omschrijving' VALUE TRIM(regexp_substr(omschrijving, '[^(]*'))
+                                   ) ORDER BY vt.id,vt.volgnummer) toegang
                           FROM G0363_Basis.verblijfseenheid_toegang vt
                                JOIN G0363_Basis.toegankelijkheid t ON vt.id_toegankelijkheid = t.toegankelijkheid
                                JOIN G0363_Basis.verblijfseenheid v ON vt.id = v.verblijfseenheid_id AND
