@@ -63,7 +63,7 @@ DATASTORE_CONFIGS = {
         'password': os.getenv('ANALYSE_DATABASE_PASSWORD', "insecure"),
         'host': os.getenv('ANALYSE_DATABASE_HOST_OVERRIDE', "hostname"),
         'port': os.getenv('ANALYSE_DATABASE_PORT_OVERRIDE', 5409),
-        'database': os.getenv('ANALYSE_DATABASE', ""),
+        'database': os.getenv('ANALYSE_DATABASE', "gob_analyse"),
     },
     'Basisinformatie': {
         'type': TYPE_OBJECTSTORE,
