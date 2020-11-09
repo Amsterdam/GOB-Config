@@ -99,6 +99,13 @@ DATASTORE_CONFIGS = {
         'host': os.getenv('GEO_BRIEVENBUS_HOST'),
         'port': os.getenv('GEO_BRIEVENBUS_PORT'),
     },
+    'GEO_BRIEVENBUS_BRK_SUBJ': {
+        'type': TYPE_SFTP,
+        'username': os.getenv('GEO_BRIEVENBUS_BRK_SUBJ_USER'),
+        'password': os.getenv('GEO_BRIEVENBUS_BRK_SUBJ_PASSWORD'),
+        'host': os.getenv('GEO_BRIEVENBUS_HOST'),
+        'port': os.getenv('GEO_BRIEVENBUS_PORT'),
+    },
 }
 
 
