@@ -1,0 +1,54 @@
+{
+  "version": "0.1",
+  "catalogue": "woz",
+  "entity": "wozdeelobjecten",
+  "source": {
+    "name": "AMSBI",
+    "application": "GOBPrepare",
+    "entity_id": "wozdeelobjectnummer",
+    "schema": "GOBPrepare",
+    "query": "sql/woz/wozdeelobjecten.sql"
+  },
+  "gob_mapping": {
+    "wozdeelobjectnummer": {
+      "source_mapping": "wozdeelobjectnummer"
+    },
+    "deelnummer": {
+      "source_mapping": "deelnummer"
+    },
+    "heeft_relatie_met_wozobject": {
+      "source_mapping": {
+        "bronwaarde": "wozbelobjnr"
+      }
+    },
+    "soortobject": {
+      "source_mapping": {
+        "code": "soort_code",
+        "omschrijving": "soort_omschrijving"
+      }
+    },
+    "begin_geldigheid": {
+      "source_mapping": "begin_geldigheid"
+    },
+    "is_verbonden_met_verblijfsobject": {
+      "source_mapping": {
+        "bronwaarde": "is_verbonden_met_verblijfsobject"
+      }
+    },
+    "is_verbonden_met_ligplaats": {
+      "source_mapping": {
+        "bronwaarde": "is_verbonden_met_ligplaats"
+      }
+    },
+    "is_verbonden_met_standplaats": {
+      "source_mapping": {
+        "bronwaarde": "is_verbonden_met_standplaats"
+      }
+    },
+    "heeft_pand": {
+      "source_mapping": {
+        "bronwaarde": "heeft_pand"
+      }
+    }
+  }
+}
