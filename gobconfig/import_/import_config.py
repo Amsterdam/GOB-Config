@@ -13,6 +13,26 @@ from gobconfig.exception import GOBConfigException
 DATASET_DIR = os.path.join(os.path.dirname(__file__), 'data/')
 
 
+def _add_file_to_mapping(result: defaultdict, filepath: str):
+    try:
+        mapping = get_mapping(filepath)
+        catalogue = mapping['catalogue']
+        collection = mapping['entity']
+        application = mapping['source']['application']
+    except (KeyError, json.decoder.JSONDecodeError):
+        raise GOBConfigException(f"Dataset file {filepath} invalid")
+
+    if application in result[catalogue][collection]:
+        raise GOBConfigException(f"Have multiple import definitions for {catalogue} {collection} with "
+                                 f"application {application}")
+    result[catalogue][collection][application] = filepath
+
+    if mapping.get('default'):
+        if '_default' in result[catalogue][collection]:
+            raise GOBConfigException(f"Have multiple defaults for {catalogue} {collection}")
+        result[catalogue][collection]['_default'] = filepath
+
+
 def _build_dataset_locations_mapping():
     """Builds dataset locations mapping based on json files present in DATASET_DIR
 
@@ -24,14 +44,7 @@ def _build_dataset_locations_mapping():
     for file in os.listdir(DATASET_DIR):
         filepath = DATASET_DIR + file
         if os.path.isfile(filepath) and file.endswith('.json'):
-            try:
-                mapping = get_mapping(filepath)
-                catalogue = mapping['catalogue']
-                collection = mapping['entity']
-                application = mapping['source']['application']
-            except (KeyError, json.decoder.JSONDecodeError):
-                raise GOBConfigException(f"Dataset file {filepath} invalid")
-            result[catalogue][collection][application] = filepath
+            _add_file_to_mapping(result, filepath)
     return result
 
 
@@ -47,6 +60,10 @@ def get_dataset_file_location(catalogue: str, collection: str, application: str 
     try:
         if not application:
             applications = dataset_locations_mapping[catalogue][collection]
+
+            if '_default' in applications:
+                # Check if default is set
+                return applications['_default']
 
             if len(applications.keys()) > 1:
                 raise GOBConfigException(f"Multiple applications found for catalogue, collection combination: "

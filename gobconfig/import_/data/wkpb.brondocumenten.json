@@ -4,7 +4,7 @@
   "entity": "brondocumenten",
   "source": {
     "name": "AMSBI",
-    "application": "Decos",
+    "application": "DecosDeprecated",
     "entity_id": "documentnummer",
     "schema": "Decos",
     "query": "sql/wkpb/brondocumenten.sql"

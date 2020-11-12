@@ -5,6 +5,7 @@ from gobconfig.exception import GOBConfigException
 TYPE_ORACLE = 'oracle'
 TYPE_POSTGRES = 'postgres'
 TYPE_OBJECTSTORE = 'objectstore'
+TYPE_SQL_SERVER = 'sqlserver'
 TYPE_SFTP = 'sftp'
 
 DATASTORE_CONFIGS = {
@@ -41,13 +42,21 @@ DATASTORE_CONFIGS = {
         'port': os.getenv("NRBIN_DATABASE_PORT", 1521),
         'database': os.getenv("NRBIN_DATABASE", ""),
     },
-    'Decos': {
+    'DecosDeprecated': {
         'type': TYPE_ORACLE,
         'username': os.getenv("DBIDC_DATABASE_USER", "gob"),
         'password': os.getenv("DBIDC_DATABASE_PASSWORD", "insecure"),
         'host': os.getenv("DBIDC_DATABASE_HOST", "hostname"),
         'port': os.getenv("DBIDC_DATABASE_PORT", 1521),
         'database': os.getenv("DBIDC_DATABASE", ""),
+    },
+    'Decos': {
+        'type': TYPE_SQL_SERVER,
+        'username': os.getenv("BINF_DATABASE_USER", "gob"),
+        'password': os.getenv("BINF_DATABASE_PASSWORD", "insecure"),
+        'host': os.getenv("BINF_DATABASE_HOST", "hostname"),
+        'port': os.getenv("BINF_DATABASE_PORT", 1433),
+        'database': os.getenv("BINF_DATABASE", ""),
     },
     'GOBPrepare': {
         'type': TYPE_POSTGRES,

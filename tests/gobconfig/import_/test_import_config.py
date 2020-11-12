@@ -37,7 +37,15 @@ class TestImportConfig(TestCase):
                 "application_a": "cat_c_col_a_app_a.json",
                 "application_b": "cat_c_col_a_app_b.json",
             }
+        },
+        "catalogue_d": {
+            "collection_a": {
+                "application_a": "cat_c_col_a_app_a.json",
+                "application_b": "cat_c_col_a_app_b.json",
+                "_default": "the_default.json",
+            }
         }
+
     }
 
     @patch("gobconfig.import_.import_config.dataset_locations_mapping", mock_locations_mapping)
@@ -58,10 +66,68 @@ class TestImportConfig(TestCase):
         with self.assertRaisesRegexp(GOBConfigException, "Multiple applications"):
             get_dataset_file_location("catalogue_c", "collection_a")
 
+    @patch("gobconfig.import_.import_config.dataset_locations_mapping", mock_locations_mapping)
+    def test_get_dataset_file_location_multiple_applications_default(self):
+        self.assertEqual("the_default.json", get_dataset_file_location("catalogue_d", "collection_a"))
+
     def defaultdict_to_dict(self, o):
         if isinstance(o, defaultdict):
             o = {k: self.defaultdict_to_dict(v) for k, v in o.items()}
         return o
+
+    @patch("gobconfig.import_.import_config.get_mapping")
+    @patch("gobconfig.import_.import_config.os")
+    @patch("gobconfig.import_.import_config.DATASET_DIR", "")
+    def test_build_dataset_locations_mapping_double_application(self, mock_os, mock_get_mapping):
+        mock_os.listdir.return_value = ['file1.json', 'file2.json']
+        mock_os.path.isfile.return_value = True
+        mock_get_mapping.side_effect = lambda x: {
+            'file1.json': {
+                'catalogue': 'somecatalogue',
+                'entity': 'someentity',
+                'source': {
+                    'application': 'some_application'
+                }
+            },
+            'file2.json': {
+                'catalogue': 'somecatalogue',
+                'entity': 'someentity',
+                'source': {
+                    'application': 'some_application'
+                }
+            }
+        }[x]
+
+        with self.assertRaisesRegexp(GOBConfigException, "Have multiple import definitions"):
+            _build_dataset_locations_mapping()
+
+    @patch("gobconfig.import_.import_config.get_mapping")
+    @patch("gobconfig.import_.import_config.os")
+    @patch("gobconfig.import_.import_config.DATASET_DIR", "")
+    def test_build_dataset_locations_mapping_double_default(self, mock_os, mock_get_mapping):
+        mock_os.listdir.return_value = ['file1.json', 'file2.json']
+        mock_os.path.isfile.return_value = True
+        mock_get_mapping.side_effect = lambda x: {
+            'file1.json': {
+                'catalogue': 'somecatalogue',
+                'entity': 'someentity',
+                'default': True,
+                'source': {
+                    'application': 'some_application'
+                }
+            },
+            'file2.json': {
+                'catalogue': 'somecatalogue',
+                'entity': 'someentity',
+                'default': True,
+                'source': {
+                    'application': 'some_application2'
+                }
+            }
+        }[x]
+
+        with self.assertRaisesRegexp(GOBConfigException, "Have multiple defaults for"):
+            _build_dataset_locations_mapping()
 
     @patch("gobconfig.import_.import_config.get_mapping")
     @patch("gobconfig.import_.import_config.os")
@@ -72,6 +138,7 @@ class TestImportConfig(TestCase):
         mock_get_mapping.return_value = {
             'catalogue': 'somecatalogue',
             'entity': 'someentity',
+            'default': True,
             'source': {
                 'application': 'some_application'
             }
@@ -80,7 +147,8 @@ class TestImportConfig(TestCase):
         expected_result = {
             'somecatalogue': {
                 'someentity': {
-                    'some_application': 'mocked/data/dir/file.json'
+                    'some_application': 'mocked/data/dir/file.json',
+                    '_default': 'mocked/data/dir/file.json',
                 }
             }
         }

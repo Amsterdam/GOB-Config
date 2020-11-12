@@ -2,6 +2,7 @@
   "version": "0.1",
   "catalogue": "bag",
   "entity": "brondocumenten",
+  "default": true,
   "source": {
     "name": "AMSBI",
     "application": "Decos",
@@ -9,7 +10,7 @@
     "schema": "Decos",
     "query": "sql/bag/brondocumenten.sql",
     "recent": [
-"    WHERE registratiedatum >= sysdate - 10"
+"    WHERE registratiedatum >= DATEADD(DAY, -10, sysdatetime())"
     ]
   },
   "not_provided_attributes": [
