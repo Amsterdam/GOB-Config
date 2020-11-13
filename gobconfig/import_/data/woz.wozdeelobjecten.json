@@ -49,6 +49,9 @@
       "source_mapping": {
         "bronwaarde": "heeft_pand"
       }
-    }
+    },
+    "not_provided_attributes": [
+      "_expiration_date"
+    ]
   }
 }

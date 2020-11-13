@@ -32,6 +32,9 @@
       "source_mapping": {
         "bronwaarde": "bevat_kadastraal_object.identificatie"
       }
-    }
+    },
+    "not_provided_attributes": [
+      "_expiration_date"
+    ]
   }
 }
