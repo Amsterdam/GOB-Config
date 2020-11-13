@@ -9,6 +9,9 @@
     "schema": "GOBPrepare",
     "query": "sql/woz/wozobjecten.sql"
   },
+  "not_provided_attributes": [
+    "_expiration_date"
+  ],
   "gob_mapping": {
     "wozobjectnummer": {
       "source_mapping": "wozobjectnummer"
@@ -32,9 +35,6 @@
       "source_mapping": {
         "bronwaarde": "bevat_kadastraal_object.identificatie"
       }
-    },
-    "not_provided_attributes": [
-      "_expiration_date"
-    ]
+    }
   }
 }
