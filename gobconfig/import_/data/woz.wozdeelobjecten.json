@@ -9,6 +9,9 @@
     "schema": "GOBPrepare",
     "query": "sql/woz/wozdeelobjecten.sql"
   },
+  "not_provided_attributes": [
+    "_expiration_date"
+  ],
   "gob_mapping": {
     "wozdeelobjectnummer": {
       "source_mapping": "wozdeelobjectnummer"
@@ -49,9 +52,6 @@
       "source_mapping": {
         "bronwaarde": "heeft_pand"
       }
-    },
-    "not_provided_attributes": [
-      "_expiration_date"
-    ]
+    }
   }
 }
