@@ -2,6 +2,7 @@
   "version": "0.1",
   "catalogue": "bag",
   "entity": "verblijfsobjecten",
+  "default": true,
   "source": {
     "name": "AMSBI",
     "application": "Neuron",

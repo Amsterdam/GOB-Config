@@ -1,0 +1,88 @@
+{
+  "version": "0.1",
+  "catalogue": "bag",
+  "entity": "verblijfsobjecten",
+  "source": {
+    "name": "Kadaster",
+    "application": "BAGExtract",
+    "entity_id": "identificatie",
+    "read_config": {
+      "object_type": "VBO"
+    }
+  },
+  "gob_mapping": {
+    "identificatie": {
+      "source_mapping": "identificatie"
+    },
+    "volgnummer": {
+      "source_mapping": "voorkomen/Voorkomen/voorkomenidentificatie"
+    },
+    "geconstateerd": {
+      "source_mapping": "geconstateerd",
+      "format": "JN"
+    },
+    "heeft_hoofdadres": {
+      "source_mapping": {
+        "bronwaarde": "heeftAlsHoofdadres/NummeraanduidingRef"
+      }
+    },
+    "heeft_nevenadres": {
+      "source_mapping": {
+        "bronwaarde": "heeftAlsNevenadres/NummeraanduidingRef"
+      }
+    },
+    "geometrie": {
+      "source_mapping": "geometrie/punt"
+    },
+    "gebruiksdoel": {
+      "force_list": true,
+      "source_mapping": {
+        "omschrijving": "gebruiksdoel"
+      }
+    },
+    "oppervlakte": {
+      "source_mapping": "oppervlakte"
+    },
+    "status": {
+      "source_mapping": {
+        "omschrijving": "status"
+      }
+    },
+    "ligt_in_panden": {
+      "source_mapping": {
+        "bronwaarde": "maaktDeelUitVan/PandRef"
+      }
+    },
+    "begin_geldigheid": {
+      "source_mapping": "voorkomen/Voorkomen/beginGeldigheid",
+      "format": "%Y-%m-%d"
+    },
+    "eind_geldigheid": {
+      "source_mapping": "voorkomen/Voorkomen/eindGeldigheid",
+      "format": "%Y-%m-%d"
+    },
+    "documentdatum": {
+      "source_mapping": "documentdatum"
+    },
+    "documentnummer": {
+      "source_mapping": "documentnummer"
+    },
+    "ligt_in_buurt": {
+      "source_mapping": {
+        "bronwaarde": "=geometrie"
+      }
+    },
+    "registratiedatum": {
+      "source_mapping": "voorkomen/Voorkomen/tijdstipRegistratie"
+    },
+    "_expiration_date": {
+      "source_mapping": "voorkomen/Voorkomen/eindGeldigheid",
+      "format": "%Y-%m-%d"
+    },
+    "heeft_onderzoeken": {
+      "source_mapping": {
+        "bronwaarde": "=identificatie"
+      }
+    }
+  }
+}
