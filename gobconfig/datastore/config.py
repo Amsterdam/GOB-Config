@@ -7,6 +7,7 @@ TYPE_POSTGRES = 'postgres'
 TYPE_OBJECTSTORE = 'objectstore'
 TYPE_SQL_SERVER = 'sqlserver'
 TYPE_SFTP = 'sftp'
+TYPE_BAG_EXTRACT = 'bagextract'
 
 DATASTORE_CONFIGS = {
     'Grondslag': {
@@ -115,6 +116,9 @@ DATASTORE_CONFIGS = {
         'host': os.getenv('GEO_BRIEVENBUS_HOST'),
         'port': os.getenv('GEO_BRIEVENBUS_PORT'),
     },
+    'BAGExtract': {
+        'type': TYPE_BAG_EXTRACT
+    }
 }
 
 
