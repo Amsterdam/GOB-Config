@@ -16,6 +16,9 @@
     "wozobjectnummer": {
       "source_mapping": "wozobjectnummer"
     },
+    "volgnummer": {
+      "source_mapping": "volgnummer"
+    },
     "gebruik": {
       "source_mapping": {
         "code": "gebruik_code",
@@ -34,6 +37,11 @@
     "bevat_kadastraalobject": {
       "source_mapping": {
         "bronwaarde": "bevat_kadastraal_object.identificatie"
+      }
+    },
+    "bestaat_uit_wozdeelobjecten": {
+      "source_mapping": {
+        "bronwaarde": "=wozobjectnummer"
       }
     }
   }

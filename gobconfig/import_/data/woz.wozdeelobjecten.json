@@ -16,13 +16,14 @@
     "wozdeelobjectnummer": {
       "source_mapping": "wozdeelobjectnummer"
     },
+    "volgnummer": {
+      "source_mapping": "volgnummer"
+    },
     "deelnummer": {
       "source_mapping": "deelnummer"
     },
-    "heeft_relatie_met_wozobject": {
-      "source_mapping": {
-        "bronwaarde": "wozbelobjnr"
-      }
+    "wozobjectnummer": {
+      "bronwaarde": "wozbelobjnr"
     },
     "soortobject": {
       "source_mapping": {

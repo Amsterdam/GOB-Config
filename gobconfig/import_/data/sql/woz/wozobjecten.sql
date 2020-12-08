@@ -1,4 +1,5 @@
 select wozobjectnummer,
+       1 as volgnummer,
        gebruik_code,
        gebruik_oms,
        soortobject_code,
