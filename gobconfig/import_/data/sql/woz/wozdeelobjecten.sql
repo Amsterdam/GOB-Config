@@ -1,4 +1,5 @@
 select wozdeelobjectnummer,
+       1 as volgnummer,
        deelnummer,
        wozbelobjnr,
        soort_code,
