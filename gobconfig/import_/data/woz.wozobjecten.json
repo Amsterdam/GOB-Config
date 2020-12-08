@@ -34,6 +34,9 @@
     "begin_geldigheid": {
       "source_mapping": "begin_geldigheid"
     },
+    "eind_geldigheid": {
+      "source_mapping": "eind_geldigheid"
+    },
     "bevat_kadastraalobject": {
       "source_mapping": {
         "bronwaarde": "bevat_kadastraal_object.identificatie",
