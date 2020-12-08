@@ -34,6 +34,9 @@
     "begin_geldigheid": {
       "source_mapping": "begin_geldigheid"
     },
+    "eind_geldigheid": {
+      "source_mapping": "eind_geldigheid"
+    },
     "is_verbonden_met_verblijfsobject": {
       "source_mapping": {
         "bronwaarde": "is_verbonden_met_verblijfsobject"
