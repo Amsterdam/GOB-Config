@@ -36,7 +36,8 @@
     },
     "bevat_kadastraalobject": {
       "source_mapping": {
-        "bronwaarde": "bevat_kadastraal_object.identificatie"
+        "bronwaarde": "bevat_kadastraal_object.identificatie",
+        "begin_geldigheid": "bevat_kadastraal_object.begin_geldigheid"
       }
     },
     "bestaat_uit_wozdeelobjecten": {
