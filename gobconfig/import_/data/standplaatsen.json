@@ -97,6 +97,11 @@
       "source_mapping": {
         "bronwaarde": "=identificatie"
       }
+    },
+    "gebruiksdoel": {
+      "source_mapping": {
+        "omschrijving": "gebruiksdoel"
+      }
     }
   }
 }

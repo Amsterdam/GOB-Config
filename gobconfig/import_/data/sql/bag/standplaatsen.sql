@@ -39,6 +39,7 @@ SELECT s.standplaatsnummer                                                      
      , m.omschrijving                                                                         AS bagproces_omschrijving
      , to_char(s.creation, 'YYYY-MM-DD HH24:MI:SS')                                           AS registratiedatum
      , s.standplaats_id                                                                       AS source_id
+     , s.vrijetekst2                                                                          AS gebruiksdoel
      , NVL2(q2.datumopvoer,
             CASE
             WHEN q2.datumopvoer < sysdate
