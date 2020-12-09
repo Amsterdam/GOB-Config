@@ -34,22 +34,26 @@
     },
     "ref_to_c": {
       "source_mapping": {
-        "bronwaarde": "ref_to_c"
+        "bronwaarde": "ref_to_c",
+        "begin_geldigheid": "ref_to_c_begin_geldigheid"
       }
     },
     "manyref_to_c": {
       "source_mapping": {
-        "bronwaarde": "manyref_to_c"
+        "bronwaarde": "manyref_to_c",
+        "begin_geldigheid": "manyref_to_c_begin_geldigheid"
       }
     },
     "ref_to_d": {
       "source_mapping": {
-        "bronwaarde": "ref_to_d"
+        "bronwaarde": "ref_to_d",
+        "begin_geldigheid": "ref_to_d_begin_geldigheid"
       }
     },
     "manyref_to_d": {
       "source_mapping": {
-        "bronwaarde": "manyref_to_d"
+        "bronwaarde": "manyref_to_d",
+        "begin_geldigheid": "manyref_to_d_begin_geldigheid"
       }
     }
   }
