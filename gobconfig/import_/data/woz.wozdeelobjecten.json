@@ -23,7 +23,7 @@
       "source_mapping": "deelnummer"
     },
     "wozobjectnummer": {
-      "bronwaarde": "wozbelobjnr"
+      "source_mapping": "wozbelobjnr"
     },
     "soortobject": {
       "source_mapping": {
