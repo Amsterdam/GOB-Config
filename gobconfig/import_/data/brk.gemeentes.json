@@ -12,7 +12,11 @@
     }
   },
   "not_provided_attributes": [
-    "_expiration_date"
+    "_expiration_date",
+    "identificatie",
+    "naam",
+    "begin_geldigheid",
+    "eind_geldigheid"
   ],
   "gob_mapping": {
     "identificatie": {
