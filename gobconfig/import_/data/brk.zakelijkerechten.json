@@ -41,6 +41,9 @@
       "WHERE (creation >= NOW() - INTERVAL '10 days' OR  modification >= NOW() - INTERVAL '10 days')"
     ]
   },
+  "not_provided_attributes": [
+    "registratiedatum"
+  ],
   "gob_mapping": {
     "id": {
       "source_mapping": "id"
