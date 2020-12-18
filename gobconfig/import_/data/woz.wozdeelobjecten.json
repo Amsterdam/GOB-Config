@@ -10,7 +10,8 @@
     "query": "sql/woz/wozdeelobjecten.sql"
   },
   "not_provided_attributes": [
-    "_expiration_date"
+    "_expiration_date",
+    "registratiedatum"
   ],
   "gob_mapping": {
     "wozdeelobjectnummer": {
