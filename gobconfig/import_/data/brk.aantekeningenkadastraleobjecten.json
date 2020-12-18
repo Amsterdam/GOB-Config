@@ -38,6 +38,10 @@
       "WHERE atg.nrn_atg_id > l.last_id"
     ]
   },
+  "not_provided_attributes": [
+    "_expiration_date",
+    "registratiedatum"
+  ],
   "gob_mapping": {
     "id": {
       "source_mapping": "nrn_atg_id"
