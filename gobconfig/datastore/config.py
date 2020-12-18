@@ -75,6 +75,14 @@ DATASTORE_CONFIGS = {
         'port': os.getenv('ANALYSE_DATABASE_PORT_OVERRIDE', 5409),
         'database': os.getenv('ANALYSE_DATABASE', "gob_analyse"),
     },
+    'GOBDatabase': {
+        'type': TYPE_POSTGRES,
+        'username': os.getenv("GOB_DATABASE_USER", "gob"),
+        'database': os.getenv("GOB_DATABASE_NAME", "gob"),
+        'password': os.getenv("GOB_DATABASE_PASSWORD", "insecure"),
+        'host': os.getenv("GOB_DATABASE_HOST_OVERRIDE", "localhost"),
+        'port': os.getenv("GOB_DATABASE_PORT_OVERRIDE", 5406),
+    },
     'Basisinformatie': {
         'type': TYPE_OBJECTSTORE,
         'VERSION': '2.0',
