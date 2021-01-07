@@ -1,0 +1,15 @@
+SELECT brk_atg_id,
+       nrn_atg_id,
+       atg_aardaantekening_code,
+       atg_aardaantekening_oms,
+       atg_omschrijving,
+       atg_einddatum,
+       brk_kot_id,
+       nrn_kot_id,
+       nrn_kot_volgnr as volgnummer,
+       brk_sjt_ids,
+       nrn_sdl_ids,
+       toestandsdatum,
+       expiration_date,
+       begindatum
+FROM brk_prepared.aantekening_kadastraal_object
