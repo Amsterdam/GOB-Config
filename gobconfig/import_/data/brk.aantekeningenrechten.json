@@ -7,32 +7,9 @@
     "application": "GOBPrepare",
     "entity_id": "identificatie",
     "schema": "GOBPrepare",
-    "query": [
-      "SELECT * FROM (",
-      "  SELECT",
-      "    brk_atg_id                    AS identificatie,",
-      "    nrn_atg_id,",
-      "    atg_aardaantekening_code,",
-      "    atg_aardaantekening_oms,",
-      "    atg_omschrijving,",
-      "    atg_einddatum,",
-      "    brk_sjt_ids,",
-      "    nrn_tng_ids,",
-      "    nrn_sdl_ids,",
-      "    toestandsdatum,",
-      "    expiration_date",
-      "  FROM brk_prepared.aantekening_recht",
-      ") art"
-    ],
+    "query": "sql/brk/aantekeningenrechten.sql",
     "recent": [
-      ", (",
-      "    SELECT",
-      "      MIN(last_id) AS last_id",
-      "    FROM brk_metadata.last_source_id",
-      "    WHERE collection = 'aantekening_recht' AND",
-      "    date_registered > NOW() - INTERVAL '10 days'",
-      "  ) l",
-      "WHERE art.nrn_atg_id > l.last_id"
+      "WHERE greatest(case when expiration_date < now() then expiration_date end, max_tng_begindatum) > now()"
     ]
   },
   "gob_mapping": {
