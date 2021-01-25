@@ -7,7 +7,11 @@
     "application": "BAGExtract",
     "entity_id": "identificatie",
     "read_config": {
-      "object_type": "VBO"
+      "object_type": "VBO",
+      "xml_object": "Verblijfsobject",
+      "gemeentes": [
+        "0457"
+      ]
     }
   },
   "gob_mapping": {
