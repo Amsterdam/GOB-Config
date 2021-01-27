@@ -1,22 +1,15 @@
 {
   "version": "0.1",
   "catalogue": "bag",
-  "entity": "ligplaatsen",
+  "entity": "nummeraanduidingen",
   "source": {
     "name": "AMSBI",
     "application": "Neuron",
     "entity_id": "identificatie",
     "schema": "Neuron",
-    "enrich": {
-      "amsterdamse_sleutel": {
-        "type": "autoid",
-        "on": "identificatie",
-        "template": "0363085XXXXXXX"
-      }
-    },
-    "query": "sql/bag/ligplaatsen.sql",
+    "query": "sql/bag/nummeraanduidingen.sql",
     "recent": [
-"      WHERE (l.creation >= sysdate - 10 OR  l.modification >= sysdate - 10)"
+"      WHERE (a.creation >= sysdate - 10 OR  a.modification >= sysdate - 10)"
     ]
   },
   "gob_mapping": {
@@ -26,12 +19,26 @@
     "volgnummer": {
       "source_mapping": "volgnummer"
     },
-    "amsterdamse_sleutel": {
-      "source_mapping": "amsterdamse_sleutel"
+    "huisnummer": {
+      "source_mapping": "huisnummer"
     },
     "geconstateerd": {
       "source_mapping": "geconstateerd",
       "format": "JN"
+    },
+    "huisletter": {
+      "source_mapping": "huisletter"
+    },
+    "huisnummertoevoeging": {
+      "source_mapping": "huisnummertoevoeging"
+    },
+    "postcode": {
+      "source_mapping": "postcode"
+    },
+    "ligt_in_woonplaats": {
+      "source_mapping": {
+        "bronwaarde": "ligt_in_bag_woonplaats"
+      }
     },
     "begin_geldigheid": {
       "source_mapping": "begin_geldigheid",
@@ -41,27 +48,16 @@
       "source_mapping": "eind_geldigheid",
       "format": "%Y-%m-%d %H:%M:%S"
     },
-    "status": {
+    "ligt_aan_openbareruimte": {
       "source_mapping": {
-        "code": "status_code",
-        "omschrijving": "status_omschrijving"
+        "bronwaarde": "ligt_aan_bag_openbareruimte"
       }
     },
-    "heeft_hoofdadres": {
+    "type_adresseerbaar_object": {
       "source_mapping": {
-        "bronwaarde": "nummeraanduidingid_hoofd"
+        "code": "type_aot_code",
+        "omschrijving": "type_aot_omschrijving"
       }
-    },
-    "heeft_nevenadres": {
-      "source_mapping": {
-        "bronwaarde": "nummeraanduidingid_neven",
-        "format": {
-          "split": ";"
-        }
-      }
-    },
-    "geometrie": {
-      "source_mapping": "geometrie"
     },
     "documentdatum": {
       "source_mapping": "documentdatum"
@@ -69,14 +65,33 @@
     "documentnummer": {
       "source_mapping": "documentnummer"
     },
+    "status": {
+      "source_mapping": {
+        "code": "status_code",
+        "omschrijving": "status_omschrijving"
+      }
+    },
+    "type_adres": {
+      "source_mapping": "type_adres"
+    },
+    "adresseert_verblijfsobject": {
+      "source_mapping": {
+        "bronwaarde": "adresseert_bag_verblijfsobject"
+      }
+    },
+    "adresseert_ligplaats": {
+      "source_mapping": {
+        "bronwaarde": "adresseert_bag_ligplaats"
+      }
+    },
+    "adresseert_standplaats": {
+      "source_mapping": {
+        "bronwaarde": "adresseert_bag_standplaats"
+      }
+    },
     "heeft_dossier": {
       "source_mapping": {
         "bronwaarde": "dossier"
-      }
-    },
-    "ligt_in_buurt": {
-      "source_mapping": {
-        "bronwaarde": "=geometrie"
       }
     },
     "bagproces": {
@@ -96,11 +111,6 @@
     "heeft_onderzoeken": {
       "source_mapping": {
         "bronwaarde": "=identificatie"
-      }
-    },
-    "gebruiksdoel": {
-      "source_mapping": {
-        "omschrijving": "gebruiksdoel"
       }
     }
   }

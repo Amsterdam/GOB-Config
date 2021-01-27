@@ -7,13 +7,6 @@
     "application": "Neuron",
     "entity_id": "identificatie",
     "schema": "Neuron",
-    "enrich": {
-      "amsterdamse_sleutel": {
-        "type": "autoid",
-        "on": "identificatie",
-        "template": "0363089XXXXXXX"
-      }
-    },
     "query": "sql/bag/woonplaatsen.sql",
     "recent": [
 "      WHERE (w.creation >= sysdate - 10 OR  w.modification >= sysdate - 10)"
@@ -25,9 +18,6 @@
     },
     "volgnummer": {
       "source_mapping": "volgnummer"
-    },
-    "amsterdamse_sleutel": {
-      "source_mapping": "amsterdamse_sleutel"
     },
     "naam": {
       "source_mapping": "naam"
