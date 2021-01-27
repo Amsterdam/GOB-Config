@@ -19,9 +19,6 @@
     "volgnummer": {
       "source_mapping": "volgnummer"
     },
-    "amsterdamse_sleutel": {
-      "source_mapping": "amsterdamse_sleutel"
-    },
     "straatcode": {
       "source_mapping": "straatcode"
     },
