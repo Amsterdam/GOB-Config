@@ -1,22 +1,15 @@
 {
   "version": "0.1",
   "catalogue": "bag",
-  "entity": "nummeraanduidingen",
+  "entity": "panden",
   "source": {
     "name": "AMSBI",
     "application": "Neuron",
     "entity_id": "identificatie",
     "schema": "Neuron",
-    "enrich": {
-      "amsterdamse_sleutel": {
-        "type": "autoid",
-        "on": "identificatie",
-        "template": "0363087XXXXXXX"
-      }
-    },
-    "query": "sql/bag/nummeraanduidingen.sql",
+    "query": "sql/bag/panden.sql",
     "recent": [
-"      WHERE (a.creation >= sysdate - 10 OR  a.modification >= sysdate - 10)"
+"      WHERE (g.creation >= sysdate - 10 OR  g.modification >= sysdate - 10)"
     ]
   },
   "gob_mapping": {
@@ -26,28 +19,20 @@
     "volgnummer": {
       "source_mapping": "volgnummer"
     },
-    "amsterdamse_sleutel": {
-      "source_mapping": "amsterdamse_sleutel"
-    },
-    "huisnummer": {
-      "source_mapping": "huisnummer"
-    },
     "geconstateerd": {
       "source_mapping": "geconstateerd",
       "format": "JN"
     },
-    "huisletter": {
-      "source_mapping": "huisletter"
+    "geometrie": {
+      "source_mapping": "geometrie"
     },
-    "huisnummertoevoeging": {
-      "source_mapping": "huisnummertoevoeging"
+    "oorspronkelijk_bouwjaar": {
+      "source_mapping": "oorspronkelijk_bouwjaar"
     },
-    "postcode": {
-      "source_mapping": "postcode"
-    },
-    "ligt_in_woonplaats": {
+    "status": {
       "source_mapping": {
-        "bronwaarde": "ligt_in_bag_woonplaats"
+        "code": "status_code",
+        "omschrijving": "status_omschrijving"
       }
     },
     "begin_geldigheid": {
@@ -58,45 +43,36 @@
       "source_mapping": "eind_geldigheid",
       "format": "%Y-%m-%d %H:%M:%S"
     },
-    "ligt_aan_openbareruimte": {
-      "source_mapping": {
-        "bronwaarde": "ligt_aan_bag_openbareruimte"
-      }
-    },
-    "type_adresseerbaar_object": {
-      "source_mapping": {
-        "code": "type_aot_code",
-        "omschrijving": "type_aot_omschrijving"
-      }
-    },
     "documentdatum": {
       "source_mapping": "documentdatum"
     },
     "documentnummer": {
       "source_mapping": "documentnummer"
     },
-    "status": {
+    "naam": {
+      "source_mapping": "naam"
+    },
+    "ligging": {
       "source_mapping": {
-        "code": "status_code",
-        "omschrijving": "status_omschrijving"
+        "code": "ligging_code",
+        "omschrijving": "ligging_omschrijving"
       }
     },
-    "type_adres": {
-      "source_mapping": "type_adres"
+    "type_woonobject": {
+      "source_mapping": "type_woonobject"
     },
-    "adresseert_verblijfsobject": {
-      "source_mapping": {
-        "bronwaarde": "adresseert_bag_verblijfsobject"
-      }
+    "aantal_bouwlagen": {
+      "source_mapping": "aantal_bouwlagen"
     },
-    "adresseert_ligplaats": {
-      "source_mapping": {
-        "bronwaarde": "adresseert_bag_ligplaats"
-      }
+    "hoogste_bouwlaag": {
+      "source_mapping": "hoogste_bouwlaag"
     },
-    "adresseert_standplaats": {
+    "laagste_bouwlaag": {
+      "source_mapping": "laagste_bouwlaag"
+    },
+    "ligt_in_bouwblok": {
       "source_mapping": {
-        "bronwaarde": "adresseert_bag_standplaats"
+        "bronwaarde": "=geometrie"
       }
     },
     "heeft_dossier": {

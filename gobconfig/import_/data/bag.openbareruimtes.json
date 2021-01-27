@@ -1,22 +1,15 @@
 {
   "version": "0.1",
   "catalogue": "bag",
-  "entity": "standplaatsen",
+  "entity": "openbareruimtes",
   "source": {
     "name": "AMSBI",
     "application": "Neuron",
     "entity_id": "identificatie",
     "schema": "Neuron",
-    "enrich": {
-      "amsterdamse_sleutel": {
-        "type": "autoid",
-        "on": "identificatie",
-        "template": "0363084XXXXXXX"
-      }
-    },
-    "query": "sql/bag/standplaatsen.sql",
+    "query": "sql/bag/openbareruimtes.sql",
     "recent": [
-"      WHERE (s.creation >= sysdate - 10 OR  s.modification >= sysdate - 10)"
+"      WHERE (o.creation >= sysdate - 10 OR  o.modification >= sysdate - 10)"
     ]
   },
   "gob_mapping": {
@@ -29,9 +22,17 @@
     "amsterdamse_sleutel": {
       "source_mapping": "amsterdamse_sleutel"
     },
-    "geconstateerd": {
-      "source_mapping": "geconstateerd",
-      "format": "JN"
+    "straatcode": {
+      "source_mapping": "straatcode"
+    },
+    "straatnaam_ptt": {
+      "source_mapping": "naam_ptt"
+    },
+    "status": {
+      "source_mapping": {
+        "code": "status_code",
+        "omschrijving": "status_omschrijving"
+      }
     },
     "begin_geldigheid": {
       "source_mapping": "begin_geldigheid",
@@ -41,27 +42,9 @@
       "source_mapping": "eind_geldigheid",
       "format": "%Y-%m-%d %H:%M:%S"
     },
-    "status": {
-      "source_mapping": {
-        "code": "status_code",
-        "omschrijving": "status_omschrijving"
-      }
-    },
-    "heeft_hoofdadres": {
-      "source_mapping": {
-        "bronwaarde": "nummeraanduidingid_hoofd"
-      }
-    },
-    "heeft_nevenadres": {
-      "source_mapping": {
-        "bronwaarde": "nummeraanduidingid_neven",
-        "format": {
-          "split": ";"
-        }
-      }
-    },
-    "geometrie": {
-      "source_mapping": "geometrie"
+    "geconstateerd": {
+      "source_mapping": "geconstateerd",
+      "format": "JN"
     },
     "documentdatum": {
       "source_mapping": "documentdatum"
@@ -69,10 +52,25 @@
     "documentnummer": {
       "source_mapping": "documentnummer"
     },
-    "ligt_in_buurt": {
+    "naam": {
+      "source_mapping": "naam"
+    },
+    "naam_nen": {
+      "source_mapping": "naam_nen"
+    },
+    "ligt_in_woonplaats": {
       "source_mapping": {
-        "bronwaarde": "=geometrie"
+        "bronwaarde": "ligt_in_bag_woonplaats"
       }
+    },
+    "type": {
+      "source_mapping": {
+        "code": "type_code",
+        "omschrijving": "type_omschrijving"
+      }
+    },
+    "beschrijving_naam": {
+      "source_mapping": "beschrijving_naam"
     },
     "heeft_dossier": {
       "source_mapping": {
@@ -93,14 +91,12 @@
       "source_mapping": "expirationdate",
       "format": "%Y-%m-%d %H:%M:%S"
     },
+    "geometrie": {
+      "source_mapping": "geometrie"
+    },
     "heeft_onderzoeken": {
       "source_mapping": {
         "bronwaarde": "=identificatie"
-      }
-    },
-    "gebruiksdoel": {
-      "source_mapping": {
-        "omschrijving": "gebruiksdoel"
       }
     }
   }
