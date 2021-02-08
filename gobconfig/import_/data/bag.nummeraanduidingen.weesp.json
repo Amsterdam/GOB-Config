@@ -1,0 +1,79 @@
+{
+  "version": "0.1",
+  "catalogue": "bag",
+  "entity": "nummeraanduidingen",
+  "source": {
+    "name": "Kadaster",
+    "application": "BAGExtract",
+    "entity_id": "identificatie",
+    "read_config": {
+      "object_type": "NUM",
+      "xml_object": "Nummeraanduiding",
+      "gemeentes": [
+        "0457"
+      ]
+    }
+  },
+  "gob_mapping": {
+    "identificatie": {
+      "source_mapping": "identificatie"
+    },
+    "volgnummer": {
+      "source_mapping": "voorkomen/Voorkomen/voorkomenidentificatie"
+    },
+    "huisnummer": {
+      "source_mapping": "huisnummer"
+    },
+    "geconstateerd": {
+      "source_mapping": "geconstateerd",
+      "format": "JN"
+    },
+    "huisletter": {
+      "source_mapping": "huisletter"
+    },
+    "huisnummertoevoeging": {
+      "source_mapping": "huisnummertoevoeging"
+    },
+    "postcode": {
+      "source_mapping": "postcode"
+    },
+    "begin_geldigheid": {
+      "source_mapping": "voorkomen/Voorkomen/beginGeldigheid",
+      "format": "%Y-%m-%d"
+    },
+    "eind_geldigheid": {
+      "source_mapping": "voorkomen/Voorkomen/eindGeldigheid",
+      "format": "%Y-%m-%d"
+    },
+    "ligt_aan_openbareruimte": {
+      "source_mapping": {
+        "bronwaarde": "ligtAan/OpenbareRuimteRef"
+      }
+    },
+    "type_adresseerbaar_object": {
+      "source_mapping": {
+        "omschrijving": "typeAdresseerbaarObject"
+      }
+    },
+    "documentdatum": {
+      "source_mapping": "documentdatum"
+    },
+    "documentnummer": {
+      "source_mapping": "documentnummer"
+    },
+    "status": {
+      "source_mapping": {
+        "omschrijving": "status"
+      }
+    },
+    "_expiration_date": {
+      "source_mapping": "voorkomen/Voorkomen/eindGeldigheid",
+      "format": "%Y-%m-%d"
+    },
+    "heeft_onderzoeken": {
+      "source_mapping": {
+        "bronwaarde": "=identificatie"
+      }
+    }
+  }
+}

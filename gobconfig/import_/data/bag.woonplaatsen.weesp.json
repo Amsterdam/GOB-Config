@@ -1,0 +1,67 @@
+{
+  "version": "0.1",
+  "catalogue": "bag",
+  "entity": "woonplaatsen",
+  "source": {
+    "name": "Kadaster",
+    "application": "BAGExtract",
+    "entity_id": "identificatie",
+    "read_config": {
+      "object_type": "WPL",
+      "xml_object": "Woonplaats",
+      "gemeentes": [
+        "0457"
+      ]
+    }
+  },
+  "gob_mapping": {
+    "identificatie": {
+      "source_mapping": "identificatie"
+    },
+    "volgnummer": {
+      "source_mapping": "voorkomen/Voorkomen/voorkomenidentificatie"
+    },
+    "naam": {
+      "source_mapping": "naam"
+    },
+    "status": {
+      "source_mapping": {
+        "omschrijving": "status"
+      }
+    },
+    "geconstateerd": {
+      "source_mapping": "geconstateerd"
+    },
+    "documentdatum": {
+      "source_mapping": "documentdatum"
+    },
+    "documentnummer": {
+      "source_mapping": "documentnummer"
+    },
+    "geometrie": {
+      "source_mapping": "geometrie/vlak"
+    },
+    "begin_geldigheid": {
+      "source_mapping": "voorkomen/Voorkomen/beginGeldigheid",
+      "format": "%Y-%m-%d"
+    },
+    "eind_geldigheid": {
+      "source_mapping": "voorkomen/Voorkomen/eindGeldigheid",
+      "format": "%Y-%m-%d"
+    },
+    "ligt_in_gemeente": {
+      "source_mapping": {
+        "bronwaarde": "=0457"
+      }
+    },
+    "_expiration_date": {
+      "source_mapping": "voorkomen/Voorkomen/eindGeldigheid",
+      "format": "%Y-%m-%d"
+    },
+    "heeft_onderzoeken": {
+      "source_mapping": {
+        "bronwaarde": "=identificatie"
+      }
+    }
+  }
+}
