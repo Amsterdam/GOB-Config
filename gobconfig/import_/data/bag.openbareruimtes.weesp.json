@@ -1,0 +1,70 @@
+{
+  "version": "0.1",
+  "catalogue": "bag",
+  "entity": "openbareruimtes",
+  "source": {
+    "name": "Kadaster",
+    "application": "BAGExtract",
+    "entity_id": "identificatie",
+    "read_config": {
+      "object_type": "OPR",
+      "xml_object": "OpenbareRuimte",
+      "gemeentes": [
+        "0457"
+      ]
+    }
+  },
+  "gob_mapping": {
+    "identificatie": {
+      "source_mapping": "identificatie"
+    },
+    "volgnummer": {
+      "source_mapping": "voorkomen/Voorkomen/voorkomenidentificatie"
+    },
+    "status": {
+      "source_mapping": {
+        "omschrijving": "status"
+      }
+    },
+    "begin_geldigheid": {
+      "source_mapping": "voorkomen/Voorkomen/beginGeldigheid",
+      "format": "%Y-%m-%d"
+    },
+    "eind_geldigheid": {
+      "source_mapping": "voorkomen/Voorkomen/eindGeldigheid",
+      "format": "%Y-%m-%d"
+    },
+    "geconstateerd": {
+      "source_mapping": "geconstateerd",
+      "format": "JN"
+    },
+    "documentdatum": {
+      "source_mapping": "documentdatum"
+    },
+    "documentnummer": {
+      "source_mapping": "documentnummer"
+    },
+    "naam": {
+      "source_mapping": "naam"
+    },
+    "ligt_in_woonplaats": {
+      "source_mapping": {
+        "bronwaarde": "ligtIn/WoonplaatsRef"
+      }
+    },
+    "type": {
+      "source_mapping": {
+        "omschrijving": "type"
+      }
+    },
+    "_expiration_date": {
+      "source_mapping": "voorkomen/Voorkomen/eindGeldigheid",
+      "format": "%Y-%m-%d"
+    },
+    "heeft_onderzoeken": {
+      "source_mapping": {
+        "bronwaarde": "=identificatie"
+      }
+    }
+  }
+}

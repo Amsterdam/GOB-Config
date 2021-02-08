@@ -1,0 +1,75 @@
+{
+  "version": "0.1",
+  "catalogue": "bag",
+  "entity": "ligplaatsen",
+  "source": {
+    "name": "Kadaster",
+    "application": "BAGExtract",
+    "entity_id": "identificatie",
+    "read_config": {
+      "object_type": "LIG",
+      "xml_object": "Ligplaats",
+      "gemeentes": [
+        "0457"
+      ]
+    }
+  },
+  "gob_mapping": {
+    "identificatie": {
+      "source_mapping": "identificatie"
+    },
+    "volgnummer": {
+      "source_mapping": "voorkomen/Voorkomen/voorkomenidentificatie"
+    },
+    "geconstateerd": {
+      "source_mapping": "geconstateerd",
+      "format": "JN"
+    },
+    "begin_geldigheid": {
+      "source_mapping": "voorkomen/Voorkomen/beginGeldigheid",
+      "format": "%Y-%m-%d"
+    },
+    "eind_geldigheid": {
+      "source_mapping": "voorkomen/Voorkomen/eindGeldigheid",
+      "format": "%Y-%m-%d"
+    },
+    "status": {
+      "source_mapping": {
+        "omschrijving": "status"
+      }
+    },
+    "heeft_hoofdadres": {
+      "source_mapping": {
+        "bronwaarde": "heeftAlsHoofdadres/NummeraanduidingRef"
+      }
+    },
+    "heeft_nevenadres": {
+      "source_mapping": {
+        "bronwaarde": "heeftAlsNevenadres/NummeraanduidingRef"
+      }
+    },
+    "geometrie": {
+      "source_mapping": "geometrie"
+    },
+    "documentdatum": {
+      "source_mapping": "documentdatum"
+    },
+    "documentnummer": {
+      "source_mapping": "documentnummer"
+    },
+    "ligt_in_buurt": {
+      "source_mapping": {
+        "bronwaarde": "=geometrie"
+      }
+    },
+    "_expiration_date": {
+      "source_mapping": "voorkomen/Voorkomen/eindGeldigheid",
+      "format": "%Y-%m-%d"
+    },
+    "heeft_onderzoeken": {
+      "source_mapping": {
+        "bronwaarde": "=identificatie"
+      }
+    }
+  }
+}

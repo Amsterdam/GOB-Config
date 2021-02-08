@@ -1,0 +1,68 @@
+{
+  "version": "0.1",
+  "catalogue": "bag",
+  "entity": "panden",
+  "source": {
+    "name": "Kadaster",
+    "application": "BAGExtract",
+    "entity_id": "identificatie",
+    "read_config": {
+      "object_type": "PND",
+      "xml_object": "Pand",
+      "gemeentes": [
+        "0457"
+      ]
+    }
+  },
+  "gob_mapping": {
+    "identificatie": {
+      "source_mapping": "identificatie"
+    },
+    "volgnummer": {
+      "source_mapping": "voorkomen/Voorkomen/voorkomenidentificatie"
+    },
+    "geconstateerd": {
+      "source_mapping": "geconstateerd",
+      "format": "JN"
+    },
+    "geometrie": {
+      "source_mapping": "geometrie"
+    },
+    "oorspronkelijk_bouwjaar": {
+      "source_mapping": "oorspronkelijkBouwjaar"
+    },
+    "status": {
+      "source_mapping": {
+        "omschrijving": "status"
+      }
+    },
+    "begin_geldigheid": {
+      "source_mapping": "voorkomen/Voorkomen/beginGeldigheid",
+      "format": "%Y-%m-%d"
+    },
+    "eind_geldigheid": {
+      "source_mapping": "voorkomen/Voorkomen/eindGeldigheid",
+      "format": "%Y-%m-%d"
+    },
+    "documentdatum": {
+      "source_mapping": "documentdatum"
+    },
+    "documentnummer": {
+      "source_mapping": "documentnummer"
+    },
+    "ligt_in_bouwblok": {
+      "source_mapping": {
+        "bronwaarde": "=geometrie"
+      }
+    },
+    "_expiration_date": {
+      "source_mapping": "voorkomen/Voorkomen/eindGeldigheid",
+      "format": "%Y-%m-%d"
+    },
+    "heeft_onderzoeken": {
+      "source_mapping": {
+        "bronwaarde": "=identificatie"
+      }
+    }
+  }
+}
