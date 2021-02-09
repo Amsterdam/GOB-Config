@@ -94,9 +94,9 @@
         "omschrijving": "gebruiksdoel",
         "format": {
           "split": ";"
-        },
-        "force_list": true
-      }
+        }
+      },
+      "force_list": true
     }
   }
 }
