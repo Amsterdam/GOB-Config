@@ -13,6 +13,9 @@
 "      WHERE (s.creation >= sysdate - 10 OR  s.modification >= sysdate - 10)"
     ]
   },
+  "not_provided_attributes": [
+    "gebruiksdoel_code"
+  ],
   "gob_mapping": {
     "identificatie": {
       "source_mapping": "identificatie"
