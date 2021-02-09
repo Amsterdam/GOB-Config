@@ -2,6 +2,7 @@
   "version": "0.1",
   "catalogue": "bag",
   "entity": "ligplaatsen",
+  "default": true,
   "source": {
     "name": "AMSBI",
     "application": "Neuron",
@@ -90,8 +91,12 @@
     },
     "gebruiksdoel": {
       "source_mapping": {
-        "omschrijving": "gebruiksdoel"
-      }
+        "omschrijving": "gebruiksdoel",
+        "format": {
+          "split": ";"
+        }
+      },
+      "force_list": true
     }
   }
 }
