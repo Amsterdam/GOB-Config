@@ -54,7 +54,10 @@
     },
     "ligt_in_panden": {
       "source_mapping": {
-        "bronwaarde": "pandidentificatie"
+        "bronwaarde": "pandidentificatie",
+        "format": {
+          "split": ";"
+        }
       }
     },
     "begin_geldigheid": {
