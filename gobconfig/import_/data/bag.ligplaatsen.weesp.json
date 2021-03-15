@@ -6,13 +6,10 @@
     "name": "Kadaster",
     "application": "BAGExtract",
     "entity_id": "identificatie",
-    "read_config": {
-      "object_type": "LIG",
-      "xml_object": "Ligplaats",
-      "gemeentes": [
-        "0457"
-      ]
-    }
+    "query": "sql/bag/ligplaatsen.weesp.sql",
+    "recent": [
+"      WHERE last_update >= CURRENT_DATE - interval '10' day"
+    ]
   },
   "gob_mapping": {
     "identificatie": {

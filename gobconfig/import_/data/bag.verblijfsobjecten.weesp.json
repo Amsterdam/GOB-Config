@@ -1,4 +1,5 @@
 {
+
   "version": "0.1",
   "catalogue": "bag",
   "entity": "verblijfsobjecten",
@@ -6,13 +7,10 @@
     "name": "Kadaster",
     "application": "BAGExtract",
     "entity_id": "identificatie",
-    "read_config": {
-      "object_type": "VBO",
-      "xml_object": "Verblijfsobject",
-      "gemeentes": [
-        "0457"
-      ]
-    }
+    "query": "sql/bag/verblijfsobjecten.weesp.sql",
+    "recent": [
+"     WHERE last_update >= CURRENT_DATE - interval '10' day"
+    ]
   },
   "gob_mapping": {
     "identificatie": {
