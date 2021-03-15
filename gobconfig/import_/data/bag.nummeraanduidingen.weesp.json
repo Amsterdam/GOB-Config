@@ -36,11 +36,15 @@
     },
     "begin_geldigheid": {
       "source_mapping": "voorkomen/Voorkomen/beginGeldigheid",
-      "format": "%Y-%m-%d"
+      "format": "%Y-%m-%d %H:%M:%S"
     },
     "eind_geldigheid": {
       "source_mapping": "voorkomen/Voorkomen/eindGeldigheid",
-      "format": "%Y-%m-%d"
+      "format": "%Y-%m-%d %H:%M:%S"
+    },
+    "registratiedatum": {
+      "source_mapping": "voorkomen/Voorkomen/tijdstipRegistratie",
+      "format": "%Y-%m-%d %H:%M:%S"
     },
     "ligt_aan_openbareruimte": {
       "source_mapping": {
@@ -58,14 +62,17 @@
     "documentnummer": {
       "source_mapping": "documentnummer"
     },
+    "type_adres": {
+      "source_mapping": "type_adres"
+    },
     "status": {
       "source_mapping": {
         "omschrijving": "status"
       }
     },
     "_expiration_date": {
-      "source_mapping": "voorkomen/Voorkomen/eindGeldigheid",
-      "format": "%Y-%m-%d"
+      "source_mapping": "expirationdate",
+      "format": "%Y-%m-%d %H:%M:%S"
     },
     "heeft_onderzoeken": {
       "source_mapping": {

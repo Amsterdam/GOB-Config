@@ -6,12 +6,32 @@ SELECT * FROM (SELECT
     object->>'huisletter' as huisletter,
     object->>'huisnummertoevoeging' as huisnummertoevoeging,
     object->>'postcode' as postcode,
-    object->>'voorkomen/Voorkomen/beginGeldigheid' as "voorkomen/Voorkomen/beginGeldigheid",
-    object->>'voorkomen/Voorkomen/eindGeldigheid' as "voorkomen/Voorkomen/eindGeldigheid",
+    to_char(to_timestamp(object->>'voorkomen/Voorkomen/beginGeldigheid', 'YYYY-MM-DD'), 'YYYY-MM-DD HH24:MI:SS') as "voorkomen/Voorkomen/beginGeldigheid",
+    to_char(to_timestamp(object->>'voorkomen/Voorkomen/eindGeldigheid', 'YYYY-MM-DD'), 'YYYY-MM-DD HH24:MI:SS') as "voorkomen/Voorkomen/eindGeldigheid",
     object->>'ligtAan/OpenbareRuimteRef' as "ligtAan/OpenbareRuimteRef",
     object->>'typeAdresseerbaarObject' as "typeAdresseerbaarObject",
     object->>'documentdatum' as documentdatum,
     object->>'documentnummer' as documentnummer,
     object->>'status' as status,
+    to_char(to_timestamp(object->>'voorkomen/Voorkomen/tijdstipRegistratie', 'YYYY-MM-DD HH24:MI:SS'), 'YYYY-MM-DD HH24:MI:SS') as "voorkomen/Voorkomen/tijdstipRegistratie",
+    CASE WHEN adres_id IS NULL
+        THEN 'Nevenadres'
+        ELSE 'Hoofdadres'
+    END as type_adres,
+    COALESCE(
+        to_char(to_timestamp(object->>'voorkomen/Voorkomen/eindGeldigheid', 'YYYY-MM-DD'), 'YYYY-MM-DD HH24:MI:SS'),
+        CASE WHEN object->>'status' LIKE '%ingetrokken'
+            THEN to_char(to_timestamp(object->>'voorkomen/Voorkomen/tijdstipRegistratie', 'YYYY-MM-DD HH24:MI:SS'), 'YYYY-MM-DD HH24:MI:SS') 
+            ELSE NULL
+         END) as expirationdate,
     last_update
-FROM bag_nummeraanduidingen WHERE gemeente = '0457') bag_nummeraanduidingen
+FROM bag_nummeraanduidingen bn
+LEFT OUTER JOIN(
+        SELECT object->>'heeftAlsHoofdadres/NummeraanduidingRef' AS adres_id FROM bag_verblijfsobjecten WHERE gemeente = '0457'
+        UNION
+        SELECT object->>'heeftAlsHoofdadres/NummeraanduidingRef' AS adres_id FROM bag_ligplaatsen WHERE gemeente = '0457'
+        UNION
+        SELECT object->>'heeftAlsHoofdadres/NummeraanduidingRef' AS adres_id FROM bag_standplaatsen WHERE gemeente = '0457'
+    ) as q2 ON bn.object->>'identificatie' = adres_id
+WHERE gemeente = '0457'
+) bag_nummeraanduidingen
