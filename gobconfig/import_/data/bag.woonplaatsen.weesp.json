@@ -6,13 +6,10 @@
     "name": "Kadaster",
     "application": "BAGExtract",
     "entity_id": "identificatie",
-    "read_config": {
-      "object_type": "WPL",
-      "xml_object": "Woonplaats",
-      "gemeentes": [
-        "0457"
-      ]
-    }
+    "query": "sql/bag/woonplaatsen.weesp.sql",
+    "recent": [
+"     WHERE last_update >= CURRENT_DATE - interval '10' day"
+    ]
   },
   "gob_mapping": {
     "identificatie": {

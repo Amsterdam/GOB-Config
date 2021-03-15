@@ -6,13 +6,10 @@
     "name": "Kadaster",
     "application": "BAGExtract",
     "entity_id": "identificatie",
-    "read_config": {
-      "object_type": "STA",
-      "xml_object": "Standplaats",
-      "gemeentes": [
-        "0457"
-      ]
-    }
+    "query": "sql/bag/standplaatsen.weesp.sql",
+    "recent": [
+"     WHERE last_update >= CURRENT_DATE - interval '10' day"
+    ]
   },
   "gob_mapping": {
     "identificatie": {
