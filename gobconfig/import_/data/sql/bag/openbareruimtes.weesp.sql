@@ -10,6 +10,5 @@ SELECT * FROM (SELECT
     object->>'naam' as naam,
     object->>'ligtIn/WoonplaatsRef' as "ligtIn/WoonplaatsRef",
     object->>'type' as type,
-    object->>'voorkomen/Voorkomen/eindGeldigheid' as "voorkomen/Voorkomen/eindGeldigheid",
     last_update
 FROM bag_openbareruimtes WHERE gemeente = '0457') bag_openbareruimtes

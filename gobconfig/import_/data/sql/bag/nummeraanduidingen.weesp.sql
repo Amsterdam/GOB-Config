@@ -13,6 +13,5 @@ SELECT * FROM (SELECT
     object->>'documentdatum' as documentdatum,
     object->>'documentnummer' as documentnummer,
     object->>'status' as status,
-    object->>'voorkomen/Voorkomen/eindGeldigheid' as "voorkomen/Voorkomen/eindGeldigheid",
     last_update
 FROM bag_nummeraanduidingen WHERE gemeente = '0457') bag_nummeraanduidingen
