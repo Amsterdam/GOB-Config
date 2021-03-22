@@ -10,6 +10,7 @@ SELECT * FROM (SELECT
     object->>'naam' as naam,
     object->>'ligtIn/WoonplaatsRef' as "ligtIn/WoonplaatsRef",
     object->>'type' as type,
+    object->>'verkorteNaam/VerkorteNaamOpenbareRuimte/verkorteNaam' as "verkorteNaam/VerkorteNaamOpenbareRuimte/verkorteNaam",
     to_char(to_timestamp(object->>'voorkomen/Voorkomen/tijdstipRegistratie', 'YYYY-MM-DD HH24:MI:SS'), 'YYYY-MM-DD HH24:MI:SS') as "voorkomen/Voorkomen/tijdstipRegistratie",
     COALESCE(
         to_char(to_timestamp(object->>'voorkomen/Voorkomen/eindGeldigheid', 'YYYY-MM-DD'), 'YYYY-MM-DD HH24:MI:SS'), 
