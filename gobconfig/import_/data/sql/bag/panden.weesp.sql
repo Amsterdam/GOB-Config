@@ -9,6 +9,5 @@ SELECT * FROM (SELECT
     object->> 'voorkomen/Voorkomen/eindGeldigheid' as "voorkomen/Voorkomen/eindGeldigheid",
     object->>'documentdatum' as documentdatum,
     object->>'documentnummer' as documentnummer,
-    object->> 'voorkomen/Voorkomen/eindGeldigheid' as "voorkomen/Voorkomen/eindGeldigheid",
     last_update
 FROM bag_panden WHERE gemeente = '0457') bag_panden

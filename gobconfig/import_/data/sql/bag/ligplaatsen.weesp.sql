@@ -10,6 +10,5 @@ SELECT * FROM (SELECT
     object->>'geometrie' as geometrie,
     object->>'documentdatum' as documentdatum,
     object->>'documentnummer' as documentnummer,
-    object->>'voorkomen/Voorkomen/eindGeldigheid' as "voorkomen/Voorkomen/eindGeldigheid",
     last_update
 FROM bag_ligplaatsen WHERE gemeente = '0457') bag_ligplaatsen
