@@ -58,6 +58,9 @@
         "_id": "reference",
         "bronwaarde": "reference"
       }
+    },
+    "incomplete_date": {
+      "source_mapping": "incomplete_date"
     }
   }
 }

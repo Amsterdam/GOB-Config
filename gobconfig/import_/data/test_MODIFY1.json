@@ -68,6 +68,9 @@
       "source_mapping": {
         "bronwaarde": "manyreference"
       }
+    },
+    "incomplete_date": {
+      "source_mapping": "incomplete_date"
     }
   }
 }
