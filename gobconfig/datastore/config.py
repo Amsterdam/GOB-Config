@@ -132,13 +132,8 @@ DATASTORE_CONFIGS = {
         'port': os.getenv('GEO_BRIEVENBUS_PORT'),
     },
     'BAGExtract': {
-         'type': TYPE_POSTGRES,
-         'username': os.getenv("GOB_BAGEXTRACT_DATABASE_USER", "gob"),
-         'password': os.getenv("GOB_BAGEXTRACT_DATABASE_PASSWORD", "insecure"),
-         'host': os.getenv("BAGEXTRACT_DATABASE_HOST_OVERRIDE", os.getenv("GOB_BAGEXTRACT_DATABASE_HOST", "hostname")),
-         'port': os.getenv("BAGEXTRACT_DATABASE_PORT_OVERRIDE", os.getenv("GOB_BAGEXTRACT_DATABASE_PORT", 5413)),
-         'database': os.getenv("GOB_BAGEXTRACT_DATABASE", 'gob_bagextract'),
-    },
+        'type': TYPE_BAG_EXTRACT
+    }
 }
 
 
