@@ -27,11 +27,11 @@ SELECT * FROM (SELECT
     last_update
 FROM bag_nummeraanduidingen bn
 LEFT OUTER JOIN(
-        SELECT object->>'heeftAlsHoofdadres/NummeraanduidingRef' AS adres_id FROM bag_verblijfsobjecten WHERE gemeente = '0457'
+        SELECT MAX(object->>'heeftAlsHoofdadres/NummeraanduidingRef') AS adres_id FROM bag_verblijfsobjecten WHERE gemeente = '0457' GROUP BY object->>'heeftAlsHoofdadres/NummeraanduidingRef'
         UNION
-        SELECT object->>'heeftAlsHoofdadres/NummeraanduidingRef' AS adres_id FROM bag_ligplaatsen WHERE gemeente = '0457'
+        SELECT MAX(object->>'heeftAlsHoofdadres/NummeraanduidingRef') AS adres_id FROM bag_ligplaatsen WHERE gemeente = '0457' GROUP BY object->>'heeftAlsHoofdadres/NummeraanduidingRef'
         UNION
-        SELECT object->>'heeftAlsHoofdadres/NummeraanduidingRef' AS adres_id FROM bag_standplaatsen WHERE gemeente = '0457'
+        SELECT MAX(object->>'heeftAlsHoofdadres/NummeraanduidingRef') AS adres_id FROM bag_standplaatsen WHERE gemeente = '0457' GROUP BY object->>'heeftAlsHoofdadres/NummeraanduidingRef'
     ) as q2 ON bn.object->>'identificatie' = adres_id
 WHERE gemeente = '0457'
 ) bag_nummeraanduidingen
