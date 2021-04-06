@@ -5,7 +5,7 @@ SELECT * FROM (SELECT
     object->>'heeftAlsHoofdadres/NummeraanduidingRef' as "heeftAlsHoofdadres/NummeraanduidingRef",
     object->>'heeftAlsNevenadres/NummeraanduidingRef' as "heeftAlsNevenadres/NummeraanduidingRef",
     object->>'geometrie/punt' as "geometrie/punt",
-    object->>'gebruiksdoel' as gebruiksdoel,
+    object->'gebruiksdoel' as gebruiksdoel,
     object->>'oppervlakte' as oppervlakte,
     object->>'status' as status,
     object->>'maaktDeelUitVan/PandRef' as "maaktDeelUitVan/PandRef",

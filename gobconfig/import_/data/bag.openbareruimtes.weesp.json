@@ -59,9 +59,7 @@
       }
     },
     "naam_nen": {
-      "source_mapping": {
-        "omschrijving": "verkorteNaam/VerkorteNaamOpenbareRuimte/verkorteNaam"
-      }
+      "source_mapping": "verkorteNaam/VerkorteNaamOpenbareRuimte/verkorteNaam"
     },
     "_expiration_date": {
       "source_mapping": "expirationdate",
