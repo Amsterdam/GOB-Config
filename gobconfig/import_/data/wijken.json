@@ -17,7 +17,7 @@
       "identificatie": {
         "type": "autoid",
         "on": "code",
-        "template": "0363098XXXXXXX"
+        "template": "0363097XXXXXXX"
       }
     },
     "query": "sql/gebieden/wijken.sql"
