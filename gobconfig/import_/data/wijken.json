@@ -13,11 +13,17 @@
       "on": "code",
       "copy": ["identificatie"]
     },
+    "enrich": {
+      "identificatie": {
+        "type": "autoid",
+        "on": "code",
+        "template": "0363098XXXXXXX"
+      }
+    },
     "query": "sql/gebieden/wijken.sql"
   },
   "not_provided_attributes": [
-    "cbs_code",
-    "identificatie"
+    "cbs_code"
   ],
   "gob_mapping": {
     "identificatie": {
