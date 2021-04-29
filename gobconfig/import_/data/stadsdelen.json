@@ -13,6 +13,13 @@
       "on": "code",
       "copy": ["identificatie"]
     },
+    "enrich": {
+      "identificatie": {
+        "type": "autoid",
+        "on": "code",
+        "template": "0363093XXXXXXX"
+      }
+    },
     "query": "sql/gebieden/stadsdelen.sql"
   },
   "not_provided_attributes": [
