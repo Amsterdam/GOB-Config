@@ -30,6 +30,9 @@
     "integer": {
       "source_mapping": "integer"
     },
+    "biginteger": {
+      "source_mapping": "biginteger"
+    },
     "point": {
       "source_mapping": "point"
     },

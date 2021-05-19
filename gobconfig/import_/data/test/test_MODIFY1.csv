@@ -1,2 +1,2 @@
-,integer,decimal,character,string,date,point,boolean,json_str,json_array,json_bool,json_null,datetime,polygon,geometry,reference,manyreference,incomplete_date
-,11,11.2,b,id 1,02-01-2001,POINT (11.2 12.3),N,b,"[11, 12, 13]",false,null,2019-02-22T14:37:30.025457,"POLYGON (( 1.0 1.0,  1.0  1.0,  1.0 1.0,  1.0 1.0))",POINT (3 3),refid 2,manyref,2021-03-00
+,integer,biginteger,decimal,character,string,date,point,boolean,json_str,json_array,json_bool,json_null,datetime,polygon,geometry,reference,manyreference,incomplete_date
+,11,2500000001,11.2,b,id 1,02-01-2001,POINT (11.2 12.3),N,b,"[11, 12, 13]",false,null,2019-02-22T14:37:30.025457,"POLYGON (( 1.0 1.0,  1.0  1.0,  1.0 1.0,  1.0 1.0))",POINT (3 3),refid 2,manyref,2021-03-00
