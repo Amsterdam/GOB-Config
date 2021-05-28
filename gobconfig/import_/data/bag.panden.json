@@ -76,6 +76,11 @@
         "bronwaarde": "=geometrie"
       }
     },
+    "ligt_in_buurt": {
+      "source_mapping": {
+        "bronwaarde": "=geometrie"
+      }
+    },
     "heeft_dossier": {
       "source_mapping": {
         "bronwaarde": "dossier"
