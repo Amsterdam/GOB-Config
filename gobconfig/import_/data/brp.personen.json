@@ -47,14 +47,18 @@
     "geboortedatum": {
       "source_mapping": "geboortedatum"
     },
-    "geboorteplaats": {
+    "heeft_geboorteplaats_nederland": {
       "source_mapping": {
-        "heeft_gemeentecode": "geboorteplaats_heeft_gem_code",
+        "bronwaarde": "geboorteplaats_heeft_gem_code"
+      }
+    },
+    "heeft_geboorteplaats_buitenland": {
+      "source_mapping": {
         "plaats_in_buitenland": "geboorteplaats_pl_in_buitlnd",
         "omschrijving": "geboorteplaats_oms"
       }
     },
-    "geboorteland": {
+    "heeft_geboorteland": {
       "source_mapping": {
         "bronwaarde": "geboorteland"
       }
