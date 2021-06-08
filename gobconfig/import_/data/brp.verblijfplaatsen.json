@@ -1,0 +1,100 @@
+{
+  "version": "0.1",
+  "catalogue": "brp",
+  "entity": "verblijfplaatsen",
+  "source": {
+    "name": "AMSBI",
+    "application": "GOBPrepare",
+    "entity_id": "identificatie",
+    "schema": "GOBPrepare",
+    "query": "sql/brp/verblijfplaatsen.sql"
+  },
+  "not_provided_attributes": [
+    "_expiration_date",
+    "registratiedatum"
+  ],
+  "gob_mapping": {
+    "identificatie": {
+      "source_mapping": "identificatie"
+    },
+    "straatnaam": {
+      "source_mapping": "straatnaam"
+    },
+    "openbare_ruimte": {
+      "source_mapping": "openbare_ruimte"
+    },
+    "huisnummer": {
+      "source_mapping": "huisnummer"
+    },
+    "huisletter": {
+      "source_mapping": "huisletter"
+    },
+    "huisnummertoevoeging": {
+      "source_mapping": "huisnummertoevoeging"
+    },
+    "aanduidinghuisnummer": {
+      "source_mapping": "aanduidinghuisnummer"
+    },
+    "postcode": {
+      "source_mapping": "postcode"
+    },
+    "adres_compleet": {
+      "source_mapping": "adres_compleet"
+    },
+    "ligt_in_woonplaats": {
+      "source_mapping": "ligt_in_woonplaats"
+    },
+    "locatiebeschrijving": {
+      "source_mapping": "locatiebeschrijving"
+    },
+    "is_verblijfsobject": {
+      "source_mapping": {
+        "bronwaarde": "is_verblijfsobject"
+      }
+    },
+    "is_ligplaats": {
+      "source_mapping": {
+        "bronwaarde": "is_ligplaats"
+      }
+    },
+    "is_standplaats": {
+      "source_mapping": {
+        "bronwaarde": "is_standplaats"
+      }
+    },
+    "heeft_nummeraanduiding": {
+      "source_mapping": {
+        "bronwaarde": "heeft_nummeraanduiding"
+      }
+    },
+    "verblijft_in_land": {
+      "source_mapping": {
+        "bronwaarde": "verblijft_in_land"
+      }
+    },
+    "buitenland_regel_1": {
+      "source_mapping": "buitenland_regel_1"
+    },
+    "buitenland_regel_2": {
+      "source_mapping": "buitenland_regel_2"
+    },
+    "buitenland_regel_3": {
+      "source_mapping": "buitenland_regel_3"
+    },
+    "datum_aanvang_adres_buitenland": {
+      "source_mapping": "datum_aanvang_adres_buitenland"
+    },
+    "aanduiding_persoongegevens_in_onderzoek": {
+      "source_mapping": "aanduiding_persoongegevens_in_onderzoek"
+    },
+    "datum_ingang_persoononderzoek": {
+      "source_mapping": "datum_ingang_persoononderzoek"
+    },
+    "datum_einde_persoononderzoek": {
+      "source_mapping": "datum_einde_persoononderzoek"
+    },
+    "aantal_keren_persoon_in_onderzoek": {
+      "source_mapping": "aantal_keren_persoon_in_onderzoek"
+    }
+  }
+}
