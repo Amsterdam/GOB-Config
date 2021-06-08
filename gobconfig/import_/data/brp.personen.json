@@ -85,6 +85,7 @@
       "source_mapping": "aantal_minderjarige_kinderen"
     },
     "heeft_verblijfplaatsen": {
+      "force_list": true,
       "source_mapping": {
         "bronwaarde": "heeft_verblijfplaatsen"
       }
