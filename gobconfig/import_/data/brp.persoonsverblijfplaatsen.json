@@ -18,14 +18,10 @@
       "source_mapping": "identificatie"
     },
     "van_persoon": {
-      "source_mapping": {
-        "bronwaarde": "van_persoon"
-      }
+      "source_mapping": "van_persoon"
     },
     "met_verblijfplaats": {
-      "source_mapping": {
-        "bronwaarde": "met_verblijfplaats"
-      }
+      "source_mapping": "met_verblijfplaats"
     },
     "functieadres": {
       "source_mapping": "functieadres"

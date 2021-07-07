@@ -95,6 +95,11 @@
     },
     "aantal_keren_persoon_in_onderzoek": {
       "source_mapping": "aantal_keren_persoon_in_onderzoek"
+    },
+    "heeft_persoonsverblijfplaatsen": {
+      "source_mapping": {
+        "bronwaarde": "identificatie"
+      }
     }
   }
 }
