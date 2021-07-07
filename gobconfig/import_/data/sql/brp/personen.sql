@@ -20,7 +20,6 @@ SELECT identificatie,
        gezinsrelatie_oms,
        aantal_kinderen,
        aantal_minderjarige_kinderen,
-       heeft_verblijfplaatsen,
        heeft_overlijden_gegevens,
        heeft_verbintenis,
        heeft_inschrijving
