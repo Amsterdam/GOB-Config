@@ -68,9 +68,7 @@
       }
     },
     "verblijft_in_land": {
-      "source_mapping": {
-        "bronwaarde": "verblijft_in_land"
-      }
+      "source_mapping": "verblijft_in_land"
     },
     "buitenland_regel_1": {
       "source_mapping": "buitenland_regel_1"

@@ -39,9 +39,7 @@
       "source_mapping": "geboortedatum"
     },
     "heeft_geboorteplaats_nederland": {
-      "source_mapping": {
-        "bronwaarde": "geboorteplaats_heeft_gem_code"
-      }
+      "source_mapping": "geboorteplaats_heeft_gem_code"
     },
     "heeft_geboorteplaats_buitenland": {
       "source_mapping": {
@@ -50,9 +48,7 @@
       }
     },
     "heeft_geboorteland": {
-      "source_mapping": {
-        "bronwaarde": "geboorteland"
-      }
+      "source_mapping": "geboorteland"
     }
   }
 }

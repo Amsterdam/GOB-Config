@@ -48,9 +48,7 @@
       "source_mapping": "geboortedatum"
     },
     "heeft_geboorteplaats_nederland": {
-      "source_mapping": {
-        "bronwaarde": "geboorteplaats_heeft_gem_code"
-      }
+      "source_mapping": "geboorteplaats_heeft_gem_code"
     },
     "heeft_geboorteplaats_buitenland": {
       "source_mapping": {
@@ -59,9 +57,7 @@
       }
     },
     "heeft_geboorteland": {
-      "source_mapping": {
-        "bronwaarde": "geboorteland"
-      }
+      "source_mapping": "geboorteland"
     },
     "nationaliteit": {
       "source_mapping": {
@@ -102,6 +98,16 @@
     "heeft_inschrijving": {
       "source_mapping": {
         "bronwaarde": "heeft_inschrijving"
+      }
+    },
+    "heeft_ouder1": {
+      "source_mapping": {
+        "bronwaarde": "heeft_ouder1"
+      }
+    },
+    "heeft_ouder2": {
+      "source_mapping": {
+        "bronwaarde": "heeft_ouder2"
       }
     }
   }
