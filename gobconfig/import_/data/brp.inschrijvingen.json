@@ -1,0 +1,30 @@
+{
+  "version": "0.1",
+  "catalogue": "brp",
+  "entity": "inschrijvingen",
+  "source": {
+    "name": "AMSBI",
+    "application": "GOBPrepare",
+    "entity_id": "identificatie",
+    "schema": "GOBPrepare",
+    "query": "sql/brp/inschrijvingen.sql"
+  },
+  "not_provided_attributes": [
+    "_expiration_date",
+    "registratiedatum"
+  ],
+  "gob_mapping": {
+    "identificatie": {
+      "source_mapping": "identificatie"
+    },
+    "burgerservicenummer": {
+      "source_mapping": "burgerservicenummer"
+    },
+    "datum_eerste_inschrijving_GBA_RNI": {
+      "source_mapping": "datum_eerste_inschrijving_GBA_RNI"
+    },
+    "indicatie_geheim": {
+      "source_mapping": "indicatie_geheim"
+    }
+  }
+}
