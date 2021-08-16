@@ -24,6 +24,10 @@
       }
     }
   },
+  "not_provided_attributes": [
+    "_expiration_date",
+    "registratiedatum"
+  ],
   "gob_mapping": {
     "identificatie": {
       "source_mapping": "identificatie"

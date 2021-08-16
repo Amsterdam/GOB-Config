@@ -17,6 +17,10 @@
       "encoding": "UTF-8"
     }
   },
+  "not_provided_attributes": [
+    "_expiration_date",
+    "registratiedatum"
+  ],
   "gob_mapping": {
     "string": {
       "source_mapping": "string"
@@ -73,7 +77,9 @@
       }
     },
     "incomplete_date": {
-      "source_mapping": "incomplete_date"
+      "source_mapping": {
+        "formatted": "incomplete_date_formatted"
+      }
     }
   }
 }
