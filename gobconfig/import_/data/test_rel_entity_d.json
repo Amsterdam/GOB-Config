@@ -16,6 +16,10 @@
       "encoding": "UTF-8"
     }
   },
+  "not_provided_attributes": [
+    "_expiration_date",
+    "registratiedatum"
+  ],
   "gob_mapping": {
     "id": {
       "source_mapping": "id"
