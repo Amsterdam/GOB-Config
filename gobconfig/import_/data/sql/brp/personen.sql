@@ -22,5 +22,7 @@ SELECT identificatie,
        aantal_minderjarige_kinderen,
        heeft_overlijden_gegevens,
        heeft_verbintenis,
-       heeft_inschrijving
+       heeft_inschrijving,
+       heeft_ouder1,
+       heeft_ouder2
 from brp_prepared.personen
