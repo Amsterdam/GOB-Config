@@ -67,9 +67,7 @@
       }
     },
     "incomplete_date": {
-      "source_mapping": {
-        "formatted": "incomplete_date_formatted"
-      }
+      "source_mapping": "incomplete_date"
     }
   }
 }
