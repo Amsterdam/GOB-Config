@@ -18,6 +18,9 @@
       "FROM brk_prepared.aardzakelijkrecht_waardelijst"
     ]
   },
+  "not_provided_attributes": [
+    "_expiration_date"
+  ],
   "gob_mapping": {
     "code": {
       "source_mapping": "code"
