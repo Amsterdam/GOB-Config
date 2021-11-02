@@ -48,12 +48,12 @@
         "bronwaarde": "ligt_in_wijk"
       }
     },
-    "_ligt_in_ggpgebied": {
+    "ligt_in_ggpgebied": {
       "source_mapping": {
         "bronwaarde": "=geometrie"
       }
     },
-    "_ligt_in_ggwgebied": {
+    "ligt_in_ggwgebied": {
       "source_mapping": {
         "bronwaarde": "=geometrie"
       }

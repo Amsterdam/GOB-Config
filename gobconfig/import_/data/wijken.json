@@ -59,7 +59,7 @@
         "bronwaarde": "ligt_in_stadsdeel"
       }
     },
-    "_ligt_in_ggwgebied": {
+    "ligt_in_ggwgebied": {
       "source_mapping": {
         "bronwaarde": "=geometrie"
       }
