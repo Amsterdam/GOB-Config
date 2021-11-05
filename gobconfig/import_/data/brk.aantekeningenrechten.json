@@ -9,7 +9,10 @@
     "schema": "GOBPrepare",
     "query": "sql/brk/aantekeningenrechten.sql",
     "recent": [
-      "WHERE greatest(case when expiration_date < now() then expiration_date end, max_tng_begindatum) > now()"
+      "WHERE ",
+      "GREATEST(CASE WHEN expiration_date < NOW() THEN expiration_date ELSE NULL END, max_tng_begindatum) ",
+      ">=",
+      " (NOW() - INTERVAL '10 DAYS')"
     ]
   },
   "gob_mapping": {
