@@ -9,7 +9,10 @@
     "schema": "GOBPrepare",
     "query": "sql/brk/aantekeningenkadastraleobjecten.sql",
     "recent": [
-      "WHERE greatest(begindatum, toestandsdatum, case when expiration_date < now() then expiration_date end) > now() - interval '10 days'"
+      "WHERE ",
+      "GREATEST(begindatum, toestandsdatum, CASE WHEN expiration_date < NOW() THEN expiration_date ELSE NULL END) ",
+      ">=",
+      " (NOW() - INTERVAL '10 DAYS')"
     ]
   },
   "not_provided_attributes": [
