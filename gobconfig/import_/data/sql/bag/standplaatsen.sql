@@ -23,6 +23,7 @@ WITH
                  GROUP BY adres_id, adresnummer)
 SELECT s.standplaatsnummer                                                                    AS identificatie
      , s.standplaatsvolgnummer                                                                AS volgnummer
+     , q4.ligt_in_woonplaats																  AS ligt_in_woonplaats
      , s.indgeconstateerd                                                                     AS geconstateerd
      , to_char(s.datumopvoer, 'YYYY-MM-DD HH24:MI:SS')                                        AS begin_geldigheid
      , to_char(q2.datumopvoer, 'YYYY-MM-DD HH24:MI:SS')                                       AS eind_geldigheid
@@ -83,3 +84,50 @@ FROM authentieke_objecten s
                           WHERE sa.indhoofdadres = 'N'
                           GROUP BY sa.standplaats_id, sa.standplaatsvolgnummer) q2 ON s.standplaats_id = q2.standplaats_id AND
                                                                                       s.standplaatsvolgnummer = q2.standplaatsvolgnummer
+    -- selecteren woonplaatsen via: openbareruimtes en nummeraanduidingen
+          LEFT OUTER JOIN (
+            WITH
+            adressen AS (SELECT   adres_id, adresnummer, OPENBARERUIMTE_ID
+                             FROM     G0363_Basis.adres
+                             WHERE    indauthentiek = 'J'
+                             GROUP BY adres_id, adresnummer, OPENBARERUIMTE_ID),
+            standplaatsen_or AS (
+                 SELECT
+                    sa.STANDPLAATS_ID, sa.STANDPLAATSVOLGNUMMER, a.OPENBARERUIMTE_ID
+                FROM
+                    G0363_Basis.standplaats_adres sa
+                JOIN adressen a
+                    ON a.adres_id = sa.adres_id
+                GROUP BY sa.STANDPLAATS_ID, sa.STANDPLAATSVOLGNUMMER, a.OPENBARERUIMTE_ID
+            )
+            SELECT
+                   sor.STANDPLAATS_ID,
+                   sor.STANDPLAATSVOLGNUMMER,
+                   listagg(DISTINCT q2.ligt_in_woonplaats, ';')
+                       WITHIN GROUP (ORDER BY q2.ligt_in_woonplaats) AS ligt_in_woonplaats
+            FROM standplaatsen_or sor
+            -- selecteren openbare ruimte
+            LEFT JOIN (
+                SELECT DISTINCT o.openbareruimte_id, o.openbareruimtenummer
+                FROM G0363_Basis.openbareruimte o
+                WHERE o.indauthentiek = 'J'
+            ) q1
+                ON sor.OPENBARERUIMTE_ID = q1.openbareruimte_id
+            -- selecteren woonplaats
+            LEFT JOIN (
+                   SELECT DISTINCT o.openbareruimte_id, w.woonplaats_id, w.woonplaatsnummer AS ligt_in_woonplaats
+                   FROM   G0363_Basis.openbareruimte o
+                   JOIN (
+                       SELECT woonplaats_id, woonplaatsnummer, indauthentiek
+                       FROM G0363_Basis.woonplaats
+                   ) w
+                       ON o.woonplaats_id = w.woonplaats_id
+                   WHERE o.indauthentiek = 'J' AND w.indauthentiek = 'J'
+            ) q2
+                ON q2.openbareruimte_id = q1.openbareruimte_id
+            GROUP BY sor.STANDPLAATS_ID, sor.STANDPLAATSVOLGNUMMER
+         ) q4
+              ON s.standplaats_id = q4.standplaats_id AND s.standplaatsvolgnummer = q4.standplaatsvolgnummer
+-- filter Weesp (3631 or 1012)
+-- https://dev.azure.com/CloudCompetenceCenter/Datateam%20Basis%20en%20Kernregistraties/_workitems/edit/25491
+WHERE q4.ligt_in_woonplaats NOT IN ('1012;3631', '1012', '3631')

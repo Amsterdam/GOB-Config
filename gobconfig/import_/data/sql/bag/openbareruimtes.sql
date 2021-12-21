@@ -1,20 +1,28 @@
 WITH
     -- SubQuery factoring for objectklasse dataset
-    authentieke_objecten AS (SELECT *
-                             FROM   G0363_Basis.openbareruimte
-                             WHERE  indauthentiek = 'J'),
+    authentieke_objecten AS (
+        SELECT *
+        FROM G0363_Basis.openbareruimte
+        WHERE indauthentiek = 'J'
+    ),
     -- SubQuery factoring for begin and eindgeldigheid
     -- begindatum gebruiken als einddatum volgende cyclus
-    begin_cyclus AS (SELECT openbareruimtenummer
-	                      , openbareruimtevolgnummer
-                          , datumopvoer
-	                      , 1 + dense_rank() OVER (partition BY openbareruimtenummer ORDER BY openbareruimtevolgnummer) AS rang
-	                 FROM   authentieke_objecten),
-    eind_cyclus AS (SELECT openbareruimtenummer
-	                     , openbareruimtevolgnummer
-	                     , datumopvoer
-	                     , dense_rank() OVER (partition BY openbareruimtenummer ORDER BY openbareruimtevolgnummer) AS rang
-	                FROM   authentieke_objecten)
+    begin_cyclus AS (
+        SELECT
+               openbareruimtenummer
+             , openbareruimtevolgnummer
+             , datumopvoer
+             , 1 + dense_rank() OVER (partition BY openbareruimtenummer ORDER BY openbareruimtevolgnummer) AS rang
+        FROM authentieke_objecten
+    ),
+    eind_cyclus AS (
+        SELECT
+                openbareruimtenummer
+              , openbareruimtevolgnummer
+              , datumopvoer
+              , dense_rank() OVER (partition BY openbareruimtenummer ORDER BY openbareruimtevolgnummer) AS rang
+        FROM authentieke_objecten
+    )
 SELECT o.openbareruimtenummer                                                                 AS identificatie
      , o.openbareruimtevolgnummer                                                             AS volgnummer
      , o.status_id                                                                            AS status_code
@@ -33,47 +41,56 @@ SELECT o.openbareruimtenummer                                                   
      , q.woonplaatsnummer                                                                     AS ligt_in_bag_woonplaats
      , o.openbareruimtetype                                                                   AS type_code
      , t.omschrijving                                                                         AS type_omschrijving
-     , CASE o.tekst
-       WHEN '16'
-       THEN NULL
-       ELSE o.tekst
-       END                                                                                    AS beschrijving_naam
+     , CASE o.tekst WHEN '16' THEN NULL ELSE o.tekst END                                      AS beschrijving_naam
      , o.bagproces                                                                            AS bagproces_code
      , m.omschrijving                                                                         AS bagproces_omschrijving
      , to_char(o.creation, 'YYYY-MM-DD HH24:MI:SS')                                           AS registratiedatum
      , o.openbareruimte_id                                                                    AS source_id
-     , NVL2(q2.datumopvoer,
+     , NVL2(
+         q2.datumopvoer,
             CASE
-            WHEN q2.datumopvoer < sysdate
-            THEN to_char(q2.datumopvoer, 'YYYY-MM-DD HH24:MI:SS')
-            ELSE to_char(o.modification, 'YYYY-MM-DD HH24:MI:SS')
+                WHEN q2.datumopvoer < sysdate
+                THEN to_char(q2.datumopvoer, 'YYYY-MM-DD HH24:MI:SS')
+                ELSE to_char(o.modification, 'YYYY-MM-DD HH24:MI:SS')
+            END,
+            CASE
+                WHEN s.status = 2
+                THEN
+                    CASE
+                        WHEN q2.datumopvoer < sysdate
+                        THEN to_char(o.datumopvoer, 'YYYY-MM-DD HH24:MI:SS')
+                        ELSE to_char(o.creation, 'YYYY-MM-DD HH24:MI:SS')
+                    END
+                ELSE NULL
             END
-    , CASE
-      WHEN s.status = 2
-      THEN CASE
-           WHEN q2.datumopvoer < sysdate
-           THEN to_char(o.datumopvoer, 'YYYY-MM-DD HH24:MI:SS')
-           ELSE to_char(o.creation, 'YYYY-MM-DD HH24:MI:SS')
-           END
-      ELSE NULL
-      END)                                                                                    AS expirationdate
+         )                                                                                    AS expirationdate
      , sdo_util.to_wktgeometry(o.geometrie)                                                   AS geometrie
 FROM authentieke_objecten o
-    -- begindatum gebruiken als einddatum volgende cyclus
-	    JOIN begin_cyclus q1 ON o.openbareruimtenummer = q1.openbareruimtenummer AND
-	                            o.openbareruimtevolgnummer = q1.openbareruimtevolgnummer
-	    LEFT OUTER JOIN eind_cyclus q2 ON  q1.openbareruimtenummer = q2.openbareruimtenummer AND
-	                                       q1.rang = q2.rang
-    -- selecteren woonplaats
-         LEFT OUTER JOIN (SELECT w.woonplaats_id
-                               , w.woonplaatsnummer
-                          FROM G0363_Basis.woonplaats w
-                          WHERE w.indauthentiek = 'J'
-                          GROUP BY w.woonplaats_id
-                                 , w.woonplaatsnummer) q ON o.woonplaats_id = q.woonplaats_id
-    -- selecteren openbare ruimte type
-         LEFT OUTER JOIN G0363_Basis.openbareruimtetype t ON o.openbareruimtetype = t.code
-    -- selecteren status
-         LEFT OUTER JOIN G0363_Basis.openbareruimtestatus s ON o.status_id = s.status
-    -- selecteren bagproces / mutatiereden
-         LEFT OUTER JOIN G0363_Basis.mutatiereden m ON o.bagproces = m.id
+
+-- begindatum gebruiken als einddatum volgende cyclus
+JOIN begin_cyclus q1
+    ON o.openbareruimtenummer = q1.openbareruimtenummer AND o.openbareruimtevolgnummer = q1.openbareruimtevolgnummer
+LEFT OUTER JOIN eind_cyclus q2
+    ON q1.openbareruimtenummer = q2.openbareruimtenummer AND q1.rang = q2.rang
+
+-- selecteren woonplaats
+LEFT OUTER JOIN (
+    SELECT w.woonplaats_id, w.woonplaatsnummer
+    FROM G0363_Basis.woonplaats w
+    WHERE w.indauthentiek = 'J'
+    GROUP BY w.woonplaats_id, w.woonplaatsnummer
+) q
+   ON o.woonplaats_id = q.woonplaats_id
+
+-- selecteren openbare ruimte type
+LEFT OUTER JOIN G0363_Basis.openbareruimtetype t
+    ON o.openbareruimtetype = t.code
+-- selecteren status
+LEFT OUTER JOIN G0363_Basis.openbareruimtestatus s
+    ON o.status_id = s.status
+-- selecteren bagproces / mutatiereden
+LEFT OUTER JOIN G0363_Basis.mutatiereden m
+    ON o.bagproces = m.id
+-- selecteren woonplaats, filter Weesp (3631 or 1012)
+-- https://dev.azure.com/CloudCompetenceCenter/Datateam%20Basis%20en%20Kernregistraties/_workitems/edit/25491
+WHERE q.woonplaatsnummer NOT IN ('1012;3631', '1012', '3631')
