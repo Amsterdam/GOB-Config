@@ -17,6 +17,7 @@ WITH
 	                FROM   authentieke_objecten)
 SELECT g.gebouwnummer                                                                         AS identificatie
      , g.gebouwvolgnummer                                                                     AS volgnummer
+     , y.ligt_in_woonplaats                                                                   AS ligt_in_woonplaats
      , g.indgeconstateerd                                                                     AS geconstateerd
      , to_char(g.datumopvoer, 'YYYY-MM-DD HH24:MI:SS')                                        AS begin_geldigheid
      , to_char(q2.datumopvoer, 'YYYY-MM-DD HH24:MI:SS')                                       AS eind_geldigheid
@@ -66,36 +67,85 @@ FROM authentieke_objecten g
 	    LEFT OUTER JOIN eind_cyclus q2 ON  q1.gebouwnummer = q2.gebouwnummer AND
 	                                       q1.rang = q2.rang
     -- selecteren status
-         LEFT OUTER JOIN G0363_Basis.gebouwstatus s ON g.status_id = s.status
+        LEFT OUTER JOIN G0363_Basis.gebouwstatus s ON g.status_id = s.status
     -- selecteren bagproces / mutatiereden
-         LEFT OUTER JOIN G0363_Basis.mutatiereden m ON g.bagproces = m.id
+        LEFT OUTER JOIN G0363_Basis.mutatiereden m ON g.bagproces = m.id
     -- selecteren ligging
-         LEFT OUTER JOIN G0363_Basis.gebouwtype t ON g.gebouwtype = t.gebouwtype
-    -- selecteren type woonobject
-         LEFT OUTER JOIN (SELECT x1.gebouw_id
-                               , x1.gebouwvolgnummer
-                               , COUNT(CASE
-                                       WHEN x2.gebruiksdoel_id > 1
-                                       THEN NULL
-                                       ELSE x2.gebruiksdoel_id
-                                       END) AS aantal_wonen
-                               , COUNT(CASE
-                                       WHEN x2.gebruiksdoel_id = 1
-                                       THEN NULL
-                                       ELSE x2.gebruiksdoel_id
-                                       END) AS aantal_nietwonen
-                          FROM (SELECT vg.gebouw_id
-                                     , vg.gebouwvolgnummer
-                                     , vg.verblijfseenheid_id
-                                     , MAX(vg.verblijfseenheidvolgnummer) AS verblijfseenheidvolgnummer
-                                FROM G0363_Basis.verblijfseenheid_gebouw vg
-                                GROUP BY vg.gebouw_id
-                                       , vg.gebouwvolgnummer
-                                       , vg.verblijfseenheid_id) x1
-                                   JOIN (SELECT vg.verblijfsobject_id
-                                              , vg.verblijfsobjectvolgnummer
-                                              , vg.gebruiksdoel_id
-                                         FROM G0363_Basis.verblijfsobject_gebruiksdoel vg) x2 ON x1.verblijfseenheid_id = x2.verblijfsobject_id AND
-                                                                                           x1.verblijfseenheidvolgnummer = x2.verblijfsobjectvolgnummer
-                          GROUP BY x1.gebouw_id, x1.gebouwvolgnummer) y ON y.gebouw_id = g.gebouw_id
-    AND y.gebouwvolgnummer = g.gebouwvolgnummer
+        LEFT OUTER JOIN G0363_Basis.gebouwtype t ON g.gebouwtype = t.gebouwtype
+    -- selecteren type woonobject, inclusief ligt_in_woonplaats
+        LEFT OUTER JOIN (
+              SELECT x1.gebouw_id
+                   , x1.gebouwvolgnummer
+                   , listagg(DISTINCT x3.ligt_in_woonplaats, ';') as ligt_in_woonplaats
+                   , COUNT(CASE
+                           WHEN x2.gebruiksdoel_id > 1
+                           THEN NULL
+                           ELSE x2.gebruiksdoel_id
+                           END) AS aantal_wonen
+                   , COUNT(CASE
+                           WHEN x2.gebruiksdoel_id = 1
+                           THEN NULL
+                           ELSE x2.gebruiksdoel_id
+                           END) AS aantal_nietwonen
+              FROM (SELECT vg.gebouw_id
+                         , vg.gebouwvolgnummer
+                         , vg.verblijfseenheid_id
+                         , MAX(vg.verblijfseenheidvolgnummer) AS verblijfseenheidvolgnummer
+                    FROM G0363_Basis.verblijfseenheid_gebouw vg
+                    GROUP BY vg.gebouw_id
+                           , vg.gebouwvolgnummer
+                           , vg.verblijfseenheid_id
+              ) x1
+              JOIN (SELECT vg.verblijfsobject_id
+                          , vg.verblijfsobjectvolgnummer
+                          , vg.gebruiksdoel_id
+                     FROM G0363_Basis.verblijfsobject_gebruiksdoel vg) x2
+                ON x1.verblijfseenheid_id = x2.verblijfsobject_id AND x1.verblijfseenheidvolgnummer = x2.verblijfsobjectvolgnummer
+              JOIN (
+                    -- selecteren woonplaats via verblijfsobject en openbareruimtes
+                    WITH
+                    adressen AS (SELECT   adres_id, adresnummer, OPENBARERUIMTE_ID
+                                     FROM     G0363_Basis.adres
+                                     WHERE    indauthentiek = 'J'
+                                     GROUP BY adres_id, adresnummer, OPENBARERUIMTE_ID),
+                    verblijfseenheid_or AS (
+                         SELECT
+                            vea.VERBLIJFSEENHEID_ID, vea.VERBLIJFSEENHEIDVOLGNUMMER, a.OPENBARERUIMTE_ID
+                        FROM
+                            G0363_Basis.verblijfseenheid_adres vea
+                        JOIN adressen a
+                            ON a.adres_id = vea.adres_id
+                        GROUP BY vea.VERBLIJFSEENHEID_ID, vea.VERBLIJFSEENHEIDVOLGNUMMER, a.OPENBARERUIMTE_ID
+                    )
+                    SELECT
+                           vor.VERBLIJFSEENHEID_ID,
+                           vor.VERBLIJFSEENHEIDVOLGNUMMER,
+                           q2.ligt_in_woonplaats
+                    FROM verblijfseenheid_or vor
+                    -- selecteren openbare ruimte
+                    LEFT JOIN (
+                        SELECT DISTINCT o.openbareruimte_id, o.openbareruimtenummer
+                        FROM G0363_Basis.openbareruimte o
+                        WHERE o.indauthentiek = 'J'
+                    ) q1
+                        ON vor.OPENBARERUIMTE_ID = q1.openbareruimte_id
+                    -- selecteren woonplaats
+                    LEFT JOIN (
+                           SELECT DISTINCT o.openbareruimte_id, w.woonplaats_id, w.woonplaatsnummer AS ligt_in_woonplaats
+                           FROM   G0363_Basis.openbareruimte o
+                           JOIN (
+                               SELECT woonplaats_id, woonplaatsnummer, indauthentiek
+                               FROM G0363_Basis.woonplaats
+                           ) w
+                               ON o.woonplaats_id = w.woonplaats_id
+                           WHERE o.indauthentiek = 'J' AND w.indauthentiek = 'J'
+                    ) q2
+                        ON q2.openbareruimte_id = q1.openbareruimte_id
+              ) x3
+                ON x1.verblijfseenheid_id = x3.verblijfseenheid_id AND x1.VERBLIJFSEENHEIDVOLGNUMMER = x3.VERBLIJFSEENHEIDVOLGNUMMER
+              GROUP BY x1.gebouw_id, x1.gebouwvolgnummer
+        ) y
+            ON y.gebouw_id = g.gebouw_id AND y.gebouwvolgnummer = g.gebouwvolgnummer
+-- filter Weesp (3631 or 1012)
+-- https://dev.azure.com/CloudCompetenceCenter/Datateam%20Basis%20en%20Kernregistraties/_workitems/edit/25491
+WHERE y.ligt_in_woonplaats NOT IN ('1012;3631', '1012', '3631')
