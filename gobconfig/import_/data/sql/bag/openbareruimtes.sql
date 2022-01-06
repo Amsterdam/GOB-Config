@@ -93,4 +93,4 @@ LEFT OUTER JOIN G0363_Basis.mutatiereden m
     ON o.bagproces = m.id
 -- selecteren woonplaats, filter Weesp (3631 or 1012)
 -- https://dev.azure.com/CloudCompetenceCenter/Datateam%20Basis%20en%20Kernregistraties/_workitems/edit/25491
-WHERE q.woonplaatsnummer NOT IN ('1012;3631', '1012', '3631')
+WHERE q.woonplaatsnummer IN ('1025', '1024', '3594')
