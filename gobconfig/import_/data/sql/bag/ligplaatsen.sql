@@ -23,7 +23,6 @@ WITH
                  GROUP BY adres_id, adresnummer)
 SELECT l.ligplaatsnummer                                                                      AS identificatie
      , l.ligplaatsvolgnummer                                                                  AS volgnummer
-     , q4.ligt_in_woonplaats																  AS ligt_in_woonplaats
      , l.indgeconstateerd                                                                     AS geconstateerd
      , to_char(l.datumopvoer, 'YYYY-MM-DD HH24:MI:SS')                                        AS begin_geldigheid
      , to_char(q2.datumopvoer, 'YYYY-MM-DD HH24:MI:SS')                                       AS eind_geldigheid
@@ -63,70 +62,40 @@ FROM authentieke_objecten l
 	    LEFT OUTER JOIN eind_cyclus q2 ON  q1.ligplaatsnummer = q2.ligplaatsnummer AND
 	                                       q1.rang = q2.rang
     -- selecteren status
-         LEFT OUTER JOIN G0363_Basis.ligplaatsstatus s ON l.status = s.status
+        LEFT OUTER JOIN G0363_Basis.ligplaatsstatus s ON l.status = s.status
     -- selecteren bagproces / mutatiereden
-         LEFT OUTER JOIN G0363_Basis.mutatiereden m ON l.bagproces = m.id
+        LEFT OUTER JOIN G0363_Basis.mutatiereden m ON l.bagproces = m.id
     -- selecteren hoofdadres(sen)
-         LEFT OUTER JOIN (SELECT la.ligplaats_id
-                               , la.ligplaatsvolgnummer
-                               , a.adresnummer
-                          FROM G0363_Basis.ligplaats_adres la
-                                   JOIN adressen a ON a.adres_id = la.adres_id
-                          WHERE la.indhoofdadres = 'J') q1 ON l.ligplaats_id = q1.ligplaats_id AND l.ligplaatsvolgnummer = q1.ligplaatsvolgnummer
-
+        LEFT OUTER JOIN (SELECT la.ligplaats_id
+                              , la.ligplaatsvolgnummer
+                              , a.adresnummer
+                         FROM G0363_Basis.ligplaats_adres la
+                                  JOIN adressen a ON a.adres_id = la.adres_id
+                         WHERE la.indhoofdadres = 'J') q1 ON l.ligplaats_id = q1.ligplaats_id AND l.ligplaatsvolgnummer = q1.ligplaatsvolgnummer
     -- selecteren nevenadres(sen)
-         LEFT OUTER JOIN (SELECT la.ligplaats_id
-                               , la.ligplaatsvolgnummer
-                               , listagg(a.adresnummer, ';')
-                                 WITHIN GROUP (ORDER BY la.ligplaats_id,la.ligplaatsvolgnummer) AS adresnummer
-                          FROM G0363_Basis.ligplaats_adres la
-                                   JOIN adressen a ON a.adres_id = la.adres_id
-                          WHERE la.indhoofdadres = 'N'
-                          GROUP BY la.ligplaats_id, la.ligplaatsvolgnummer) q2 ON l.ligplaats_id = q2.ligplaats_id AND l.ligplaatsvolgnummer = q2.ligplaatsvolgnummer
+        LEFT OUTER JOIN (SELECT la.ligplaats_id
+                              , la.ligplaatsvolgnummer
+                              , listagg(a.adresnummer, ';')
+                                WITHIN GROUP (ORDER BY la.ligplaats_id,la.ligplaatsvolgnummer) AS adresnummer
+                         FROM G0363_Basis.ligplaats_adres la
+                                  JOIN adressen a ON a.adres_id = la.adres_id
+                         WHERE la.indhoofdadres = 'N'
+                         GROUP BY la.ligplaats_id, la.ligplaatsvolgnummer) q2 ON l.ligplaats_id = q2.ligplaats_id AND l.ligplaatsvolgnummer = q2.ligplaatsvolgnummer
     -- selecteren woonplaatsen via: openbareruimtes en nummeraanduidingen
-          LEFT OUTER JOIN (
-            WITH
-            adressen AS (SELECT   adres_id, adresnummer, OPENBARERUIMTE_ID
-                             FROM     G0363_Basis.adres
-                             WHERE    indauthentiek = 'J'
-                             GROUP BY adres_id, adresnummer, OPENBARERUIMTE_ID),
-            ligplaatsen_or AS (
-                 SELECT
-                    la.LIGPLAATS_ID, la.LIGPLAATSVOLGNUMMER, a.OPENBARERUIMTE_ID
-                FROM
-                    G0363_Basis.ligplaats_adres la
-                JOIN adressen a
-                    ON a.adres_id = la.adres_id
-                GROUP BY la.LIGPLAATS_ID, la.LIGPLAATSVOLGNUMMER, a.OPENBARERUIMTE_ID
-            )
-            SELECT
-                   lor.LIGPLAATS_ID,
-                   lor.LIGPLAATSVOLGNUMMER,
-                   listagg(DISTINCT q2.ligt_in_woonplaats, ';')
-                       WITHIN GROUP (ORDER BY q2.ligt_in_woonplaats) AS ligt_in_woonplaats
-            FROM ligplaatsen_or lor
-            -- selecteren openbare ruimte
-            LEFT JOIN (
-                SELECT DISTINCT o.openbareruimte_id, o.openbareruimtenummer
-                FROM G0363_Basis.openbareruimte o
-                WHERE o.indauthentiek = 'J'
-            ) q1
-                ON lor.OPENBARERUIMTE_ID = q1.openbareruimte_id
-            -- selecteren woonplaats
-            LEFT JOIN (
-                   SELECT DISTINCT o.openbareruimte_id, w.woonplaats_id, w.woonplaatsnummer AS ligt_in_woonplaats
-                   FROM   G0363_Basis.openbareruimte o
-                   JOIN (
-                       SELECT woonplaats_id, woonplaatsnummer, indauthentiek
-                       FROM G0363_Basis.woonplaats
-                   ) w
-                       ON o.woonplaats_id = w.woonplaats_id
-                   WHERE o.indauthentiek = 'J' AND w.indauthentiek = 'J'
-            ) q2
-                ON q2.openbareruimte_id = q1.openbareruimte_id
-            GROUP BY lor.LIGPLAATS_ID, lor.LIGPLAATSVOLGNUMMER
-         ) q4
-              ON l.ligplaats_id = q4.ligplaats_id AND l.ligplaatsvolgnummer = q4.ligplaatsvolgnummer
+        LEFT OUTER JOIN (
+            SELECT ligplaats_id, ligplaatsvolgnummer, MAX(w.woonplaatsnummer) AS woonplaatsnummer
+            FROM G0363_Basis.ligplaats_adres lpa
+                JOIN G0363_Basis.adres adr
+                     USING (adres_id)
+                JOIN G0363_Basis.openbareruimte or_
+                    USING (openbareruimte_id)
+                JOIN G0363_Basis.woonplaats w
+                     ON or_.woonplaats_id = w.woonplaats_id
+            WHERE adr.indauthentiek = 'J' AND or_.indauthentiek = 'J' AND w.indauthentiek = 'J'
+            GROUP BY ligplaats_id, ligplaatsvolgnummer
+        ) w
+             ON l.ligplaats_id = w.ligplaats_id AND l.ligplaatsvolgnummer = w.ligplaatsvolgnummer
 -- filter Weesp (3631 or 1012)
 -- https://dev.azure.com/CloudCompetenceCenter/Datateam%20Basis%20en%20Kernregistraties/_workitems/edit/25491
-WHERE q4.ligt_in_woonplaats NOT IN ('1012;3631', '1012', '3631')
+WHERE w.woonplaatsnummer IN ('1025', '1024', '3594')
+   or (w.woonplaatsnummer is null and substr(l.ligplaatsnummer, 0, 4) = '0363')

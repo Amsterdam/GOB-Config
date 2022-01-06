@@ -23,7 +23,6 @@ WITH
                  GROUP BY adres_id, adresnummer)
 SELECT v.verblijfseenheidnummer                                                               AS identificatie
      , v.verblijfseenheidvolgnummer                                                           AS volgnummer
-     , q4.ligt_in_woonplaats																  AS ligt_in_woonplaats
      , s.status                                                                               AS status_code
      , s.omschrijving                                                                         AS status_omschrijving
      , to_char(v.datumopvoer, 'YYYY-MM-DD HH24:MI:SS')                                        AS begin_geldigheid
@@ -82,10 +81,10 @@ SELECT v.verblijfseenheidnummer                                                 
      , sdo_util.to_wktgeometry(v.geometrie)                                                   AS geometrie
 FROM authentieke_objecten v
     -- begindatum gebruiken als einddatum volgende cyclus
-	    JOIN begin_cyclus q1 ON v.verblijfseenheidnummer = q1.verblijfseenheidnummer AND
-	                            v.verblijfseenheidvolgnummer = q1.verblijfseenheidvolgnummer
-	    LEFT OUTER JOIN eind_cyclus q2 ON  q1.verblijfseenheidnummer = q2.verblijfseenheidnummer AND
-	                                       q1.rang = q2.rang
+	     JOIN begin_cyclus q1 ON v.verblijfseenheidnummer = q1.verblijfseenheidnummer AND
+	                             v.verblijfseenheidvolgnummer = q1.verblijfseenheidvolgnummer
+	     LEFT OUTER JOIN eind_cyclus q2 ON q1.verblijfseenheidnummer = q2.verblijfseenheidnummer AND
+	                                        q1.rang = q2.rang
     -- selecteren status
          LEFT OUTER JOIN G0363_Basis.verblijfsobjectstatus s ON v.status_id = s.status
     -- selecteren bagproces / mutatiereden
@@ -218,49 +217,20 @@ FROM authentieke_objecten v
                                 q1.min_gebruiksdoel != 1) q7 ON v.verblijfseenheid_id = q7.verblijfsobject_id AND
                                                                 v.verblijfseenheidvolgnummer = q7.verblijfsobjectvolgnummer
     -- selecteren woonplaatsen via: openbareruimtes en nummeraanduidingen
-          LEFT OUTER JOIN (
-            WITH
-            adressen AS (SELECT   adres_id, adresnummer, OPENBARERUIMTE_ID
-                             FROM     G0363_Basis.adres
-                             WHERE    indauthentiek = 'J'
-                             GROUP BY adres_id, adresnummer, OPENBARERUIMTE_ID),
-            verblijfseenheid_or AS (
-                 SELECT
-                    vea.VERBLIJFSEENHEID_ID, vea.VERBLIJFSEENHEIDVOLGNUMMER, a.OPENBARERUIMTE_ID
-                FROM
-                    G0363_Basis.verblijfseenheid_adres vea
-                JOIN adressen a
-                    ON a.adres_id = vea.adres_id
-                GROUP BY vea.VERBLIJFSEENHEID_ID, vea.VERBLIJFSEENHEIDVOLGNUMMER, a.OPENBARERUIMTE_ID
-            )
-            SELECT
-                   vor.VERBLIJFSEENHEID_ID,
-                   vor.VERBLIJFSEENHEIDVOLGNUMMER,
-                   listagg(DISTINCT q2.ligt_in_woonplaats, ';')
-                       WITHIN GROUP (ORDER BY q2.ligt_in_woonplaats) AS ligt_in_woonplaats
-            FROM verblijfseenheid_or vor
-            -- selecteren openbare ruimte
-            LEFT JOIN (
-                SELECT DISTINCT o.openbareruimte_id, o.openbareruimtenummer
-                FROM G0363_Basis.openbareruimte o
-                WHERE o.indauthentiek = 'J'
-            ) q1
-                ON vor.OPENBARERUIMTE_ID = q1.openbareruimte_id
-            -- selecteren woonplaats
-            LEFT JOIN (
-                   SELECT DISTINCT o.openbareruimte_id, w.woonplaats_id, w.woonplaatsnummer AS ligt_in_woonplaats
-                   FROM   G0363_Basis.openbareruimte o
-                   JOIN (
-                       SELECT woonplaats_id, woonplaatsnummer, indauthentiek
-                       FROM G0363_Basis.woonplaats
-                   ) w
-                       ON o.woonplaats_id = w.woonplaats_id
-                   WHERE o.indauthentiek = 'J' AND w.indauthentiek = 'J'
-            ) q2
-                ON q2.openbareruimte_id = q1.openbareruimte_id
-            GROUP BY vor.VERBLIJFSEENHEID_ID, vor.VERBLIJFSEENHEIDVOLGNUMMER
-         ) q4
-              ON v.VERBLIJFSEENHEID_ID = q4.VERBLIJFSEENHEID_ID AND v.VERBLIJFSEENHEIDVOLGNUMMER = q4.VERBLIJFSEENHEIDVOLGNUMMER
+         LEFT JOIN (
+            SELECT verblijfseenheid_id, verblijfseenheidvolgnummer, MAX(w.woonplaatsnummer) AS woonplaatsnummer
+            FROM G0363_Basis.verblijfseenheid_adres veg
+                     JOIN G0363_Basis.adres adr
+                        USING (adres_id)
+                     JOIN G0363_Basis.openbareruimte or_
+                        USING (openbareruimte_id)
+                     JOIN G0363_Basis.woonplaats w
+                        ON or_.woonplaats_id = w.woonplaats_id
+            WHERE adr.indauthentiek = 'J' AND or_.indauthentiek = 'J' AND w.indauthentiek = 'J'
+            GROUP BY verblijfseenheid_id, verblijfseenheidvolgnummer
+         ) w
+              ON v.verblijfseenheid_id = w.verblijfseenheid_id AND v.verblijfseenheidvolgnummer = w.verblijfseenheidvolgnummer
 -- filter Weesp (3631 or 1012)
 -- https://dev.azure.com/CloudCompetenceCenter/Datateam%20Basis%20en%20Kernregistraties/_workitems/edit/25491
-WHERE q4.ligt_in_woonplaats NOT IN ('1012;3631', '1012', '3631')
+WHERE w.woonplaatsnummer IN ('1025', '1024', '3594')
+   OR (w.woonplaatsnummer IS NULL AND SUBSTR(v.verblijfseenheidnummer, 0, 4) = '0363')
