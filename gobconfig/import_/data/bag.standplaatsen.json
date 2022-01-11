@@ -9,9 +9,7 @@
     "entity_id": "identificatie",
     "schema": "Neuron",
     "query": "sql/bag/standplaatsen.sql",
-    "recent": [
-"      WHERE (s.creation >= sysdate - 10 OR  s.modification >= sysdate - 10)"
-    ]
+    "recent": ["AND (s.creation >= sysdate - 10 OR s.modification >= sysdate - 10)"]
   },
   "not_provided_attributes": [
     "gebruiksdoel_code"
