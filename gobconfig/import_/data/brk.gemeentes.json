@@ -5,10 +5,10 @@
   "source": {
     "name": "Kadaster",
     "application": "PDOK",
-    "entity_id": "id",
+    "entity_id": "code",
     "application_config": {
       "type": "wfs",
-      "url": "https://geodata.nationaalgeoregister.nl/bestuurlijkegrenzen/wfs?service=WFS&request=getfeature&typename=gemeenten&outputFormat=application/json"
+      "url": "https://service.pdok.nl/kadaster/bestuurlijkegebieden/wfs/v1_0?request=GetFeature&service=WFS&version=1.1.0&typeName=bestuurlijkegebieden:Gemeentegebied&outputFormat=application%2Fjson"
     }
   },
   "not_provided_attributes": [
@@ -23,7 +23,7 @@
       "source_mapping": "code"
     },
     "naam": {
-      "source_mapping": "gemeentenaam"
+      "source_mapping": "naam"
     },
     "geometrie": {
       "source_mapping": "geometry"
