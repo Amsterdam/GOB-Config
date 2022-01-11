@@ -9,9 +9,7 @@
     "entity_id": "identificatie",
     "schema": "Neuron",
     "query": "sql/bag/nummeraanduidingen.sql",
-    "recent": [
-"      WHERE (a.creation >= sysdate - 10 OR  a.modification >= sysdate - 10)"
-    ]
+    "recent": ["AND (a.creation >= sysdate - 10 OR a.modification >= sysdate - 10)"]
   },
   "gob_mapping": {
     "identificatie": {

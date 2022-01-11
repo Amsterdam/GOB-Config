@@ -9,9 +9,7 @@
     "entity_id": "identificatie",
     "schema": "Neuron",
     "query": "sql/bag/openbareruimtes.sql",
-    "recent": [
-"      WHERE (o.creation >= sysdate - 10 OR  o.modification >= sysdate - 10)"
-    ]
+    "recent": ["AND (o.creation >= sysdate - 10 OR o.modification >= sysdate - 10)"]
   },
   "gob_mapping": {
     "identificatie": {
