@@ -97,5 +97,6 @@ FROM authentieke_objecten l
              ON l.ligplaats_id = w.ligplaats_id AND l.ligplaatsvolgnummer = w.ligplaatsvolgnummer
 -- filter Weesp (3631 or 1012)
 -- https://dev.azure.com/CloudCompetenceCenter/Datateam%20Basis%20en%20Kernregistraties/_workitems/edit/25491
-WHERE w.woonplaatsnummer IN ('1025', '1024', '3594')
-   or (w.woonplaatsnummer is null and SUBSTR(l.ligplaatsnummer, 0, 4) = '0363')
+WHERE (
+  w.woonplaatsnummer IN ('1025', '1024', '3594') OR (w.woonplaatsnummer IS NULL AND SUBSTR(l.ligplaatsnummer, 0, 4) = '0363')
+)
