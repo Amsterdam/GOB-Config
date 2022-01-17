@@ -232,5 +232,6 @@ FROM authentieke_objecten v
               ON v.verblijfseenheid_id = w.verblijfseenheid_id AND v.verblijfseenheidvolgnummer = w.verblijfseenheidvolgnummer
 -- filter Weesp (3631 or 1012)
 -- https://dev.azure.com/CloudCompetenceCenter/Datateam%20Basis%20en%20Kernregistraties/_workitems/edit/25491
-WHERE w.woonplaatsnummer IN ('1025', '1024', '3594')
-   OR (w.woonplaatsnummer IS NULL AND SUBSTR(v.verblijfseenheidnummer, 0, 4) = '0363')
+WHERE (
+    w.woonplaatsnummer IN ('1025', '1024', '3594') OR (w.woonplaatsnummer IS NULL AND SUBSTR(v.verblijfseenheidnummer, 0, 4) = '0363')
+)
