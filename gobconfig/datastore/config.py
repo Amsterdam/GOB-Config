@@ -3,7 +3,7 @@ import os
 from gobconfig.exception import GOBConfigException
 
 TYPE_ORACLE = 'oracle'
-TYPE_POSTGRES = 'postgres'
+TYPE_POSTGRES = 'postgresql'
 TYPE_OBJECTSTORE = 'objectstore'
 TYPE_SQL_SERVER = 'sqlserver'
 TYPE_SFTP = 'sftp'
