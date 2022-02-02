@@ -48,10 +48,12 @@
       "source_mapping": "GGW_CODE"
     },
     "begin_geldigheid": {
-      "source_mapping": "GGW_BEGINDATUM"
+      "source_mapping": "GGW_BEGINDATUM",
+      "format": "%Y-%m-%d %H:%M:%S"
     },
     "eind_geldigheid": {
-      "source_mapping": "GGW_EINDDATUM"
+      "source_mapping": "GGW_EINDDATUM",
+      "format": "%Y-%m-%d %H:%M:%S"
     },
     "documentdatum": {
       "source_mapping": "GGW_DOCUMENTDATUM"
@@ -71,7 +73,7 @@
     },
     "_expiration_date": {
       "source_mapping": "GGW_EINDDATUM",
-      "format": "%Y-%m-%d"
+      "format": "%Y-%m-%d %H:%M:%S"
     }
   }
 }

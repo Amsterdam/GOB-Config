@@ -29,10 +29,12 @@
       "source_mapping": "code"
     },
     "begin_geldigheid": {
-      "source_mapping": "begin_geldigheid"
+      "source_mapping": "begin_geldigheid",
+      "format": "%Y-%m-%d"
     },
     "eind_geldigheid": {
-      "source_mapping": "eind_geldigheid"
+      "source_mapping": "eind_geldigheid",
+      "format": "%Y-%m-%d"
     },
     "ligt_in_buurt": {
       "source_mapping": {
