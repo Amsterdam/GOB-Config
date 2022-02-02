@@ -48,10 +48,12 @@
       "source_mapping": "GGP_CODE"
     },
     "begin_geldigheid": {
-      "source_mapping": "GGP_BEGINDATUM"
+      "source_mapping": "GGP_BEGINDATUM",
+      "format": "%Y-%m-%d %H:%M:%S"
     },
     "eind_geldigheid": {
-      "source_mapping": "GGP_EINDDATUM"
+      "source_mapping": "GGP_EINDDATUM",
+      "format": "%Y-%m-%d %H:%M:%S"
     },
     "documentdatum": {
       "source_mapping": "GGP_DOCUMENTDATUM"
@@ -71,7 +73,7 @@
     },
     "_expiration_date": {
       "source_mapping": "GGP_EINDDATUM",
-      "format": "%Y-%m-%d"
+      "format": "%Y-%m-%d %H:%M:%S"
     }
   }
 }

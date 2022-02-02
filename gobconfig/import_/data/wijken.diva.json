@@ -43,10 +43,12 @@
       "source_mapping": "code"
     },
     "begin_geldigheid": {
-      "source_mapping": "datum_begin_geldigheid"
+      "source_mapping": "datum_begin_geldigheid",
+      "format": "%Y-%m-%d"
     },
     "eind_geldigheid": {
-      "source_mapping": "datum_einde_geldigheid"
+      "source_mapping": "datum_einde_geldigheid",
+      "format": "%Y-%m-%d"
     },
     "documentdatum": {
       "source_mapping": "documentdatum"
