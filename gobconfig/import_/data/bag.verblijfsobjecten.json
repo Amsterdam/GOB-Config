@@ -9,7 +9,9 @@
     "entity_id": "identificatie",
     "schema": "Neuron",
     "query": "sql/bag/verblijfsobjecten.sql",
-    "recent": ["AND (v.creation >= sysdate - 10 OR v.modification >= sysdate - 10)"]
+    "recent": [
+"    WHERE (v.creation >= sysdate - 10 OR  v.modification >= sysdate - 10)"
+    ]
   },
   "gob_mapping": {
     "identificatie": {

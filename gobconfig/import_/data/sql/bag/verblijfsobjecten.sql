@@ -81,10 +81,10 @@ SELECT v.verblijfseenheidnummer                                                 
      , sdo_util.to_wktgeometry(v.geometrie)                                                   AS geometrie
 FROM authentieke_objecten v
     -- begindatum gebruiken als einddatum volgende cyclus
-	     JOIN begin_cyclus q1 ON v.verblijfseenheidnummer = q1.verblijfseenheidnummer AND
-	                             v.verblijfseenheidvolgnummer = q1.verblijfseenheidvolgnummer
-	     LEFT OUTER JOIN eind_cyclus q2 ON q1.verblijfseenheidnummer = q2.verblijfseenheidnummer AND
-	                                        q1.rang = q2.rang
+	    JOIN begin_cyclus q1 ON v.verblijfseenheidnummer = q1.verblijfseenheidnummer AND
+	                            v.verblijfseenheidvolgnummer = q1.verblijfseenheidvolgnummer
+	    LEFT OUTER JOIN eind_cyclus q2 ON  q1.verblijfseenheidnummer = q2.verblijfseenheidnummer AND
+	                                       q1.rang = q2.rang
     -- selecteren status
          LEFT OUTER JOIN G0363_Basis.verblijfsobjectstatus s ON v.status_id = s.status
     -- selecteren bagproces / mutatiereden
@@ -216,22 +216,3 @@ FROM authentieke_objecten v
                                 vg.gebruiksdoel_id = 4 AND
                                 q1.min_gebruiksdoel != 1) q7 ON v.verblijfseenheid_id = q7.verblijfsobject_id AND
                                                                 v.verblijfseenheidvolgnummer = q7.verblijfsobjectvolgnummer
-    -- selecteren woonplaatsen via: openbareruimtes en nummeraanduidingen
-         LEFT JOIN (
-            SELECT verblijfseenheid_id, verblijfseenheidvolgnummer, MAX(w.woonplaatsnummer) AS woonplaatsnummer
-            FROM G0363_Basis.verblijfseenheid_adres veg
-                     JOIN G0363_Basis.adres adr
-                        USING (adres_id)
-                     JOIN G0363_Basis.openbareruimte or_
-                        USING (openbareruimte_id)
-                     JOIN G0363_Basis.woonplaats w
-                        ON or_.woonplaats_id = w.woonplaats_id
-            WHERE adr.indauthentiek = 'J' AND or_.indauthentiek = 'J' AND w.indauthentiek = 'J'
-            GROUP BY verblijfseenheid_id, verblijfseenheidvolgnummer
-         ) w
-              ON v.verblijfseenheid_id = w.verblijfseenheid_id AND v.verblijfseenheidvolgnummer = w.verblijfseenheidvolgnummer
--- filter Weesp (3631 or 1012)
--- https://dev.azure.com/CloudCompetenceCenter/Datateam%20Basis%20en%20Kernregistraties/_workitems/edit/25491
-WHERE (
-    w.woonplaatsnummer IN ('1025', '1024', '3594') OR (w.woonplaatsnummer IS NULL AND SUBSTR(v.verblijfseenheidnummer, 0, 4) = '0363')
-)
