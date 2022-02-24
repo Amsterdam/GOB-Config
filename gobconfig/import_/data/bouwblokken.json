@@ -38,11 +38,11 @@
     },
     "begin_geldigheid": {
       "source_mapping": "begin_geldigheid",
-      "format": "%Y-%m-%d"
+      "format": "%Y-%m-%d %H:%M:%S"
     },
     "eind_geldigheid": {
       "source_mapping": "eind_geldigheid",
-      "format": "%Y-%m-%d"
+      "format": "%Y-%m-%d %H:%M:%S"
     },
     "ligt_in_buurt": {
       "source_mapping": {
