@@ -31,39 +31,33 @@ SELECT w.woonplaatsnummer                                                       
      , '0363'                                                                                 AS ligt_in_gemeente
      , to_char(w.creation, 'YYYY-MM-DD HH24:MI:SS')                                           AS registratiedatum
      , w.woonplaats_id                                                                        AS source_id
-     , NVL2(
-         q2.datumopvoer,
+     , NVL2(q2.datumopvoer,
             CASE
-                WHEN q2.datumopvoer < sysdate
-                THEN to_char(q2.datumopvoer, 'YYYY-MM-DD HH24:MI:SS')
-                ELSE to_char(w.modification, 'YYYY-MM-DD HH24:MI:SS')
-            END,
-            CASE
-                WHEN s.status = 2
-                THEN
-                    CASE
-                        WHEN q2.datumopvoer < sysdate
-                        THEN to_char(w.datumopvoer, 'YYYY-MM-DD HH24:MI:SS')
-                        ELSE to_char(w.creation, 'YYYY-MM-DD HH24:MI:SS')
-                    END
-                ELSE NULL
+            WHEN q2.datumopvoer < sysdate
+            THEN to_char(q2.datumopvoer, 'YYYY-MM-DD HH24:MI:SS')
+            ELSE to_char(w.modification, 'YYYY-MM-DD HH24:MI:SS')
             END
-         )                                                                                     AS expirationdate
+    , CASE
+      WHEN s.status = 2
+      THEN CASE
+           WHEN q2.datumopvoer < sysdate
+           THEN to_char(w.datumopvoer, 'YYYY-MM-DD HH24:MI:SS')
+           ELSE to_char(w.creation, 'YYYY-MM-DD HH24:MI:SS')
+           END
+      ELSE NULL
+      END)                                                                                AS expirationdate
      , w.bagproces                                                                            AS bagproces_code
      , m.omschrijving                                                                         AS bagproces_omschrijving
      , sdo_util.to_wktgeometry(geometrie)                                                     AS geometrie
 FROM authentieke_objecten w
--- begindatum gebruiken als einddatum volgende cyclus
-JOIN begin_cyclus q1
-    ON w.woonplaatsnummer = q1.woonplaatsnummer AND w.woonplaatsvolgnummer = q1.woonplaatsvolgnummer
-LEFT OUTER JOIN eind_cyclus q2
-    ON  q1.woonplaatsnummer = q2.woonplaatsnummer AND q1.rang = q2.rang
--- selecteren status
-LEFT OUTER JOIN G0363_Basis.woonplaatsstatus s
-    ON w.status_id = s.status
--- selecteren bagproces / mutatiereden
-LEFT OUTER JOIN G0363_Basis.mutatiereden m
-    ON w.bagproces = m.id
--- filter Weesp (3631 or 1012)
--- https://dev.azure.com/CloudCompetenceCenter/Datateam%20Basis%20en%20Kernregistraties/_workitems/edit/25491
-WHERE w.woonplaatsnummer IN ('1025', '1024', '3594')
+     -- begindatum gebruiken als einddatum volgende cyclus
+	    JOIN begin_cyclus q1 ON w.woonplaatsnummer = q1.woonplaatsnummer AND
+	                            w.woonplaatsvolgnummer = q1.woonplaatsvolgnummer
+	    LEFT OUTER JOIN eind_cyclus q2 ON  q1.woonplaatsnummer = q2.woonplaatsnummer AND
+	                                       q1.rang = q2.rang
+    -- selecteren status
+         LEFT OUTER JOIN G0363_Basis.woonplaatsstatus s
+                         ON w.status_id = s.status
+    -- selecteren bagproces / mutatiereden
+         LEFT OUTER JOIN G0363_Basis.mutatiereden m
+                         ON w.bagproces = m.id

@@ -69,90 +69,82 @@ SELECT      a.adresnummer                                                       
        ELSE q3.ligt_in_woonplaats
        END                                                                                         AS ligt_in_bag_woonplaats
 FROM authentieke_objecten a
--- begindatum gebruiken als einddatum volgende cyclus
-JOIN begin_cyclus q1
-    ON a.adresnummer = q1.adresnummer AND a.adresvolgnummer = q1.adresvolgnummer
-LEFT OUTER JOIN eind_cyclus q2
-    ON  q1.adresnummer = q2.adresnummer AND q1.rang = q2.rang
--- selecteren openbare ruimte
-LEFT OUTER JOIN (
-    SELECT DISTINCT o.openbareruimte_id, o.openbareruimtenummer
-    FROM G0363_Basis.openbareruimte o
-    WHERE o.indauthentiek = 'J'
-) q1
-    ON a.openbareruimte_id = q1.openbareruimte_id
--- selecteren woonplaats
-LEFT OUTER JOIN (
-   SELECT
-          w2.openbareruimte_id
-         , listagg(w2.woonplaatsnummer, ';') WITHIN GROUP (ORDER BY w2.woonplaatsnummer) AS ligt_in_woonplaats
-   FROM  (
-       SELECT o.openbareruimte_id, w.woonplaats_id, w.woonplaatsnummer
-       FROM   G0363_Basis.openbareruimte o
-       JOIN (
-           SELECT woonplaats_id, woonplaatsnummer, indauthentiek
-           FROM G0363_Basis.woonplaats
-       ) w
-           ON o.woonplaats_id = w.woonplaats_id
-       WHERE o.indauthentiek = 'J' AND w.indauthentiek = 'J'
-       GROUP BY o.openbareruimte_id, w.woonplaats_id, w.woonplaatsnummer
-   ) w2
-   GROUP BY w2.openbareruimte_id
-) q3
-    ON  q1.openbareruimte_id = q3.openbareruimte_id
--- selecteren type adresseerbaar object
-LEFT OUTER JOIN G0363_Basis.adrestype t
-    ON a.adrestype = t.adrestype
--- selecteren status
-LEFT OUTER JOIN G0363_Basis.adresstatus s
-    ON a.statuscode = s.status
--- selecteren bagproces / mutatiereden
-LEFT OUTER JOIN G0363_Basis.mutatiereden m
-    ON a.bagproces = m.id
--- selecteren hoofdadres/nevenadres (hoofdadres igv hoofdadres+nevenadres)
-LEFT OUTER JOIN (
-    SELECT adres_id, MIN(indhoofdadres) AS indhoofdadres
-    FROM   G0363_Basis.verblijfseenheid_adres
-    GROUP BY adres_id
-    UNION
-    SELECT adres_id, MIN(indhoofdadres) AS indhoofdadres
-    FROM   G0363_Basis.ligplaats_adres
-    GROUP BY adres_id
-    UNION
-    SELECT adres_id, MIN(indhoofdadres) AS indhoofdadres
-    FROM   G0363_Basis.standplaats_adres
-    GROUP BY adres_id
-) q2
-    ON a.adres_id = q2.adres_id
--- selecteren verblijfsobject
-LEFT OUTER JOIN (
-    SELECT va.verblijfseenheid_id, va.adres_id, ve.verblijfseenheidnummer
-    FROM G0363_Basis.verblijfseenheid_adres va
-    JOIN G0363_Basis.verblijfseenheid ve
-    ON va.verblijfseenheid_id = ve.verblijfseenheid_id AND va.verblijfseenheidvolgnummer = ve.verblijfseenheidvolgnummer
-    WHERE ve.indauthentiek = 'J'
-    GROUP BY va.verblijfseenheid_id, va.adres_id, ve.verblijfseenheidnummer
-) q3
-    ON a.adres_id = q3.adres_id
--- selecteren ligplaats
-LEFT OUTER JOIN (
-    SELECT la.ligplaats_id, la.adres_id, lp.ligplaatsnummer
-    FROM   G0363_Basis.ligplaats_adres la
-    JOIN   G0363_Basis.ligplaats lp
-        ON  la.ligplaats_id = lp.ligplaats_id AND la.ligplaatsvolgnummer = lp.ligplaatsvolgnummer
-    WHERE  lp.indauthentiek = 'J'
-    GROUP BY la.ligplaats_id, la.adres_id, lp.ligplaatsnummer
-) q4
-    ON a.adres_id = q4.adres_id
--- selecteren standplaats
-LEFT OUTER JOIN (
-    SELECT sa.standplaats_id, sa.adres_id, sp.standplaatsnummer
-    FROM   G0363_Basis.standplaats_adres sa
-    JOIN   G0363_Basis.standplaats sp
-        ON  sa.standplaats_id = sp.standplaats_id AND sa.standplaatsvolgnummer = sp.standplaatsvolgnummer
-    WHERE  sp.indauthentiek = 'J'
-    GROUP BY sa.standplaats_id, sa.adres_id, sp.standplaatsnummer
-) q5 ON a.adres_id = q5.adres_id
--- selecteren woonplaats, filter Weesp (3631 or 1012)
--- https://dev.azure.com/CloudCompetenceCenter/Datateam%20Basis%20en%20Kernregistraties/_workitems/edit/25491
-WHERE q3.ligt_in_woonplaats NOT IN ('1012;3631', '1012', '3631')
+     -- begindatum gebruiken als einddatum volgende cyclus
+	    JOIN begin_cyclus q1 ON a.adresnummer = q1.adresnummer AND
+	                            a.adresvolgnummer = q1.adresvolgnummer
+	    LEFT OUTER JOIN eind_cyclus q2 ON  q1.adresnummer = q2.adresnummer AND
+	                                       q1.rang = q2.rang
+     -- selecteren openbare ruimte
+           LEFT OUTER JOIN (SELECT DISTINCT o.openbareruimte_id
+                                          ,      o.openbareruimtenummer
+                            FROM   G0363_Basis.openbareruimte o
+                            WHERE  o.indauthentiek = 'J') q1 ON a.openbareruimte_id = q1.openbareruimte_id
+    -- selecteren woonplaats
+           LEFT OUTER JOIN (SELECT w2.openbareruimte_id
+                                 , listagg(w2.woonplaatsnummer, ';') WITHIN GROUP (ORDER BY w2.woonplaatsnummer) AS ligt_in_woonplaats
+                            FROM  (SELECT o.openbareruimte_id
+                                        , w.woonplaats_id
+                                        , w.woonplaatsnummer
+                                   FROM   G0363_Basis.openbareruimte o
+                                   JOIN   G0363_Basis.woonplaats     w ON o.woonplaats_id = w.woonplaats_id
+                                   WHERE  o.indauthentiek = 'J'
+                                     AND  w.indauthentiek = 'J'
+                                   GROUP BY o.openbareruimte_id
+                                          , w.woonplaats_id
+                                          , w.woonplaatsnummer) w2
+                            GROUP BY w2.openbareruimte_id) q3 ON  q1.openbareruimte_id = q3.openbareruimte_id
+    -- selecteren type adresseerbaar object
+           LEFT OUTER JOIN G0363_Basis.adrestype t ON a.adrestype = t.adrestype
+    -- selecteren status
+           LEFT OUTER JOIN G0363_Basis.adresstatus s ON a.statuscode = s.status
+    -- selecteren bagproces / mutatiereden
+           LEFT OUTER JOIN G0363_Basis.mutatiereden m ON a.bagproces = m.id
+    -- selecteren hoofdadres/nevenadres (hoofdadres igv hoofdadres+nevenadres)
+           LEFT OUTER JOIN (SELECT adres_id
+                                 , MIN(indhoofdadres) AS indhoofdadres
+                            FROM   G0363_Basis.verblijfseenheid_adres
+                            GROUP BY adres_id
+                            UNION
+                            SELECT adres_id
+                                 , MIN(indhoofdadres) AS indhoofdadres
+                            FROM   G0363_Basis.ligplaats_adres
+                            GROUP BY adres_id
+                            UNION
+                            SELECT adres_id
+                                 , MIN(indhoofdadres) AS indhoofdadres
+                            FROM   G0363_Basis.standplaats_adres
+                            GROUP BY adres_id) q2 ON a.adres_id = q2.adres_id
+    -- selecteren verblijfsobject
+           LEFT OUTER JOIN (SELECT va.verblijfseenheid_id
+                                 , va.adres_id
+                                 , ve.verblijfseenheidnummer
+                            FROM   G0363_Basis.verblijfseenheid_adres  va
+                            JOIN   G0363_Basis.verblijfseenheid        ve
+                                ON  va.verblijfseenheid_id = ve.verblijfseenheid_id AND
+                                    va.verblijfseenheidvolgnummer = ve.verblijfseenheidvolgnummer
+                            WHERE  ve.indauthentiek = 'J'
+                            GROUP BY va.verblijfseenheid_id
+                                   , va.adres_id
+                                   , ve.verblijfseenheidnummer) q3 ON a.adres_id = q3.adres_id
+    -- selecteren ligplaats
+           LEFT OUTER JOIN (SELECT la.ligplaats_id
+                                 , la.adres_id
+                                 , lp.ligplaatsnummer
+                            FROM   G0363_Basis.ligplaats_adres la
+                            JOIN   G0363_Basis.ligplaats       lp ON  la.ligplaats_id = lp.ligplaats_id AND
+                                                                la.ligplaatsvolgnummer = lp.ligplaatsvolgnummer
+                            WHERE  lp.indauthentiek = 'J'
+                            GROUP BY la.ligplaats_id
+                                   , la.adres_id
+                                   , lp.ligplaatsnummer) q4 ON a.adres_id = q4.adres_id
+    -- selecteren standplaats
+           LEFT OUTER JOIN (SELECT sa.standplaats_id
+                                 , sa.adres_id
+                                 , sp.standplaatsnummer
+                            FROM   G0363_Basis.standplaats_adres sa
+                            JOIN   G0363_Basis.standplaats       sp ON  sa.standplaats_id = sp.standplaats_id AND
+                                                                  sa.standplaatsvolgnummer = sp.standplaatsvolgnummer
+                            WHERE  sp.indauthentiek = 'J'
+                            GROUP BY sa.standplaats_id
+                                   , sa.adres_id
+                                   , sp.standplaatsnummer) q5 ON a.adres_id = q5.adres_id

@@ -97,26 +97,5 @@ FROM authentieke_objecten g
                                               , vg.gebruiksdoel_id
                                          FROM G0363_Basis.verblijfsobject_gebruiksdoel vg) x2 ON x1.verblijfseenheid_id = x2.verblijfsobject_id AND
                                                                                            x1.verblijfseenheidvolgnummer = x2.verblijfsobjectvolgnummer
-                          GROUP BY x1.gebouw_id, x1.gebouwvolgnummer
-          ) y ON y.gebouw_id = g.gebouw_id AND y.gebouwvolgnummer = g.gebouwvolgnummer
-        LEFT JOIN (
-            -- selecteer woonplaats via verblijfsobject / nummeraanduiding / openbareruimte / woonplaats
-            SELECT gebouw_id, gebouwvolgnummer, MAX(w.woonplaatsnummer) AS woonplaatsnummer
-            FROM G0363_Basis.verblijfseenheid_gebouw veg
-                     JOIN G0363_Basis.verblijfseenheid_adres vea
-                          USING (verblijfseenheid_id, verblijfseenheidvolgnummer)
-                     JOIN G0363_Basis.adres adr
-                          USING (adres_id)
-                     JOIN G0363_Basis.openbareruimte or_
-                         USING (openbareruimte_id)
-                     JOIN G0363_Basis.woonplaats w
-                          ON or_.woonplaats_id = w.woonplaats_id
-            WHERE adr.indauthentiek = 'J' AND or_.indauthentiek = 'J' AND w.indauthentiek = 'J'
-            GROUP BY gebouw_id, gebouwvolgnummer
-        ) w
-            ON w.gebouw_id = g.gebouw_id AND w.gebouwvolgnummer = g.gebouwvolgnummer
--- Not every pand has a woonplaats linked to it.
--- Also filter the panden without woonplaats on the first 4 characters of gebouwnummer
-WHERE (
-  w.woonplaatsnummer IN ('1025', '1024', '3594') OR (w.woonplaatsnummer IS NULL AND SUBSTR(g.gebouwnummer, 0, 4) = '0363')
-)
+                          GROUP BY x1.gebouw_id, x1.gebouwvolgnummer) y ON y.gebouw_id = g.gebouw_id
+    AND y.gebouwvolgnummer = g.gebouwvolgnummer
