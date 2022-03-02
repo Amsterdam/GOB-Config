@@ -60,14 +60,35 @@ SELECT      a.adresnummer                                                       
       ELSE NULL
       END)                                                                                   AS expirationdate
      , CASE
-       WHEN (INSTR(q3.ligt_in_woonplaats, '1024;3594') > 0 OR INSTR(q3.ligt_in_woonplaats, '1025;3594') > 0)
-            AND q2.datumopvoer < DATE '2014-01-10'
-       THEN REGEXP_SUBSTR(q3.ligt_in_woonplaats, '[^;]+', 1, 1)
-       WHEN (INSTR(q3.ligt_in_woonplaats, '1024;3594') > 0 OR INSTR(q3.ligt_in_woonplaats, '1025;3594') > 0)
-            AND (q2.datumopvoer >= DATE '2014-01-10' OR q2.datumopvoer IS NULL)
-       THEN REGEXP_SUBSTR(q3.ligt_in_woonplaats, '[^;]+', 1, 2)
-       ELSE q3.ligt_in_woonplaats
-       END                                                                                         AS ligt_in_bag_woonplaats
+         -- Amsterdam
+         -- Woonplaatsnummer: Before 2014-01-10: 1025, after 3594 (merge with Zuidoost)
+         -- https://www.amsterdam.nl/stelselpedia/bag-index/catalogus-bag/objectklasse-woonplaats/
+           WHEN
+               (INSTR(q3.ligt_in_woonplaats, '1024;3594') > 0 OR INSTR(q3.ligt_in_woonplaats, '1025;3594') > 0)
+                AND q2.datumopvoer < DATE '2014-01-10'
+               THEN
+                    REGEXP_SUBSTR(q3.ligt_in_woonplaats, '[^;]+', 1, 1)
+           WHEN
+               (INSTR(q3.ligt_in_woonplaats, '1024;3594') > 0 OR INSTR(q3.ligt_in_woonplaats, '1025;3594') > 0)
+                   AND (q2.datumopvoer >= DATE '2014-01-10' OR q2.datumopvoer IS NULL)
+               THEN
+                    REGEXP_SUBSTR(q3.ligt_in_woonplaats, '[^;]+', 1, 2)
+        -- Weesp
+        -- Woonplaatsnummer: Before 2016-01-01: 1012, after 3631
+        -- On 1-1-2016 the gemeente Gooise Meren van Muiden, Naarden en Bussum was created, this changed some borders
+           WHEN
+               (INSTR(q3.ligt_in_woonplaats, '1012;3631') > 0 OR INSTR(q3.ligt_in_woonplaats, '1012;3631') > 0)
+                AND q2.datumopvoer < DATE '2016-01-01'
+               THEN
+                    REGEXP_SUBSTR(q3.ligt_in_woonplaats, '[^;]+', 1, 1)
+           WHEN
+               (INSTR(q3.ligt_in_woonplaats, '1012;3631') > 0 OR INSTR(q3.ligt_in_woonplaats, '1012;3631') > 0)
+                   AND (q2.datumopvoer >= DATE '2016-01-01' OR q2.datumopvoer IS NULL)
+               THEN
+                    REGEXP_SUBSTR(q3.ligt_in_woonplaats, '[^;]+', 1, 2)
+           ELSE
+               q3.ligt_in_woonplaats
+    END                                                                                         AS ligt_in_bag_woonplaats
 FROM authentieke_objecten a
      -- begindatum gebruiken als einddatum volgende cyclus
 	    JOIN begin_cyclus q1 ON a.adresnummer = q1.adresnummer AND
