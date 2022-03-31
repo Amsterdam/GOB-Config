@@ -3,12 +3,13 @@
   "catalogue": "brk",
   "entity": "gemeentes",
   "source": {
-    "name": "Kadaster",
-    "application": "PDOK",
+    "name": "AMSBI",
+    "application": "Basisinformatie",
     "entity_id": "code",
-    "application_config": {
-      "type": "wfs",
-      "url": "https://service.pdok.nl/kadaster/bestuurlijkegebieden/wfs/v1_0?request=GetFeature&service=WFS&version=1.1.0&typeName=bestuurlijkegebieden:Gemeentegebied&outputFormat=application%2Fjson"
+    "read_config": {
+      "file_filter": "brk/bestuurlijke_grenzen_2021\\.csv$",
+      "file_type": "CSV",
+      "delimiter": ";"
     }
   },
   "not_provided_attributes": [
@@ -23,14 +24,18 @@
       "source_mapping": "code"
     },
     "naam": {
-      "source_mapping": "naam"
+      "source_mapping": "gemeentenaam"
     },
     "geometrie": {
       "source_mapping": "geometry"
     },
     "begin_geldigheid": {
-      "source_mapping": "=2020-01-01 00:00:00",
-      "format": "%Y-%m-%d %H:%M:%S"
+      "source_mapping": "begin_geldigheid",
+      "format": "%Y-%m-%d"
+    },
+    "eind_geldigheid": {
+      "source_mapping": "eind_geldigheid",
+      "format": "%Y-%m-%d"
     }
   }
 }
