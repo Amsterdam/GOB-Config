@@ -20,7 +20,27 @@ WITH
                         , adresnummer
                  FROM     G0363_Basis.adres
                  WHERE    indauthentiek = 'J'
-                 GROUP BY adres_id, adresnummer)
+                 GROUP BY adres_id, adresnummer),
+    -- gemeentes
+    adres_in_gemeente AS (
+        SELECT a.ADRESNUMMER, MAX(q3.ligt_in_woonplaats) as ligt_in_woonplaats
+        FROM G0363_Basis.adres a
+        LEFT OUTER JOIN (
+            SELECT w2.openbareruimte_id, MAX(w2.woonplaatsnummer) AS ligt_in_woonplaats
+            FROM (
+                SELECT o.openbareruimte_id, w.woonplaatsnummer
+                  FROM G0363_Basis.openbareruimte o
+                  JOIN G0363_Basis.woonplaats w
+                    ON o.woonplaats_id = w.woonplaats_id
+                  WHERE o.indauthentiek = 'J' AND w.indauthentiek = 'J'
+                  GROUP BY o.openbareruimte_id, w.woonplaats_id, w.woonplaatsnummer
+                ) w2
+            GROUP BY w2.openbareruimte_id
+        ) q3
+            USING  (openbareruimte_id)
+        WHERE a.INDAUTHENTIEK = 'J'
+        GROUP BY a.ADRESNUMMER
+    )
 SELECT v.verblijfseenheidnummer                                                               AS identificatie
      , v.verblijfseenheidvolgnummer                                                           AS volgnummer
      , s.status                                                                               AS status_code
@@ -79,6 +99,20 @@ SELECT v.verblijfseenheidnummer                                                 
      , q2.adresnummer                                                                         AS nummeraanduidingid_neven
      , q4.pandidentificatie                                                                   AS pandidentificatie
      , sdo_util.to_wktgeometry(v.geometrie)                                                   AS geometrie
+    , CASE
+      -- Gemeente Weesp:
+      --   woonplaats Weesp and ligplaats closed before 24 maart 2022
+      WHEN (q8.ligt_in_woonplaats IN (1012, 3631) AND q2.DATUMOPVOER < DATE '2022-03-24')
+      THEN '0457'
+      -- Gemeente Amsterdam:
+      --   woonplaats Weesp and ligplaats closed after 24 maart 2022 or actual
+      --   woonplaats Amsterdam (no time condition)
+      WHEN q8.ligt_in_woonplaats IN (1024, 1025, 3594) OR
+           (q8.ligt_in_woonplaats IN (1012, 3631) AND (q2.DATUMOPVOER >= DATE '2022-03-24' OR q2.datumopvoer IS NULL))
+      THEN '0363'
+      -- gemeente is undetermined
+      ELSE NULL
+    END                                                                                       AS ligt_in_gemeente
 FROM authentieke_objecten v
     -- begindatum gebruiken als einddatum volgende cyclus
 	    JOIN begin_cyclus q1 ON v.verblijfseenheidnummer = q1.verblijfseenheidnummer AND
@@ -216,3 +250,5 @@ FROM authentieke_objecten v
                                 vg.gebruiksdoel_id = 4 AND
                                 q1.min_gebruiksdoel != 1) q7 ON v.verblijfseenheid_id = q7.verblijfsobject_id AND
                                                                 v.verblijfseenheidvolgnummer = q7.verblijfsobjectvolgnummer
+        -- selecteren ligt_in_gemeente
+         LEFT OUTER JOIN adres_in_gemeente q8 ON q8.ADRESNUMMER = q1.ADRESNUMMER

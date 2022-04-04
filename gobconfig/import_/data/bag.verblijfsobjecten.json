@@ -171,6 +171,11 @@
       "source_mapping": {
         "bronwaarde": "=identificatie"
       }
+    },
+    "ligt_in_gemeente": {
+      "source_mapping": {
+        "bronwaarde": "ligt_in_gemeente"
+      }
     }
   }
 }
