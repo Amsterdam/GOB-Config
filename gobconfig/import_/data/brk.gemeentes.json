@@ -7,18 +7,12 @@
     "application": "Basisinformatie",
     "entity_id": "code",
     "read_config": {
-      "file_filter": "brk/bestuurlijke_grenzen_2021\\.csv$",
+      "file_filter": "brk/bestuurlijke_grenzen_2022\\.csv$",
       "file_type": "CSV",
       "delimiter": ";"
     }
   },
-  "not_provided_attributes": [
-    "_expiration_date",
-    "identificatie",
-    "naam",
-    "begin_geldigheid",
-    "eind_geldigheid"
-  ],
+  "not_provided_attributes": [],
   "gob_mapping": {
     "identificatie": {
       "source_mapping": "code"
@@ -36,6 +30,17 @@
     "eind_geldigheid": {
       "source_mapping": "eind_geldigheid",
       "format": "%Y-%m-%d"
+    },
+    "_expiration_date": {
+      "source_mapping": "eind_geldigheid",
+      "format": "%Y-%m-%d"
+    },
+    "registratiedatum": {
+      "source_mapping": "registratiedatum",
+      "format": "%Y-%m-%d"
+    },
+    "volgnummer": {
+      "source_mapping": "volgnummer"
     }
   }
 }
