@@ -76,18 +76,11 @@ SELECT      a.adresnummer                                                       
         -- Weesp
         -- Woonplaatsnummer: Before 2016-01-01: 1012, after 3631
         -- On 1-1-2016 the gemeente Gooise Meren van Muiden, Naarden en Bussum was created, this changed some borders
-           WHEN
-               (INSTR(q3.ligt_in_woonplaats, '1012;3631') > 0 OR INSTR(q3.ligt_in_woonplaats, '1012;3631') > 0)
-                AND q2.datumopvoer < DATE '2016-01-01'
-               THEN
-                    REGEXP_SUBSTR(q3.ligt_in_woonplaats, '[^;]+', 1, 1)
-           WHEN
-               (INSTR(q3.ligt_in_woonplaats, '1012;3631') > 0 OR INSTR(q3.ligt_in_woonplaats, '1012;3631') > 0)
-                   AND (q2.datumopvoer >= DATE '2016-01-01' OR q2.datumopvoer IS NULL)
-               THEN
-                    REGEXP_SUBSTR(q3.ligt_in_woonplaats, '[^;]+', 1, 2)
-           ELSE
-               q3.ligt_in_woonplaats
+           WHEN q3.ligt_in_woonplaats = '1012;3631' AND q2.datumopvoer < DATE '2016-01-01'
+                THEN '1012'
+           WHEN q3.ligt_in_woonplaats = '1012;3631' AND (q2.datumopvoer >= DATE '2016-01-01' OR q2.datumopvoer IS NULL)
+                THEN '3631'
+           ELSE q3.ligt_in_woonplaats
     END                                                                                         AS ligt_in_bag_woonplaats
 FROM authentieke_objecten a
      -- begindatum gebruiken als einddatum volgende cyclus

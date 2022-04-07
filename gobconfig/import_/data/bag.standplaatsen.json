@@ -100,6 +100,11 @@
         }
       },
       "force_list": true
+    },
+    "ligt_in_gemeente": {
+      "source_mapping": {
+        "bronwaarde": "ligt_in_gemeente"
+      }
     }
   }
 }
