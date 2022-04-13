@@ -5,7 +5,6 @@ SELECT s1.naam                                                             AS na
 ,      to_char(nvl(q2.einddatum, q3.ingsdatum), 'YYYY-MM-DD')              AS eind_geldigheid
 ,      to_char(s1.docdatum, 'YYYY-MM-DD')                                  AS documentdatum
 ,      s1.docnr                                                            AS documentnummer
-,      '0363'                                                              AS ligt_in_gemeente
 ,      to_char(t1.inwin, 'YYYY-MM-DD HH24:MI:SS')                          AS registratiedatum
 ,      t1.guid                                                             AS source_id
 ,      to_char(nvl(q2.einddatum, q3.ingsdatum), 'YYYY-MM-DD HH24:MI:SS')   AS expirationdate

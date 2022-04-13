@@ -83,6 +83,11 @@
     },
     "geometrie": {
       "source_mapping": "geometrie"
+    },
+    "ligt_in_gemeente": {
+      "source_mapping": {
+        "bronwaarde": "=geometrie"
+      }
     }
   }
 }
