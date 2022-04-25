@@ -38,4 +38,5 @@ JOIN  (SELECT t2.id
                          FROM   gebieden.dgdtw_topografie t3
                          JOIN   gebieden.dgdtw_table_6021 s3 ON t3.id = s3.dgdtw_primary_key) q3 ON t1.guid = q3.guid AND t1.verval = q3.inwin
 WHERE  t1.objectcode = 6021 -- buurt
+        AND (q2.ingsdatum <> nvl(q2.einddatum, q3.ingsdatum) OR nvl(q2.einddatum, q3.ingsdatum) IS NULL) -- exclude intervals with length 0
 ORDER BY code, volgnummer
