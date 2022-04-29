@@ -8,7 +8,7 @@ SELECT s1.naam                                                             AS na
        ELSE s1.wijkcode || s1.brtcode
        END                                                                 AS code
 ,      NULL                                                                AS identificatie
-,      q2.volgnummer                                                       AS volgnummer
+,      dense_rank() OVER (partition BY q2.guid ORDER BY q3.inwin)          AS volgnummer
 ,      to_char(q2.ingsdatum, 'YYYY-MM-DD')                                 AS begin_geldigheid
 ,      to_char(nvl(q2.einddatum, q3.ingsdatum), 'YYYY-MM-DD')              AS eind_geldigheid
 ,      to_char(s1.docdatum, 'YYYY-MM-DD')                                  AS documentdatum
@@ -28,7 +28,7 @@ JOIN   gebieden.dgdtw_table_6021 s1 ON t1.id = s1.dgdtw_primary_key
 JOIN  (SELECT t2.id
        ,      s2.ingsdatum
        ,      s2.einddatum
-       ,      dense_rank() OVER (partition BY t2.guid ORDER BY t2.inwin) AS volgnummer
+       ,      t2.guid
        FROM   gebieden.dgdtw_topografie t2
        JOIN   gebieden.dgdtw_table_6021 s2 ON t2.id = s2.dgdtw_primary_key) q2 ON t1.id = q2.id
        -- einddatum toestand selecteren (kan leeg zijn) van volgende cyclus
