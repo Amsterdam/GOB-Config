@@ -14,7 +14,8 @@ WITH
 	                     , gebouwvolgnummer
 	                     , datumopvoer
 	                     , dense_rank() OVER (partition BY gebouwnummer ORDER BY gebouwvolgnummer) AS rang
-	                FROM   authentieke_objecten)
+	                FROM   authentieke_objecten),
+    panden_full AS (
 SELECT g.gebouwnummer                                                                         AS identificatie
      , g.gebouwvolgnummer                                                                     AS volgnummer
      , g.indgeconstateerd                                                                     AS geconstateerd
@@ -59,6 +60,8 @@ SELECT g.gebouwnummer                                                           
            END
       ELSE NULL
       END)                                                                                    AS expirationdate
+      , g.modification
+      , g.creation
 FROM authentieke_objecten g
      -- begindatum gebruiken als einddatum volgende cyclus
 	    JOIN begin_cyclus q1 ON g.gebouwnummer = q1.gebouwnummer AND
@@ -99,3 +102,6 @@ FROM authentieke_objecten g
                                                                                            x1.verblijfseenheidvolgnummer = x2.verblijfsobjectvolgnummer
                           GROUP BY x1.gebouw_id, x1.gebouwvolgnummer) y ON y.gebouw_id = g.gebouw_id
     AND y.gebouwvolgnummer = g.gebouwvolgnummer
+)
+SELECT *
+FROM panden_full
