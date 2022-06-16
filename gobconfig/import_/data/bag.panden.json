@@ -10,7 +10,13 @@
     "schema": "Neuron",
     "query": "sql/bag/panden.sql",
     "recent": [
-"      WHERE (g.creation >= sysdate - 10 OR  g.modification >= sysdate - 10)"
+"-- haal alle cycli op van gewijzigde ids",
+"JOIN (",
+" SELECT DISTINCT identificatie",
+" FROM panden_full",
+" WHERE (creation >= sysdate - 10 OR modification >= sysdate - 10)",
+") panden_recent",
+"ON panden_full.identificatie = panden_recent.identificatie"
     ]
   },
   "gob_mapping": {
