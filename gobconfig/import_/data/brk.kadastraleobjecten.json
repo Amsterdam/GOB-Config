@@ -9,43 +9,51 @@
     "schema": "GOBPrepare",
     "query": [
       "SELECT",
-      "   brk_kot_id,                       -- identificatie_kadastraal_object",
+      "   brk_kot_id, -- identificatie_kadastraal_object",
       "   nrn_kot_id,",
-      "   source_id,                        -- alias for nrn_kot_id",
+      "   source_id,  -- alias for nrn_kot_id",
       "   nrn_kot_volgnr AS volgnummer,",
       "   kad_gemeente,",
-      "   brg_gemeente,",
       "   kad_gemeentecode,",
+      "   brg_gemeente,",
       "   brg_gemeente_oms,",
       "   kad_gemeentecode->>'omschrijving' || sectie AS kad_gemeentesectie,",
-      "   sectie,                           -- kadastrale sectie",
-      "   perceelnummer,                    -- perceelnummer",
-      "   index_letter,                     -- indexletter",
-      "   index_nummer,                     -- indexnummer",
+      "   sectie,  -- kadastrale sectie",
+      "   perceelnummer,  -- perceelnummer",
+      "   index_letter,  -- indexletter",
+      "   index_nummer,  -- indexnummer",
       "   kadastrale_aanduiding,",
-      "   soortgrootte_code,                -- soort_grootte",
-      "   soortgrootte_oms,                 -- soort_grootte",
-      "   kadgrootte,                       -- grootte",
-      "   koopsom,                          -- koopsom",
-      "   koopsom_valuta,                   -- koopsom_valutacode",
-      "   koopjaar,                         -- koopjaar",
-      "   indicatie_meer_objecten,          -- indicatie_meer_objecten",
-      "   cultuurcodeonbebouwd_code,        -- soort_cultuur_onbebouwd",
-      "   cultuurcodeonbebouwd_oms,         -- soort_cultuur_onbebouwd",
-      "   cultuurcodebebouwd,               -- soort_cultuur_bebouwd",
-      "   status_code,                      -- status",
-      "   ind_voorlopige_kadgrens,          -- indicatie_voorlopige_geometrie",
-      "   inonderzoek,                      -- in_onderzoek",
-      "   toestandsdatum,                   -- toestandsdatum",
+      "   soortgrootte_code,  -- soort_grootte",
+      "   soortgrootte_oms,  -- soort_grootte",
+      "   kadgrootte,  -- grootte",
+      "   koopsom,  -- koopsom",
+      "   koopsom_valuta,  -- koopsom_valutacode",
+      "   koopjaar,  -- koopjaar",
+      "   indicatie_meer_objecten,  -- indicatie_meer_objecten",
+      "   cultuurcodeonbebouwd_code,  -- soort_cultuur_onbebouwd",
+      "   cultuurcodeonbebouwd_oms,  -- soort_cultuur_onbebouwd",
+      "   cultuurcodebebouwd_code,  -- soort_cultuur_bebouwd",
+      "   cultuurcodebebouwd_oms,  -- soort_cultuur_bebouwd",
+      "   status_code,  -- status",
+      "   inonderzoek,  -- in_onderzoek",
+      "   referentie,  -- referentie",
+      "   oudst_digitaal_bekend,  -- oudst_digitaal_bekend",
+      "   mutatie_id,  -- mutatie_id",
+      "   meettarief_verschuldigd,  -- meettarief_verschuldigd",
+      "   toelichting_bewaarder,  -- toelichting_bewaarder",
+      "   tijdstip_ontstaan_object,  -- tijdstip_ontstaan_object",
+      "   hoofdsplitsing_identificatie,  -- hoofdsplitsing_identificatie",
+      "   afwijking_lijst_rechthebbenden,  -- afwijking_lijst_rechthebbenden",
+      "   toestandsdatum,  -- toestandsdatum",
       "   creation AS begin_geldigheid,",
       "   modification,",
       "   einddatum AS eind_geldigheid,",
       "   expiration_date AS expiration_date,",
-      "   ST_AsText(geometrie) AS geometrie,                        -- geometrie",
-      "   perceelnummer_rotatie,            -- perceelnummer_rotatie",
-      "   perceelnummer_verschuiving_x,     -- perceelnummer_verschuiving",
-      "   perceelnummer_verschuiving_y,     -- perceelnummer_verschuiving",
-      "   ST_AsText(perceelnummer_geometrie) AS perceelnummer_geometrie,           -- plaatscoordinaten",
+      "   ST_AsText(geometrie) AS geometrie,  -- geometrie",
+      "   perceelnummer_rotatie,  -- perceelnummer_rotatie",
+      "   perceelnummer_verschuiving_x,  -- perceelnummer_verschuiving",
+      "   perceelnummer_verschuiving_y,  -- perceelnummer_verschuiving",
+      "   ST_AsText(perceelnummer_geometrie) AS plaatscoordinaten,  -- plaatscoordinaten",
       "   ST_AsText(bijpijling_geometrie) AS bijpijling_geometrie,",
       "   relatie_g_perceel,",
       "   adressen,",
@@ -66,25 +74,25 @@
     "identificatie": {
       "source_mapping": "brk_kot_id"
     },
-    "_expiration_date": {
+    "datumActueelTot": {
       "source_mapping": "expiration_date"
     },
-    "aangeduid_door_gemeente": {
+    "aangeduidDoorGemeente": {
       "source_mapping": {
         "bronwaarde": "brg_gemeente.code"
       }
     },
-    "aangeduid_door_kadastralegemeente": {
+    "aangeduidDoorKadastralegemeente": {
       "source_mapping": {
         "bronwaarde": "kad_gemeente.omschrijving"
       }
     },
-    "aangeduid_door_kadastralegemeentecode": {
+    "aangeduidDoorKadastralegemeentecode": {
       "source_mapping": {
         "bronwaarde": "kad_gemeentecode.omschrijving"
       }
     },
-    "aangeduid_door_kadastralesectie": {
+    "aangeduidDoorKadastralesectie": {
       "source_mapping": {
         "bronwaarde": "kad_gemeentesectie"
       }
@@ -104,10 +112,10 @@
     "gemeente": {
       "source_mapping": "brg_gemeente_oms"
     },
-    "kadastrale_aanduiding": {
+    "kadastraleAanduiding": {
       "source_mapping": "kadastrale_aanduiding"
     },
-    "soort_grootte": {
+    "soortGrootte": {
       "source_mapping": {
         "code": "soortgrootte_code",
         "omschrijving": "soortgrootte_oms"
@@ -116,10 +124,13 @@
     "grootte": {
       "source_mapping": "kadgrootte"
     },
-    "soort_cultuur_bebouwd": {
-      "source_mapping": "cultuurcodebebouwd"
+    "soortCultuuronBebouwd": {
+      "source_mapping": {
+        "code": "cultuurcodebebouwd_code",
+        "omschrijving": "cultuurcodebebouwd_oms"
+      }
     },
-    "soort_cultuur_onbebouwd": {
+    "soortCultuurOnbebouwd": {
       "source_mapping": {
         "code": "cultuurcodeonbebouwd_code",
         "omschrijving": "cultuurcodeonbebouwd_oms"
@@ -134,56 +145,77 @@
     "plaatscoordinaten": {
       "source_mapping": "perceelnummer_geometrie"
     },
-    "perceelnummer_rotatie": {
+    "perceelnummerRotatie": {
       "source_mapping": "perceelnummer_rotatie"
     },
-    "perceelnummer_verschuiving": {
+    "perceelnummerVerschuiving": {
       "source_mapping": {
         "x": "perceelnummer_verschuiving_x",
         "y": "perceelnummer_verschuiving_y"
       }
     },
-    "bijpijling_geometrie": {
+    "bijpijlingGeometrie": {
       "source_mapping": "bijpijling_geometrie"
-    },
-    "indicatie_voorlopige_geometrie": {
-      "source_mapping": "ind_voorlopige_kadgrens"
     },
     "koopsom": {
       "source_mapping": "koopsom"
     },
-    "koopsom_valutacode": {
+    "koopsomValutacode": {
       "source_mapping": "koopsom_valuta"
     },
     "koopjaar": {
       "source_mapping": "koopjaar"
     },
-    "indicatie_meer_objecten": {
+    "indicatieMeerObjecten": {
       "source_mapping": "indicatie_meer_objecten"
     },
     "toestandsdatum": {
       "source_mapping": "toestandsdatum"
     },
-    "begin_geldigheid": {
+    "beginGeldigheid": {
       "source_mapping": "begin_geldigheid"
     },
-    "eind_geldigheid": {
+    "eindGeldigheid": {
       "source_mapping": "eind_geldigheid"
     },
-    "in_onderzoek": {
+    "inOnderzoek": {
       "source_mapping": "inonderzoek"
     },
-    "is_ontstaan_uit_g_perceel": {
+    "referentie": {
+      "source_mapping": "referentie"
+    },
+    "oudstDigitaalBekend": {
+      "source_mapping": "oudst_digitaal_bekend"
+    },
+    "mutatieId": {
+      "source_mapping": "mutatie_id"
+    },
+    "meettariefVerschuldigd": {
+      "source_mapping": "meettarief_verschuldigd"
+    },
+    "toelichtingBewaarder": {
+      "source_mapping": "toelichting_bewaarder"
+    },
+    "tijdstipOntstaanObject": {
+      "source_mapping": "tijdstip_ontstaan_object"
+    },
+    "hoofdsplitsingIdentificatie": {
+      "source_mapping": "hoofdsplitsing_identificatie"
+    },
+    "afwijkingLijstRechthebbenden": {
+      "source_mapping": "afwijking_lijst_rechthebbenden"
+    },
+    "isOntstaanUitGPerceel": {
       "source_mapping": {
         "bronwaarde": "relatie_g_perceel.brk_kot_id"
       }
     },
-    "heeft_een_relatie_met_verblijfsobject": {
+    "heeftEenRelatieMetVerblijfsobject": {
       "source_mapping": {
         "bronwaarde": "adressen.bag_id"
       }
     },
-    "is_ontstaan_uit_kadastraalobject": {
+    "isOntstaanUitKadastraalobject": {
       "source_mapping": {
         "bronwaarde": "ontstaan_uit_kadastraalobject.brk_kot_id"
       }
