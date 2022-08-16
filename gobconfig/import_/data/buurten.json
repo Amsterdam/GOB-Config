@@ -56,17 +56,17 @@
     "documentnummer": {
       "source_mapping": "documentnummer"
     },
-    "ligt_in_wijk": {
+    "ligt_in_gebieden_wijk": {
       "source_mapping": {
         "bronwaarde": "ligt_in_wijk"
       }
     },
-    "ligt_in_ggpgebied": {
+    "ligt_in_gebieden_ggpgebied": {
       "source_mapping": {
         "bronwaarde": "=geometrie"
       }
     },
-    "ligt_in_ggwgebied": {
+    "ligt_in_gebieden_ggwgebied": {
       "source_mapping": {
         "bronwaarde": "=geometrie"
       }
@@ -78,13 +78,17 @@
       "source_mapping": "expirationdate",
       "format": "%Y-%m-%d %H:%M:%S"
     },
+    "datum_actueel_tot": {
+      "source_mapping": "expirationdate",
+      "format": "%Y-%m-%d %H:%M:%S"
+    },
     "_source_id": {
       "source_mapping": "source_id"
     },
     "geometrie": {
       "source_mapping": "geometrie"
     },
-    "ligt_in_gemeente": {
+    "ligt_in_brk_gemeente": {
       "source_mapping": {
         "bronwaarde": "=geometrie"
       }

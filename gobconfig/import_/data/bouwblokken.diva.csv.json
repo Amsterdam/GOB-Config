@@ -36,7 +36,7 @@
       "source_mapping": "eind_geldigheid",
       "format": "%Y-%m-%d"
     },
-    "ligt_in_buurt": {
+    "ligt_in_gebieden_buurt": {
       "source_mapping": {
         "bronwaarde": "=geometrie"
       }
@@ -45,10 +45,14 @@
       "source_mapping": "expirationdate",
       "format": "%Y-%m-%d %H:%M:%S"
     },
+    "datum_actueel_tot": {
+      "source_mapping": "expirationdate",
+      "format": "%Y-%m-%d %H:%M:%S"
+    },
     "geometrie": {
       "source_mapping": "geometrie"
     },
-    "ligt_in_gemeente": {
+    "ligt_in_brk_gemeente": {
       "source_mapping": {
         "bronwaarde": "=geometrie"
       }

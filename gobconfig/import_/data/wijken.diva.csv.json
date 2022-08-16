@@ -45,12 +45,12 @@
     "documentnummer": {
       "source_mapping": "documentnummer"
     },
-    "ligt_in_stadsdeel": {
+    "ligt_in_gebieden_stadsdeel": {
       "source_mapping": {
         "bronwaarde": "ligt_in_stadsdeel"
       }
     },
-    "ligt_in_ggwgebied": {
+    "ligt_in_gebieden_ggwgebied": {
       "source_mapping": {
         "bronwaarde": "=geometrie"
       }
@@ -62,10 +62,14 @@
       "source_mapping": "expirationdate",
       "format": "%Y-%m-%d %H:%M:%S"
     },
+    "datum_actueel_tot": {
+      "source_mapping": "expirationdate",
+      "format": "%Y-%m-%d %H:%M:%S"
+    },
     "geometrie": {
       "source_mapping": "geometrie"
     },
-    "ligt_in_gemeente": {
+    "ligt_in_brk_gemeente": {
       "source_mapping": {
         "bronwaarde": "=geometrie"
       }
