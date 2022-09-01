@@ -53,7 +53,7 @@ class TestImportConfig(TestCase):
         self.assertEqual(self.mock_locations_mapping["catalogue_b"]["collection_b"]["application_a"],
                          get_dataset_file_location("catalogue_b", "collection_b", "application_a"))
 
-        with self.assertRaisesRegexp(GOBConfigException, "No dataset found"):
+        with self.assertRaisesRegex(GOBConfigException, "No dataset found"):
             get_dataset_file_location("catalogue_b", "collection_c_non_existent", "application_a")
 
     @patch("gobconfig.import_.import_config.dataset_locations_mapping", mock_locations_mapping)
@@ -63,7 +63,7 @@ class TestImportConfig(TestCase):
 
     @patch("gobconfig.import_.import_config.dataset_locations_mapping", mock_locations_mapping)
     def test_get_dataset_file_location_implicit_ambiguous_applications(self):
-        with self.assertRaisesRegexp(GOBConfigException, "Multiple applications"):
+        with self.assertRaisesRegex(GOBConfigException, "Multiple applications"):
             get_dataset_file_location("catalogue_c", "collection_a")
 
     @patch("gobconfig.import_.import_config.dataset_locations_mapping", mock_locations_mapping)
@@ -98,7 +98,7 @@ class TestImportConfig(TestCase):
             }
         }[x]
 
-        with self.assertRaisesRegexp(GOBConfigException, "Have multiple import definitions"):
+        with self.assertRaisesRegex(GOBConfigException, "Have multiple import definitions"):
             _build_dataset_locations_mapping()
 
     @patch("gobconfig.import_.import_config.get_mapping")
@@ -126,7 +126,7 @@ class TestImportConfig(TestCase):
             }
         }[x]
 
-        with self.assertRaisesRegexp(GOBConfigException, "Have multiple defaults for"):
+        with self.assertRaisesRegex(GOBConfigException, "Have multiple defaults for"):
             _build_dataset_locations_mapping()
 
     @patch("gobconfig.import_.import_config.get_mapping")
@@ -169,7 +169,7 @@ class TestImportConfig(TestCase):
             }
         }
 
-        with self.assertRaisesRegexp(GOBConfigException, "Dataset file mocked/data/dir/file.json invalid"):
+        with self.assertRaisesRegex(GOBConfigException, "Dataset file mocked/data/dir/file.json invalid"):
             _build_dataset_locations_mapping()
 
     @patch("gobconfig.import_.import_config.get_mapping")
@@ -180,7 +180,7 @@ class TestImportConfig(TestCase):
         mock_os.path.isfile.return_value = True
         mock_get_mapping.side_effect = json.decoder.JSONDecodeError("", MagicMock(), 0)
 
-        with self.assertRaisesRegexp(GOBConfigException, "Dataset file mocked/data/dir/file.json invalid"):
+        with self.assertRaisesRegex(GOBConfigException, "Dataset file mocked/data/dir/file.json invalid"):
             _build_dataset_locations_mapping()
 
     @patch("gobconfig.import_.import_config.get_query")
