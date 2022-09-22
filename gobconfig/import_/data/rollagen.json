@@ -11,7 +11,8 @@
     }
   },
   "not_provided_attributes": [
-    "_expiration_date"
+    "_expiration_date",
+    "datum_actueel_tot"
   ],
   "gob_mapping": {
     "identificatie": {
@@ -21,14 +22,20 @@
         ["upper"]
       ]
     },
-    "is_gemeten_van_bouwblok": {
+    "is_gemeten_van_gebieden_bouwblok": {
       "source_mapping": {
         "bronwaarde": "name"
       },
       "filters": {
         "bronwaarde": [
-          ["re.sub", "(.+\/)([^.]*)(.*)", "\\2"],
-          ["upper"]
+          [
+            "re.sub",
+            "(.+/)([^.]*)(.*)",
+            "\\2"
+          ],
+          [
+            "upper"
+          ]
         ]
       }
     },

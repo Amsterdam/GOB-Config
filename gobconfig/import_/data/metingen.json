@@ -36,7 +36,7 @@
 "    )"
     ],
     "some_day": [
-"    WHERE mod(hoort_bij_meetbout, 10) = mod(extract(DAY FROM sysdate), 10)"
+      "    WHERE mod(hoort_bij_meetbout, 10) = mod(extract(DAY FROM sysdate), 10)"
     ]
   },
   "not_provided_attributes": [
@@ -51,11 +51,6 @@
     "identificatie": {
       "source_mapping": "identificatie"
     },
-    "hoort_bij_meetbout": {
-      "source_mapping": {
-        "bronwaarde": "hoort_bij_meetbout"
-      }
-    },
     "datum": {
       "source_mapping": "datum",
       "format": "%Y-%m-%d"
@@ -68,14 +63,6 @@
     },
     "hoogte_tov_nap": {
       "source_mapping": "hoogte_tov_nap"
-    },
-    "refereert_aan_referentiepunten": {
-      "source_mapping": {
-        "bronwaarde": "refereert_aan_refpunt",
-        "format": {
-          "split": ";"
-        }
-      }
     },
     "is_gemeten_door": {
       "source_mapping": "is_gemeten_door_onderneming"
@@ -109,6 +96,23 @@
       "source_mapping": "source_id"
     },
     "_expiration_date": {
+      "source_mapping": "expirationdate",
+      "format": "%Y-%m-%d %H:%M:%S"
+    },
+    "hoort_bij_meetbouten_meetbout": {
+      "source_mapping": {
+        "bronwaarde": "hoort_bij_meetbout"
+      }
+    },
+    "refereert_aan_meetbouten_referentiepunten": {
+      "source_mapping": {
+        "bronwaarde": "refereert_aan_refpunt",
+        "format": {
+          "split": ";"
+        }
+      }
+    },
+    "datum_actueel_tot": {
       "source_mapping": "expirationdate",
       "format": "%Y-%m-%d %H:%M:%S"
     }
