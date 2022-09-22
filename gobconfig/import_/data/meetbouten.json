@@ -76,11 +76,6 @@
     "identificatie": {
       "source_mapping": "identificatie"
     },
-    "nabij_nummeraanduiding": {
-      "source_mapping": {
-        "bronwaarde": "adres"
-      }
-    },
     "locatie": {
       "source_mapping": "locatie"
     },
@@ -109,21 +104,6 @@
     "windrichting": {
       "source_mapping": "windrichting"
     },
-    "ligt_in_bouwblok": {
-      "source_mapping": {
-        "bronwaarde": "ligt_in_bouwblok"
-      }
-    },
-    "ligt_in_buurt": {
-      "source_mapping": {
-        "bronwaarde": "=geometrie"
-      }
-    },
-    "ligt_in_stadsdeel": {
-      "source_mapping": {
-        "bronwaarde": "=geometrie"
-      }
-    },
     "_expiration_date": {
       "source_mapping": "expirationdate",
       "format": "%Y-%m-%d %H:%M:%S"
@@ -137,6 +117,28 @@
     "publiceerbaar": {
       "source_mapping": "publiceerbaar",
       "format": "10"
+    },
+    "datum_actueel_tot": {
+      "source_mapping": "expirationdate",
+      "format": "%Y-%m-%d %H:%M:%S"
+    },
+    "nabij_adres": {
+      "source_mapping": "adres"
+    },
+    "ligt_in_gebieden_bouwblok": {
+      "source_mapping": {
+        "bronwaarde": "ligt_in_bouwblok"
+      }
+    },
+    "ligt_in_gebieden_buurt": {
+      "source_mapping": {
+        "bronwaarde": "=geometrie"
+      }
+    },
+    "ligt_in_gebieden_stadsdeel": {
+      "source_mapping": {
+        "bronwaarde": "=geometrie"
+      }
     }
   }
 }
