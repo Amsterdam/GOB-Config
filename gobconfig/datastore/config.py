@@ -26,30 +26,13 @@ DATASTORE_CONFIGS = {
         'port': os.getenv("BINBG_DATABASE_PORT", 1521),
         'database': os.getenv("BINBG_DATABASE", "")
     },
-    'DIVA': {
-        'type': TYPE_ORACLE,
-        'username': os.getenv("DBIGM_DATABASE_USER", "gob"),
-        'password': os.getenv("DBIGM_DATABASE_PASSWORD", "insecure"),
-        'host': os.getenv("DBIGM_DATABASE_HOST", "hostname"),
-        'port': os.getenv("DBIGM_DATABASE_PORT", 1521),
-        'database': os.getenv("DBIGM_DATABASE", ""),
-    },
     'Neuron': {
         'type': TYPE_ORACLE,
-        # NRBIN is the new Neuron configuration. Not to be confused with the old BINNRN variables
         'username': os.getenv("NRBIN_DATABASE_USER", "gob"),
         'password': os.getenv("NRBIN_DATABASE_PASSWORD", "insecure"),
         'host': os.getenv("NRBIN_DATABASE_HOST", "hostname"),
         'port': os.getenv("NRBIN_DATABASE_PORT", 1521),
         'database': os.getenv("NRBIN_DATABASE", ""),
-    },
-    'DecosDeprecated': {
-        'type': TYPE_ORACLE,
-        'username': os.getenv("DBIDC_DATABASE_USER", "gob"),
-        'password': os.getenv("DBIDC_DATABASE_PASSWORD", "insecure"),
-        'host': os.getenv("DBIDC_DATABASE_HOST", "hostname"),
-        'port': os.getenv("DBIDC_DATABASE_PORT", 1521),
-        'database': os.getenv("DBIDC_DATABASE", ""),
     },
     'Decos': {
         'type': TYPE_SQL_SERVER,
