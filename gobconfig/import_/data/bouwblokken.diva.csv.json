@@ -5,7 +5,7 @@
   "source": {
     "name": "AMSBI",
     "application": "Basisinformatie",
-    "entity_id": "identificatie",
+    "entity_id": "code",
     "read_config": {
       "file_filter": "gebieden/Bouwblokken/DIVA_gebieden_bouwblokken.csv",
       "file_type": "CSV",
