@@ -1,0 +1,156 @@
+{
+  "version": "0.1",
+  "catalogue": "brk2",
+  "entity": "kadastraleobjecten",
+  "source": {
+    "name": "AMSBI",
+    "application": "GOBPrepare",
+    "entity_id": "id",
+    "schema": "GOBPrepare",
+    "query": "sql/brk2/kadastraleobjecten.sql"
+  },
+  "gob_mapping": {
+    "_expiration_date": {
+      "source_mapping": "_expiration_date",
+      "format": "%Y-%m-%d %H:%M:%S"
+    },
+    "identificatie": {
+      "source_mapping": "identificatie"
+    },
+    "volgnummer": {
+      "source_mapping": "volgnummer"
+    },
+    "id": {
+      "source_mapping": "id"
+    },
+    "registratiedatum": {
+      "source_mapping": "registratiedatum"
+    },
+    "kadastrale_aanduiding": {
+      "source_mapping": "kadastrale_aanduiding"
+    },
+    "perceelnummer": {
+      "source_mapping": "perceelnummer"
+    },
+    "indexletter": {
+      "source_mapping": "indexletter"
+    },
+    "indexnummer": {
+      "source_mapping": "indexnummer"
+    },
+    "soort_grootte": {
+      "source_mapping": {
+        "code": "soort_grootte_code",
+        "omschrijving": "soort_grootte_omschrijving"
+      }
+    },
+    "grootte": {
+      "source_mapping": "grootte"
+    },
+    "soort_cultuur_onbebouwd": {
+      "source_mapping": {
+        "code": "soort_cultuur_onbebouwd_code",
+        "omschrijving": "soort_cultuur_onbebouwd_omschrijving"
+      }
+    },
+    "soort_cultuur_bebouwd": {
+      "source_mapping": {
+        "code": "soort_cultuur_bebouwd_code",
+        "omschrijving": "soort_cultuur_bebouwd_omschrijving"
+      }
+    },
+    "status": {
+      "source_mapping": "status"
+    },
+    "referentie": {
+      "source_mapping": "referentie"
+    },
+    "oudst_digitaal_bekend": {
+      "source_mapping": "oudst_digitaal_bekend",
+      "format": "%Y-%m-%d %H:%M:%S"
+    },
+    "mutatie_id": {
+      "source_mapping": "mutatie_id"
+    },
+    "meettarief_verschuldigd": {
+      "source_mapping": "meettarief_verschuldigd"
+    },
+    "toelichting_bewaarder": {
+      "source_mapping": "toelichting_bewaarder"
+    },
+    "tijdstip_ontstaan_object": {
+      "source_mapping": "tijdstip_ontstaan_object",
+      "format": "%Y-%m-%d %H:%M:%S"
+    },
+    "hoofdsplitsing_identificatie": {
+      "source_mapping": "hoofdsplitsing_identificatie"
+    },
+    "afwijking_lijst_rechthebbenden": {
+      "source_mapping": "afwijking_lijst_rechthebbenden"
+    },
+    "geometrie": {
+      "source_mapping": "geometrie"
+    },
+    "plaatscoordinaten": {
+      "source_mapping": "plaatscoordinaten"
+    },
+    "perceelnummer_rotatie": {
+      "source_mapping": "perceelnummer_rotatie"
+    },
+    "perceelnummer_verschuiving_x": {
+      "source_mapping": "perceelnummer_verschuiving_x"
+    },
+    "perceelnummer_verschuiving_y": {
+      "source_mapping": "perceelnummer_verschuiving_y"
+    },
+    "bijpijling_geometrie": {
+      "source_mapping": "bijpijling_geometrie"
+    },
+    "koopsom": {
+      "source_mapping": "koopsom"
+    },
+    "koopsom_valutacode": {
+      "source_mapping": "koopsom_valutacode"
+    },
+    "koopjaar": {
+      "source_mapping": "koopjaar"
+    },
+    "indicatie_meer_objecten": {
+      "source_mapping": "indicatie_meer_objecten"
+    },
+    "toestandsdatum": {
+      "source_mapping": "toestandsdatum",
+      "format": "%Y-%m-%d %H:%M:%S"
+    },
+    "begin_geldigheid": {
+      "source_mapping": "begin_geldigheid",
+      "format": "%Y-%m-%d %H:%M:%S"
+    },
+    "eind_geldigheid": {
+      "source_mapping": "eind_geldigheid",
+      "format": "%Y-%m-%d %H:%M:%S"
+    },
+    "in_onderzoek": {
+      "source_mapping": "inonderzoek"
+    },
+    "datum_actueel_tot": {
+      "source_mapping": "datum_actueel_tot",
+      "format": "%Y-%m-%d %H:%M:%S"
+    },
+    "is_ontstaan_uit_g_perceel": {
+      "source_mapping": {
+        "bronwaarde": "is_ontstaan_uit_g_perceel.kot_identificatie"
+      }
+    },
+    "heeft_een_relatie_met_verblijfsobject": {
+      "source_mapping": {
+        "bronwaarde": "heeft_een_relatie_met_verblijfsobject.bag_id"
+      }
+    },
+    "is_ontstaan_uit_kadastraalobject": {
+      "source_mapping": {
+        "bronwaarde": "is_ontstaan_uit_kadastraalobject.kot_identificatie"
+      }
+    }
+  }
+}
