@@ -131,7 +131,7 @@
       "format": "%Y-%m-%d %H:%M:%S"
     },
     "in_onderzoek": {
-      "source_mapping": "inonderzoek"
+      "source_mapping": "in_onderzoek"
     },
     "datum_actueel_tot": {
       "source_mapping": "datum_actueel_tot",
