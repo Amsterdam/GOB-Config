@@ -13,6 +13,8 @@ WITH kot_full AS (
 	grootte,
 	soort_cultuur_onbebouwd_code,
 	soort_cultuur_onbebouwd_omschrijving,
+	soort_cultuur_bebouwd_code,
+	soort_cultuur_bebouwd_omschrijving,
 	status,
 	referentie,
 	oudst_digitaal_bekend,
