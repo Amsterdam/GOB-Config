@@ -29,6 +29,27 @@
     "kadastrale_aanduiding": {
       "source_mapping": "kadastrale_aanduiding"
     },
+    "aangeduid_door_gemeente": {
+      "source_mapping": {
+        "code": "aangeduid_door_gemeente_code",
+        "omschrijving": "aangeduid_door_gemeente_omschrijving"
+      }
+    },
+    "aangeduid_door_kadastralegemeente": {
+      "source_mapping": {
+        "code": "aangeduid_door_kadastralegemeente_code",
+        "omschrijving": "aangeduid_door_kadastralegemeente_omschrijving"
+      }
+    },
+    "aangeduid_door_kadastralegemeentecode": {
+      "source_mapping": {
+        "code": "aangeduid_door_kadastralegemeentecode_code",
+        "omschrijving": "aangeduid_door_kadastralegemeentecode_omschrijving"
+      }
+    },
+    "aangeduid_door_kadastralesectie": {
+      "source_mapping": "aangeduid_door_kadastralesectie"
+    },
     "perceelnummer": {
       "source_mapping": "perceelnummer"
     },
@@ -136,6 +157,9 @@
     "datum_actueel_tot": {
       "source_mapping": "datum_actueel_tot",
       "format": "%Y-%m-%d %H:%M:%S"
+    },
+    "indicatie_voorlopige_kadastrale_grens": {
+      "source_mapping": "indicatie_voorlopige_kadastrale_grens"
     },
     "is_ontstaan_uit_g_perceel": {
       "source_mapping": {
