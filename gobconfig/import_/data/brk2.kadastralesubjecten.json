@@ -1,0 +1,172 @@
+{
+  "version": "0.1",
+  "catalogue": "brk2",
+  "entity": "kadastralesubjecten",
+  "source": {
+    "name": "AMSBI",
+    "application": "GOBPrepare",
+    "entity_id": "identificatie",
+    "schema": "GOBPrepare",
+    "query": "sql/brk2/kadastralesubjecten.sql"
+  },
+  "gob_mapping": {
+    "_expiration_date": {
+      "source_mapping": "_expiration_date",
+      "format": "%Y-%m-%d %H:%M:%S"
+    },
+    "identificatie": {
+      "source_mapping": "identificatie"
+    },
+    "type_subject": {
+      "source_mapping": "type_subject"
+    },
+    "beschikkingsbevoegdheid": {
+      "source_mapping": {
+        "code": "beschikkingsbevoegdheid_code",
+        "omschrijving": "beschikkingsbevoegdheid_omschrijving"
+      }
+    },
+    "indicatie_afscherming_gegevens": {
+      "source_mapping": "indicatie_afscherming_gegevens"
+    },
+    "heeft_bsn_voor_brp_persoon": {
+      "source_mapping": "heeft_bsn_voor_brp_persoon"
+    },
+    "voornamen": {
+      "source_mapping": "voornamen"
+    },
+    "voorvoegsels": {
+      "source_mapping": "voorvoegsels"
+    },
+    "geslachtsnaam": {
+      "source_mapping": "geslachtsnaam"
+    },
+    "geslacht": {
+      "source_mapping": {
+        "code": "geslacht_code",
+        "omschrijving": "geslacht_omschrijving"
+      }
+    },
+    "naam_gebruik": {
+      "source_mapping": {
+        "code": "naam_gebruik_code",
+        "omschrijving": "naam_gebruik_omschrijving"
+      }
+    },
+    "titel_of_predicaat": {
+      "source_mapping": {
+        "code": "titel_of_predicaat_code",
+        "omschrijving": "titel_of_predicaat_omschrijving"
+      }
+    },
+    "indicatie_diakriet_niet_toonbaar": {
+      "source_mapping": "indicatie_diakriet_niet_toonbaar"
+    },
+    "geboortedatum": {
+      "source_mapping": "geboortedatum",
+      "format": "%Y-%m-%d"
+    },
+    "geboortedatum_onvolledig": {
+      "source_mapping": "geboortedatum_onvolledig"
+    },
+    "geboorteplaats": {
+      "source_mapping": "geboorteplaats"
+    },
+    "geboorteland": {
+      "source_mapping": {
+        "code": "geboorteland_code",
+        "omschrijving": "geboorteland_omschrijving"
+      }
+    },
+    "datum_overlijden": {
+      "source_mapping": "datum_overlijden",
+      "format": "%Y-%m-%d"
+    },
+    "datum_overlijden_onvolledig": {
+      "source_mapping": "datum_overlijden_onvolledig"
+    },
+    "indicatie_overleden": {
+      "source_mapping": "indicatie_overleden"
+    },
+    "voornamen_partner": {
+      "source_mapping": "voornamen_partner"
+    },
+    "voorvoegsels_partner": {
+      "source_mapping": "voorvoegsels_partner"
+    },
+    "geslachtsnaam_partner": {
+      "source_mapping": "geslachtsnaam_partner"
+    },
+    "heeft_rsin_voor_hr_niet_natuurlijkepersoon": {
+      "source_mapping": "heeft_rsin_voor_hr_niet_natuurlijkepersoon"
+    },
+    "heeft_kvknummer_voor_hr_maatschappelijkeactiviteit": {
+      "source_mapping": "heeft_kvknummer_voor_hr_maatschappelijkeactiviteit"
+    },
+    "rechtsvorm": {
+      "source_mapping": {
+        "code": "rechtsvorm_code",
+        "omschrijving": "rechtsvorm_omschrijving"
+      }
+    },
+    "statutaire_naam": {
+      "source_mapping": "statutaire_naam"
+    },
+    "statutaire_zetel": {
+      "source_mapping": "statutaire_zetel"
+    },
+    "woonadres": {
+      "source_mapping": {
+        "type": "woonadres_type",
+        "adresseerbaar_object": "woonadres_adresseerbaar_object",
+        "openbare_ruimtenaam": "woonadres_openbare_ruimtenaam",
+        "huisnummer": "woonadres_huisnummer",
+        "huisletter": "woonadres_huisletter",
+        "huisnummertoevoeging": "woonadres_huisnummertoevoeging",
+        "postcode": "woonadres_postcode",
+        "woonplaats": "woonadres_woonplaats",
+        "woonplaats_afwijkend": "woonadres_woonplaats_afwijkend",
+        "buitenland_adres": "woonadres_buitenland_adres",
+        "buitenland_woonplaats": "woonadres_buitenland_woonplaats",
+        "buitenland_regio": "woonadres_buitenland_regio",
+        "buitenland_land_code": "woonadres_buitenland_land_code",
+        "buitenland_land_omschrijving": "woonadres_buitenland_land_omschrijving"
+      }
+    },
+    "land_waarnaar_vertrokken": {
+      "source_mapping": {
+        "code": "land_waarnaar_vertrokken_code",
+        "omschrijving": "land_waarnaar_vertrokken_omschrijving"
+      }
+    },
+    "postadres": {
+      "source_mapping": {
+        "type": "postadres_type",
+        "adresseerbaar_object": "postadres_adresseerbaar_object",
+        "openbare_ruimtenaam": "postadres_openbare_ruimtenaam",
+        "huisnummer": "postadres_huisnummer",
+        "huisletter": "postadres_huisletter",
+        "huisnummertoevoeging": "postadres_huisnummertoevoeging",
+        "postcode": "postadres_postcode",
+        "woonplaatsnaam": "postadres_woonplaats",
+        "woonplaatsnaam_afwijkend": "postadres_woonplaats_afwijkend",
+        "buitenland_adres": "postadres_buitenland_adres",
+        "buitenland_woonplaats": "postadres_buitenland_woonplaats",
+        "buitenland_regio": "postadres_buitenland_regio",
+        "buitenland_land_code": "postadres_buitenland_land_code",
+        "buitenland_land_omschrijving": "postadres_buitenland_land_omschrijving",
+        "postbus_nummer": "postadres_postbus_nummer",
+        "postbus_postcode": "postadres_postbus_postcode",
+        "postbus_woonplaatsnaam": "postadres_postbus_woonplaatsnaam"
+      }
+    },
+    "datum_actueel_tot": {
+      "source_mapping": "datum_actueel_tot",
+      "format": "%Y-%m-%d %H:%M:%S"
+    },
+    "toestandsdatum": {
+      "source_mapping": "toestandsdatum",
+      "format": "%Y-%m-%d %H:%M:%S"
+    }
+  }
+}
