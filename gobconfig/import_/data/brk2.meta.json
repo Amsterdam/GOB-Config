@@ -1,0 +1,25 @@
+{
+  "version": "0.1",
+  "catalogue": "brk2",
+  "entity": "meta",
+  "source": {
+    "name": "AMSBI",
+    "application": "GOBPrepare",
+    "entity_id": "id",
+    "schema": "GOBPrepare",
+    "query": [
+      "SELECT id, toestandsdatum FROM brk2_prepared.meta"
+    ]
+  },
+  "not_provided_attributes": [
+    "_expiration_date"
+  ],
+  "gob_mapping": {
+    "id": {
+      "source_mapping": "id"
+    },
+    "kennisgevingsdatum": {
+      "source_mapping": "toestandsdatum"
+    }
+  }
+}
