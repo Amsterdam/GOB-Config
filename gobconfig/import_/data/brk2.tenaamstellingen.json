@@ -1,0 +1,87 @@
+{
+  "version": "0.1",
+  "catalogue": "brk2",
+  "entity": "tenaamstellingen",
+  "source": {
+    "name": "AMSBI",
+    "application": "GOBPrepare",
+    "entity_id": "neuron_id",
+    "schema": "GOBPrepare",
+    "query": "sql/brk2/tenaamstellingen.sql"
+  },
+  "gob_mapping": {
+    "_expiration_date": {
+      "source_mapping": "_expiration_date",
+      "format": "%Y-%m-%d %H:%M:%S"
+    },
+    "identificatie": {
+      "source_mapping": "identificatie"
+    },
+    "volgnummer": {
+      "source_mapping": "volgnummer"
+    },
+    "neuron_id": {
+      "source_mapping": "neuron_id"
+    },
+    "van_brk_kadastraalsubject": {
+      "source_mapping": "van_brk_kadastraalsubject"
+    },
+    "begin_geldigheid": {
+      "source_mapping": "begin_geldigheid",
+      "format": "%Y-%m-%d %H:%M:%S"
+    },
+    "eind_geldigheid": {
+      "source_mapping": "eind_geldigheid",
+      "format": "%Y-%m-%d %H:%M:%S"
+    },
+    "datum_actueel_tot": {
+      "source_mapping": "datum_actueel_tot",
+      "format": "%Y-%m-%d %H:%M:%S"
+    },
+    "aandeel": {
+      "source_mapping": {
+        "teller": "aandeel_teller",
+        "noemer": "aandeel_noemer"
+      }
+    },
+    "geldt_voor": {
+      "source_mapping": {
+        "teller": "geldt_voor_teller",
+        "noemer": "geldt_voor_noemer"
+      }
+    },
+    "burgerlijke_staat_ten_tijde_van_verkrijging": {
+      "source_mapping": {
+        "code": "burgerlijke_staat_ten_tijde_van_verkrijging_code",
+        "omschrijving": "burgerlijke_staat_ten_tijde_van_verkrijging_omschrijving"
+      }
+    },
+    "betrokken_partner_brk_subject": {
+      "source_mapping": "betrokken_partner_brk_subject"
+    },
+    "betrokken_samenwerkingsverband_brk_subject": {
+      "source_mapping": "betrokken_samenwerkingsverband_brk_subject"
+    },
+    "verkregen_namens_samenwerkingsverband": {
+      "source_mapping": {
+        "type": "verkregen_namens_samenwerkingsverband_type",
+        "omschrijving": "verkregen_namens_samenwerkingsverband_omschrijving"
+      }
+    },
+    "betrokken_gorzen_en_aanwassen_brk_subject": {
+      "source_mapping": "betrokken_gorzen_en_aanwassen_brk_subject"
+    },
+    "in_onderzoek": {
+      "source_mapping": "in_onderzoek"
+    },
+    "van_brk_zakelijk_recht": {
+      "source_mapping": {
+        "bronwaarde": "van_brk_zakelijk_recht"
+      }
+    },
+    "toestandsdatum": {
+      "source_mapping": "toestandsdatum",
+      "format": "%Y-%m-%d %H:%M:%S"
+    }
+  }
+}
