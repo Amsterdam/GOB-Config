@@ -1,0 +1,110 @@
+{
+  "version": "0.1",
+  "catalogue": "brk2",
+  "entity": "zakelijkerechten",
+  "source": {
+    "name": "AMSBI",
+    "application": "GOBPrepare",
+    "entity_id": "identificatie",
+    "schema": "GOBPrepare",
+    "query": "sql/brk2/zakelijkerechten.sql"
+  },
+  "gob_mapping": {
+    "_expiration_date": {
+      "source_mapping": "_expiration_date",
+      "format": "%Y-%m-%d %H:%M:%S"
+    },
+    "volgnummer": {
+      "source_mapping": "volgnummer"
+    },
+    "identificatie": {
+      "source_mapping": "identificatie"
+    },
+    "begin_geldigheid": {
+      "source_mapping": "begin_geldigheid",
+      "format": "%Y-%m-%d %H:%M:%S"
+    },
+    "eind_geldigheid": {
+      "source_mapping": "eind_geldigheid",
+      "format": "%Y-%m-%d %H:%M:%S"
+    },
+    "datum_actueel_tot": {
+      "source_mapping": "datum_actueel_tot",
+      "format": "%Y-%m-%d %H:%M:%S"
+    },
+    "belast_brk_zakelijke_rechten": {
+      "source_mapping": {
+        "bronwaarde": "belast_zakelijkerechten.bronwaarde"
+      }
+    },
+    "belast_met_brk_zakelijke_rechten": {
+      "source_mapping": {
+        "bronwaarde": "belast_met_zakelijkerechten.bronwaarde"
+      }
+    },
+    "ontstaan_uit_brk_zakelijke_rechten": {
+      "source_mapping": {
+        "bronwaarde": "ontstaan_uit_brk_zakelijke_rechten.zrt_identificatie"
+      }
+    },
+    "ontstaan_uit_appartementsrechtsplitsing_vve": {
+      "source_mapping": {
+        "bronwaarde": "ontstaan_uit_appartementsrechtsplitsing_vve"
+      }
+    },
+    "betrokken_bij_brk_zakelijke_rechten": {
+      "source_mapping": {
+        "bronwaarde": "betrokken_bij_brk_zakelijke_rechten.zrt_identificatie"
+      }
+    },
+    "betrokken_bij_appartementsrechtsplitsing_vve": {
+      "source_mapping": {
+        "bronwaarde": "betrokken_bij_appartementsrechtsplitsing_vve"
+      }
+    },
+    "is_beperkt_tot_brk_tenaamstellingen": {
+      "source_mapping": {
+        "bronwaarde": "is_beperkt_tot_brk_tenaamstellingen.bronwaarde"
+      }
+    },
+    "rust_op_brk_kadastraal_object": {
+      "source_mapping": {
+        "bronwaarde": "rust_op_kadastraalobject"
+      }
+    },
+    "vve_identificatie_ontstaan_uit": {
+      "source_mapping": "vve_identificatie_ontstaan_uit"
+    },
+    "vve_identificatie_betrokken_bij": {
+      "source_mapping": "vve_identificatie_betrokken_bij"
+    },
+    "appartementsrechtsplitsing_type": {
+      "source_mapping": {
+        "code": "appartementsrechtsplitsingtype_code",
+        "omschrijving": "appartementsrechtsplitsingtype_omschrijving"
+      }
+    },
+    "is_bestemd_tot_identificatie": {
+      "source_mapping": "isbestemdtot_identificatie"
+    },
+    "toelichting_bewaarder": {
+      "source_mapping": "toelichting_bewaarder"
+    },
+    "in_onderzoek": {
+      "source_mapping": "inonderzoek"
+    },
+    "aard_zakelijk_recht": {
+      "source_mapping": {
+        "code": "aard_zakelijk_recht_code",
+        "omschrijving": "aard_zakelijk_recht_omschrijving"
+      }
+    },
+    "akr_aard_zakelijk_recht": {
+      "source_mapping": "akr_aard_zakelijk_recht"
+    },
+    "toestandsdatum": {
+      "source_mapping": "toestandsdatum",
+      "format": "%Y-%m-%d %H:%M:%S"
+    }
+  }
+}
