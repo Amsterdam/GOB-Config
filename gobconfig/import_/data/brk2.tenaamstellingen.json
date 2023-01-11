@@ -24,7 +24,9 @@
       "source_mapping": "neuron_id"
     },
     "van_brk_kadastraalsubject": {
-      "source_mapping": "van_brk_kadastraalsubject"
+      "source_mapping": {
+        "bronwaarde": "van_brk_kadastraalsubject"
+      }
     },
     "begin_geldigheid": {
       "source_mapping": "begin_geldigheid",
@@ -57,10 +59,14 @@
       }
     },
     "betrokken_partner_brk_subject": {
-      "source_mapping": "betrokken_partner_brk_subject"
+      "source_mapping": {
+        "bronwaarde": "betrokken_partner_brk_subject"
+      }
     },
     "betrokken_samenwerkingsverband_brk_subject": {
-      "source_mapping": "betrokken_samenwerkingsverband_brk_subject"
+      "source_mapping": {
+        "bronwaarde": "betrokken_samenwerkingsverband_brk_subject"
+      }
     },
     "verkregen_namens_samenwerkingsverband": {
       "source_mapping": {
@@ -69,7 +75,9 @@
       }
     },
     "betrokken_gorzen_en_aanwassen_brk_subject": {
-      "source_mapping": "betrokken_gorzen_en_aanwassen_brk_subject"
+      "source_mapping": {
+        "bronwaarde": "betrokken_gorzen_en_aanwassen_brk_subject"
+      }
     },
     "in_onderzoek": {
       "source_mapping": "in_onderzoek"
