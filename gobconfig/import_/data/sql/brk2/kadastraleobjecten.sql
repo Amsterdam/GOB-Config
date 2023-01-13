@@ -5,13 +5,13 @@ WITH kot_full AS (
 	id,
 	registratiedatum,
 	kadastrale_aanduiding,
-	aangeduid_door_gemeente_code,
-	aangeduid_door_gemeente_omschrijving,
-	aangeduid_door_kadastralegemeente_code,
-	aangeduid_door_kadastralegemeente_omschrijving,
-	aangeduid_door_kadastralegemeentecode_code,
-	aangeduid_door_kadastralegemeentecode_omschrijving,
-	aangeduid_door_kadastralesectie,
+	aangeduid_door_brk_gemeente_code,
+	aangeduid_door_brk_gemeente_omschrijving,
+	aangeduid_door_brk_kadastralegemeente_code,
+	aangeduid_door_brk_kadastralegemeente_omschrijving,
+	aangeduid_door_brk_kadastralegemeentecode_code,
+	aangeduid_door_brk_kadastralegemeentecode_omschrijving,
+	aangeduid_door_brk_kadastralesectie,
 	perceelnummer,
 	indexletter,
 	indexnummer,
@@ -48,9 +48,9 @@ WITH kot_full AS (
 	in_onderzoek,
 	datum_actueel_tot,
 	_expiration_date,
-	is_ontstaan_uit_g_perceel,
-	heeft_een_relatie_met_verblijfsobject,
-	is_ontstaan_uit_kadastraalobject
+	is_ontstaan_uit_brk_g_perceel,
+	heeft_een_relatie_met_bag_verblijfsobject,
+	is_ontstaan_uit_brk_kadastraalobject
 	FROM brk2_prepared.kadastraal_object kot_full
 )
 SELECT *
