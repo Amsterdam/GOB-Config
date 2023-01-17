@@ -10,7 +10,13 @@
     "schema": "Neuron",
     "query": "sql/bag/verblijfsobjecten.sql",
     "recent": [
-"    WHERE (v.creation >= sysdate - 10 OR  v.modification >= sysdate - 10)"
+"-- haal alle cycli op van gewijzigde ids",
+"JOIN (",
+" SELECT DISTINCT identificatie",
+" FROM verblijfsobjecten_full",
+" WHERE (creation >= sysdate - 10 OR modification >= sysdate - 10)",
+") verblijfsobjecten_recent",
+"ON verblijfsobjecten_full.identificatie = verblijfsobjecten_recent.identificatie"
     ]
   },
   "gob_mapping": {

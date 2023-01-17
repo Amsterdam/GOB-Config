@@ -40,7 +40,8 @@ WITH
             USING  (openbareruimte_id)
         WHERE a.INDAUTHENTIEK = 'J'
         GROUP BY a.ADRESNUMMER
-    )
+    ),
+    verblijfsobjecten_full AS (
 SELECT v.verblijfseenheidnummer                                                               AS identificatie
      , v.verblijfseenheidvolgnummer                                                           AS volgnummer
      , s.status                                                                               AS status_code
@@ -113,6 +114,8 @@ SELECT v.verblijfseenheidnummer                                                 
       -- gemeente is undetermined
       ELSE NULL
     END                                                                                       AS ligt_in_gemeente
+    , v.modification
+    , v.creation
 FROM authentieke_objecten v
     -- begindatum gebruiken als einddatum volgende cyclus
 	    JOIN begin_cyclus q1 ON v.verblijfseenheidnummer = q1.verblijfseenheidnummer AND
@@ -201,7 +204,7 @@ FROM authentieke_objecten v
                           WHERE v.indauthentiek = 'J'
                           GROUP BY vt.id, vt.volgnummer) q5 ON v.verblijfseenheid_id = q5.verblijfsobject_id AND
                                                                v.verblijfseenheidvolgnummer = q5.verblijfsobjectvolgnummer
-    -- select gebruiksdoel_woonfunctie_code and gebruiksdoel_woonfunctie_omschrijving 
+    -- select gebruiksdoel_woonfunctie_code and gebruiksdoel_woonfunctie_omschrijving
          LEFT OUTER JOIN (SELECT vg.verblijfsobject_id
                                , vg.verblijfsobjectvolgnummer
                                , CASE g.gebruiksdoel_id
@@ -252,3 +255,6 @@ FROM authentieke_objecten v
                                                                 v.verblijfseenheidvolgnummer = q7.verblijfsobjectvolgnummer
         -- selecteren ligt_in_gemeente
          LEFT OUTER JOIN adres_in_gemeente q8 ON q8.ADRESNUMMER = q1.ADRESNUMMER
+)
+SELECT *
+FROM verblijfsobjecten_full
