@@ -3,11 +3,29 @@
 set -u # crash on missing env
 set -e # stop on any error
 
-echo "Running style checks"
-flake8
+echo() {
+   builtin echo -e "$@"
+}
 
-echo "Running unit tests"
-coverage run --data-file=/tmp/.coveragerc --source=./gobconfig -m pytest tests/
+export COVERAGE_FILE="/tmp/.coverage"
+
+
+echo "Running mypy"
+mypy gobconfig
+
+echo "\nRunning unit tests"
+coverage run --source=gobconfig -m pytest
 
 echo "Coverage report"
-coverage report --data-file=/tmp/.coveragerc --show-missing --fail-under=100
+coverage report --fail-under=100
+
+echo "\nCheck if Black finds no potential reformat fixes"
+black --check --diff gobconfig
+
+echo "\nCheck for potential import sort"
+isort --check --diff gobconfig
+
+echo "\nRunning Flake8 style checks"
+flake8 gobconfig
+
+echo "\nChecks complete"
