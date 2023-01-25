@@ -14,7 +14,7 @@ RUN rm requirements.txt
 COPY gobconfig gobconfig
 
 # Copy test module and tests.
-COPY test.sh .flake8 ./
+COPY test.sh pyproject.toml ./
 COPY tests tests
 
 USER datapunt
