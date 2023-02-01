@@ -5,5 +5,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    container_name: gobconfig
+    image: gob_config
     command: >
       bash -c "./test.sh"

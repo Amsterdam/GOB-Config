@@ -1,22 +1,26 @@
 """Mapping.
 
-Reads a mapping from a file
+Read a mapping from a file
 """
 
 
 import json
 import os
 from collections import defaultdict
-from typing import Optional
+from typing import Any, Optional
 
 from gobconfig.exception import GOBConfigException
 
 DATASET_DIR = os.path.join(os.path.dirname(__file__), "data/")
 
-ResultType = defaultdict[str, defaultdict[str, dict[str, str]]]
+DatasetPathType = str
+FilenameType = str
+DatasetMappingType = dict[str, Any]
+ResultType = defaultdict[str, defaultdict[str, dict[str, DatasetPathType]]]
 
 
-def _add_file_to_mapping(result: ResultType, filepath: str):
+def _add_file_to_mapping(result: ResultType, filepath: DatasetPathType) -> None:
+    """Add dataset filepath to result."""
     try:
         mapping = get_mapping(filepath)
         catalogue = mapping["catalogue"]
@@ -37,8 +41,8 @@ def _add_file_to_mapping(result: ResultType, filepath: str):
         result[catalogue][collection]["_default"] = filepath
 
 
-def _build_dataset_locations_mapping():
-    """Build dataset locations mapping based on json files present in DATASET_DIR.
+def _build_dataset_locations_mapping() -> ResultType:
+    """Build dataset locations mapping based on JSON Files present in DATASET_DIR.
 
     :return:
     """
@@ -52,7 +56,7 @@ def _build_dataset_locations_mapping():
     return result
 
 
-def get_dataset_file_location(catalogue: str, collection: str, application: Optional[str] = None):
+def get_dataset_file_location(catalogue: str, collection: str, application: Optional[str] = None) -> DatasetPathType:
     """Return the dataset file location for the given catalogue, collection, application combination.
 
     Application may be omitted when there is only one application available for given catalogue and collection.
@@ -86,7 +90,7 @@ def get_dataset_file_location(catalogue: str, collection: str, application: Opti
         )
 
 
-def get_query(filename):
+def get_query(filename: FilenameType) -> list[str]:
     """Get query contents from file.
 
     Return an array of lines to be compatible with inline query contents.
@@ -98,21 +102,21 @@ def get_query(filename):
     try:
         # Load query from file
         sql_file = os.path.join(DATASET_DIR, filename)
-        with open(sql_file, "r") as sql_reader:
+        with open(sql_file, "r", encoding="utf8") as sql_reader:
             return sql_reader.readlines()
     except FileNotFoundError:
         print(f"Query file not found {filename}")
         return []
 
 
-def get_mapping(filename):
+def get_mapping(filepath: DatasetPathType) -> DatasetMappingType:
     """Read a mapping from a file.
 
-    :param filename: name of the file that contains the mapping
+    :param filepath: path of the file that contains the mapping
     :return: an object that contains the mapping
     """
-    with open(filename) as file:
-        mapping = json.load(file)
+    with open(filepath, encoding="utf8") as file:
+        mapping: DatasetMappingType = json.load(file)
 
         source_filename = mapping.get("source", {}).get("application_config", {}).get("filename")
 
@@ -128,7 +132,7 @@ def get_mapping(filename):
         return mapping
 
 
-def get_absolute_filepath(filename: str):
+def get_absolute_filepath(filename: FilenameType) -> DatasetPathType:
     """Return absolute filepath for filename. filename should be relative to the data directory.
 
     :param filename:
@@ -137,7 +141,7 @@ def get_absolute_filepath(filename: str):
     return os.path.join(DATASET_DIR, filename)
 
 
-def get_import_definition_by_filename(filename: str):
+def get_import_definition_by_filename(filename: FilenameType) -> DatasetMappingType:
     """Return import definition with filename relative to data directory.
 
     :param filename:
@@ -146,7 +150,7 @@ def get_import_definition_by_filename(filename: str):
     return get_mapping(get_absolute_filepath(filename))
 
 
-def get_import_definition(catalogue: str, collection: str, application: Optional[str] = None):
+def get_import_definition(catalogue: str, collection: str, application: Optional[str] = None) -> DatasetMappingType:
     """Return import definition for the given catalogue, collection, application combination."""
     file = get_dataset_file_location(catalogue, collection, application)
     return get_mapping(file)
