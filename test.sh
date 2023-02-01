@@ -23,7 +23,7 @@ echo "\nCheck if Black finds no potential reformat fixes"
 black --check --diff gobconfig
 
 echo "\nCheck for potential import sort"
-isort --check --diff gobconfig
+isort --check --diff --src-path=gobconfig gobconfig
 
 echo "\nRunning Flake8 style checks"
 flake8 gobconfig
