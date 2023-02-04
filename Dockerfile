@@ -4,17 +4,14 @@ MAINTAINER datapunt@amsterdam.nl
 
 # Install gobconfig in /app folder.
 WORKDIR /app
-
-# Install required Python packages.
-COPY requirements.txt /app/
-RUN pip install --no-cache-dir -r requirements.txt
-RUN rm requirements.txt
-
-# Copy gobconfig module.
 COPY gobconfig gobconfig
 
+# Install required Python test packages.
+COPY pyproject.toml .
+RUN pip install --no-cache-dir --editable .[test]
+
 # Copy test module and tests.
-COPY test.sh pyproject.toml ./
+COPY test.sh .
 COPY tests tests
 
 USER datapunt
