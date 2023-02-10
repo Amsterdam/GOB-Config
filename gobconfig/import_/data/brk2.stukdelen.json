@@ -1,0 +1,112 @@
+{
+  "version": "0.1",
+  "catalogue": "brk2",
+  "entity": "stukdelen",
+  "source": {
+    "name": "AMSBI",
+    "application": "GOBPrepare",
+    "entity_id": "identificatie",
+    "schema": "GOBPrepare",
+    "query": "sql/brk2/stukdelen.sql"
+  },
+  "gob_mapping": {
+    "_expiration_date": {
+      "source_mapping": "_expiration_date",
+      "format": "%Y-%m-%d %H:%M:%S"
+    },
+    "identificatie": {
+      "source_mapping": "identificatie"
+    },
+    "neuron_id": {
+      "source_mapping": "neuron_id"
+    },
+    "aard": {
+      "source_mapping": {
+        "code": "aard_code",
+        "omschrijving": "aard_omschrijving"
+      }
+    },
+    "bedrag_transactie": {
+      "source_mapping": {
+        "valuta": "bedrag_transactie_valuta",
+        "bedrag": "bedrag_transactie_bedrag"
+      }
+    },
+    "is_bron_voor_brk_tenaamstelling": {
+      "source_mapping": {
+        "bronwaarde": "is_bron_voor_brk_tenaamstelling.tng_neuron_id"
+      }
+    },
+    "is_bron_voor_brk_aantekening_kadastraal_object": {
+      "source_mapping": {
+        "bronwaarde": "is_bron_voor_brk_aantekening_kadastraal_object.akt_identificatie"
+      }
+    },
+    "is_bron_voor_brk_aantekening_recht": {
+      "source_mapping": {
+        "bronwaarde": "is_bron_voor_brk_aantekening_recht.art_identificatie"
+      }
+    },
+    "is_bron_voor_brk_zakelijk_recht": {
+      "source_mapping": {
+        "bronwaarde": "is_bron_voor_brk_zakelijk_recht.zrt_identificatie"
+      }
+    },
+    "stukidentificatie": {
+      "source_mapping": "stukidentificatie"
+    },
+    "portefeuillenummer_akr": {
+      "source_mapping": "portefeuillenummer_akr"
+    },
+    "tijdstip_aanbieding_stuk": {
+      "source_mapping": "tijdstip_aanbieding_stuk",
+      "format": "%Y-%m-%d %H:%M:%S"
+    },
+    "reeks": {
+      "source_mapping": {
+        "code": "reeks_code",
+        "omschrijving": "reeks_omschrijving"
+      }
+    },
+    "volgnummer_stuk": {
+      "source_mapping": "volgnummer_stuk"
+    },
+    "registercode_stuk": {
+      "source_mapping": {
+        "code": "registercode_stuk_code",
+        "omschrijving": "registercode_stuk_omschrijving"
+      }
+    },
+    "soort_register_stuk": {
+      "source_mapping": {
+        "code": "soort_register_stuk_code",
+        "omschrijving": "soort_register_stuk_omschrijving"
+      }
+    },
+    "deel_soort_stuk": {
+      "source_mapping": "deel_soort_stuk"
+    },
+    "toestandsdatum": {
+      "source_mapping": "toestandsdatum",
+      "format": "%Y-%m-%d"
+    },
+    "tekening_ingeschreven": {
+      "source_mapping": "tekening_ingeschreven"
+    },
+    "tijdstip_ondertekening": {
+      "source_mapping": "tijdstip_ondertekening",
+      "format": "%Y-%m-%d %H:%M:%S"
+    },
+    "toelichting_bewaarder": {
+      "source_mapping": "toelichting_bewaarder"
+    },
+    "datum_actueel_tot": {
+      "source_mapping": "datum_actueel_tot",
+      "format": "%Y-%m-%d %H:%M:%S"
+    },
+    "begin_geldigheid": {
+      "source_mapping": "begin_geldigheid",
+      "format": "%Y-%m-%d %H:%M:%S"
+    }
+  }
+}
