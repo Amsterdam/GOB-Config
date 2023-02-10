@@ -22,6 +22,6 @@ SELECT
 	aard_zakelijk_recht_code,
 	aard_zakelijk_recht_omschrijving,
 	akr_aard_zakelijk_recht,
-	toestandsdatum,
+	DATE(toestandsdatum) AS toestandsdatum,
 	_expiration_date
 FROM brk2_prepared.zakelijk_recht

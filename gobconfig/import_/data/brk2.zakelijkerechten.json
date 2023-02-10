@@ -104,7 +104,7 @@
     },
     "toestandsdatum": {
       "source_mapping": "toestandsdatum",
-      "format": "%Y-%m-%d %H:%M:%S"
+      "format": "%Y-%m-%d"
     }
   }
 }
