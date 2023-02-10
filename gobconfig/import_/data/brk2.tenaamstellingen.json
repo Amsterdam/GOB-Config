@@ -87,9 +87,12 @@
         "bronwaarde": "van_brk_zakelijk_recht"
       }
     },
+    "is_gebaseerd_op_brk_stukdelen": {
+      "source_mapping": "is_gebaseerd_op_brk_stukdeel.bronwaarde"
+    },
     "toestandsdatum": {
       "source_mapping": "toestandsdatum",
-      "format": "%Y-%m-%d %H:%M:%S"
+      "format": "%Y-%m-%d"
     }
   }
 }
