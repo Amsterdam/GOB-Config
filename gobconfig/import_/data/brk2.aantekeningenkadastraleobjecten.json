@@ -1,0 +1,79 @@
+{
+  "version": "0.1",
+  "catalogue": "brk2",
+  "entity": "aantekeningenkadastraleobjecten",
+  "source": {
+    "name": "AMSBI",
+    "application": "GOBPrepare",
+    "entity_id": "identificatie",
+    "schema": "GOBPrepare",
+    "query": "sql/brk2/aantekeningenkadastraleobjecten.sql"
+  },
+  "gob_mapping": {
+    "_expiration_date": {
+      "source_mapping": "_expiration_date",
+      "format": "%Y-%m-%d %H:%M:%S"
+    },
+    "identificatie": {
+      "source_mapping": "identificatie"
+    },
+    "volgnummer": {
+      "source_mapping": "volgnummer"
+    },
+    "registratiedatum": {
+      "source_mapping": "registratiedatum",
+      "format": "%Y-%m-%d %H:%M:%S"
+    },
+    "begin_geldigheid": {
+      "source_mapping": "begin_geldigheid",
+      "format": "%Y-%m-%d %H:%M:%S"
+    },
+    "eind_geldigheid": {
+      "source_mapping": "eind_geldigheid",
+      "format": "%Y-%m-%d %H:%M:%S"
+    },
+    "einddatum_recht": {
+      "source_mapping": "einddatum_recht",
+      "format": "%Y-%m-%d %H:%M:%S"
+    },
+    "aard": {
+      "source_mapping": {
+        "code": "aard_code",
+        "omschrijving": "aard_omschrijving"
+      }
+    },
+    "omschrijving": {
+      "source_mapping": "omschrijving"
+    },
+    "betreft_gedeelte_van_perceel": {
+      "source_mapping": "betreft_gedeelte_van_perceel"
+    },
+    "heeft_brk_betrokken_persoon": {
+      "source_mapping": {
+        "bronwaarde": "heeft_brk_betrokken_persoon.sjt_identificatie"
+      }
+    },
+    "heeft_betrekking_op_brk_kadastraal_object": {
+      "source_mapping": {
+        "bronwaarde": "heeft_betrekking_op_brk_kadastraal_object"
+      }
+    },
+    "is_gebaseerd_op_brk_stukdeel": {
+      "source_mapping": {
+        "bronwaarde": "is_gebaseerd_op_brk_stukdeel"
+      }
+    },
+    "einddatum": {
+      "source_mapping": "einddatum",
+      "format": "%Y-%m-%d %H:%M:%S"
+    },
+    "datum_actueel_tot": {
+      "source_mapping": "datum_actueel_tot",
+      "format": "%Y-%m-%d %H:%M:%S"
+    },
+    "toestandsdatum": {
+      "source_mapping": "toestandsdatum",
+      "format": "%Y-%m-%d"
+    }
+  }
+}
