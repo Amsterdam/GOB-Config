@@ -1,0 +1,67 @@
+{
+  "version": "0.1",
+  "catalogue": "brk2",
+  "entity": "aantekeningenrechten",
+  "source": {
+    "name": "AMSBI",
+    "application": "GOBPrepare",
+    "entity_id": "identificatie",
+    "schema": "GOBPrepare",
+    "query": "sql/brk2/aantekeningenrechten.sql"
+  },
+  "gob_mapping": {
+    "_expiration_date": {
+      "source_mapping": "_expiration_date",
+      "format": "%Y-%m-%d %H:%M:%S"
+    },
+    "identificatie": {
+      "source_mapping": "identificatie"
+    },
+    "neuron_id": {
+      "source_mapping": "neuron_id"
+    },
+    "einddatum_recht": {
+      "source_mapping": "einddatum_recht",
+      "format": "%Y-%m-%d %H:%M:%S"
+    },
+    "aard": {
+      "source_mapping": {
+        "code": "aard_code",
+        "omschrijving": "aard_omschrijving"
+      }
+    },
+    "omschrijving": {
+      "source_mapping": "omschrijving"
+    },
+    "betreft_gedeelte_van_perceel": {
+      "source_mapping": "betreft_gedeelte_van_perceel"
+    },
+    "betrokken_brk_tenaamstelling": {
+      "source_mapping": {
+        "bronwaarde": "betrokken_brk_tenaamstelling.tng_id"
+      }
+    },
+    "heeft_brk_betrokken_persoon": {
+      "source_mapping": {
+        "bronwaarde": "heeft_brk_betrokken_persoon.sjt_identificatie"
+      }
+    },
+    "is_gebaseerd_op_brk_stukdeel": {
+      "source_mapping": {
+        "bronwaarde": "is_gebaseerd_op_brk_stukdeel"
+      }
+    },
+    "einddatum": {
+      "source_mapping": "einddatum",
+      "format": "%Y-%m-%d %H:%M:%S"
+    },
+    "datum_actueel_tot": {
+      "source_mapping": "datum_actueel_tot",
+      "format": "%Y-%m-%d %H:%M:%S"
+    },
+    "toestandsdatum": {
+      "source_mapping": "toestandsdatum",
+      "format": "%Y-%m-%d"
+    }
+  }
+}
