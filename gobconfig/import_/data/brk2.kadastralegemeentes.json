@@ -1,0 +1,34 @@
+{
+  "version": "0.1",
+  "catalogue": "brk2",
+  "entity": "kadastralegemeentes",
+  "source": {
+    "name": "AMSBI",
+    "application": "GOBPrepare",
+    "entity_id": "identificatie",
+    "schema": "GOBPrepare",
+    "query": [
+      "SELECT",
+      "   identificatie,",
+      "   ligt_in_brk_gemeente,",
+      "   ST_AsText(geometrie) AS geometrie",
+      "FROM brk2_prepared.kadastrale_gemeente"
+    ]
+  },
+  "not_provided_attributes": [
+    "_expiration_date"
+  ],
+  "gob_mapping": {
+    "identificatie": {
+      "source_mapping": "identificatie"
+    },
+    "ligt_in_brk_gemeente": {
+      "source_mapping": {
+        "bronwaarde": "ligt_in_brk_gemeente"
+      }
+    },
+    "geometrie": {
+      "source_mapping": "geometrie"
+    }
+  }
+}
