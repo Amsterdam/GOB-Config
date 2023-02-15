@@ -2,7 +2,7 @@ WITH kot_full AS (
     SELECT
 	identificatie,
 	volgnummer,
-	id,
+	id AS neuron_id,
 	registratiedatum,
 	kadastrale_aanduiding,
 	aangeduid_door_brk_gemeente_code,
@@ -42,7 +42,7 @@ WITH kot_full AS (
 	koopsom_valutacode,
 	koopjaar,
 	indicatie_meer_objecten,
-	toestandsdatum,
+	DATE(toestandsdatum) AS toestandsdatum,
 	begin_geldigheid,
 	eind_geldigheid,
 	in_onderzoek,
