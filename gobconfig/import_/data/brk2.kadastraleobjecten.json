@@ -5,7 +5,7 @@
   "source": {
     "name": "AMSBI",
     "application": "GOBPrepare",
-    "entity_id": "id",
+    "entity_id": "neuron_id",
     "schema": "GOBPrepare",
     "query": "sql/brk2/kadastraleobjecten.sql"
   },
@@ -20,8 +20,8 @@
     "volgnummer": {
       "source_mapping": "volgnummer"
     },
-    "id": {
-      "source_mapping": "id"
+    "neuron_id": {
+      "source_mapping": "neuron_id"
     },
     "registratiedatum": {
       "source_mapping": "registratiedatum"
@@ -29,25 +29,25 @@
     "kadastrale_aanduiding": {
       "source_mapping": "kadastrale_aanduiding"
     },
-    "aangeduid_door_gemeente": {
+    "aangeduid_door_brk_gemeente": {
       "source_mapping": {
         "code": "aangeduid_door_brk_gemeente_code",
         "omschrijving": "aangeduid_door_brk_gemeente_omschrijving"
       }
     },
-    "aangeduid_door_kadastralegemeente": {
+    "aangeduid_door_brk_kadastralegemeente": {
       "source_mapping": {
         "code": "aangeduid_door_brk_kadastralegemeente_code",
         "omschrijving": "aangeduid_door_brk_kadastralegemeente_omschrijving"
       }
     },
-    "aangeduid_door_kadastralegemeentecode": {
+    "aangeduid_door_brk_kadastralegemeentecode": {
       "source_mapping": {
         "code": "aangeduid_door_brk_kadastralegemeentecode_code",
         "omschrijving": "aangeduid_door_brk_kadastralegemeentecode_omschrijving"
       }
     },
-    "aangeduid_door_kadastralesectie": {
+    "aangeduid_door_brk_kadastralesectie": {
       "source_mapping": "aangeduid_door_brk_kadastralesectie"
     },
     "perceelnummer": {
@@ -118,11 +118,11 @@
     "perceelnummer_rotatie": {
       "source_mapping": "perceelnummer_rotatie"
     },
-    "perceelnummer_verschuiving_x": {
-      "source_mapping": "perceelnummer_verschuiving_x"
-    },
-    "perceelnummer_verschuiving_y": {
-      "source_mapping": "perceelnummer_verschuiving_y"
+    "perceelnummer_verschuiving": {
+      "source_mapping": {
+        "x": "perceelnummer_verschuiving_x",
+        "y": "perceelnummer_verschuiving_y"
+      }
     },
     "bijpijling_geometrie": {
       "source_mapping": "bijpijling_geometrie"
@@ -141,7 +141,7 @@
     },
     "toestandsdatum": {
       "source_mapping": "toestandsdatum",
-      "format": "%Y-%m-%d %H:%M:%S"
+      "format": "%Y-%m-%d"
     },
     "begin_geldigheid": {
       "source_mapping": "begin_geldigheid",
@@ -161,17 +161,17 @@
     "indicatie_voorlopige_kadastrale_grens": {
       "source_mapping": "indicatie_voorlopige_kadastrale_grens"
     },
-    "is_ontstaan_uit_g_perceel": {
+    "is_ontstaan_uit_brk_g_perceel": {
       "source_mapping": {
         "bronwaarde": "is_ontstaan_uit_brk_g_perceel.kot_identificatie"
       }
     },
-    "heeft_een_relatie_met_verblijfsobject": {
+    "heeft_een_relatie_met_bag_verblijfsobject": {
       "source_mapping": {
         "bronwaarde": "heeft_een_relatie_met_bag_verblijfsobject.bag_id"
       }
     },
-    "is_ontstaan_uit_kadastraalobject": {
+    "is_ontstaan_uit_brk_kadastraalobject": {
       "source_mapping": {
         "bronwaarde": "is_ontstaan_uit_brk_kadastraalobject.kot_identificatie"
       }
