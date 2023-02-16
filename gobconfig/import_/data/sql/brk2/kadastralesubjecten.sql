@@ -66,6 +66,6 @@ SELECT
 	postadres_postbus_postcode,
 	postadres_postbus_woonplaatsnaam,
 	datum_actueel_tot,
-	toestandsdatum,
+	DATE(toestandsdatum) AS toestandsdatum,
 	_expiration_date
 FROM brk2_prepared.kadastraal_subject
