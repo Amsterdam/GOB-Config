@@ -89,7 +89,7 @@
     },
     "is_gebaseerd_op_brk_stukdelen": {
       "source_mapping": {
-        "bronwaarde": "is_gebaseerd_op_brk_stukdeel.bronwaarde"
+        "bronwaarde": "is_gebaseerd_op_brk_stukdelen.bronwaarde"
       }
     },
     "toestandsdatum": {
