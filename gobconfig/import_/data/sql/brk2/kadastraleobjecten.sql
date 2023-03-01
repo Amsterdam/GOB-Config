@@ -22,7 +22,6 @@ WITH kot_full AS (
 	soort_cultuur_onbebouwd_omschrijving,
 	soort_cultuur_bebouwd_code,
 	soort_cultuur_bebouwd_omschrijving,
-	status,
 	referentie,
 	oudst_digitaal_bekend,
 	mutatie_id,
