@@ -4,7 +4,7 @@ SELECT
 	aard_code,
 	aard_omschrijving,
 	bedrag_transactie_valuta,
-	bedrag_transactie_bedrag,
+	to_char(bedrag_transactie_bedrag, '999999999999.99')::numeric AS bedrag_transactie_bedrag,
 	is_bron_voor_brk_tenaamstelling,
 	is_bron_voor_brk_aantekening_kadastraal_object,
 	is_bron_voor_brk_aantekening_recht,
