@@ -103,10 +103,6 @@
     "datum_actueel_tot": {
       "source_mapping": "datum_actueel_tot",
       "format": "%Y-%m-%d %H:%M:%S"
-    },
-    "begin_geldigheid": {
-      "source_mapping": "begin_geldigheid",
-      "format": "%Y-%m-%d %H:%M:%S"
     }
   }
 }
