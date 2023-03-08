@@ -5,7 +5,7 @@
   "source": {
     "name": "AMSBI",
     "application": "GOBPrepare",
-    "entity_id": "neuron_id",
+    "entity_id": "identificatie",
     "schema": "GOBPrepare",
     "query": "sql/brk2/tenaamstellingen.sql"
   },
