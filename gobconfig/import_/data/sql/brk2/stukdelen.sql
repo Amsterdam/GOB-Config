@@ -25,6 +25,5 @@ SELECT
 	tijdstip_ondertekening,
 	toelichting_bewaarder,
 	datum_actueel_tot,
-	begin_geldigheid,
 	_expiration_date
 FROM brk2_prepared.stukdeel
