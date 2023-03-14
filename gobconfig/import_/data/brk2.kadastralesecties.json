@@ -1,0 +1,38 @@
+{
+  "version": "0.1",
+  "catalogue": "brk2",
+  "entity": "kadastralesecties",
+  "source": {
+    "name": "AMSBI",
+    "application": "GOBPrepare",
+    "entity_id": "identificatie",
+    "schema": "GOBPrepare",
+    "query": [
+      "SELECT",
+      "   identificatie,",
+      "   code,",
+      "   is_onderdeel_van_brk_kadastrale_gemeentecode,",
+      "   ST_AsText(geometrie) AS geometrie",
+      "FROM brk2_prepared.kadastrale_sectie"
+    ]
+  },
+  "not_provided_attributes": [
+    "_expiration_date"
+  ],
+  "gob_mapping": {
+    "identificatie": {
+      "source_mapping": "identificatie"
+    },
+    "code": {
+      "source_mapping": "code"
+    },
+    "is_onderdeel_van_brk_kadastrale_gemeentecode": {
+      "source_mapping": {
+        "bronwaarde": "is_onderdeel_van_brk_kadastrale_gemeentecode"
+      }
+    },
+    "geometrie": {
+      "source_mapping": "geometrie"
+    }
+  }
+}
