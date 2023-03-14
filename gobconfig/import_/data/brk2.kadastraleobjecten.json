@@ -5,7 +5,7 @@
   "source": {
     "name": "AMSBI",
     "application": "GOBPrepare",
-    "entity_id": "neuron_id",
+    "entity_id": "identificatie",
     "schema": "GOBPrepare",
     "query": "sql/brk2/kadastraleobjecten.sql"
   },
@@ -31,24 +31,23 @@
     },
     "aangeduid_door_brk_gemeente": {
       "source_mapping": {
-        "code": "aangeduid_door_brk_gemeente_code",
-        "omschrijving": "aangeduid_door_brk_gemeente_omschrijving"
+        "bronwaarde": "aangeduid_door_brk_gemeente_omschrijving"
       }
     },
     "aangeduid_door_brk_kadastralegemeente": {
       "source_mapping": {
-        "code": "aangeduid_door_brk_kadastralegemeente_code",
-        "omschrijving": "aangeduid_door_brk_kadastralegemeente_omschrijving"
+        "bronwaarde": "aangeduid_door_brk_kadastralegemeente_omschrijving"
       }
     },
     "aangeduid_door_brk_kadastralegemeentecode": {
       "source_mapping": {
-        "code": "aangeduid_door_brk_kadastralegemeentecode_code",
-        "omschrijving": "aangeduid_door_brk_kadastralegemeentecode_omschrijving"
+        "bronwaarde": "aangeduid_door_brk_kadastralegemeentecode_omschrijving"
       }
     },
     "aangeduid_door_brk_kadastralesectie": {
-      "source_mapping": "aangeduid_door_brk_kadastralesectie"
+      "source_mapping": {
+        "bronwaarde": "aangeduid_door_brk_kadastralesectie"
+      }
     },
     "perceelnummer": {
       "source_mapping": "perceelnummer"
