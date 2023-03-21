@@ -34,7 +34,7 @@
     },
     "is_bron_voor_brk_tenaamstelling": {
       "source_mapping": {
-        "bronwaarde": "is_bron_voor_brk_tenaamstelling.tng_neuron_id"
+        "bronwaarde": "is_bron_voor_brk_tenaamstelling.tng_identificatie"
       }
     },
     "is_bron_voor_brk_aantekening_kadastraal_object": {
