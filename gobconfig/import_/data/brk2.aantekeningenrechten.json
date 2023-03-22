@@ -38,7 +38,7 @@
     },
     "betrokken_brk_tenaamstelling": {
       "source_mapping": {
-        "bronwaarde": "betrokken_brk_tenaamstelling.tng_id"
+        "bronwaarde": "betrokken_brk_tenaamstelling.tng_identificatie"
       }
     },
     "heeft_brk_betrokken_persoon": {
