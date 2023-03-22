@@ -59,9 +59,7 @@
       }
     },
     "betrokken_bij_appartementsrechtsplitsing_vve": {
-      "source_mapping": {
-        "bronwaarde": "betrokken_bij_appartementsrechtsplitsing_vve"
-      }
+      "source_mapping": "betrokken_bij_appartementsrechtsplitsing_vve"
     },
     "is_beperkt_tot_brk_tenaamstellingen": {
       "source_mapping": {
