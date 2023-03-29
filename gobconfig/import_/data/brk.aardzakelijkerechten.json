@@ -7,35 +7,26 @@
     "application": "GOBPrepare",
     "entity_id": "code",
     "schema": "GOBPrepare",
-    "query": [
-      "SELECT",
-      "   code,",
-      "   waarde,",
-      "   datumvanaf,",
-      "   datumtot,",
-      "   toelichting,",
-      "   akrcode",
-      "FROM brk_prepared.aardzakelijkrecht_waardelijst"
-    ]
+    "query": "sql/brk/aardzakelijkerechten.sql"
   },
   "not_provided_attributes": [
     "_expiration_date"
   ],
   "gob_mapping": {
     "code": {
-      "source_mapping": "code"
+      "source_mapping": "Code"
     },
     "waarde": {
-      "source_mapping": "waarde"
+      "source_mapping": "Waarde"
     },
     "datum_vanaf": {
-      "source_mapping": "datumvanaf"
+      "source_mapping": "DatumVanaf"
     },
     "datum_tot": {
-      "source_mapping": "datumtot"
+      "source_mapping": "DatumTot"
     },
     "toelichting": {
-      "source_mapping": "toelichting"
+      "source_mapping": "Toelichting"
     },
     "akr_code": {
       "source_mapping": "akrcode"
