@@ -5,7 +5,7 @@
   "source": {
     "name": "AMSBI",
     "application": "GOBPrepare",
-    "entity_id": "code",
+    "entity_id": "Code",
     "schema": "GOBPrepare",
     "query": "sql/brk/aardzakelijkerechten.sql"
   },
