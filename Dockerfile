@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1
-FROM amsterdam/gob_baseimage:3.9-buster
+FROM amsterdam/gob_baseimage:3.9-bullseye
 MAINTAINER datapunt@amsterdam.nl
 
 # Install gobconfig in /app folder.
