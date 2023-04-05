@@ -1,0 +1,41 @@
+{
+  "version": "0.1",
+  "catalogue": "brk2",
+  "entity": "gemeentes",
+  "source": {
+    "name": "AMSBI",
+    "application": "GOBPrepare",
+    "entity_id": "identificatie",
+    "schema": "GOBPrepare",
+    "query": "sql/brk2/gemeentes.sql"
+  },
+  "not_provided_attributes": [
+    "registratiedatum"
+  ],
+  "gob_mapping": {
+    "identificatie": {
+      "source_mapping": "identificatie"
+    },
+    "volgnummer": {
+      "source_mapping": "volgnummer"
+    },
+    "naam": {
+      "source_mapping": "naam"
+    },
+    "begin_geldigheid": {
+      "source_mapping": "begin_geldigheid",
+      "format": "%d-%m-%Y"
+    },
+    "eind_geldigheid": {
+      "source_mapping": "eind_geldigheid",
+      "format": "%d-%m-%Y"
+    },
+    "_expiration_date": {
+      "source_mapping": "eind_geldigheid",
+      "format": "%d-%m-%Y"
+    },
+    "geometrie": {
+      "source_mapping": "geometrie"
+    }
+  }
+}
