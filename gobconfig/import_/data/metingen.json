@@ -71,16 +71,13 @@
       "source_mapping": "type_meting"
     },
     "zakking": {
-      "source_mapping": "zakking",
-      "precision": 4
+      "source_mapping": "zakking"
     },
     "zakkingssnelheid": {
-      "source_mapping": "zakkingssnelheid",
-      "precision": 4
+      "source_mapping": "zakkingssnelheid"
     },
     "zakking_cumulatief": {
-      "source_mapping": "zakking_cumulatief",
-      "precision": 4
+      "source_mapping": "zakking_cumulatief"
     },
     "hoeveelste_meting": {
       "source_mapping": "hoeveelste_meting"
