@@ -31,7 +31,7 @@
     },
     "aangeduid_door_brk_gemeente": {
       "source_mapping": {
-        "bronwaarde": "aangeduid_door_brk_gemeente_omschrijving"
+        "bronwaarde": "=geometrie"
       }
     },
     "aangeduid_door_brk_kadastralegemeente": {
