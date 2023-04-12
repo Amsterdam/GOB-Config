@@ -9,6 +9,9 @@
     "schema": "GOBPrepare",
     "query": "sql/brk2/kadastraleobjecten.sql"
   },
+  "not_provided_attributes": [
+    "registratiedatum"
+  ],
   "gob_mapping": {
     "_expiration_date": {
       "source_mapping": "_expiration_date",
@@ -22,9 +25,6 @@
     },
     "neuron_id": {
       "source_mapping": "neuron_id"
-    },
-    "registratiedatum": {
-      "source_mapping": "registratiedatum"
     },
     "kadastrale_aanduiding": {
       "source_mapping": "kadastrale_aanduiding"

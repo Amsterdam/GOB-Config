@@ -9,6 +9,9 @@
     "schema": "GOBPrepare",
     "query": "sql/brk2/aantekeningenkadastraleobjecten.sql"
   },
+  "not_provided_attributes": [
+    "registratiedatum"
+  ],
   "gob_mapping": {
     "_expiration_date": {
       "source_mapping": "_expiration_date",
@@ -19,10 +22,6 @@
     },
     "volgnummer": {
       "source_mapping": "volgnummer"
-    },
-    "registratiedatum": {
-      "source_mapping": "registratiedatum",
-      "format": "%Y-%m-%d %H:%M:%S"
     },
     "begin_geldigheid": {
       "source_mapping": "begin_geldigheid",
