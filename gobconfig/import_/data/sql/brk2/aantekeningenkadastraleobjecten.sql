@@ -1,7 +1,6 @@
 SELECT
 	identificatie,
 	volgnummer,
-	registratiedatum,
 	begin_geldigheid,
 	eind_geldigheid,
 	einddatum_recht,
