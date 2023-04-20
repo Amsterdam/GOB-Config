@@ -3,7 +3,6 @@ WITH kot_full AS (
 	identificatie,
 	volgnummer,
 	id AS neuron_id,
-	registratiedatum,
 	kadastrale_aanduiding,
 	aangeduid_door_brk_gemeente_code,
 	aangeduid_door_brk_gemeente_omschrijving,
