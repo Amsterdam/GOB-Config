@@ -11,6 +11,7 @@
       "SELECT",
       "   identificatie,",
       "   is_onderdeel_van_brk_kadastrale_gemeente,",
+      "   code,",
       "   ST_AsText(geometrie) AS geometrie",
       "FROM brk2_prepared.kadastrale_gemeentecode"
     ]
@@ -26,6 +27,9 @@
       "source_mapping": {
         "bronwaarde": "is_onderdeel_van_brk_kadastrale_gemeente"
       }
+    },
+    "code": {
+      "source_mapping": "code"
     },
     "geometrie": {
       "source_mapping": "geometrie"
