@@ -11,6 +11,7 @@
       "SELECT",
       "   identificatie,",
       "   ligt_in_brk_gemeente,",
+      "   code,",
       "   ST_AsText(geometrie) AS geometrie",
       "FROM brk2_prepared.kadastrale_gemeente"
     ]
@@ -26,6 +27,9 @@
       "source_mapping": {
         "bronwaarde": "ligt_in_brk_gemeente"
       }
+    },
+    "code": {
+      "source_mapping": "code"
     },
     "geometrie": {
       "source_mapping": "geometrie"
