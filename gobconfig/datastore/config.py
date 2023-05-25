@@ -90,6 +90,16 @@ DATASTORE_CONFIGS: DatastoreConfigsType = {
         "PASSWORD": os.getenv("GOB_OBJECTSTORE_PASSWORD"),
         "REGION_NAME": "NL",
     },
+    "HandelsregisterObjectstore": {
+        "type": TYPE_OBJECTSTORE,
+        "VERSION": "2.0",
+        "AUTHURL": "https://identity.stack.cloudvps.com/v2.0",
+        "TENANT_NAME": os.getenv("HANDELSREGISTER_OBJECTSTORE_TENANT_NAME"),
+        "TENANT_ID": os.getenv("HANDELSREGISTER_OBJECTSTORE_TENANT_ID"),
+        "USER": os.getenv("HANDELSREGISTER_OBJECTSTORE_USER"),
+        "PASSWORD": os.getenv("HANDELSREGISTER_OBJECTSTORE_PASSWORD"),
+        "REGION_NAME": "NL",
+    },
     "GEO_BRIEVENBUS": {
         "type": TYPE_SFTP,
         "username": os.getenv("GEO_BRIEVENBUS_USER"),
