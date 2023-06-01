@@ -20,6 +20,9 @@
     "neuron_id": {
       "source_mapping": "neuron_id"
     },
+    "was_identificatie": {
+      "source_mapping": "was_identificatie"
+    },
     "einddatum_recht": {
       "source_mapping": "einddatum_recht",
       "format": "%Y-%m-%d %H:%M:%S"

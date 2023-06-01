@@ -26,6 +26,9 @@
     "neuron_id": {
       "source_mapping": "neuron_id"
     },
+    "was_identificatie": {
+      "source_mapping": "was_identificatie"
+    },
     "van_brk_kadastraalsubject": {
       "source_mapping": {
         "bronwaarde": "van_brk_kadastraalsubject"

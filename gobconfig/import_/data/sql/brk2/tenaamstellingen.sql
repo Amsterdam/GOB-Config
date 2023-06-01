@@ -2,6 +2,7 @@ SELECT
 	identificatie,
 	volgnummer,
 	neuron_id,
+	was_identificatie,
 	van_brk_kadastraalsubject,
 	begin_geldigheid,
 	eind_geldigheid,
