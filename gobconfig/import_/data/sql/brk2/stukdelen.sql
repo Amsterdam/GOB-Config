@@ -1,6 +1,7 @@
 SELECT
 	identificatie,
 	id AS neuron_id,
+	was_identificatie,
 	aard_code,
 	aard_omschrijving,
 	bedrag_transactie_valuta,

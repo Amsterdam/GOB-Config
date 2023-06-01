@@ -20,6 +20,9 @@
     "neuron_id": {
       "source_mapping": "neuron_id"
     },
+    "was_identificatie": {
+      "source_mapping": "was_identificatie"
+    },
     "aard": {
       "source_mapping": {
         "code": "aard_code",
