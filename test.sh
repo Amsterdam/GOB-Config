@@ -16,10 +16,10 @@ mypy gobconfig
 echo "\nRunning unit tests"
 coverage run --source=gobconfig -m pytest
 
-echo "Coverage report"
+echo "\nCoverage report"
 coverage report --fail-under=100
 
-echo "\nCheck if Black finds no potential reformat fixes"
+echo "\nCheck if Black finds potential reformat fixes"
 black --check --diff gobconfig
 
 echo "\nCheck for potential import sort"

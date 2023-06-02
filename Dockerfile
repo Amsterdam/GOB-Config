@@ -1,14 +1,16 @@
 # syntax=docker/dockerfile:1
-FROM amsterdam/gob_baseimage:3.9-bullseye
-MAINTAINER datapunt@amsterdam.nl
+FROM python:3.9-bullseye
 
-# Install gobconfig in /app folder.
+# Add user datapunt
+RUN useradd --user-group --system datapunt
+
+# Copy gobconfig to /app folder.
 WORKDIR /app
 COPY gobconfig gobconfig
 
 # Install required Python test packages.
 COPY pyproject.toml .
-RUN pip install --no-cache-dir --editable .[test]
+RUN pip install --no-cache-dir .[test]
 
 # Copy test module and tests.
 COPY test.sh .
