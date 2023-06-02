@@ -8,7 +8,6 @@ TYPE_POSTGRES = "postgresql"
 TYPE_OBJECTSTORE = "objectstore"
 TYPE_SQL_SERVER = "sqlserver"
 TYPE_SFTP = "sftp"
-TYPE_BAG_EXTRACT = "bagextract"
 
 DatastoreConfigType = dict[str, Union[Optional[str], int]]
 DatastoreConfigsType = dict[str, DatastoreConfigType]
