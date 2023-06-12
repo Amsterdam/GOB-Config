@@ -1,6 +1,7 @@
 SELECT
 	volgnummer,
 	identificatie,
+	was_identificatie,
 	begin_geldigheid,
 	eind_geldigheid,
 	datum_actueel_tot,

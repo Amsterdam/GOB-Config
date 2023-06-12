@@ -1,6 +1,7 @@
 SELECT
 	identificatie,
 	neuron_id,
+	was_identificatie,
 	einddatum_recht,
 	aard_code,
 	aard_omschrijving,

@@ -23,6 +23,9 @@
     "volgnummer": {
       "source_mapping": "volgnummer"
     },
+    "was_identificatie": {
+      "source_mapping": "was_identificatie"
+    },
     "begin_geldigheid": {
       "source_mapping": "begin_geldigheid",
       "format": "%Y-%m-%d %H:%M:%S"

@@ -8,7 +8,6 @@ TYPE_POSTGRES = "postgresql"
 TYPE_OBJECTSTORE = "objectstore"
 TYPE_SQL_SERVER = "sqlserver"
 TYPE_SFTP = "sftp"
-TYPE_BAG_EXTRACT = "bagextract"
 
 DatastoreConfigType = dict[str, Union[Optional[str], int]]
 DatastoreConfigsType = dict[str, DatastoreConfigType]
@@ -53,14 +52,6 @@ DATASTORE_CONFIGS: DatastoreConfigsType = {
         "host": os.getenv("PREPARE_DATABASE_HOST_OVERRIDE", os.getenv("GOB_PREPARE_DATABASE_HOST", "hostname")),
         "port": os.getenv("PREPARE_DATABASE_PORT_OVERRIDE", os.getenv("GOB_PREPARE_DATABASE_PORT", 5408)),
         "database": os.getenv("GOB_PREPARE_DATABASE", ""),
-    },
-    "GOBAnalyse": {
-        "type": TYPE_POSTGRES,
-        "username": os.getenv("ANALYSE_DATABASE_USER", "gob"),
-        "password": os.getenv("ANALYSE_DATABASE_PASSWORD", "insecure"),
-        "host": os.getenv("ANALYSE_DATABASE_HOST_OVERRIDE", "hostname"),
-        "port": os.getenv("ANALYSE_DATABASE_PORT_OVERRIDE", 5409),
-        "database": os.getenv("ANALYSE_DATABASE", "gob_analyse"),
     },
     "GOBDatabase": {
         "type": TYPE_POSTGRES,
