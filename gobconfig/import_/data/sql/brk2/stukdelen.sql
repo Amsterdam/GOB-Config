@@ -26,5 +26,6 @@ SELECT
 	tijdstip_ondertekening,
 	toelichting_bewaarder,
 	datum_actueel_tot,
-	_expiration_date
+	_expiration_date,
+	is_bron_voor_brk_erfpachtcanon
 FROM brk2_prepared.stukdeel

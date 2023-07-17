@@ -1,0 +1,65 @@
+{
+  "version": "0.1",
+  "catalogue": "brk2",
+  "entity": "erfpachtcanons",
+  "source": {
+    "name": "AMSBI",
+    "application": "GOBPrepare",
+    "entity_id": "identificatie",
+    "schema": "GOBPrepare",
+    "query": "sql/brk2/erfpachtcanons.sql"
+  },
+  "not_provided_attributes": [
+  ],
+  "gob_mapping": {
+    "identificatie": {
+      "source_mapping": "identificatie"
+    },
+    "volgnummer": {
+      "source_mapping": "volgnummer"
+    },
+    "soort": {
+      "source_mapping": {
+        "code": "soort_code",
+        "omschrijving": "soort_omschrijving"
+      }
+    },
+    "jaarlijks_bedrag": {
+      "source_mapping": {
+        "valuta_som": "jaarlijks_bedrag_valuta_som",
+        "valuta_code": "jaarlijks_bedrag_valuta_code",
+        "betreft_meer_onroerende_zaken": "jaarlijks_bedrag_betreft_meer_onroerende_zaken"
+      }
+    },
+    "is_gebaseerd_op_brk_stukdeel": {
+      "source_mapping": {
+        "bronwaarde": "is_gebaseerd_op_brk_stukdeel_identificatie"
+      }
+    },
+    "einddatum": {
+      "source_mapping": "einddatum_afkoop",
+      "format": "%Y-%m-%d %H:%M:%S"
+    },
+    "datum_actueel_tot": {
+      "source_mapping": "datum_actueel_tot",
+      "format": "%Y-%m-%d %H:%M:%S"
+    },
+    "toestandsdatum": {
+      "source_mapping": "toestandsdatum",
+      "format": "%Y-%m-%d"
+    },
+    "betreft_brk_zakelijkrecht": {
+      "source_mapping": {
+        "bronwaarde": "betreft_brk_zakelijk_recht_identificatie"
+      }
+    },
+    "begin_geldigheid": {
+      "source_mapping": "begin_geldigheid",
+      "format": "%Y-%m-%d %H:%M:%S"
+    },
+    "eind_geldigheid": {
+      "source_mapping": "eind_geldigheid",
+      "format": "%Y-%m-%d %H:%M:%S"
+    }
+  }
+}
