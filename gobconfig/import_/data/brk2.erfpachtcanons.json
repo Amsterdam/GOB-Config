@@ -10,6 +10,7 @@
     "query": "sql/brk2/erfpachtcanons.sql"
   },
   "not_provided_attributes": [
+    "registratiedatum"
   ],
   "gob_mapping": {
     "identificatie": {
@@ -59,6 +60,10 @@
     },
     "eind_geldigheid": {
       "source_mapping": "eind_geldigheid",
+      "format": "%Y-%m-%d %H:%M:%S"
+    },
+    "_expiration_date": {
+      "source_mapping": "datum_actueel_tot",
       "format": "%Y-%m-%d %H:%M:%S"
     }
   }
