@@ -1,7 +1,7 @@
 {
   "version": "0.1",
   "catalogue": "woz",
-  "entity": "wozdeelobjecten",
+  "entity": "deelobjecten",
   "source": {
     "name": "AMSBI",
     "application": "GOBPrepare",
@@ -26,7 +26,7 @@
     "wozobjectnummer": {
       "source_mapping": "wozbelobjnr"
     },
-    "soortobject": {
+    "soort_object": {
       "source_mapping": {
         "code": "soort_code",
         "omschrijving": "soort_omschrijving"
@@ -38,22 +38,22 @@
     "eind_geldigheid": {
       "source_mapping": "eind_geldigheid"
     },
-    "is_verbonden_met_verblijfsobject": {
+    "is_verbonden_met_bag_verblijfsobject": {
       "source_mapping": {
         "bronwaarde": "is_verbonden_met_verblijfsobject"
       }
     },
-    "is_verbonden_met_ligplaats": {
+    "is_verbonden_met_bag_ligplaats": {
       "source_mapping": {
         "bronwaarde": "is_verbonden_met_ligplaats"
       }
     },
-    "is_verbonden_met_standplaats": {
+    "is_verbonden_met_bag_standplaats": {
       "source_mapping": {
         "bronwaarde": "is_verbonden_met_standplaats"
       }
     },
-    "heeft_pand": {
+    "heeft_bag_pand": {
       "source_mapping": {
         "bronwaarde": "heeft_pand"
       }

@@ -1,7 +1,7 @@
 {
   "version": "0.1",
   "catalogue": "woz",
-  "entity": "wozobjecten",
+  "entity": "objecten",
   "source": {
     "name": "AMSBI",
     "application": "GOBPrepare",
@@ -26,7 +26,7 @@
         "omschrijving": "gebruik_oms"
       }
     },
-    "soortobject": {
+    "soort_object": {
       "source_mapping": {
         "code": "soortobject_code",
         "omschrijving": "soortobject_oms"
@@ -38,13 +38,13 @@
     "eind_geldigheid": {
       "source_mapping": "eind_geldigheid"
     },
-    "bevat_kadastraalobject": {
+    "bevat_brk_kadastraalobject": {
       "source_mapping": {
         "bronwaarde": "bevat_kadastraal_object.identificatie",
         "begin_geldigheid": "bevat_kadastraal_object.begin_geldigheid"
       }
     },
-    "bestaat_uit_wozdeelobjecten": {
+    "bestaat_uit_woz_deelobjecten": {
       "source_mapping": {
         "bronwaarde": "=wozobjectnummer"
       }
