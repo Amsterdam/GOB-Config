@@ -1,0 +1,201 @@
+{
+  "version": "0.1",
+  "catalogue": "hr",
+  "entity": "vestigingen",
+  "source": {
+    "name": "AMSBI",
+    "application": "GOBPrepare",
+    "entity_id": "vestigingsnummer",
+    "schema": "GOBPrepare",
+    "query": "sql/hr/vestigingen.sql"
+  },
+  "gob_mapping": {
+    "vestigingsnummer": {
+      "source_mapping": "vestigingsnummer"
+    },
+    "datum_actueel_tot": {
+      "source_mapping": "datum_actueel_tot",
+      "format": "%Y-%m-%d %H:%M:%S"
+    },
+    "datum_aanvang": {
+      "source_mapping": "datum_aanvang",
+      "format": "%Y-%m-%d"
+    },
+    "datum_einde": {
+      "source_mapping": "datum_einde",
+      "format": "%Y-%m-%d"
+    },
+    "datum_voortzetting": {
+      "source_mapping": "datum_voortzetting",
+      "format": "%Y-%m-%d"
+    },
+    "is_commerciele_vestiging": {
+      "source_mapping": "is_commerciele_vestiging"
+    },
+    "eerste_handelsnaam": {
+      "source_mapping": "eerste_handelsnaam"
+    },
+    "communicatie": {
+      "source_mapping": {
+        "toegangscode": "communicatie.toegangscode",
+        "nummer": "communicatie.nummer",
+        "soort": "communicatie.soort"
+      },
+      "force_list": true
+    },
+    "email_adressen": {
+      "source_mapping": {
+        "email_adres": "email_adressen.email_adres"
+      },
+      "force_list": true
+    },
+    "domeinnamen": {
+      "source_mapping": {
+        "domeinnaam": "domeinnamen.domeinnaam"
+      },
+      "force_list": true
+    },
+    "is_samengevoegd_met_vestiging": {
+      "source_mapping": {
+        "bronwaarde": "is_samengevoegd_met_vestiging"
+      }
+    },
+    "datum_afgesloten": {
+      "source_mapping": "datum_afgesloten",
+      "format": "%Y-%m-%d"
+    },
+    "datum_samenvoeging": {
+      "source_mapping": "datum_samenvoeging",
+      "format": "%Y-%m-%d"
+    },
+    "naam": {
+      "source_mapping": "naam"
+    },
+    "verkorte_naam": {
+      "source_mapping": "verkorte_naam"
+    },
+    "ook_genoemd": {
+      "source_mapping": "ook_genoemd"
+    },
+    "totaal_werkzame_personen": {
+      "source_mapping": "totaal_werkzame_personen"
+    },
+    "voltijd_werkzame_personen": {
+      "source_mapping": "voltijd_werkzame_personen"
+    },
+    "deeltijd_werkzame_personen": {
+      "source_mapping": "deeltijd_werkzame_personen"
+    },
+    "hoofd_vestiging": {
+      "source_mapping": "hoofd_vestiging"
+    },
+    "activiteit_omschrijving": {
+      "source_mapping": "activiteit_omschrijving"
+    },
+    "importeert": {
+      "source_mapping": "importeert"
+    },
+    "exporteert": {
+      "source_mapping": "exporteert"
+    },
+    "activiteiten": {
+      "source_mapping": "activiteiten",
+      "force_list": true
+    },
+    "handelsnamen": {
+      "source_mapping": {
+        "datum_aanvang": "handelsnamen.datum_aanvang",
+        "datum_einde": "handelsnamen.datum_einde",
+        "handelsnaam": "handelsnamen.handelsnaam",
+        "volgorde": "handelsnamen.volgorde"
+      },
+      "force_list": true
+    },
+    "is_een_uitoefening_van": {
+      "source_mapping": {
+        "bronwaarde": "is_een_uitoefening_van"
+      }
+    },
+    "bezoek_locatie": {
+      "source_mapping": {
+        "afgeschermd": "bezoek_locatie.afgeschermd",
+        "toevoeging_adres": "bezoek_locatie.toevoeging_adres",
+        "volledig_adres": "bezoek_locatie.volledig_adres",
+        "straatnaam": "bezoek_locatie.straatnaam",
+        "huisnummer": "bezoek_locatie.huisnummer",
+        "huisletter": "bezoek_locatie.huisletter",
+        "huisnummer_toevoeging": "bezoek_locatie.huisnummer_toevoeging",
+        "postcode": "bezoek_locatie.postcode",
+        "plaats": "bezoek_locatie.plaats",
+        "straat_huisnummer_buitenland": "bezoek_locatie.straat_huisnummer_buitenland",
+        "postcode_plaats_buitenland": "bezoek_locatie.postcode_plaats_buitenland",
+        "regio_buitenland": "bezoek_locatie.regio_buitenland",
+        "land_buitenland": "bezoek_locatie.land_buitenland"
+      }
+    },
+    "bezoek_geopunt": {
+      "source_mapping": "bezoek_geopunt"
+    },
+    "bezoek_heeft_nummeraanduiding": {
+      "source_mapping": {
+        "bronwaarde": "bezoek_heeft_nummeraanduiding"
+      }
+    },
+    "bezoek_heeft_verblijfsobject": {
+      "source_mapping": {
+        "bronwaarde": "bezoek_heeft_verblijfsobject"
+      }
+    },
+    "bezoek_heeft_ligplaats": {
+      "source_mapping": {
+        "bronwaarde": "bezoek_heeft_ligplaats"
+      }
+    },
+    "bezoek_heeft_standplaats": {
+      "source_mapping": {
+        "bronwaarde": "bezoek_heeft_standplaats"
+      }
+    },
+    "post_locatie": {
+      "source_mapping": {
+        "afgeschermd": "post_locatie.afgeschermd",
+        "toevoeging_adres": "post_locatie.toevoeging_adres",
+        "volledig_adres": "post_locatie.volledig_adres",
+        "straatnaam": "post_locatie.straatnaam",
+        "huisnummer": "post_locatie.huisnummer",
+        "huisletter": "post_locatie.huisletter",
+        "huisnummer_toevoeging": "post_locatie.huisnummer_toevoeging",
+        "postbusnummer": "post_locatie.postbusnummer",
+        "postcode": "post_locatie.postcode",
+        "plaats": "post_locatie.plaats",
+        "straat_huisnummer_buitenland": "post_locatie.straat_huisnummer_buitenland",
+        "postcode_plaats_buitenland": "post_locatie.postcode_plaats_buitenland",
+        "regio_buitenland": "post_locatie.regio_buitenland",
+        "land_buitenland": "post_locatie.land_buitenland"
+      }
+    },
+    "post_geopunt": {
+      "source_mapping": "post_geopunt"
+    },
+    "post_heeft_nummeraanduiding": {
+      "source_mapping": {
+        "bronwaarde": "post_heeft_nummeraanduiding"
+      }
+    },
+    "post_heeft_verblijfsobject": {
+      "source_mapping": {
+        "bronwaarde": "post_heeft_verblijfsobject"
+      }
+    },
+    "post_heeft_ligplaats": {
+      "source_mapping": {
+        "bronwaarde": "post_heeft_ligplaats"
+      }
+    },
+    "post_heeft_standplaats": {
+      "source_mapping": {
+        "bronwaarde": "post_heeft_standplaats"
+      }
+    }
+  }
+}
