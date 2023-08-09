@@ -1,0 +1,212 @@
+{
+  "version": "0.1",
+  "catalogue": "hr",
+  "entity": "maatschappelijkeactiviteiten",
+  "source": {
+    "name": "AMSBI",
+    "application": "GOBPrepare",
+    "entity_id": "kvknummer",
+    "schema": "GOBPrepare",
+    "query": "sql/hr/maatschappelijke_activiteiten.sql"
+  },
+  "gob_mapping": {
+    "kvknummer": {
+      "source_mapping": "kvknummer"
+    },
+    "datum_actueel_tot": {
+      "source_mapping": "datum_actueel_tot",
+      "format": "%Y-%m-%d %H:%M:%S"
+    },
+    "datum_aanvang_maatschappelijke_activiteit": {
+      "source_mapping": "datum_aanvang_maatschappelijke_activiteit",
+      "format": "%Y-%m-%d"
+    },
+    "datum_einde_maatschappelijke_activiteit": {
+      "source_mapping": "datum_einde_maatschappelijke_activiteit",
+      "format": "%Y-%m-%d"
+    },
+    "registratie_tijdstip_maatschappelijke_activiteit": {
+      "source_mapping": "registratie_tijdstip_maatschappelijke_activiteit",
+      "format": "%Y-%m-%d %H:%M:%S"
+    },
+    "naam": {
+      "source_mapping": "naam"
+    },
+    "non_mailing": {
+      "source_mapping": "non_mailing"
+    },
+    "incidenteel_uitlenen_arbeidskrachten": {
+      "source_mapping": "incidenteel_uitlenen_arbeidskrachten"
+    },
+    "activiteiten": {
+      "source_mapping": "activiteiten",
+      "force_list": true
+    },
+    "heeft_hoofdvestiging": {
+      "source_mapping": {
+        "bronwaarde": "heeft_hoofdvestiging"
+      }
+    },
+    "datum_aanvang_maatschappelijke_activiteit_vestiging": {
+      "source_mapping": "datum_aanvang_maatschappelijke_activiteit_vestiging",
+      "format": "%Y-%m-%d"
+    },
+    "datum_einde_maatschappelijke_activiteit_vestiging": {
+      "source_mapping": "datum_einde_maatschappelijke_activiteit_vestiging",
+      "format": "%Y-%m-%d"
+    },
+    "wordt_uitgeoefend_in_niet_commerciele_vestiging": {
+      "source_mapping": {
+        "bronwaarde": "wordt_uitgeoefend_in_niet_commerciele_vestiging"
+      }
+    },
+    "heeft_als_eigenaar_np": {
+      "source_mapping": {
+        "bronwaarde": "heeft_als_eigenaar_np"
+      }
+    },
+    "heeft_als_eigenaar_nnp": {
+      "source_mapping": {
+        "bronwaarde": "heeft_als_eigenaar_nnp"
+      }
+    },
+    "onderneming": {
+      "source_mapping": "onderneming"
+    },
+    "totaal_werkzame_personen": {
+      "source_mapping": "totaal_werkzame_personen"
+    },
+    "voltijd_werkzame_personen": {
+      "source_mapping": "voltijd_werkzame_personen"
+    },
+    "deeltijd_werkzame_personen": {
+      "source_mapping": "deeltijd_werkzame_personen"
+    },
+    "datum_aanvang_onderneming": {
+      "source_mapping": "datum_aanvang_onderneming",
+      "format": "%Y-%m-%d"
+    },
+    "datum_einde_onderneming": {
+      "source_mapping": "datum_einde_onderneming",
+      "format": "%Y-%m-%d"
+    },
+    "is_overdracht_voortzetting_onderneming": {
+      "source_mapping": "is_overdracht_voortzetting_onderneming"
+    },
+    "datum_overdracht_voortzetting_onderneming": {
+      "source_mapping": "datum_overdracht_voortzetting_onderneming",
+      "format": "%Y-%m-%d"
+    },
+    "wordt_uitgeoefend_in_commerciele_vestiging": {
+      "source_mapping": {
+        "bronwaarde": "wordt_uitgeoefend_in_commerciele_vestiging"
+      }
+    },
+    "datum_aanvang_onderneming_vestiging": {
+      "source_mapping": "datum_aanvang_onderneming_vestiging",
+      "format": "%Y-%m-%d"
+    },
+    "datum_einde_onderneming_vestiging": {
+      "source_mapping": "datum_einde_onderneming_vestiging",
+      "format": "%Y-%m-%d"
+    },
+    "datum_aanvang_onderneming_handelsnaam": {
+      "source_mapping": "datum_aanvang_onderneming_handelsnaam",
+      "format": "%Y-%m-%d"
+    },
+    "datum_einde_onderneming_handelsnaam": {
+      "source_mapping": "datum_einde_onderneming_handelsnaam",
+      "format": "%Y-%m-%d"
+    },
+    "handelsnamen": {
+      "source_mapping": {
+        "datum_aanvang": "handelsnamen.datum_aanvang",
+        "datum_einde": "handelsnamen.datum_einde",
+        "handelsnaam": "handelsnamen.handelsnaam",
+        "volgorde": "handelsnamen.volgorde"
+      },
+      "force_list": true
+    },
+    "communicatie": {
+      "source_mapping": {
+        "toegangscode": "communicatie.toegangscode",
+        "nummer": "communicatie.nummer",
+        "soort": "communicatie.soort"
+      },
+      "force_list": true
+    },
+    "email_adressen": {
+      "source_mapping": {
+        "email_adres": "email_adressen.email_adres"
+      },
+      "force_list": true
+    },
+    "domeinnamen": {
+      "source_mapping": {
+        "domeinnaam": "domeinnamen.domeinnaam"
+      },
+      "force_list": true
+    },
+    "bezoek_locatie": {
+      "source_mapping": {
+        "afgeschermd": "bezoek_locatie.afgeschermd",
+        "toevoeging_adres": "bezoek_locatie.toevoeging_adres",
+        "volledig_adres": "bezoek_locatie.volledig_adres",
+        "straatnaam": "bezoek_locatie.straatnaam",
+        "huisnummer": "bezoek_locatie.huisnummer",
+        "huisletter": "bezoek_locatie.huisletter",
+        "huisnummer_toevoeging": "bezoek_locatie.huisnummer_toevoeging",
+        "postcode": "bezoek_locatie.postcode",
+        "plaats": "bezoek_locatie.plaats",
+        "straat_huisnummer_buitenland": "bezoek_locatie.straat_huisnummer_buitenland",
+        "postcode_plaats_buitenland": "bezoek_locatie.postcode_plaats_buitenland",
+        "regio_buitenland": "bezoek_locatie.regio_buitenland",
+        "land_buitenland": "bezoek_locatie.land_buitenland"
+      }
+    },
+    "bezoek_geopunt": {
+      "source_mapping": "bezoek_geopunt"
+    },
+    "heeft_nummeraanduiding": {
+      "source_mapping": {
+        "bronwaarde": "heeft_nummeraanduiding"
+      }
+    },
+    "heeft_verblijfsobject": {
+      "source_mapping": {
+        "bronwaarde": "heeft_verblijfsobject"
+      }
+    },
+    "heeft_ligplaats": {
+      "source_mapping": {
+        "bronwaarde": "heeft_ligplaats"
+      }
+    },
+    "heeft_standplaats": {
+      "source_mapping": {
+        "bronwaarde": "heeft_standplaats"
+      }
+    },
+    "post_locatie": {
+      "source_mapping": {
+        "afgeschermd": "post_locatie.afgeschermd",
+        "toevoeging_adres": "post_locatie.toevoeging_adres",
+        "volledig_adres": "post_locatie.volledig_adres",
+        "straatnaam": "post_locatie.straatnaam",
+        "huisnummer": "post_locatie.huisnummer",
+        "huisletter": "post_locatie.huisletter",
+        "huisnummer_toevoeging": "post_locatie.huisnummer_toevoeging",
+        "postbusnummer": "post_locatie.postbusnummer",
+        "postcode": "post_locatie.postcode",
+        "plaats": "post_locatie.plaats",
+        "straat_huisnummer_buitenland": "post_locatie.straat_huisnummer_buitenland",
+        "postcode_plaats_buitenland": "post_locatie.postcode_plaats_buitenland",
+        "regio_buitenland": "post_locatie.regio_buitenland",
+        "land_buitenland": "post_locatie.land_buitenland"
+      }
+    },
+    "post_geopunt": {
+      "source_mapping": "post_geopunt"
+    }
+  }
+}
