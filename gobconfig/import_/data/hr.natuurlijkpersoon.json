@@ -1,0 +1,99 @@
+{
+  "version": "0.1",
+  "catalogue": "hr",
+  "entity": "natuurlijkpersoon",
+  "source": {
+    "name": "AMSBI",
+    "application": "GOBPrepare",
+    "entity_id": "identificatie",
+    "schema": "GOBPrepare",
+    "query": "sql/hr/natuurlijkpersoon.sql"
+  },
+  "gob_mapping": {
+    "identificatie": {
+      "source_mapping": "identificatie"
+    },
+    "bsn": {
+      "source_mapping": "bsn"
+    },
+    "datum_actueel_tot": {
+      "source_mapping": "datum_actueel_tot",
+      "format": "%Y-%m-%d %H:%M:%S"
+    },
+    "geslachtsnaam": {
+      "source_mapping": "geslachtsnaam"
+    },
+    "voorvoegsel_geslachtsnaam": {
+      "source_mapping": "voorvoegsel_geslachtsnaam"
+    },
+    "voornamen": {
+      "source_mapping": {
+        "voornaam": "voornamen.voornaam"
+      },
+      "force_list": true
+    },
+    "geslachtsaanduiding": {
+      "source_mapping": "geslachtsaanduiding"
+    },
+    "volledige_naam": {
+      "source_mapping": "volledige_naam"
+    },
+    "geboortedatum": {
+      "source_mapping": "geboortedatum",
+      "format": "%Y-%m-%d"
+    },
+    "geboorteplaats": {
+      "source_mapping": "geboorteplaats"
+    },
+    "geboorteland": {
+      "source_mapping": "geboorteland"
+    },
+    "overlijdensdatum": {
+      "source_mapping": "overlijdensdatum",
+      "format": "%Y-%m-%d"
+    },
+    "schuldsanering": {
+      "source_mapping": "schuldsanering"
+    },
+    "surceance_van_betaling": {
+      "source_mapping": "surceance_van_betaling"
+    },
+    "status": {
+      "source_mapping": "status"
+    },
+    "duur": {
+      "source_mapping": "duur"
+    },
+    "faillisement": {
+      "source_mapping": "faillisement"
+    },
+    "persoon_rechtsvorm": {
+      "source_mapping": "persoon_rechtsvorm"
+    },
+    "uitgebreide_rechtsvorm": {
+      "source_mapping": "uitgebreide_rechtsvorm"
+    },
+    "type_persoon": {
+      "source_mapping": "type_persoon"
+    },
+    "rol": {
+      "source_mapping": "rol"
+    },
+    "toegangscode": {
+      "source_mapping": "toegangscode"
+    },
+    "nummer": {
+      "source_mapping": "nummer"
+    },
+    "heeft_functie_vervulling": {
+      "source_mapping": {
+        "bronwaarde": "heeft_functie_vervulling"
+      }
+    },
+    "is_functie_vervulling": {
+      "source_mapping": {
+        "bronwaarde": "is_functie_vervulling"
+      }
+    }
+  }
+}
