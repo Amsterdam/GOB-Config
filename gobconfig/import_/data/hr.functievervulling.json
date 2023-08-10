@@ -1,0 +1,145 @@
+{
+  "version": "0.1",
+  "catalogue": "hr",
+  "entity": "functievervulling",
+  "source": {
+    "name": "AMSBI",
+    "application": "GOBPrepare",
+    "entity_id": "identificatie",
+    "schema": "GOBPrepare",
+    "query": "sql/hr/functievervulling.sql"
+  },
+  "gob_mapping": {
+    "identificatie": {
+      "source_mapping": "identificatie"
+    },
+    "langstzittende": {
+      "source_mapping": "langstzittende"
+    },
+    "datum_aanvang": {
+      "source_mapping": "datum_aanvang",
+      "format": "%Y-%m-%d"
+    },
+    "datum_einde": {
+      "source_mapping": "datum_einde",
+      "format": "%Y-%m-%d"
+    },
+    "functie_titel": {
+      "source_mapping": "functie_titel"
+    },
+    "indicatie_statutair": {
+      "source_mapping": "indicatie_statutair"
+    },
+    "schorsing": {
+      "source_mapping": {
+        "datum_aanvang": "schorsing.datum_aanvang",
+        "datum_einde": "schorsing.datum_einde"
+      }
+    },
+    "aansprakelijke": {
+      "source_mapping": {
+        "code": "aansprakelijke.code",
+        "omschrijving": "aansprakelijke.omschrijving"
+      }
+    },
+    "handelingsbekwaam": {
+      "source_mapping": "handelingsbekwaam"
+    },
+    "bevoegdheids_aansprakelijke": {
+      "source_mapping": {
+        "soort_bevoegdheid": "bevoegdheids_aansprakelijke.soort_bevoegdheid",
+        "beperking_in_euros": "bevoegdheids_aansprakelijke.beperking_in_euros",
+        "overige_beperking": "bevoegdheids_aansprakelijke.overige_beperking"
+      }
+    },
+    "bestuursfunctie": {
+      "source_mapping": {
+        "code": "bestuursfunctie.code",
+        "omschrijving": "bestuursfunctie.omschrijving"
+      }
+    },
+    "bevoegdheid_bestuurder": {
+      "source_mapping": {
+        "soort_bevoegdheid": "bevoegdheid_bestuurder.soort_bevoegdheid",
+        "bevoegd_met_andere_personen": "bevoegdheid_bestuurder.bevoegd_met_andere_personen"
+      }
+    },
+    "vertegenwoordiger_bestuurder_rechtspersoon": {
+      "source_mapping": "vertegenwoordiger_bestuurder_rechtspersoon"
+    },
+    "gemachtigde": {
+      "source_mapping": {
+        "code": "gemachtigde.code",
+        "omschrijving": "gemachtigde.omschrijving"
+      }
+    },
+    "volmacht": {
+      "source_mapping": "volmacht"
+    },
+    "statutair": {
+      "source_mapping": "statutair"
+    },
+    "heeft_hr_vestiging": {
+      "source_mapping": {
+        "bronwaarde": "heeft_hr_vestiging.bronwaarde"
+      }
+    },
+    "beperkte_volmacht": {
+      "source_mapping": "beperkte_volmacht"
+    },
+    "beperking_in_geld": {
+      "source_mapping": "beperking_in_geld"
+    },
+    "doen_van_opgave_aan_handelsregister": {
+      "source_mapping": "doen_van_opgave_aan_handelsregister"
+    },
+    "overige_volmacht": {
+      "source_mapping": "overige_volmacht"
+    },
+    "omschrijving_overige_beperkingen": {
+      "source_mapping": "omschrijving_overige_beperkingen"
+    },
+    "beperking_in_handeling": {
+      "source_mapping": "beperking_in_handeling"
+    },
+    "soort_handeling": {
+      "source_mapping": "soort_handeling"
+    },
+    "volledige_volmacht": {
+      "source_mapping": "volledige_volmacht"
+    },
+    "overige_functionaris": {
+      "source_mapping": {
+        "code": "overige_functionaris.code",
+        "omschrijving": "overige_functionaris.omschrijving"
+      }
+    },
+    "afwijkend_aansprakelijkheidsbeding": {
+      "source_mapping": "afwijkend_aansprakelijkheidsbeding"
+    },
+    "bevoegdheid_funtionaris_volgens_buitlands_recht": {
+      "source_mapping": {
+        "soort_bevoegdheid": "bevoegdheid_funtionaris_volgens_buitlands_recht.soort_bevoegdheid"
+      }
+    },
+    "publiekrechtelijke_functionaris": {
+      "source_mapping": {
+        "code": "publiekrechtelijke_functionaris.code",
+        "omschrijving": "publiekrechtelijke_functionaris.omschrijving"
+      }
+    },
+    "bevoegdheid_publiek_rechtelijke_functionaris": {
+      "source_mapping": "bevoegdheid_publiek_rechtelijke_functionaris"
+    },
+    "soort_bevoegdheid": {
+      "source_mapping": "soort_bevoegdheid"
+    },
+    "functionaris_bijzondere_rechtstoestand": {
+      "source_mapping": {
+        "curator": "functionaris_bijzondere_rechtstoestand.curator",
+        "rechter_commissaris": "functionaris_bijzondere_rechtstoestand.rechter_commissaris",
+        "bewindvoerder": "functionaris_bijzondere_rechtstoestand.bewindvoerder"
+      }
+    }
+  }
+}
