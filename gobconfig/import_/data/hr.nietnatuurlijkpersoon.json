@@ -1,0 +1,97 @@
+{
+  "version": "0.1",
+  "catalogue": "hr",
+  "entity": "nietnatuurlijkpersoon",
+  "source": {
+    "name": "AMSBI",
+    "application": "GOBPrepare",
+    "entity_id": "identificatie",
+    "schema": "GOBPrepare",
+    "query": "sql/hr/nietnatuurlijkpersoon.sql"
+  },
+  "gob_mapping": {
+    "identificatie": {
+      "source_mapping": "identificatie"
+    },
+    "rsin": {
+      "source_mapping": "rsin"
+    },
+    "datum_actueel_tot": {
+      "source_mapping": "datum_actueel_tot",
+      "format": "%Y-%m-%d %H:%M:%S"
+    },
+    "datum_uitschrijving": {
+      "source_mapping": "datum_uitschrijving",
+      "format": "%Y-%m-%d %H:%M:%S"
+    },
+    "schuldsanering": {
+      "source_mapping": "schuldsanering"
+    },
+    "surceance_van_betaling": {
+      "source_mapping": "surceance_van_betaling"
+    },
+    "status": {
+      "source_mapping": "status"
+    },
+    "duur": {
+      "source_mapping": "duur"
+    },
+    "faillisement": {
+      "source_mapping": "faillisement"
+    },
+    "naam": {
+      "source_mapping": "naam"
+    },
+    "volledige_naam": {
+      "source_mapping": "volledige_naam"
+    },
+    "ook_genoemd": {
+      "source_mapping": "ook_genoemd"
+    },
+    "verkorte_naam": {
+      "source_mapping": "verkorte_naam"
+    },
+    "type_persoon": {
+      "source_mapping": "type_persoon"
+    },
+    "toegangscode": {
+      "source_mapping": "toegangscode"
+    },
+    "nummer": {
+      "source_mapping": "nummer"
+    },
+    "doelrechtsvorm": {
+      "source_mapping": "doelrechtsvorm"
+    },
+    "rechtsvorm": {
+      "source_mapping": "rechtsvorm"
+    },
+    "persoon_rechtsvorm": {
+      "source_mapping": "persoon_rechtsvorm"
+    },
+    "uitgebreide_rechtsvorm": {
+      "source_mapping": "uitgebreide_rechtsvorm"
+    },
+    "rol": {
+      "source_mapping": "rol"
+    },
+    "datum_aanvang": {
+      "source_mapping": "datum_aanvang",
+      "format": "%Y-%m-%d"
+    },
+    "datum_einde": {
+      "source_mapping": "datum_einde",
+      "format": "%Y-%m-%d"
+    },
+    "heeft_functie_vervulling": {
+      "source_mapping": {
+        "bronwaarde": "heeft_functie_vervulling"
+      }
+    },
+    "is_functie_vervulling": {
+      "source_mapping": {
+        "bronwaarde": "is_functie_vervulling"
+      }
+    }
+  }
+}
