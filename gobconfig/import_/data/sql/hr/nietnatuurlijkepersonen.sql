@@ -22,6 +22,6 @@ SELECT
 	rol,
 	datum_aanvang,
 	datum_einde,
-	heeft_functie_vervulling,
-	is_functie_vervulling
-FROM hr_prepared.nietnatuurlijkpersoon
+	heeft_functie_vervullingen,
+	is_functie_vervullingen
+FROM hr_prepared.nietnatuurlijkepersonen

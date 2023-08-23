@@ -55,9 +55,9 @@
       "source_mapping": "datum_einde_maatschappelijke_activiteit_vestiging",
       "format": "%Y-%m-%d"
     },
-    "wordt_uitgeoefend_in_niet_commerciele_vestiging": {
+    "wordt_uitgeoefend_in_niet_commerciele_vestigingen": {
       "source_mapping": {
-        "bronwaarde": "wordt_uitgeoefend_in_niet_commerciele_vestiging"
+        "bronwaarde": "wordt_uitgeoefend_in_niet_commerciele_vestigingen"
       }
     },
     "heeft_als_eigenaar_np": {
@@ -97,9 +97,9 @@
       "source_mapping": "datum_overdracht_voortzetting_onderneming",
       "format": "%Y-%m-%d"
     },
-    "wordt_uitgeoefend_in_commerciele_vestiging": {
+    "wordt_uitgeoefend_in_commerciele_vestigingen": {
       "source_mapping": {
-        "bronwaarde": "wordt_uitgeoefend_in_commerciele_vestiging"
+        "bronwaarde": "wordt_uitgeoefend_in_commerciele_vestigingen"
       }
     },
     "datum_aanvang_onderneming_vestiging": {

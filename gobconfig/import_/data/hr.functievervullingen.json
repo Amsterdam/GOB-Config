@@ -1,13 +1,13 @@
 {
   "version": "0.1",
   "catalogue": "hr",
-  "entity": "functievervulling",
+  "entity": "functievervullingen",
   "source": {
     "name": "AMSBI",
     "application": "GOBPrepare",
     "entity_id": "identificatie",
     "schema": "GOBPrepare",
-    "query": "sql/hr/functievervulling.sql"
+    "query": "sql/hr/functievervullingen.sql"
   },
   "gob_mapping": {
     "identificatie": {
@@ -79,9 +79,9 @@
     "statutair": {
       "source_mapping": "statutair"
     },
-    "heeft_hr_vestiging": {
+    "heeft_hr_vestigingen": {
       "source_mapping": {
-        "bronwaarde": "heeft_hr_vestiging.bronwaarde"
+        "bronwaarde": "heeft_hr_vestigingen.bronwaarde"
       }
     },
     "beperkte_volmacht": {

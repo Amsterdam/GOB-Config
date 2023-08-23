@@ -1,13 +1,13 @@
 {
   "version": "0.1",
   "catalogue": "hr",
-  "entity": "natuurlijkpersoon",
+  "entity": "natuurlijkepersonen",
   "source": {
     "name": "AMSBI",
     "application": "GOBPrepare",
     "entity_id": "identificatie",
     "schema": "GOBPrepare",
-    "query": "sql/hr/natuurlijkpersoon.sql"
+    "query": "sql/hr/natuurlijkepersonen.sql"
   },
   "gob_mapping": {
     "identificatie": {
@@ -85,14 +85,14 @@
     "nummer": {
       "source_mapping": "nummer"
     },
-    "heeft_functie_vervulling": {
+    "heeft_functie_vervullingen": {
       "source_mapping": {
-        "bronwaarde": "heeft_functie_vervulling"
+        "bronwaarde": "heeft_functie_vervullingen"
       }
     },
-    "is_functie_vervulling": {
+    "is_functie_vervullingen": {
       "source_mapping": {
-        "bronwaarde": "is_functie_vervulling"
+        "bronwaarde": "is_functie_vervullingen"
       }
     }
   }

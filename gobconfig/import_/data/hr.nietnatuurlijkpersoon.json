@@ -1,13 +1,13 @@
 {
   "version": "0.1",
   "catalogue": "hr",
-  "entity": "nietnatuurlijkpersoon",
+  "entity": "nietnatuurlijkepersonen",
   "source": {
     "name": "AMSBI",
     "application": "GOBPrepare",
     "entity_id": "identificatie",
     "schema": "GOBPrepare",
-    "query": "sql/hr/nietnatuurlijkpersoon.sql"
+    "query": "sql/hr/nietnatuurlijkepersonen.sql"
   },
   "gob_mapping": {
     "identificatie": {
@@ -83,14 +83,14 @@
       "source_mapping": "datum_einde",
       "format": "%Y-%m-%d"
     },
-    "heeft_functie_vervulling": {
+    "heeft_functie_vervullingen": {
       "source_mapping": {
-        "bronwaarde": "heeft_functie_vervulling"
+        "bronwaarde": "heeft_functie_vervullingen"
       }
     },
-    "is_functie_vervulling": {
+    "is_functie_vervullingen": {
       "source_mapping": {
-        "bronwaarde": "is_functie_vervulling"
+        "bronwaarde": "is_functie_vervullingen"
       }
     }
   }

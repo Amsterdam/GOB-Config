@@ -9,7 +9,7 @@ SELECT
 	communicatie,
 	email_adressen,
 	domeinnamen,
-	is_samengevoegd_met_vestiging,
+	is_samengevoegd_met_vestigingen,
 	datum_afgesloten,
 	datum_samenvoeging,
 	naam,
