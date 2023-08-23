@@ -22,6 +22,6 @@ SELECT
 	rol,
 	toegangscode,
 	nummer,
-	heeft_functie_vervulling,
-	is_functie_vervulling
-FROM hr_prepared.natuurlijkpersoon
+	heeft_functie_vervullingen,
+	is_functie_vervullingen
+FROM hr_prepared.natuurlijkepersonen

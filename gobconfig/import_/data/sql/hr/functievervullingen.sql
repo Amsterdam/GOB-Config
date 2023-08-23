@@ -15,7 +15,7 @@ SELECT
 	gemachtigde,
 	volmacht,
 	statutair,
-	heeft_hr_vestiging,
+	heeft_hr_vestigingen,
 	beperkte_volmacht,
 	beperking_in_geld,
 	doen_van_opgave_aan_handelsregister,
@@ -31,4 +31,4 @@ SELECT
 	bevoegdheid_publiek_rechtelijke_functionaris,
 	soort_bevoegdheid,
 	functionaris_bijzondere_rechtstoestand
-FROM hr_prepared.functievervulling
+FROM hr_prepared.functievervullingen
