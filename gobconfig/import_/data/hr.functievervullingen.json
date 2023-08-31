@@ -9,6 +9,9 @@
     "schema": "GOBPrepare",
     "query": "sql/hr/functievervullingen.sql"
   },
+  "not_provided_attributes": [
+    "_expiration_date"
+  ],
   "gob_mapping": {
     "identificatie": {
       "source_mapping": "identificatie"
