@@ -1,0 +1,37 @@
+{
+  "version": "0.1",
+  "catalogue": "monumenten",
+  "entity": "complexen",
+  "source": {
+    "name": "AMSBI",
+    "application": "GOBPrepare",
+    "entity_id": "identificatie",
+    "schema": "GOBPrepare",
+    "query": "sql/monumenten/complexen.sql"
+  },
+  "not_provided_attributes": [
+    "_expiration_date"
+  ],
+  "gob_mapping": {
+    "identificatie": {
+      "source_mapping": "identificatie"
+    },
+    "monumentnummer_complex": {
+      "source_mapping": "monumentnummer_complex"
+    },
+    "complex_naam": {
+      "source_mapping": "complex_naam"
+    },
+    "bestaat_uit_monumenten_monumenten": {
+      "source_mapping": {
+        "bronwaarde": "bestaat_uit_monumenten_monumenten.identificatie"
+      }
+    },
+    "beschrijving": {
+      "source_mapping": "beschrijving"
+    },
+    "beschrijving_publiek": {
+      "source_mapping": "beschrijving_publiek"
+    }
+  }
+}
