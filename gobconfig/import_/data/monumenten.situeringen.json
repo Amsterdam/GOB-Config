@@ -1,0 +1,36 @@
+{
+  "version": "0.1",
+  "catalogue": "monumenten",
+  "entity": "situeringen",
+  "source": {
+    "name": "AMSBI",
+    "application": "GOBPrepare",
+    "entity_id": "identificatie",
+    "schema": "GOBPrepare",
+    "query": "sql/monumenten/situeringen.sql"
+  },
+  "not_provided_attributes": [
+    "_expiration_date"
+  ],
+  "gob_mapping": {
+    "identificatie": {
+      "source_mapping": "identificatie"
+    },
+    "eerste_situering": {
+      "source_mapping": "eerste_situering"
+    },
+    "situering_nummeraanduiding": {
+      "source_mapping": "situering_nummeraanduiding"
+    },
+    "hoort_bij_monumenten_monument": {
+      "source_mapping": {
+        "bronwaarde": "hoort_bij_monumenten_monument"
+      }
+    },
+    "betreft_bag_nummeraanduiding": {
+      "source_mapping": {
+        "bronwaarde": "betreft_bag_nummeraanduiding"
+      }
+    }
+  }
+}

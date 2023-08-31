@@ -1,0 +1,90 @@
+{
+  "version": "0.1",
+  "catalogue": "monumenten",
+  "entity": "monumenten",
+  "source": {
+    "name": "AMSBI",
+    "application": "GOBPrepare",
+    "entity_id": "identificatie",
+    "schema": "GOBPrepare",
+    "query": "sql/monumenten/monumenten.sql"
+  },
+  "not_provided_attributes": [
+    "_expiration_date"
+  ],
+  "gob_mapping": {
+    "identificatie": {
+      "source_mapping": "identificatie"
+    },
+    "monument_nummer": {
+      "source_mapping": "monument_nummer"
+    },
+    "orde_naam": {
+      "source_mapping": "orde_naam"
+    },
+    "betreft_bag_pand": {
+      "source_mapping": {
+        "bronwaarde": "betreft_bag_pand.identificatie"
+      }
+    },
+    "monument_naam": {
+      "source_mapping": "monument_naam"
+    },
+    "type": {
+      "source_mapping": "type"
+    },
+    "status": {
+      "source_mapping": "status"
+    },
+    "aanwijzingsdatum": {
+      "source_mapping": "aanwijzingsdatum",
+      "format": "%Y-%m-%d"
+    },
+    "in_onderzoek": {
+      "source_mapping": "in_onderzoek"
+    },
+    "architect_ontwerp": {
+      "source_mapping": "architect_ontwerp"
+    },
+    "opdrachtgever_bouw": {
+      "source_mapping": "opdrachtgever_bouw"
+    },
+    "bouwjaar_start_bouwperiode": {
+      "source_mapping": "bouwjaar_start_bouwperiode"
+    },
+    "bouwjaar_eind_bouwperiode": {
+      "source_mapping": "bouwjaar_eind_bouwperiode"
+    },
+    "oorspronkelijke_functie": {
+      "source_mapping": "oorspronkelijke_functie"
+    },
+    "coordinaten": {
+      "source_mapping": "coordinaten"
+    },
+    "geometrie": {
+      "source_mapping": "geometrie"
+    },
+    "redengevende_omschrijving": {
+      "source_mapping": "redengevende_omschrijving"
+    },
+    "redengevende_omschrijving_publiek": {
+      "source_mapping": "redengevende_omschrijving_publiek"
+    },
+    "beschrijving": {
+      "source_mapping": "beschrijving"
+    },
+    "beschrijving_publiek": {
+      "source_mapping": "beschrijving_publiek"
+    },
+    "ligt_in_monumenten_complex": {
+      "source_mapping": {
+        "bronwaarde": "ligt_in_monumenten_complex"
+      }
+    },
+    "heeft_monumenten_situeringen": {
+      "source_mapping": {
+        "bronwaarde": "heeft_monumenten_situeringen.identificatie"
+      }
+    }
+  }
+}
