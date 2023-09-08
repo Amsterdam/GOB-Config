@@ -19,14 +19,14 @@ repository = "https://github.com/Amsterdam/GOB-Config"
 
 [project.optional-dependencies]
 test = [
-    "black~=23.7.0",
-    "coverage~=7.2.7",
+    "black~=23.9.0",
+    "coverage~=7.3.1",
     "flake8~=6.1.0",
     "flake8-docstrings~=1.7.0",
     "flake8-pyproject~=1.2.3",
     "isort~=5.12.0",
-    "mypy~=1.4.1",
-    "pytest~=7.4.0",
+    "mypy~=1.5.1",
+    "pytest~=7.4.2",
 ]
 
 
@@ -109,7 +109,7 @@ no_implicit_optional = true
 
 # Getting these passing should be easy
 strict_equality = true
-strict_concatenate = true
+extra_checks = true
 
 # Strongly recommend enabling this one as soon as you can
 check_untyped_defs = true
