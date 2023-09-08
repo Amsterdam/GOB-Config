@@ -21,11 +21,11 @@
     },
     "datum_actueel_tot": {
       "source_mapping": "datum_actueel_tot",
-      "format": "%Y-%m-%d %H:%M:%S"
+      "format": "%Y-%m-%d"
     },
     "datum_uitschrijving": {
       "source_mapping": "datum_uitschrijving",
-      "format": "%Y-%m-%d %H:%M:%S"
+      "format": "%Y-%m-%d"
     },
     "schuldsanering": {
       "source_mapping": "schuldsanering"
