@@ -116,4 +116,8 @@ FROM (
 
                 'WP'  -- Stadsgebied Weesp
                )
+         -- Only on acceptance there is a duplicate document
+         -- subject1 should be '\IMPDOCSE\' and not '\IMPDOCSA\'
+         -- because bronleverancier_omschrijving is 'Stadsdeel West' (see mapping above)
+         AND NOT (b.subject1 = '\IMPDOCSA\' AND b.subject2 = 'SE06894773_OV00ML.pdf')
      ) brondocumenten
