@@ -1,7 +1,8 @@
 SELECT identificatie,
-       "monumentnummerComplex"                 as monumentnummer_complex,
-       "complexNaam"                           as complex_naam,
-       "bestaatUitMonumentenMonumenten"::jsonb as bestaat_uit_monumenten_monumenten,
+       "monumentnummerComplex"                 AS monumentnummer_complex,
+       naam                                    AS complex_naam,
+       "bestaatUitMonumentenMonumenten"::jsonb AS bestaat_uit_monumenten_monumenten,
        beschrijving,
-       "beschrijvingPubliek"                   as beschrijving_publiek
+       "beschrijvingPubliek"                   AS beschrijving_publiek,
+       "datumActueelTot"                       AS datum_actueel_tot
 FROM monumenten_prepared.complexen
