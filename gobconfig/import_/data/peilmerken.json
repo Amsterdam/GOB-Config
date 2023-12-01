@@ -55,7 +55,7 @@
     },
     "ligt_in_gebieden_bouwblok": {
       "source_mapping": {
-        "bronwaarde": "ligt_in_bouwblok"
+        "bronwaarde": "=geometrie"
       }
     },
     "publiceerbaar": {
