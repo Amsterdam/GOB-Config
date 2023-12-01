@@ -19,8 +19,8 @@
     "monumentnummer_complex": {
       "source_mapping": "monumentnummer_complex"
     },
-    "complex_naam": {
-      "source_mapping": "complex_naam"
+    "naam": {
+      "source_mapping": "naam"
     },
     "bestaat_uit_monumenten_monumenten": {
       "source_mapping": {
@@ -32,6 +32,10 @@
     },
     "beschrijving_publiek": {
       "source_mapping": "beschrijving_publiek"
+    },
+    "datum_actueel_tot": {
+      "source_mapping": "datum_actueel_tot",
+      "format": "%Y-%m-%d %H:%M:%S"
     }
   }
 }

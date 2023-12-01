@@ -16,19 +16,19 @@
     "identificatie": {
       "source_mapping": "identificatie"
     },
-    "monument_nummer": {
-      "source_mapping": "monument_nummer"
+    "monumentnummer": {
+      "source_mapping": "monumentnummer"
     },
-    "orde_naam": {
-      "source_mapping": "orde_naam"
+    "adressering": {
+      "source_mapping": "adressering"
     },
     "betreft_bag_pand": {
       "source_mapping": {
         "bronwaarde": "betreft_bag_pand.identificatie"
       }
     },
-    "monument_naam": {
-      "source_mapping": "monument_naam"
+    "naam": {
+      "source_mapping": "naam"
     },
     "type": {
       "source_mapping": "type"
@@ -36,9 +36,13 @@
     "status": {
       "source_mapping": "status"
     },
-    "aanwijzingsdatum": {
-      "source_mapping": "aanwijzingsdatum",
-      "format": "%Y-%m-%d"
+    "datum_aanwijzing": {
+      "source_mapping": "datum_aanwijzing",
+      "format": "%Y-%m-%d %H:%M:%S"
+    },
+    "datum_afvoeren": {
+      "source_mapping": "datum_afvoereng",
+      "format": "%Y-%m-%d %H:%M:%S"
     },
     "in_onderzoek": {
       "source_mapping": "in_onderzoek"
@@ -49,20 +53,23 @@
     "opdrachtgever_bouw": {
       "source_mapping": "opdrachtgever_bouw"
     },
-    "bouwjaar_start_bouwperiode": {
-      "source_mapping": "bouwjaar_start_bouwperiode"
+    "jaar_begin_van": {
+      "source_mapping": "jaar_begin_van"
     },
-    "bouwjaar_eind_bouwperiode": {
-      "source_mapping": "bouwjaar_eind_bouwperiode"
+    "jaar_begin_tot": {
+      "source_mapping": "jaar_begin_tot"
     },
     "oorspronkelijke_functie": {
       "source_mapping": "oorspronkelijke_functie"
     },
-    "coordinaten": {
-      "source_mapping": "coordinaten"
+    "punt_coordinaten": {
+      "source_mapping": "punt_coordinaten"
     },
     "geometrie": {
       "source_mapping": "geometrie"
+    },
+    "contour": {
+      "source_mapping": "contour"
     },
     "redengevende_omschrijving": {
       "source_mapping": "redengevende_omschrijving"
@@ -85,6 +92,10 @@
       "source_mapping": {
         "bronwaarde": "heeft_monumenten_situeringen.identificatie"
       }
+    },
+    "datum_actueel_tot": {
+      "source_mapping": "datum_actueel_tot",
+      "format": "%Y-%m-%d %H:%M:%S"
     }
   }
 }
