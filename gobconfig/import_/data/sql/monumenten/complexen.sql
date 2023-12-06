@@ -1,6 +1,6 @@
 SELECT identificatie,
        "monumentnummerComplex"                 AS monumentnummer_complex,
-       naam                                    AS complex_naam,
+       naam,
        "bestaatUitMonumentenMonumenten"::jsonb AS bestaat_uit_monumenten_monumenten,
        beschrijving,
        "beschrijvingPubliek"                   AS beschrijving_publiek,

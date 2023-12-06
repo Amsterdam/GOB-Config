@@ -41,7 +41,7 @@
       "format": "%Y-%m-%d %H:%M:%S"
     },
     "datum_afvoeren": {
-      "source_mapping": "datum_afvoereng",
+      "source_mapping": "datum_afvoeren",
       "format": "%Y-%m-%d %H:%M:%S"
     },
     "in_onderzoek": {
