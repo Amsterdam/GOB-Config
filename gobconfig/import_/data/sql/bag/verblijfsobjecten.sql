@@ -55,21 +55,23 @@ SELECT v.verblijfseenheidnummer                                                 
      , TRIM(nvl(regexp_substr(v.documentnummer, '^(.*?)_', 1, 1, NULL, 1), v.documentnummer)) AS dossier
      , to_char(v.creation, 'YYYY-MM-DD HH24:MI:SS')                                           AS registratiedatum
      , v.verblijfseenheid_id                                                                  AS source_id
-     , NVL2(q2.datumopvoer,
-            CASE
-            WHEN q2.datumopvoer < sysdate
-            THEN to_char(q2.datumopvoer, 'YYYY-MM-DD HH24:MI:SS')
-            ELSE to_char(v.modification, 'YYYY-MM-DD HH24:MI:SS')
-            END
-    , CASE
-      WHEN s.status NOT IN (1, 3, 4, 6, 7)
-      THEN CASE
-           WHEN q2.datumopvoer < sysdate
-           THEN to_char(v.datumopvoer, 'YYYY-MM-DD HH24:MI:SS')
-           ELSE to_char(v.creation, 'YYYY-MM-DD HH24:MI:SS')
-           END
-      ELSE NULL
-      END)                                                                                    AS expirationdate
+     , CASE
+         -- no endvalidity, use beginvalidity for certain status
+         WHEN q2.datumopvoer IS NULL
+         THEN
+             CASE
+                 -- for every status OTHER than 1, 3, 4, 6, 7, the verblijfsobject is expired at begin_geldigheid
+                 WHEN s.status NOT IN (1, 3, 4, 6, 7)
+                 THEN to_char(v.datumopvoer, 'YYYY-MM-DD HH24:MI:SS')
+             END
+          -- endvalidity exists
+         ELSE
+             CASE
+                 WHEN q2.datumopvoer < sysdate
+                 THEN to_char(q2.datumopvoer, 'YYYY-MM-DD HH24:MI:SS')
+                 ELSE to_char(v.modification, 'YYYY-MM-DD HH24:MI:SS')
+             END
+        END                                                                                   AS expirationdate
      , v.bagproces                                                                            AS bagproces_code
      , m.omschrijving                                                                         AS bagproces_omschrijving
      , v.vloeroppervlakte                                                                     AS oppervlakte
