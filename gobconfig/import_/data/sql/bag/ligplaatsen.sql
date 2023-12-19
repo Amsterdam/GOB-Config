@@ -61,19 +61,16 @@ SELECT l.ligplaatsnummer                                                        
      , l.ligplaats_id                                                                         AS source_id
      , l.vrijetekst2                                                                          AS gebruiksdoel
      , CASE
-         -- no endvalidity, use beginvalidity for certain status
          WHEN q2.datumopvoer IS NULL
          THEN
              CASE
-                 -- the verblijfsobject is expired at begin_geldigheid
-                 WHEN s.status = 2
-                 THEN to_char(l.datumopvoer, 'YYYY-MM-DD HH24:MI:SS')
+                 WHEN s.status = 2  -- Plaats ingetrokken
+                 THEN to_char(l.datumopvoer, 'YYYY-MM-DD HH24:MI:SS')  -- begin_geldigheid
              END
-          -- endvalidity exists
          ELSE
              CASE
                  WHEN q2.datumopvoer < sysdate
-                 THEN to_char(q2.datumopvoer, 'YYYY-MM-DD HH24:MI:SS')
+                 THEN to_char(q2.datumopvoer, 'YYYY-MM-DD HH24:MI:SS')  -- eind_geldigheid
                  ELSE to_char(l.modification, 'YYYY-MM-DD HH24:MI:SS')
              END
        END                                                                                    AS expirationdate
