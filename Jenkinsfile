@@ -25,11 +25,11 @@ node('GOBBUILD') {
     stage('Test') {
         lock("gob-config-test") {
             tryStep "test", {
-                sh "docker-compose -p gobconfig build && " +
-                   "docker-compose -p gobconfig run --rm test"
+                sh "docker compose -p gobconfig build && " +
+                   "docker compose -p gobconfig run --rm test"
 
             }, {
-                sh "docker-compose -p gobconfig down"
+                sh "docker compose -p gobconfig down"
             }
         }
     }
