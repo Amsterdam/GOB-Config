@@ -43,19 +43,16 @@ SELECT o.openbareruimtenummer                                                   
      , to_char(o.creation, 'YYYY-MM-DD HH24:MI:SS')                                           AS registratiedatum
      , o.openbareruimte_id                                                                    AS source_id
      , CASE
-         -- no endvalidity, use beginvalidity for certain status
          WHEN q2.datumopvoer IS NULL
          THEN
              CASE
-                 -- for every status = 2 the verblijfsobject is expired at begin_geldigheid
-                 WHEN s.status = 2
-                 THEN to_char(o.datumopvoer, 'YYYY-MM-DD HH24:MI:SS')
+                 WHEN s.status = 2  -- Naamgeving ingetrokken
+                 THEN to_char(o.datumopvoer, 'YYYY-MM-DD HH24:MI:SS')  -- begin_geldigheid
              END
-          -- endvalidity exists
          ELSE
              CASE
                  WHEN q2.datumopvoer < sysdate
-                 THEN to_char(q2.datumopvoer, 'YYYY-MM-DD HH24:MI:SS')
+                 THEN to_char(q2.datumopvoer, 'YYYY-MM-DD HH24:MI:SS')  -- eind_geldigheid
                  ELSE to_char(o.modification, 'YYYY-MM-DD HH24:MI:SS')
              END
        END                                                                                    AS expirationdate

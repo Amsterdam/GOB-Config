@@ -44,21 +44,17 @@ WITH
       END                                                                                      AS ligt_in_gemeente
       , to_char(w.creation, 'YYYY-MM-DD HH24:MI:SS')                                           AS registratiedatum
       , w.woonplaats_id                                                                        AS source_id
-
      , CASE
-         -- no endvalidity, use beginvalidity for certain status
          WHEN q2.datumopvoer IS NULL
          THEN
              CASE
-                 -- when status = 2,, the verblijfsobject is expired at begin_geldigheid
-                 WHEN s.status = 2
-                 THEN to_char(w.datumopvoer, 'YYYY-MM-DD HH24:MI:SS')
+                 WHEN s.status = 2 -- Woonplaats ingetrokken
+                 THEN to_char(w.datumopvoer, 'YYYY-MM-DD HH24:MI:SS')  -- begin_geldigheid
              END
-          -- endvalidity exists
          ELSE
              CASE
                  WHEN q2.datumopvoer < sysdate
-                 THEN to_char(q2.datumopvoer, 'YYYY-MM-DD HH24:MI:SS')
+                 THEN to_char(q2.datumopvoer, 'YYYY-MM-DD HH24:MI:SS')  -- eind_geldigheid
                  ELSE to_char(w.modification, 'YYYY-MM-DD HH24:MI:SS')
              END
        END                                                                                     AS expirationdate
