@@ -44,21 +44,24 @@ WITH
       END                                                                                      AS ligt_in_gemeente
       , to_char(w.creation, 'YYYY-MM-DD HH24:MI:SS')                                           AS registratiedatum
       , w.woonplaats_id                                                                        AS source_id
-      , NVL2(q2.datumopvoer,
+
+     , CASE
+         -- no endvalidity, use beginvalidity for certain status
+         WHEN q2.datumopvoer IS NULL
+         THEN
+             CASE
+                 -- when status = 2,, the verblijfsobject is expired at begin_geldigheid
+                 WHEN s.status = 2
+                 THEN to_char(w.datumopvoer, 'YYYY-MM-DD HH24:MI:SS')
+             END
+          -- endvalidity exists
+         ELSE
              CASE
                  WHEN q2.datumopvoer < sysdate
-                     THEN to_char(q2.datumopvoer, 'YYYY-MM-DD HH24:MI:SS')
+                 THEN to_char(q2.datumopvoer, 'YYYY-MM-DD HH24:MI:SS')
                  ELSE to_char(w.modification, 'YYYY-MM-DD HH24:MI:SS')
-                 END
-     , CASE
-           WHEN s.status = 2
-               THEN CASE
-                        WHEN q2.datumopvoer < sysdate
-                            THEN to_char(w.datumopvoer, 'YYYY-MM-DD HH24:MI:SS')
-                        ELSE to_char(w.creation, 'YYYY-MM-DD HH24:MI:SS')
-               END
-           ELSE NULL
-                 END)                                                                          AS expirationdate
+             END
+       END                                                                                     AS expirationdate
       , w.bagproces                                                                            AS bagproces_code
       , m.omschrijving                                                                         AS bagproces_omschrijving
       , sdo_util.to_wktgeometry(geometrie)                                                     AS geometrie

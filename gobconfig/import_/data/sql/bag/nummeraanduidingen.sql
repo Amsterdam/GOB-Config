@@ -44,21 +44,23 @@ SELECT      a.adresnummer                                                       
      ,      q5.standplaatsnummer                                                                   AS adresseert_bag_standplaats
      ,      to_char(a.creation, 'YYYY-MM-DD HH24:MI:SS')                                           AS registratiedatum
      ,      a.adres_id                                                                             AS source_id
-     ,      NVL2(q2.datumopvoer,
-                 CASE
+     , CASE
+         -- no endvalidity, use beginvalidity for certain status
+         WHEN q2.datumopvoer IS NULL
+         THEN
+             CASE
+                 -- when status = 2, the verblijfsobject is expired at begin_geldigheid
+                 WHEN s.status = 2
+                 THEN to_char(a.datumopvoer, 'YYYY-MM-DD HH24:MI:SS')
+             END
+          -- endvalidity exists
+         ELSE
+             CASE
                  WHEN q2.datumopvoer < sysdate
                  THEN to_char(q2.datumopvoer, 'YYYY-MM-DD HH24:MI:SS')
                  ELSE to_char(a.modification, 'YYYY-MM-DD HH24:MI:SS')
-                 END
-    , CASE WHEN s.status = 2
-           THEN
-               CASE
-               WHEN q2.datumopvoer < sysdate
-               THEN to_char(a.datumopvoer, 'YYYY-MM-DD HH24:MI:SS')
-               ELSE to_char(a.creation, 'YYYY-MM-DD HH24:MI:SS')
-               END
-      ELSE NULL
-      END)                                                                                   AS expirationdate
+             END
+       END                                                                                         AS expirationdate
      , CASE
          -- Amsterdam
          -- Woonplaatsnummer: Before 2014-01-10: 1025, after 3594 (merge with Zuidoost)

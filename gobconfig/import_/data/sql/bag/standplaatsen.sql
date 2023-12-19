@@ -60,21 +60,23 @@ SELECT s.standplaatsnummer                                                      
      , to_char(s.creation, 'YYYY-MM-DD HH24:MI:SS')                                           AS registratiedatum
      , s.standplaats_id                                                                       AS source_id
      , s.vrijetekst2                                                                          AS gebruiksdoel
-     , NVL2(q2.datumopvoer,
-            CASE
-            WHEN q2.datumopvoer < sysdate
-            THEN to_char(q2.datumopvoer, 'YYYY-MM-DD HH24:MI:SS')
-            ELSE to_char(s.modification, 'YYYY-MM-DD HH24:MI:SS')
-            END
-    , CASE
-      WHEN s.status = 2 THEN
-          CASE
-          WHEN q2.datumopvoer < sysdate
-          THEN to_char(s.datumopvoer, 'YYYY-MM-DD HH24:MI:SS')
-          ELSE to_char(s.creation, 'YYYY-MM-DD HH24:MI:SS')
-          END
-      ELSE NULL
-      END)                                                                                    AS expirationdate
+     , CASE
+         -- no endvalidity, use beginvalidity for certain status
+         WHEN q2.datumopvoer IS NULL
+         THEN
+             CASE
+                 -- when status = 2, the verblijfsobject is expired at begin_geldigheid
+                 WHEN s.status = 2
+                 THEN to_char(s.datumopvoer, 'YYYY-MM-DD HH24:MI:SS')
+             END
+          -- endvalidity exists
+         ELSE
+             CASE
+                 WHEN q2.datumopvoer < sysdate
+                 THEN to_char(q2.datumopvoer, 'YYYY-MM-DD HH24:MI:SS')
+                 ELSE to_char(s.modification, 'YYYY-MM-DD HH24:MI:SS')
+             END
+       END                                                                                    AS expirationdate
     , CASE
       -- Gemeente Weesp:
       --   woonplaats Weesp and ligplaats closed before 24 maart 2022

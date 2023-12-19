@@ -45,21 +45,23 @@ SELECT g.gebouwnummer                                                           
      , m.omschrijving                                                                         AS bagproces_omschrijving
      , to_char(g.creation, 'YYYY-MM-DD HH24:MI:SS')                                           AS registratiedatum
      , g.gebouw_id                                                                            AS source_id
-     , NVL2(q2.datumopvoer,
-            CASE
-            WHEN q2.datumopvoer < sysdate
-            THEN to_char(q2.datumopvoer, 'YYYY-MM-DD HH24:MI:SS')
-            ELSE to_char(g.modification, 'YYYY-MM-DD HH24:MI:SS')
-            END
-    , CASE
-      WHEN s.status NOT IN (1, 2, 3, 7, 10, 11, 12, 13)
-      THEN CASE
-           WHEN q2.datumopvoer < sysdate
-           THEN to_char(g.datumopvoer, 'YYYY-MM-DD HH24:MI:SS')
-           ELSE to_char(g.creation, 'YYYY-MM-DD HH24:MI:SS')
-           END
-      ELSE NULL
-      END)                                                                                    AS expirationdate
+     , CASE
+         -- no endvalidity, use beginvalidity for certain status
+         WHEN q2.datumopvoer IS NULL
+         THEN
+             CASE
+                 -- for every status OTHER than 1, 2, 3, 7, 10, 11, 12, 13, the verblijfsobject is expired at begin_geldigheid
+                 WHEN s.status NOT IN (1, 2, 3, 7, 10, 11, 12, 13)
+                 THEN to_char(g.datumopvoer, 'YYYY-MM-DD HH24:MI:SS')
+             END
+          -- endvalidity exists
+         ELSE
+             CASE
+                 WHEN q2.datumopvoer < sysdate
+                 THEN to_char(q2.datumopvoer, 'YYYY-MM-DD HH24:MI:SS')
+                 ELSE to_char(g.modification, 'YYYY-MM-DD HH24:MI:SS')
+             END
+       END                                                                                    AS expirationdate
       , g.modification
       , g.creation
 FROM authentieke_objecten g
