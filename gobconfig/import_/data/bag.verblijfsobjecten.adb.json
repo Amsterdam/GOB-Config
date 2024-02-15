@@ -1,0 +1,117 @@
+{
+  "version": "0.1",
+  "catalogue": "bag",
+  "entity": "verblijfsobjecten",
+  "source": {
+    "name": "AMSBI",
+    "application": "GOBPrepare",
+    "entity_id": "identificatie",
+    "schema": "Neuron",
+    "query": "sql/bag/adb/verblijfsobjecten.sql"
+  },
+  "not_provided_attributes": [
+    "financieringscode",
+    "cbs_nummer",
+    "indicatie_woningvoorraad",
+    "eigendomsverhouding",
+    "feitelijk_gebruik",
+    "redenopvoer",
+    "redenafvoer"
+  ],
+  "gob_mapping": {
+    "identificatie": {
+      "source_mapping": "identificatie"
+    },
+    "volgnummer": {
+      "source_mapping": "volgnummer"
+    },
+    "geconstateerd": {
+      "source_mapping": "geconstateerd"
+    },
+    "heeft_hoofdadres": {
+      "source_mapping": "heeft_hoofdadres"
+    },
+    "heeft_nevenadres": {
+      "source_mapping": "heeft_nevenadres"
+    },
+    "geometrie": {
+      "source_mapping": "geometrie"
+    },
+    "gebruiksdoel": {
+      "source_mapping": "gebruiksdoel"
+    },
+    "oppervlakte": {
+      "source_mapping": "oppervlakte"
+    },
+    "status": {
+      "source_mapping": "status"
+    },
+    "ligt_in_panden": {
+      "source_mapping": "ligt_in_panden"
+    },
+    "begin_geldigheid": {
+      "source_mapping": "begin_geldigheid",
+      "format": "%Y-%m-%d %H:%M:%S"
+    },
+    "eind_geldigheid": {
+      "source_mapping": "eind_geldigheid",
+      "format": "%Y-%m-%d %H:%M:%S"
+    },
+    "documentdatum": {
+      "source_mapping": "documentdatum"
+    },
+    "documentnummer": {
+      "source_mapping": "documentnummer"
+    },
+    "gebruiksdoel_woonfunctie": {
+      "source_mapping": "gebruiksdoel_woonfunctie"
+    },
+    "gebruiksdoel_gezondheidszorgfunctie": {
+      "source_mapping": "gebruiksdoel_gezondheidszorgfunctie"
+    },
+    "aantal_eenheden_complex": {
+      "source_mapping": "aantal_verhuurbare_eenheden"
+    },
+    "verdieping_toegang": {
+      "source_mapping": "verdieping_toegang"
+    },
+    "aantal_bouwlagen": {
+      "source_mapping": "aantal_bouwlagen"
+    },
+    "hoogste_bouwlaag": {
+      "source_mapping": "hoogste_bouwlaag"
+    },
+    "laagste_bouwlaag": {
+      "source_mapping": "laagste_bouwlaag"
+    },
+    "aantal_kamers": {
+      "source_mapping": "aantal_kamers"
+    },
+    "toegang": {
+      "source_mapping": "toegang"
+    },
+    "ligt_in_buurt": {
+      "source_mapping": "ligt_in_buurt"
+    },
+    "heeft_dossier": {
+      "source_mapping": "heeft_dossier"
+    },
+    "bagproces": {
+      "source_mapping": "bagproces"
+    },
+    "registratiedatum": {
+      "source_mapping": "registratiedatum",
+      "format": "%Y-%m-%d %H:%M:%S"
+    },
+    "_expiration_date": {
+      "source_mapping": "_expiration_date",
+      "format": "%Y-%m-%d %H:%M:%S"
+    },
+    "heeft_onderzoeken": {
+      "source_mapping": "heeft_onderzoeken"
+    },
+    "ligt_in_gemeente": {
+      "source_mapping": "ligt_in_gemeente"
+    }
+  }
+}

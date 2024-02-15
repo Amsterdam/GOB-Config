@@ -1,0 +1,79 @@
+{
+  "version": "0.1",
+  "catalogue": "bag",
+  "entity": "openbareruimtes",
+  "source": {
+    "name": "AMSBI",
+    "application": "GOBPrepare",
+    "entity_id": "identificatie",
+    "schema": "Neuron",
+    "query": "sql/bag/adb/openbareruimtes.sql"
+  },
+  "not_provided_attributes": [
+    "straatcode",
+    "straatnaam_ptt"
+  ],
+  "gob_mapping": {
+    "identificatie": {
+      "source_mapping": "identificatie"
+    },
+    "volgnummer": {
+      "source_mapping": "volgnummer"
+    },
+    "status": {
+      "source_mapping": "status"
+    },
+    "begin_geldigheid": {
+      "source_mapping": "begin_geldigheid",
+      "format": "%Y-%m-%d %H:%M:%S"
+    },
+    "eind_geldigheid": {
+      "source_mapping": "eind_geldigheid",
+      "format": "%Y-%m-%d %H:%M:%S"
+    },
+    "geconstateerd": {
+      "source_mapping": "geconstateerd"
+    },
+    "documentdatum": {
+      "source_mapping": "documentdatum"
+    },
+    "documentnummer": {
+      "source_mapping": "documentnummer"
+    },
+    "naam": {
+      "source_mapping": "naam"
+    },
+    "naam_nen": {
+      "source_mapping": "naam_nen"
+    },
+    "ligt_in_woonplaats": {
+      "source_mapping": "ligt_in_woonplaats"
+    },
+    "type": {
+      "source_mapping": "type"
+    },
+    "beschrijving_naam": {
+      "source_mapping": "beschrijving_naam"
+    },
+    "heeft_dossier": {
+      "source_mapping": "heeft_dossier"
+    },
+    "bagproces": {
+      "source_mapping": "bagproces"
+    },
+    "registratiedatum": {
+      "source_mapping": "registratiedatum",
+      "format": "%Y-%m-%d %H:%M:%S"
+    },
+    "_expiration_date": {
+      "source_mapping": "_expiration_date",
+      "format": "%Y-%m-%d %H:%M:%S"
+    },
+    "geometrie": {
+      "source_mapping": "geometrie"
+    },
+    "heeft_onderzoeken": {
+      "source_mapping": "heeft_onderzoeken"
+    }
+  }
+}

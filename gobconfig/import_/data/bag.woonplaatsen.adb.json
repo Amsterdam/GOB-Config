@@ -1,0 +1,69 @@
+{
+  "version": "0.1",
+  "catalogue": "bag",
+  "entity": "woonplaatsen",
+  "source": {
+    "name": "AMSBI",
+    "application": "GOBPrepare",
+    "entity_id": "identificatie",
+    "schema": "Neuron",
+    "query": "sql/bag/adb/woonplaatsen.sql"
+  },
+  "not_provided_attributes": [
+    "woonplaats_ptt"
+  ],
+  "gob_mapping": {
+    "identificatie": {
+      "source_mapping": "identificatie"
+    },
+    "volgnummer": {
+      "source_mapping": "volgnummer"
+    },
+    "naam": {
+      "source_mapping": "naam"
+    },
+    "status": {
+      "source_mapping": "status"
+    },
+    "geconstateerd": {
+      "source_mapping": "geconstateerd"
+    },
+    "documentdatum": {
+      "source_mapping": "documentdatum"
+    },
+    "documentnummer": {
+      "source_mapping": "documentnummer"
+    },
+    "geometrie": {
+      "source_mapping": "geometrie"
+    },
+    "begin_geldigheid": {
+      "source_mapping": "begin_geldigheid",
+      "format": "%Y-%m-%d %H:%M:%S"
+    },
+    "eind_geldigheid": {
+      "source_mapping": "eind_geldigheid",
+      "format": "%Y-%m-%d %H:%M:%S"
+    },
+    "heeft_dossier": {
+      "source_mapping": "heeft_dossier"
+    },
+    "bagproces": {
+      "source_mapping": "bagproces"
+    },
+    "registratiedatum": {
+      "source_mapping": "registratiedatum",
+      "format": "%Y-%m-%d %H:%M:%S"
+    },
+    "ligt_in_gemeente": {
+      "source_mapping": "ligt_in_gemeente"
+    },
+    "_expiration_date": {
+      "source_mapping": "_expiration_date",
+      "format": "%Y-%m-%d %H:%M:%S"
+    },
+    "heeft_onderzoeken": {
+      "source_mapping": "heeft_onderzoeken"
+    }
+  }
+}
