@@ -1,0 +1,90 @@
+{
+  "version": "0.1",
+  "catalogue": "bag",
+  "entity": "nummeraanduidingen",
+  "source": {
+    "name": "AMSBI",
+    "application": "GOBPrepare",
+    "entity_id": "identificatie",
+    "schema": "Neuron",
+    "query": "sql/bag/adb/nummeraanduidingen.sql"
+  },
+  "gob_mapping": {
+    "identificatie": {
+      "source_mapping": "identificatie"
+    },
+    "volgnummer": {
+      "source_mapping": "volgnummer"
+    },
+    "huisnummer": {
+      "source_mapping": "huisnummer"
+    },
+    "geconstateerd": {
+      "source_mapping": "geconstateerd"
+    },
+    "huisletter": {
+      "source_mapping": "huisletter"
+    },
+    "huisnummertoevoeging": {
+      "source_mapping": "huisnummertoevoeging"
+    },
+    "postcode": {
+      "source_mapping": "postcode"
+    },
+    "ligt_in_woonplaats": {
+      "source_mapping": "ligt_in_woonplaats"
+    },
+    "begin_geldigheid": {
+      "source_mapping": "begin_geldigheid",
+      "format": "%Y-%m-%d %H:%M:%S"
+    },
+    "eind_geldigheid": {
+      "source_mapping": "eind_geldigheid",
+      "format": "%Y-%m-%d %H:%M:%S"
+    },
+    "ligt_aan_openbareruimte": {
+      "source_mapping": "ligt_aan_openbareruimte"
+    },
+    "type_adresseerbaar_object": {
+      "source_mapping": "type_adresseerbaar_object"
+    },
+    "documentdatum": {
+      "source_mapping": "documentdatum"
+    },
+    "documentnummer": {
+      "source_mapping": "documentnummer"
+    },
+    "status": {
+      "source_mapping": "status"
+    },
+    "type_adres": {
+      "source_mapping": "type_adres"
+    },
+    "adresseert_verblijfsobject": {
+      "source_mapping": "adresseert_verblijfsobject"
+    },
+    "adresseert_ligplaats": {
+      "source_mapping": "adresseert_ligplaats"
+    },
+    "adresseert_standplaats": {
+      "source_mapping": "adresseert_standplaats"
+    },
+    "heeft_dossier": {
+      "source_mapping": "heeft_dossier"
+    },
+    "bagproces": {
+      "source_mapping": "bagproces"
+    },
+    "registratiedatum": {
+      "source_mapping": "registratiedatum",
+      "format": "%Y-%m-%d %H:%M:%S"
+    },
+    "_expiration_date": {
+      "source_mapping": "_expiration_date",
+      "format": "%Y-%m-%d %H:%M:%S"
+    },
+    "heeft_onderzoeken": {
+      "source_mapping": "heeft_onderzoeken"
+    }
+  }
+}
