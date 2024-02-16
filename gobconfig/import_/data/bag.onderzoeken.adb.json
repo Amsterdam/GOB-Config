@@ -1,0 +1,61 @@
+{
+  "version": "0.1",
+  "catalogue": "bag",
+  "entity": "onderzoeken",
+  "source": {
+    "name": "AMSBI",
+    "application": "GOBPrepare",
+    "entity_id": "identificatie",
+    "schema": "Neuron",
+    "query": "sql/bag/adb/onderzoeken.sql"
+  },
+  "not_provided_attributes": [
+    "registratiedatum"
+  ],
+  "gob_mapping": {
+    "identificatie": {
+      "source_mapping": "identificatie"
+    },
+    "object_identificatie": {
+      "source_mapping": "object_identificatie"
+    },
+    "volgnummer": {
+      "source_mapping": "volgnummer"
+    },
+    "objecttype": {
+      "source_mapping": "objecttype"
+    },
+    "kenmerk": {
+      "source_mapping": "kenmerk"
+    },
+    "in_onderzoek": {
+      "source_mapping": "in_onderzoek"
+    },
+    "documentdatum": {
+      "source_mapping": "documentdatum"
+    },
+    "documentnummer": {
+      "source_mapping": "documentnummer"
+    },
+    "begin_geldigheid": {
+      "source_mapping": "begin_geldigheid",
+      "format": "%Y-%m-%d"
+    },
+    "eind_geldigheid": {
+      "source_mapping": "eind_geldigheid",
+      "format": "%Y-%m-%d"
+    },
+    "_expiration_date": {
+      "source_mapping": "_expiration_date",
+      "format": "%Y-%m-%d"
+    },
+    "tijdstip_registratie": {
+      "source_mapping": "tijdstip_registratie",
+      "format": "%Y-%m-%d %H:%M:%S"
+    },
+    "eind_registratie": {
+      "source_mapping": "eind_registratie",
+      "format": "%Y-%m-%d %H:%M:%S"
+    }
+  }
+}
