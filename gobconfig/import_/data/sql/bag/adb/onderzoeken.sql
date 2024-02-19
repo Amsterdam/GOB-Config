@@ -5,7 +5,7 @@ select
     object_identificatie,
     objecttype,
     kenmerk,
-    in_onderzoek,
+    CASE WHEN in_onderzoek THEN 'J' ELSE 'N' END AS in_onderzoek,
     begin_geldigheid,
     eind_geldigheid,
     documentnummer,
