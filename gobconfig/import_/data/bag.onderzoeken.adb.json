@@ -2,6 +2,7 @@
   "version": "0.1",
   "catalogue": "bag",
   "entity": "onderzoeken",
+  "default": true,
   "source": {
     "name": "AMSBI",
     "application": "GOBPrepare",
