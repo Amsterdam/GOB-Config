@@ -4,9 +4,9 @@
   "entity": "peilmerken",
   "source": {
     "name": "AMSBI",
-    "application": "Grondslag",
+    "application": "GOBPrepare",
     "entity_id": "identificatie",
-    "schema": "grondslag",
+    "schema": "GOBPrepare",
     "query": "sql/nap/peilmerken.sql"
   },
   "gob_mapping": {
@@ -20,10 +20,10 @@
       "source_mapping": "jaar"
     },
     "merk_code": {
-      "source_mapping": "merk_id"
+      "source_mapping": "merk.code"
     },
     "merk_omschrijving": {
-      "source_mapping": "merk_omschrijving"
+      "source_mapping": "merk.omschrijving"
     },
     "omschrijving": {
       "source_mapping": "omschrijving"
@@ -44,10 +44,10 @@
       "source_mapping": "geometrie"
     },
     "status_code": {
-      "source_mapping": "status_id"
+      "source_mapping": "status.code"
     },
     "status_omschrijving": {
-      "source_mapping": "status_omschrijving"
+      "source_mapping": "status.omschrijving"
     },
     "vervaldatum": {
       "source_mapping": "vervaldatum",
