@@ -2,5 +2,5 @@
 
 
 # GOB Config version.
-__version_info__ = ("0", "14", "2")
+__version_info__ = ("0", "19", "0")
 __version__ = ".".join(__version_info__)
