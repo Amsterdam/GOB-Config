@@ -39,7 +39,7 @@
     },
     "einddatum": {
       "source_mapping": "einddatum_afkoop",
-      "format": "%Y-%m-%d %H:%M:%S"
+      "format": "%Y-%m-%d"
     },
     "datum_actueel_tot": {
       "source_mapping": "datum_actueel_tot",

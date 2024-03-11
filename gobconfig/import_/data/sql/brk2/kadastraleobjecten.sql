@@ -1,5 +1,4 @@
-WITH kot_full AS (
-    SELECT
+SELECT
 	identificatie,
 	volgnummer,
 	id AS neuron_id,
@@ -46,10 +45,7 @@ WITH kot_full AS (
 	in_onderzoek,
 	datum_actueel_tot,
 	_expiration_date,
-	is_ontstaan_uit_brk_g_perceel,
-	heeft_een_relatie_met_bag_verblijfsobject,
-	is_ontstaan_uit_brk_kadastraalobject
-	FROM brk2_prepared.kadastraal_object kot_full
-)
-SELECT *
-FROM kot_full
+	is_ontstaan_uit_brk_g_perceel::jsonb,
+	heeft_een_relatie_met_bag_verblijfsobject::jsonb,
+	is_ontstaan_uit_brk_kadastraalobject::jsonb
+FROM brk2_prepared.kadastraal_object

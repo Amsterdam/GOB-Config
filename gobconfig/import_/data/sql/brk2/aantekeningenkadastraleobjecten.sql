@@ -9,7 +9,7 @@ SELECT
 	aard_omschrijving,
 	omschrijving,
 	betreft_gedeelte_van_perceel,
-	heeft_brk_betrokken_persoon,
+	heeft_brk_betrokken_persoon::jsonb,
 	heeft_betrekking_op_brk_kadastraal_object,
 	is_gebaseerd_op_brk_stukdeel,
 	einddatum,

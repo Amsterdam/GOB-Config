@@ -6,10 +6,10 @@ SELECT
 	aard_omschrijving,
 	bedrag_transactie_valuta,
 	bedrag_transactie_bedrag,
-	is_bron_voor_brk_tenaamstelling,
-	is_bron_voor_brk_aantekening_kadastraal_object,
-	is_bron_voor_brk_aantekening_recht,
-	is_bron_voor_brk_zakelijk_recht,
+	is_bron_voor_brk_tenaamstelling::jsonb,
+	is_bron_voor_brk_aantekening_kadastraal_object::jsonb,
+	is_bron_voor_brk_aantekening_recht::jsonb,
+	is_bron_voor_brk_zakelijk_recht::jsonb,
 	stukidentificatie,
 	portefeuillenummer_akr,
 	tijdstip_aanbieding_stuk,
@@ -27,5 +27,5 @@ SELECT
 	toelichting_bewaarder,
 	datum_actueel_tot,
 	_expiration_date,
-	is_bron_voor_brk_erfpachtcanon
+	is_bron_voor_brk_erfpachtcanon::jsonb
 FROM brk2_prepared.stukdeel
