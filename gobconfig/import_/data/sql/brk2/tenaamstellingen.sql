@@ -20,7 +20,7 @@ SELECT
 	betrokken_gorzen_en_aanwassen_brk_subject,
 	in_onderzoek,
 	van_brk_zakelijk_recht,
-	is_gebaseerd_op_brk_stukdeel AS is_gebaseerd_op_brk_stukdelen,
+	is_gebaseerd_op_brk_stukdeel::jsonb AS is_gebaseerd_op_brk_stukdelen,
 	DATE(toestandsdatum) AS toestandsdatum,
 	_expiration_date
 FROM brk2_prepared.tenaamstelling
